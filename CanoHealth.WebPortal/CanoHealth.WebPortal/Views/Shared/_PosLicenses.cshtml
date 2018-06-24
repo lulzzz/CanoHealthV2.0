@@ -1,0 +1,144 @@
+﻿<script type="text/x-kendo-template" id="detail-license-template">
+
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-info-circle"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Type</h5>
+                                <p>#:licenseName#</p>
+                            </div>
+                        </div>
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-check-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Effective Date</h5>
+                                <p> #:effectiveDate#  </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-hashtag"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Number</h5>
+                                <p>#:licenseNumber#</p>
+                            </div>
+                        </div>
+                        <div class="text-icon" style="margin-bottom: 10px !important; ">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-times-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Expire Date</h5>
+                                <p> #:expireDate#  </p>
+                            </div>
+                        </div>
+                        <div class="text-icon" style="margin-bottom: 10px !important; cursor: pointer;" data-bind="events: {click: onDownloadLicenseFile}">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">File</h5>
+                                <div title="#=originalFileName#">
+                                    #if(originalFileName != null && originalFileName.length < 20){#
+                                    <p>#:originalFileName#</p>
+                                    #}else if(originalFileName != null && originalFileName.length > 20){#
+                                    <p>#:originalFileName.substring(0,12) + '...' + originalFileName.substring(originalFileName.length - 5)#</p>
+                                    #}else{#
+                                    <p>NONE</p>
+                                    #}#
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-pencil-square-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Note</h5>
+                                <div style="height: 50px !important; overflow-y: auto; ">
+                                    #if(note != null){#
+                                    <p>#:note#</p>
+                                    #}else{#
+                                    <p>NONE</p>
+                                    #}#
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <a class="k-button k-edit-button" href="\\#" title="Edit"><span class="k-icon k-i-edit"></span></a>
+                    @*<a class="k-button k-delete-button" title="Release"><span class="k-icon k-i-close"></span></a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</script>
+
+<script type="text/x-kendo-templ" id="edit-license-template">
+    <div class="col-md-4">
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">type: <sup class="text-danger">*</sup></label>
+                            <input name="type" data-role="autocomplete"
+                                   data-placeholder="License Type ..."
+                                   data-value-primitive="true"
+                                   data-text-field="licenseName"
+                                   data-bind="value: licenseName, source: licenseTypeDataSource"
+                                   style="width: 100%;"
+                                   required data-required-msg="This field is required.">
+                            <span class="k-invalid-msg" data-for="type"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
+                            <input name="effective" data-role="datepicker" data-bind="value: effectiveDate" required data-required-msg="This field is required." style="width: 100%" />
+                            <span class="k-invalid-msg" data-for="effective"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">number: <sup class="text-danger">*</sup></label>
+                            <input type="text" name="Number" class="k-textbox" required data-required-msg="This field is required." style="width: 100%; border-radius: 3px !important;" data-bind="value: licenseNumber" />
+                            <span class="k-invalid-msg" data-for="Number"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">expire date: <sup class="text-danger">*</sup></label>
+                            <input name="expire" data-role="datepicker" data-bind="value: expireDate" style="width: 100%" required data-required-msg="This field is required." />
+                            <span class="k-invalid-msg" data-for="expire"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">FILE: </label>
+                            @(Html.Kendo().Upload()
+                                  .Name("UniqueFileName_#=placeOfServiceId#")
+                                  .Multiple(false)
+                                  .HtmlAttributes(new { style = "width:100%" })
+                                  .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
+                                  .Events(ev => ev.Select("onSelectPlaceOfServiceLicenseFile").Remove("onRemovePlaceOfServiceLicenseFile"))
+                                  .ToClientTemplate())
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="control-label text-uppercase">Notes: </label>
+                        <textarea rows="3" style="border-radius: 3px !important; width: 100%;" data-bind="value: note"></textarea>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                    <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

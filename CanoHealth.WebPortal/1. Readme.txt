@@ -1,0 +1,29 @@
+TEMPLATE
+TELERIK ASP.NET MVC (GRID AND MENU)
+
+PAKAGES INSTALLED
+Install-Package Microsoft.AspNet.Identity.Samples -Version 2.1.0-alpha1
+install-package glimpse.mvc5
+install-pakage glimpse.ef6
+install-pakage Elmah
+install-package StructureMap.MVC5
+install-package Structuremap.WebAPI2
+install-package AutoMapper -version 4.1.1.0
+Tools\Extensions and Updates\Online\Web Essentials 2013.5
+Tools\Extensions and Updates\Online\Productivity Power Tools
+Install-Package Moment.js (work with dates and times)
+Bootbox.js (Bootstrap modals made easy)
+
+TEST
+install-package moq -version:4.2.1510.2205 (under unit test)
+install-package FluentAssertions -version:3.3.0 (under unit test)
+install-package nunit -version:2.6.3 (under integrtation test)
+
+
+PATTERNS
+Repository
+Unit of Work
+
+TEST SOLUTIONS
+UnitTest
+IntegrationTest

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanoHealth.WebPortal", "CanoHealth.WebPortal\CanoHealth.WebPortal.csproj", "{77CF4ADA-7770-4BDB-AF55-035B26C0A099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanoHealth.WebPortal.Test", "CanoHealth.WebPortal.Test\CanoHealth.WebPortal.Test.csproj", "{BE3CFCC8-E9A9-406D-80E8-7FD002FDC290}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanoHealth.WebPortal.IntegrationTest", "CanoHealth.WebPortal.IntegrationTest\CanoHealth.WebPortal.IntegrationTest.csproj", "{460B1504-9DC7-41D1-9305-67716FDB77B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77CF4ADA-7770-4BDB-AF55-035B26C0A099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CF4ADA-7770-4BDB-AF55-035B26C0A099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CF4ADA-7770-4BDB-AF55-035B26C0A099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CF4ADA-7770-4BDB-AF55-035B26C0A099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3CFCC8-E9A9-406D-80E8-7FD002FDC290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3CFCC8-E9A9-406D-80E8-7FD002FDC290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3CFCC8-E9A9-406D-80E8-7FD002FDC290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3CFCC8-E9A9-406D-80E8-7FD002FDC290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{460B1504-9DC7-41D1-9305-67716FDB77B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{460B1504-9DC7-41D1-9305-67716FDB77B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{460B1504-9DC7-41D1-9305-67716FDB77B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{460B1504-9DC7-41D1-9305-67716FDB77B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6C557D6-16E4-426A-BA00-79BEABDDC6AA}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://harnierprogramming.visualstudio.com/
+		SccProjectUniqueName0 = CanoHealth.WebPortal.IntegrationTest\\CanoHealth.WebPortal.IntegrationTest.csproj
+		SccProjectName0 = CanoHealth.WebPortal.IntegrationTest
+		SccAuxPath0 = https://harnierprogramming.visualstudio.com
+		SccLocalPath0 = CanoHealth.WebPortal.IntegrationTest
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = CanoHealth.WebPortal.Test\\CanoHealth.WebPortal.Test.csproj
+		SccProjectName1 = CanoHealth.WebPortal.Test
+		SccAuxPath1 = https://harnierprogramming.visualstudio.com
+		SccLocalPath1 = CanoHealth.WebPortal.Test
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = CanoHealth.WebPortal\\CanoHealth.WebPortal.csproj
+		SccProjectName2 = CanoHealth.WebPortal
+		SccAuxPath2 = https://harnierprogramming.visualstudio.com
+		SccLocalPath2 = CanoHealth.WebPortal
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

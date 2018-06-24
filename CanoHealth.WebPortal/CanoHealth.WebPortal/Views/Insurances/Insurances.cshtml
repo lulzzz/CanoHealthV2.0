@@ -1,0 +1,156 @@
+﻿@using CanoHealth.WebPortal.ViewModels
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Insurances";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Insurances</h1>
+
+        <ol class="breadcrumb pull-right">
+
+            <li><a href="/">Home</a></li>
+            <li class="active">Insurances</li>
+        </ol>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="col-md-offset-8 col-md-4">
+        @{ Html.RenderAction("RenderCorporationInLayout", "Corporation", new { Area = "", currentUserId = User.Identity.GetUserId() }); }
+    </div>
+</div>
+
+<br />
+
+<div class="container-fluid">
+    @(Html.Kendo().Grid<InsuranceFormViewModel>()
+                                .Name("Insurances")
+                                .ToolBar(toolbar =>
+                                {
+                                    toolbar.Create().Text("NEW");
+                                    toolbar.Excel().Text("EXCEL");
+                                })
+                                .Excel(ex =>
+                                {
+                                    ex.AllPages(true);
+                                    ex.FileName("Insurances");
+                                    ex.Filterable(true);
+                                })
+                                .Columns(col =>
+                                {
+                                    col.Bound(p => p.InsuranceId).Hidden(true);
+
+
+                                    col.Bound(p => p.Name).Title("NAME").Width(110);
+
+                        //col.Bound(p => p.Code).Title("CODE").Width(110);
+
+                        col.Bound(p => p.Address).Title("ADDRESS").Width(200);
+
+                                    col.Bound(p => p.PhoneNumber).Title("PHONE NUMBER").Width(110);
+
+
+                                    col.Bound(p => p.Active).ClientTemplate("#=Active ? 'YES' : 'NO'#")
+                                        .Title("ACTIVE").Width(70);
+
+                                    col.Command(cmd =>
+                                    {
+                                        cmd.Edit();
+                                        cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate").HtmlAttributes(new { @class = "js-inactive" });
+                                        cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate").HtmlAttributes(new { @class = "js-active" });
+                                    }).Width(150).Title("ACTIONS");
+                                })
+
+                                .Editable(editable =>
+                                {
+                                    editable.Mode(GridEditMode.PopUp);
+                                    editable.TemplateName("InsuranceForm");
+                                    editable.Window(wnd =>
+                                    {
+                                        wnd.Title("INSURANCE");
+                                        wnd.Width(500);
+                                        wnd.Actions(ac => ac.Minimize().Maximize().Close());
+                                    });
+                                })
+
+                                .ClientDetailTemplateId("insurance-detail-template")
+
+                                .Pageable(ps => ps
+                                .Refresh(true)
+                                .PreviousNext(true)
+                                .ButtonCount(5)
+                                .PageSizes(new object[] { 25, 50, 100, "All" })
+                                )
+
+                                .Sortable()
+                                .Groupable()
+                                .Filterable()
+                                .Resizable(r => r.Columns(true))
+                                .Scrollable(s => s.Height("auto"))
+
+                                .Events(ev => ev.DataBound("onDataBoundInsuranceGrid").DetailExpand("onExpandInsuranceDetails"))//
+
+                                .DataSource(ds => ds
+                                    .Ajax()
+                                    .PageSize(25)
+                                    .ServerOperation(false)
+                                    .Model(model =>
+                                    {
+                                        model.Id(pk => pk.InsuranceId);
+                                        model.Field(p => p.InsuranceId).Editable(false);
+                                        model.Field(p => p.Active).Editable(false);
+                                    })
+                                    .Events(ev => ev.Error("serverSideErrorHandlers"))
+                                    .Read(r => r.Action("ReadInsurances", "Insurances"))
+                                    .Create(c => c.Action("CreateInsurance", "Insurances"))
+                                    .Update(u => u.Action("UpdateInsurance", "Insurances"))
+                        ))
+</div>
+
+@Html.Partial("_PartialServerSideErrorHandlerTemplate")
+
+<script type="text/x-kendo-template" id="insurance-detail-template">
+    <h2 class="section-title">Business Lines</h2>
+    <a data-insurance-id="#=InsuranceId#" class="btn btn-ar btn-primary js-insurancebusinessline-addbtn" style="margin-left: 16px;"><i class="fa fa-plus-circle"></i> NEW</a>
+    <br />
+    <br />
+    @(Html.Kendo().ListView<InsuranceBusinessLineViewModel>()
+                .Name("IsuranceBusinesLine_#=InsuranceId#")
+                .TagName("div")
+                .HtmlAttributes(new { style = "border: 0 !important;" })
+                .ClientTemplateId("businessline-detail-template")
+                .DataSource(dataSource =>
+                {
+                    dataSource.Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }));
+                })
+                .ToClientTemplate())
+</script>
+
+<script type="text/x-kendo-template" id="businessline-detail-template">
+    <div class="col-md-3">
+        <div class="content-box box-default insurance-businessline">
+            <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
+            <h5 class="content-box-title">#:Code#</h5>
+        </div>
+    </div>
+</script>
+
+<div class="js-insurancebusinessline-formwnd hidden-window">
+    <label class="control-label text-uppercase">business line</label>
+    <select data-role="multiselect"
+            data-value-primitive="false"
+            data-text-field="Code"
+            data-value-field="PlanTypeId"
+            data-bind="value: selectedBusinessLines, source: businessLinesDataSource"></select>
+    <br />
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary" data-bind="events:{ click: onAddBusinessLinesToInsurance }"><i class="fa fa-check-circle"></i> Submit</a>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/insurances")
+}

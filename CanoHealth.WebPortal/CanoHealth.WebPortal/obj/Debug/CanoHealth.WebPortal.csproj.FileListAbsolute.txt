@@ -1,0 +1,439 @@
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll.config
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.pdb
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Elmah.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Ado.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.AspNet.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Core.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.EF6.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Mvc5.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Web.Infrastructure.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Owin.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebActivatorEx.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebGrease.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.pdb
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.pdb
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.pdb
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.xml
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\bg-BG\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\cs-CZ\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\da-DK\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\de-DE\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\es-ES\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-CA\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-FR\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\he-IL\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\it-IT\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\nl-NL\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pl-PL\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-BR\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-PT\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ro-RO\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ru-RU\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sk-SK\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sv-SE\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\tr-TR\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\uk-UA\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\zh-CN\Kendo.Mvc.resources.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csprojResolveAssemblyReference.cache
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddColumnsAddressAndPhoneNumberToCorporationTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddNpiAndTaxIdColumnsToCorporationTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.PopulatePlanTypeTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePlanTypeTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideConventionsForInsuranceTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateInsuranceTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateCorporationTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.InitialCreate.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.init.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrrideConventionsForCorporationTable.resources
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.GenerateResource.Cache
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.dll
+D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll.config
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Elmah.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Ado.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.AspNet.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Core.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.EF6.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Mvc5.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Web.Infrastructure.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Owin.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Cors.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.Cors.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebActivatorEx.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebGrease.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.Cors.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\bg-BG\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\cs-CZ\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\da-DK\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\de-DE\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\es-ES\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-CA\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-FR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\he-IL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\it-IT\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\nl-NL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pl-PL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-BR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-PT\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ro-RO\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ru-RU\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sk-SK\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sv-SE\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\tr-TR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\uk-UA\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\zh-CN\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateStoredProcedureGetDoctorLinkedContracts.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddNoteColumnToDoctorCorporationContractLinkTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorCorporationContractLinkTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddFromAndToDateTimeColumnsToDoctorClinicsTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToClinicDoctorsTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateDoctorClinicRelationshipTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintsInMedicalLicenseTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorFileTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingDoctorFileTypeNameConfiguration.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorFileTypeName.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorFileTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToDoctorTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingActiveColumnInDoctorTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AverridingConventionsForDoctorTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateMedicalLicenseTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingConventionsForClassificationColumnInMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintForClassificationColumnInMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateDoctorTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideContentTypeColumnConventionPosLicensesTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideContentTypeColumnConfigurationTableContractAddendum.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateContractAddendumTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintNameInsuranceTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToContractTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.ChangeActiveColumnInTheInsuranceTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateClinicLineofBusinessContractTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateContractLineofBusinessTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintCorporationIdInsuranceIdinContractTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintGroupNumberInContractTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateCorporationInsuranceContractRelation.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintLicenseTypePlaceOfService.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.PopulateRoleTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePosLicenseAndLicenseTypeTables.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateAuditLogTable1.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePlaceOfServiceTable1.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateAuditLogTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddColumnsAddressAndPhoneNumberToCorporationTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddNpiAndTaxIdColumnsToCorporationTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.PopulatePlanTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePlanTypeTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideConventionsForInsuranceTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateInsuranceTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateCorporationTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.InitialCreate.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.init.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrrideConventionsForCorporationTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.GenerateResource.cache
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.CoreCompileInputs.cache
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.CopyComplete
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateInsuranceBusinessLineTable.resources
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintInsuranceBusinessLine.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll.config
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\CanoHealth.WebPortal.pdb
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Elmah.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Ado.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.AspNet.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Core.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.EF6.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Glimpse.Mvc5.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Web.Infrastructure.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Owin.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Cors.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.Cors.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebActivatorEx.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\WebGrease.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Antlr3.Runtime.pdb
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\AutoMapper.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\EntityFramework.SqlServer.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Kendo.Mvc.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Core.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.AspNet.Identity.Owin.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Cookies.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Facebook.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Google.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.OAuth.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Owin.Security.Twitter.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.pdb
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Microsoft.Practices.ServiceLocation.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\Newtonsoft.Json.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.pdb
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\StructureMap.Web.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Net.Http.Formatting.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Helpers.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.Cors.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Http.WebHost.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Mvc.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Optimization.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.Razor.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Deployment.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\System.Web.WebPages.Razor.xml
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\bg-BG\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\cs-CZ\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\da-DK\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\de-DE\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\es-ES\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-CA\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\fr-FR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\he-IL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\it-IT\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\nl-NL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pl-PL\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-BR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\pt-PT\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ro-RO\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ru-RU\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sk-SK\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\sv-SE\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\tr-TR\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\uk-UA\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\zh-CN\Kendo.Mvc.resources.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csprojResolveAssemblyReference.cache
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUserCorporationAccessTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToIdentityRole.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddFirstLastNameAndActiveColumnToIdentityUser.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingConventionsInIdentityUserTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateProviderByLocation.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideProviderEffectiveDateColumnForProviderByLocationTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AlterStoredProcedureGetDoctorLinkedContractsInfo.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddIndividualProviderEffectiveDateColumn.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateTableOutOfNetworkContract.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideCodeColumnConventionsInPlanTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddEffectiveDateToDoctorCorporationContractLinkTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrrideProviderNameColumnInDoctorIndividualProviderTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintProviderNumberDoctorIndividualProviderTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateDoctorIndividualProviderTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintInsuranceBusinessLine.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateInsuranceBusinessLineTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateStoredProcedureGetDoctorLinkedContracts.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddNoteColumnToDoctorCorporationContractLinkTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorCorporationContractLinkTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddFromAndToDateTimeColumnsToDoctorClinicsTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToClinicDoctorsTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateDoctorClinicRelationshipTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintsInMedicalLicenseTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorFileTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingDoctorFileTypeNameConfiguration.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintDoctorFileTypeName.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddDoctorFileTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToDoctorTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingActiveColumnInDoctorTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AverridingConventionsForDoctorTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateMedicalLicenseTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverridingConventionsForClassificationColumnInMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintForClassificationColumnInMedicalLicenseTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateDoctorTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideContentTypeColumnConventionPosLicensesTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideContentTypeColumnConfigurationTableContractAddendum.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateContractAddendumTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintNameInsuranceTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddActiveColumnToContractTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.ChangeActiveColumnInTheInsuranceTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateClinicLineofBusinessContractTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateContractLineofBusinessTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintCorporationIdInsuranceIdinContractTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintGroupNumberInContractTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateCorporationInsuranceContractRelation.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateUniqueConstraintLicenseTypePlaceOfService.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.PopulateRoleTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePosLicenseAndLicenseTypeTables.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateAuditLogTable1.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePlaceOfServiceTable1.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateAuditLogTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddColumnsAddressAndPhoneNumberToCorporationTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.AddNpiAndTaxIdColumnsToCorporationTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.PopulatePlanTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreatePlanTypeTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrideConventionsForInsuranceTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateInsuranceTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.CreateCorporationTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.InitialCreate.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.init.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.Migrations.OverrrideConventionsForCorporationTable.resources
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.GenerateResource.cache
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.CoreCompileInputs.cache
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.CopyComplete
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.dll
+\\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.pdb

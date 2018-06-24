@@ -1,0 +1,81 @@
+﻿    .product-view
+    {
+        float: left;
+        width: 25%;
+        height: 300px;
+        box-sizing: border-box;
+        border-top: 0;
+        position: relative;
+        border: 1px solid #ccc;
+        overflow-y: hidden;
+    }
+    .product-view:nth-child(even) {
+        border-left-width: 0;
+    }
+    .product-view dl
+    {
+        margin: 10px 10px 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .product-view dt, dd
+    {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        line-height: 24px;
+        font-size: 18px;
+    }
+    .product-view dt
+    {
+        font-size: 11px;
+        height: 16px;
+        line-height: 16px;
+        text-transform: uppercase;
+        opacity: 0.5;
+    }
+    
+    .product-view dd
+    {
+        height: 46px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+    }
+    
+    .product-view dd .k-widget,
+    .product-view dd .k-textbox {
+        font-size: 14px;
+    }
+   
+    .edit-buttons
+    {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px;
+        background-color: rgba(0,0,0,0.1);
+    }
+    span.k-invalid-msg
+    {
+        position: absolute;
+        margin-left: 6px;
+    }
+    
+    .k-add-button {
+        margin-bottom: 2em;
+    }
+    
+    @media only screen and (max-width : 620px) {
+    
+        .product-view
+        {
+            width: 100%;
+        }
+        .product-view:nth-child(even) {
+            border-left-width: 1px;
+        }
+    }

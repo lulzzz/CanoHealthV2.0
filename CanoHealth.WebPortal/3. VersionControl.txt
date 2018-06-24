@@ -1,0 +1,32 @@
+V02-07-18 09-18 AM Setting Camel Case Notation in Web Api 2. See WebApiConfig.cs
+
+V02/08/2018 08:25 AM Adding animate.css to the content folder to produce animation effects check BundleConfig.cs in App_Start Folder under 
+new StyleBundle("~/Content/css"
+
+V02/08/2018 08:35 AM Adding Underscore.js to user the template engine to create templates and render views
+
+V02/13/20108 08:50 AM
+Adding Moment.js to work and format date and times
+
+Adding Bootbox.min.js to work with bootstrap modals
+
+See the Bundle config to optimize we can merge the jQuery and Bootstrap bundles as one into a lib
+
+V02/19/18 10:55 PM
+Deployed in local IIS http://localhost:8172
+Create the Corporation API Controller.
+
+V03/09/2018 09:41 PM
+Moving the fonts and Images folder inside the Content folder.
+Adding to the css bundle the kendo bundles
+adding into de lib bundle the kendo bundles.
+
+17:11 PM
+The RazonArtificial green theme was added to the solution
+new Bundles was created as well as a new layout page
+tested with PlaceOfService.cshtml
+
+V04/03/2018
+09:38 PM Actualizando la version de Kendo a v20180.1.221
+
+

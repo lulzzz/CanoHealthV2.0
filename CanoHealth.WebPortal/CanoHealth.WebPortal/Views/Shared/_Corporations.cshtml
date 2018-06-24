@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CanoHealth.WebPortal.ViewModels.CorporationViewModel>
+    
+
+    
+<!-- Nav tabs -->
+<ul class="nav nav-tabs nav-tabs-ar">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        if (i == 0)
+        {
+            <li class="active">
+                <a href="#home3_@i" data-toggle="tab">
+                    @Model.ToList()[i].CorporationName
+                </a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="#profile3_@i" data-toggle="tab">
+                    @Model.ToList()[i].CorporationName
+                </a>
+            </li>
+        }
+    }
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        if (i == 0)
+        {
+            <div class="tab-pane active" id="home3_@i">
+                <strong>NPI: </strong> @Model.ToList()[i].Npi
+                <br />
+                <strong>TAXID: </strong> @Model.ToList()[i].TaxId
+            </div>
+        }
+        else
+        {
+            <div class="tab-pane" id="profile3_@i">
+                <strong>NPI: </strong> @Model.ToList()[i].Npi
+                <br />
+                <strong>TAXID: </strong> @Model.ToList()[i].TaxId
+            </div>
+        }
+    }
+   
+</div>

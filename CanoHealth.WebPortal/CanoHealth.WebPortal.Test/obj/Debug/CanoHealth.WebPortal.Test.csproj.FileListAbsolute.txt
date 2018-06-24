@@ -1,0 +1,16 @@
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\CanoHealth.WebPortal.Test.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\CanoHealth.WebPortal.Test.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.Core.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\Moq.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.Core.pdb
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\FluentAssertions.Core.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\bin\Debug\Moq.xml
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\obj\Debug\CanoHealth.WebPortal.Test.csprojResolveAssemblyReference.cache
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\obj\Debug\CanoHealth.WebPortal.Test.csproj.CoreCompileInputs.cache
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\obj\Debug\CanoHealth.WebPortal.Test.csproj.CopyComplete
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\obj\Debug\CanoHealth.WebPortal.Test.dll
+\\cmbs-svr\users$\greidys\Desktop\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal.Test\obj\Debug\CanoHealth.WebPortal.Test.pdb
