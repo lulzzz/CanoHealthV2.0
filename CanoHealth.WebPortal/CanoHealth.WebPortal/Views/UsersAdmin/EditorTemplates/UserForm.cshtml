@@ -36,37 +36,37 @@
 
     <!--Active-->
     <div id="js-active" class="form-group">
-        <input type="checkbox" name="Active" id="Active" class="k-checkbox"  />
+        <input type="checkbox" name="Active" id="Active" class="k-checkbox" />
         <label class="k-checkbox-label text-uppercase" for="Active"> Active</label>
 
-        <input type="checkbox" class="k-checkbox"  />
+        <input type="checkbox" class="k-checkbox" />
     </div>
 
     <!--Roles-->
     <div class="form-group">
         <label for="Roles" class="control-label text-uppercase">roles: <sup class="text-danger">*</sup></label>
         @(Html.Kendo().MultiSelectFor(m => m.Roles)
-              .DataTextField("Name")
-              .DataValueField("Id")
-              .Placeholder("Select Roles...")
-              .Height(520)
-              .DataSource(source =>
-              {
-                  source.Custom()
-                      .ServerFiltering(true)
-                      .ServerPaging(true)
-                      .PageSize(80)
-                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                      .Transport(transport =>
+                      .DataTextField("Name")
+                      .DataValueField("Id")
+                      .Placeholder("Select Roles...")
+                      .Height(520)
+                      .DataSource(source =>
                       {
-                          transport.Read("ReadActiveRoles", "RolesAdmin");
-                      })
-                      .Schema(schema =>
-                      {
-                          schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                              .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                          source.Custom()
+                              .ServerFiltering(true)
+                              .ServerPaging(true)
+                              .PageSize(80)
+                              .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+                              .Transport(transport =>
+                              {
+                                  transport.Read("ReadActiveRoles", "RolesAdmin");
+                              })
+                              .Schema(schema =>
+                              {
+                                  schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                      .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
                       });
-              })
+                      })
         )
     </div>
 
@@ -74,27 +74,28 @@
     <div class="form-group">
         <label for="" class="control-label text-uppercase">corporations: <sup class="text-danger">*</sup></label>
         @(Html.Kendo().MultiSelectFor(m => m.Corporations)
-              .DataTextField("CorporationName")
-              .DataValueField("CorporationId")
-              .Placeholder("Select Corporation...")
-              .Height(520)
-              .DataSource(source =>
-              {
-                  source.Custom()
-                      .ServerFiltering(true)
-                      .ServerPaging(true)
-                      .PageSize(80)
-                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                      .Transport(transport =>
+                      .DataTextField("CorporationName")
+                      .DataValueField("CorporationId")
+                      .Placeholder("Select Corporation...")
+                      .Height(520)
+                      .DataSource(source =>
                       {
-                          transport.Read("ReadActiveCorporations", "Corporation");
-                      })
-                      .Schema(schema =>
-                      {
-                          schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                              .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                          source.Custom()
+                              .ServerFiltering(true)
+                              .ServerPaging(true)
+                              .PageSize(80)
+                              .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+                              .Transport(transport =>
+                              {
+                                  transport.Read("ReadActiveCorporations", "Corporation");
+                              })
+                              .Schema(schema =>
+                              {
+                                  schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                      .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
                       });
-              })
+                      })
         )
     </div>
 </div>
+

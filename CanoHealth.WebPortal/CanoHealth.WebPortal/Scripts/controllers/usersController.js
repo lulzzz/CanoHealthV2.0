@@ -9,15 +9,16 @@
     }
 
     var validateEmail = function () {
-        alert("email is changing.");
-        //var email = $(this).val();
-        //var emailpattern = new RegExp("@@canohealth.com");
-        //if (!emailpattern.test(email.toString())) {
-        //    alert("invalid email address. It should be part of canohealth domain.");
-        //    return;
-        //} else {
-            
-        //}
+        
+        var email = $(this).val();
+        console.log("email: ", email);
+        var emailpattern = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(canohealth)\.com$/g;
+        if (!emailpattern.test(email.toString())) {
+            toastr.error("invalid email address. It should be part of canohealth domain.");
+            $(".k-grid-update").hide();
+        } else {
+            $(".k-grid-update").show();
+        }
     };
 
     var onEditUserItem = function(e) {
@@ -62,9 +63,14 @@
         }
     };
 
+    var onOpenUserFormWindow = function () {
+        $(".container-fluid").on("change", ".js-email", validateEmail);
+    };
+
     return {
         init: init,
         onEditUserItem: onEditUserItem,
-        userserverSideErrorHandlers: userserverSideErrorHandlers
+        userserverSideErrorHandlers: userserverSideErrorHandlers,
+        onOpenUserFormWindow: onOpenUserFormWindow
     }
 }();

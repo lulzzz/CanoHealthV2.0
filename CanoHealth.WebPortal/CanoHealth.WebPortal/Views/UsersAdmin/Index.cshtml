@@ -55,6 +55,7 @@
               {
                   wnd.Title("");
                   wnd.Width(600);
+                  wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
               });
           })
           .Filterable()
@@ -97,11 +98,5 @@
 </script>
 
 @section Scripts{
-    <script src="~/Scripts/controllers/usersController.js"></script>
-    <script>
-        $(document).ready(function() {
-            UsersController.init(".container-fluid");
-        });
-    </script>
-    
+    <script src="~/Scripts/controllers/usersController.js"></script>    
 }
