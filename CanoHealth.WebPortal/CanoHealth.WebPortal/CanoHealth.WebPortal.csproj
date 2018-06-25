@@ -754,6 +754,7 @@
     <Compile Include="ViewModels\SearchInsuranceLocationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\afterBootstrapAndKendoStyles.css" />
     <Content Include="Content\animate.css" />
