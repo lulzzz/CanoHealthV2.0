@@ -5,7 +5,7 @@
 
     //Private methods
     var init = function (container) {
-        $(container).on("click", ".js-email", validateEmail);
+        $(container).on("change", ".js-email", validateEmail);
     }
 
     var validateEmail = function () {

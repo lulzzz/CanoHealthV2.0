@@ -18,5 +18,10 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 rol => rol.Roles
             }).ToList();
         }
+
+        public ApplicationUser GetByUserName(string username)
+        {
+            return SingleOrDefault(u => u.Email.Equals(username, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

@@ -6,5 +6,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
     public interface IUserRepository : IRepository<ApplicationUser>
     {
         IEnumerable<ApplicationUser> GetUsers();
+
+        ApplicationUser GetByUserName(string username);
     }
 }

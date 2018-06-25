@@ -279,6 +279,7 @@
     <Compile Include="Controllers\Api\PersonalFileTypesController.cs" />
     <Compile Include="Controllers\Api\ProviderByLocationsController.cs" />
     <Compile Include="Controllers\Api\SearchEngineController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\BusinessLinesController.cs" />
     <Compile Include="Controllers\ClinicContractBusinessLinesController.cs" />
     <Compile Include="Controllers\ClinicDoctorTeamsController.cs" />
