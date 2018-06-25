@@ -90,17 +90,10 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Home</a>
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Admin</a>
                                 <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
-                                    <li><a href="#">Option 1: Default</a></li>
-                                    <li><a href="#">Option 2: Services</a></li>
-                                    <li><a href="#">Option 3: Full Intro</a></li>
-                                    <li><a href="#">Option 4: Only Full Intro</a></li>
-                                    <li><a href="home_news.html">Option 5: News</a></li>
-                                    <li><a href="home_profile.html">Option 6: Professional Profile</a></li>
-                                    <li><a href="home_plan.html">Option 7: Subscribe</a></li>
-                                    <li role="presentation" class="dropdown-header">New Home Pages 1.4</li>
-                                    <li><a href="home_polygon.html">Option 8: Product <span class="label label-success pull-right">New</span></a></li>
+                                    <li><a href="@Url.Action("Index", "UsersAdmin")"><i class="fa fa-users"></i> Users</a></li>
+                                    <li><a href="@Url.Action("Index", "RolesAdmin")"><i class="fa fa-key"></i> Roles</a></li>                                    
                                 </ul>
                             </li>
                             <li class="dropdown yamm-fw">

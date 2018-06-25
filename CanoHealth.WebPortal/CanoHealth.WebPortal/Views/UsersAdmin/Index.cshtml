@@ -58,18 +58,17 @@
               });
           })
           .Filterable()
-            .Sortable()
-            .Groupable()
-            .Resizable(r => r.Columns(true))
-            .Pageable(pager => pager
-
-                .Numeric(true)
-                .Info(true)
-                .PreviousNext(true)
-                .Refresh(true)
-                .PageSizes(new object[] { 25, 50, 100, "All" })
-            )
-            .Scrollable(s => s.Height("auto"))
+          .Sortable()
+          .Groupable()
+          .Resizable(r => r.Columns(true))
+          .Pageable(pager => pager
+            .Numeric(true)
+            .Info(true)
+            .PreviousNext(true)
+            .Refresh(true)
+            .PageSizes(new object[] { 25, 50, 100, "All" })
+          )
+          .Scrollable(s => s.Height("auto"))
           .Events(ev => ev.Edit("UsersController.onEditUserItem"))
           .DataSource(ds => ds
               .Ajax()

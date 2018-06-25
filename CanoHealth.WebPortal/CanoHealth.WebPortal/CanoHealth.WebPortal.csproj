@@ -1464,9 +1464,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="Persistance\EntityConfigurations\" />
-    <Folder Include="Views\CorporationAccesses\" />
     <Folder Include="Views\PersonalFiles\" />
-    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Persistance\Migrations\201805271537364_CreateUserCorporationAccessTable.resx">
