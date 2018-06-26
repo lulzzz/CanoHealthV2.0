@@ -1,5 +1,6 @@
 ﻿var UsersController = function () {
     //Private properties
+    var user;
     var uservalidationMessageTmpl = kendo.template($("#serverside-errorhandler-Template")
         .html());
 
@@ -18,7 +19,9 @@
             $(".k-grid-update").hide();
         } else {
             var checkAvailabilitySuccess = function (response) {
-                if (response) {
+                //If a user was found with the same username and the admin is creating a new user show message and hide button
+                //if a user is found with the same username and the admin is updating the user and the ids are differents then show message an hide the button.
+                if ((response && !user) || (user && user.id !== response.id)) {
                     toastr.error("There is a user with the same username. Please try again.");
                     $(".k-grid-update").hide();
                 } else {
@@ -34,7 +37,8 @@
         }
     };
 
-    var onEditUserItem = function(e) {
+    var onEditUserItem = function (e) {
+        user = e.model;
         if (e.model.isNew()) {
             e.model.Active = true;
             $("#js-password").show();
