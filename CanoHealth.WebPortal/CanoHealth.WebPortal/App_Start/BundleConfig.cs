@@ -17,9 +17,9 @@ namespace CanoHealth.WebPortal
                         "~/Scripts/bootbox.min.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/app/app.js",
-                        "~/Scripts/kendo/jszip.min.js",
-                        "~/Scripts/kendo/kendo.all.min.js",
-                        "~/Scripts/kendo/kendo.aspnetmvc.min.js"
+                        "~/Scripts/kendo/2018.1.221/jszip.min.js",
+                        "~/Scripts/kendo/2018.1.221/kendo.all.min.js",
+                        "~/Scripts/kendo/2018.1.221/kendo.aspnetmvc.min.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/contracts").Include(
@@ -98,8 +98,8 @@ namespace CanoHealth.WebPortal
                      "~/Content/Site.css",
                      "~/Content/toastr.css",
 
-                     "~/Content/kendo/kendo.common-bootstrap.min.css",
-                     "~/Content/kendo/kendo.bootstrap.min.css",
+                     "~/Content/kendo/2018.1.221/kendo.common-bootstrap.min.css",
+                     "~/Content/kendo/2018.1.221/kendo.bootstrap.min.css",
                      "~/Content/afterBootstrapAndKendoStyles.css",
                      "~/Content/font-awesome.css"
                      ));
@@ -121,9 +121,9 @@ namespace CanoHealth.WebPortal
                     "~/Content/Site_razonartificial_theme.css"
                 ));
 
-            bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                "~/Content/kendo/kendo.common-bootstrap.min.css",
-                "~/Content/kendo/kendo.bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+                "~/Content/kendo/2018.1.221/kendo.common-bootstrap.min.css",
+                "~/Content/kendo/2018.1.221/kendo.bootstrap.min.css"));
         }
     }
 }

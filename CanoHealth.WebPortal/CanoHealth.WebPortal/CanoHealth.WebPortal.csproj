@@ -724,6 +724,7 @@
     <Compile Include="ViewModels\InsuranceBusinessLineViewModel.cs" />
     <Compile Include="ViewModels\InsuranceFormViewModel.cs" />
     <Compile Include="ViewModels\LinkedContractViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ChangePasswordInitViewModel.cs" />
     <Compile Include="ViewModels\MedicalLicenseFormViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1265,6 +1266,7 @@
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\controllers\accountsController.js" />
     <Content Include="Scripts\controllers\contractsController.js" />
     <Content Include="Scripts\controllers\doctorsController.js" />
     <Content Include="Scripts\controllers\individualProvidersController.js" />
@@ -1362,6 +1364,7 @@
     <Content Include="Scripts\services\insuranceService.js" />
     <Content Include="Scripts\services\personalFileService.js" />
     <Content Include="Scripts\services\placeOfService.js" />
+    <Content Include="Scripts\services\userService.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\underscore-min.js" />
@@ -1453,6 +1456,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\UsersAdmin\IndexOriginal.cshtml" />
     <Content Include="Views\UsersAdmin\EditorTemplates\UserForm.cshtml" />
+    <Content Include="Views\Manage\ChangePasswordWhenInit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

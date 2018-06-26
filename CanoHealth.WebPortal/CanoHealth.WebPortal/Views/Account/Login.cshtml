@@ -2,62 +2,124 @@
 @model CanoHealth.WebPortal.ViewModels.Account.LoginViewModel
 
 @{
-    ViewBag.Title = "Log in";    
+    ViewBag.Title = "Log in";
 }
 
-<br /><br />
 
-<div class="row">
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title"></h1>
+
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index","Home", new {area = ""})"> <i class="fa fa-home"></i> HOME</a></li>
+            <li class="active">Login</li>
+        </ol>
+    </div>
+</header>
+
+
+<div class="row js-loggin-section">
     <div class="col-lg-4 col-lg-offset-1 col-md-5">
+        <!--if user is inactive (Active = false) notify to the user.-->
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger ">
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">&times;</a>
+                <p>@ViewBag.Error</p>
+            </div>
+        }
+
         <h2 class="section-title no-margin-top">Are you registered?</h2>
         <div class="panel panel-primary animated fadeInDown animation-delay-2">
             <div class="panel-heading text-center">ACCESS ACCOUNT</div>
             <div class="panel-body">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <div class="input-group login-input">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input class="form-control" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" placeholder="Username" type="text" value="">
-                                </div>
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group login-input">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input class="form-control"
+                                       data-val="true" data-val-email="The Email field is not a valid e-mail address."
+                                       data-val-required="The Email field is required."
+                                       id="Email"
+                                       name="Email"
+                                       placeholder="example@canohealth.com"
+                                       type="text" value="">
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group login-input">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input class="form-control" data-val="true" data-val-required="The Password field is required." id="tbPass" name="Password" placeholder="Password" type="password">
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <input type="checkbox" name="RememberMe" id="RememberMe" value="true">
+                                <label for="RememberMe">Remember me</label>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <div class="input-group login-input">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input class="form-control" data-val="true" data-val-required="The Password field is required." id="tbPass" name="Password" placeholder="Password" type="password">
-                                </div>
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
+                    <button type="submit" id="js-btn-submit" class="btn btn-ar btn-primary pull-right">Login</button>
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <div class="checkbox">
-                                    <input type="checkbox" name="RememberMe" id="RememberMe" value="true">
-                                    <label for="RememberMe">Remember me</label>
-                                </div>
-                            </div>
-                        </div>
+                    <a href="/Account/ForgotPassword" class="btn btn-ar btn-warning">Password Recovery</a>
 
-                        <button type="submit" class="btn btn-ar btn-primary pull-right">Login</button>
-
-                        <a href="/Account/ForgotPassword" class="btn btn-ar btn-warning">Password Recovery</a>
-
-                        <div class="clearfix"></div>
+                    <div class="clearfix"></div>
                 }
             </div>
         </div>
     </div>
 </div>
 
+<div id="js-changepassword-window" style="display: none;">
+    @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Change Password Form</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="OldPassword" class="control-label ">Old Password</label>           
+            <input type="password" name="OldPassword" id="OldPassword" class="k-textbox" style="width: 100%;" />           
+        </div>
+        <div class="form-group">
+            <label for="NewPassword" class="control-label">New Password</label>            
+            <input type="password" name="NewPassword" id="NewPassword" class="k-textbox" style="width: 100%;"/>          
+        </div>
+        <div class="form-group">
+            <label for="ConfirmPassword" class="control-label">New Password</label>            
+            <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="k-textbox" style="width: 100%;"/>           
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Change password" class="btn btn-ar btn-primary" />
+            </div>
+        </div>
+    }
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script src="~/Scripts/services/userService.js"></script>
+    <script src="~/Scripts/controllers/accountsController.js"></script>
+    <script>
+        $(document).ready(function () {
+            AccountsController.init(".js-loggin-section");
+        });
+    </script>*@
 }

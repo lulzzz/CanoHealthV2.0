@@ -16,78 +16,78 @@
 
 <div id="js-user-container" class="container-fluid">
     @(Html.Kendo().Grid<UserFormViewModel>()
-          .Name("Users")
-          .ToolBar(tool =>
-          {
-              tool.Create().Text("NEW");
-              tool.Excel().Text("EXCEL");
-          })
-          .Excel(ex =>
-          {
-              ex.AllPages(true);
-              ex.FileName("Users");
-          })
-          .Columns(col =>
-          {
-              col.Bound(u => u.Id).Hidden();
-              col.Bound(u => u.Password).Hidden();
-              col.Bound(u => u.ConfirmPassword).Hidden();
+        .Name("Users")
+        .ToolBar(tool =>
+        {
+            tool.Create().Text("NEW");
+            tool.Excel().Text("EXCEL");
+        })
+        .Excel(ex =>
+        {
+            ex.AllPages(true);
+            ex.FileName("Users");
+        })
+        .Columns(col =>
+        {
+            col.Bound(u => u.Id).Hidden();
+            col.Bound(u => u.Password).Hidden();
+            col.Bound(u => u.ConfirmPassword).Hidden();
 
-              col.Bound(u => u.FirstName).Title("FIRST NAME");
+            col.Bound(u => u.FirstName).Title("FIRST NAME");
 
-              col.Bound(u => u.LastName).Title("LAST NAME");
+            col.Bound(u => u.LastName).Title("LAST NAME");
 
-              col.Bound(u => u.Email).Title("EMAIL");
+            col.Bound(u => u.Email).Title("EMAIL");
 
-              col.Bound(u => u.Active).Title("ACTIVE")
-                  .ClientTemplate("#=Active ? 'YES': 'NO'#");
+            col.Bound(u => u.Active).Title("ACTIVE")
+                .ClientTemplate("#=Active ? 'YES': 'NO'#");
 
-              col.Command(cmd =>
-              {
-                  cmd.Edit();
-              }).Title("ACTIONS");
-          })
-          .Editable(ed =>
-          {
-              ed.Mode(GridEditMode.PopUp);
-              ed.TemplateName("UserForm");
-              ed.Window(wnd =>
-              {
-                  wnd.Title("");
-                  wnd.Width(600);
-                  wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
-              });
-          })
-          .Filterable()
-          .Sortable()
-          .Groupable()
-          .Resizable(r => r.Columns(true))
-          .Pageable(pager => pager
-            .Numeric(true)
-            .Info(true)
-            .PreviousNext(true)
-            .Refresh(true)
-            .PageSizes(new object[] { 25, 50, 100, "All" })
-          )
-          .Scrollable(s => s.Height("auto"))
-          .Events(ev => ev.Edit("UsersController.onEditUserItem"))
-          .DataSource(ds => ds
-              .Ajax()
-              .ServerOperation(true)
-              .PageSize(20)
-              .Model(model =>
-              {
-                  model.Id(u => u.Id);
-                  model.Field(u => u.Id).Editable(false);
-              })
-              .Events(ev =>
-              {
-                  ev.Error("UsersController.userserverSideErrorHandlers");
-              })
-              .Read(r => r.Action("ReadUsers", "UsersAdmin"))
-              .Create(c => c.Action("CreateUser", "UsersAdmin"))
-              .Update(u => u.Action("UpdateUser", "UsersAdmin"))
-          ))
+            col.Command(cmd =>
+            {
+                cmd.Edit();
+            }).Title("ACTIONS");
+        })
+        .Editable(ed =>
+        {
+            ed.Mode(GridEditMode.PopUp);
+            ed.TemplateName("UserForm");
+            ed.Window(wnd =>
+            {
+                wnd.Title("");
+                wnd.Width(600);
+                wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
+            });
+        })
+        .Filterable()
+        .Sortable()
+        .Groupable()
+        .Resizable(r => r.Columns(true))
+        .Pageable(pager => pager
+        .Numeric(true)
+        .Info(true)
+        .PreviousNext(true)
+        .Refresh(true)
+        .PageSizes(new object[] { 25, 50, 100, "All" })
+        )
+        .Scrollable(s => s.Height("auto"))
+        .Events(ev => ev.Edit("UsersController.onEditUserItem"))
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(20)
+            .Model(model =>
+            {
+                model.Id(u => u.Id);
+                model.Field(u => u.Id).Editable(false);
+            })
+            .Events(ev =>
+            {
+                ev.Error("UsersController.userserverSideErrorHandlers");
+            })
+            .Read(r => r.Action("ReadUsers", "UsersAdmin"))
+            .Create(c => c.Action("CreateUser", "UsersAdmin"))
+            .Update(u => u.Action("UpdateUser", "UsersAdmin"))
+        ))
 </div>
 
 <script type="text/kendo-template" id="serverside-errorhandler-Template">
@@ -98,5 +98,6 @@
 </script>
 
 @section Scripts{
-    <script src="~/Scripts/controllers/usersController.js"></script>    
+    <script src="~/Scripts/services/userService.js"></script>
+    <script src="~/Scripts/controllers/usersController.js"></script>
 }

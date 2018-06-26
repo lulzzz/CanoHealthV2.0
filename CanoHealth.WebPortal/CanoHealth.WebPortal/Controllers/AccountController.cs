@@ -1,16 +1,12 @@
-﻿using System.Globalization;
+﻿using CanoHealth.WebPortal.ViewModels.Account;
 using IdentitySample.Models;
-using CanoHealth.WebPortal.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using CanoHealth.WebPortal.ViewModels.Account;
 
 namespace IdentitySample.Controllers
 {
@@ -21,7 +17,7 @@ namespace IdentitySample.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -70,6 +66,22 @@ namespace IdentitySample.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user != null && user.Active == false)
+            {
+                ViewBag.Error = "Your account is inactive. Please contact your system administrator.";
+                return View(model);
+            }
+
+            /*This scenario is when the user is created by the administrator and never goes to email to confirm his account and 
+             goes directly to the login page in that time the EmailConfirmed is false so it would be the first login action in the system
+             for that reason we confirm the email and send the user to change the password inmediately*/
+            if (user != null && user.EmailConfirmed == false)
+            {
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var resultado = await UserManager.ConfirmEmailAsync(user.Id, code);
             }
 
             // This doen't count login failures towards lockout only two factor authentication

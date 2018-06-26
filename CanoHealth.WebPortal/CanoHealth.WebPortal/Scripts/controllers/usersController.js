@@ -1,4 +1,4 @@
-﻿var UsersController = function () {
+﻿var UsersController = function (userService) {
     //Private properties
     var user;
     var uservalidationMessageTmpl = kendo.template($("#serverside-errorhandler-Template")
@@ -21,7 +21,7 @@
             var checkAvailabilitySuccess = function (response) {
                 //If a user was found with the same username and the admin is creating a new user show message and hide button
                 //if a user is found with the same username and the admin is updating the user and the ids are differents then show message an hide the button.
-                if ((response && !user) || (user && user.id !== response.id)) {
+                if ((response && !user) || (response && user && user.id !== response.id)) {
                     toastr.error("There is a user with the same username. Please try again.");
                     $(".k-grid-update").hide();
                 } else {
@@ -33,7 +33,7 @@
                 $(".k-grid-update").hide();
             };
 
-            AjaxCallGet("/api/users", { username: email }, checkAvailabilitySuccess, checkAvailabilityFail);           
+            userService.getUserInfo({ username: email }, checkAvailabilitySuccess, checkAvailabilityFail);                       
         }
     };
 
@@ -90,4 +90,4 @@
         userserverSideErrorHandlers: userserverSideErrorHandlers,
         onOpenUserFormWindow: onOpenUserFormWindow
     }
-}();
+}(UserService);

@@ -2,12 +2,36 @@
 
 @{
     ViewBag.Title = "Error";
+    Layout = null;
 }
 
 @*<hgroup>
-    <h1 class="text-error">Error.</h1>
-    <h2 class="text-error">An error occurred while processing your request.</h2>
-  </hgroup>*@
+      <h1 class="text-error">Error.</h1>
+      <h2 class="text-error">An error occurred while processing your request.</h2>
+    </hgroup>*@
+
+<!-- CSS -->
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+
+@*@Styles.Render("~/Content/razontheme")*@
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<link href="~/Content/kendo/2018.1.221/kendo.common-bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2018.1.221/kendo.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/afterBootstrapAndKendoStyles.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+<link href="~/Content/preload.css" rel="stylesheet" />
+<link href="~/Content/vendors.css" rel="stylesheet" />
+<link href="~/Content/syntaxhighlighter/shCore.css" rel="stylesheet" />
+<link href="~/Content/style-green.css" rel="stylesheet" />
+<link href="~/Content/width-full.css" rel="stylesheet" />
+<link href="~/Content/Site_razonartificial_theme.css" rel="stylesheet" />
+<link href="~/Content/cano-logo.css" rel="stylesheet" />
+
+@Scripts.Render("~/bundles/razontheme")
 
 <div class="paper-back">
     <div class="absolute-center">
@@ -27,3 +51,4 @@
         </div>
     </div>
 </div>
+
