@@ -17,7 +17,20 @@
             toastr.error("invalid email address. It should be part of canohealth domain.");
             $(".k-grid-update").hide();
         } else {
-            $(".k-grid-update").show();
+            var checkAvailabilitySuccess = function (response) {
+                if (response) {
+                    toastr.error("There is a user with the same username. Please try again.");
+                    $(".k-grid-update").hide();
+                } else {
+                    $(".k-grid-update").show();
+                }
+            };
+            var checkAvailabilityFail = function (response) {
+                toastr.error("We are sorry, but something went wrong. Please try again.");
+                $(".k-grid-update").hide();
+            };
+
+            AjaxCallGet("/api/users", { username: email }, checkAvailabilitySuccess, checkAvailabilityFail);           
         }
     };
 
