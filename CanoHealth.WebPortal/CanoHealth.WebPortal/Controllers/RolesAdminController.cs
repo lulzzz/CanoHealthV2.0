@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace IdentitySample.Controllers
 {
-    //[Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
