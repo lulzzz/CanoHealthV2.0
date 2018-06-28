@@ -13,6 +13,7 @@
             if (response && response.active && response.emailConfirmed === false) {
                 
                 var changePasswordWindow = $("#js-changepassword-window").kendoWindow({
+                    title: "Change password",
                     modal: true,
                     width: 600,
                     actions: [],

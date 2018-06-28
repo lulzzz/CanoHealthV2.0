@@ -75,18 +75,17 @@ namespace IdentitySample.Controllers
                 return View(model);
             }
 
-            /*This scenario is when the user is created by the administrator and never goes to email to confirm his account and 
-             goes directly to the login page in that time the EmailConfirmed is false so it would be the first login action in the system
-             for that reason we confirm the email and send the user to change the password inmediately*/
+            /*This scenario is when the user is created by the administrator and never goes to 
+             * the email to confirm his account and goes directly to the login page in that 
+             * time the EmailConfirmed is false so it would be the first login action in the 
+             * system for that reason we confirm the email and send the user to change the 
+             * password inmediately*/
             if (user != null && user.EmailConfirmed == false)
-            {
-                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var resultado = await UserManager.ConfirmEmailAsync(user.Id, code);
-            }
+                return RedirectToAction("ChangePasswordWhenInit", "Manage", new { UserId = user.Id });
 
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:

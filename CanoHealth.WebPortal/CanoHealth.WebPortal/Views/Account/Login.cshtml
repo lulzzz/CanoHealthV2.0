@@ -58,7 +58,13 @@
                         <div class="col-md-12">
                             <div class="input-group login-input">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input class="form-control" data-val="true" data-val-required="The Password field is required." id="tbPass" name="Password" placeholder="Password" type="password">
+                                <input class="form-control" 
+                                       data-val="true" 
+                                       data-val-required="The Password field is required." 
+                                       id="Password" 
+                                       name="Password" 
+                                       placeholder="Password" 
+                                       type="password">
                             </div>
                             <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
                         </div>
@@ -85,31 +91,47 @@
 </div>
 
 <div id="js-changepassword-window" style="display: none;">
-    @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <h4>Change Password Form</h4>
-        <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="form-group">
-            <label for="OldPassword" class="control-label ">Old Password</label>           
-            <input type="password" name="OldPassword" id="OldPassword" class="k-textbox" style="width: 100%;" />           
-        </div>
-        <div class="form-group">
-            <label for="NewPassword" class="control-label">New Password</label>            
-            <input type="password" name="NewPassword" id="NewPassword" class="k-textbox" style="width: 100%;"/>          
-        </div>
-        <div class="form-group">
-            <label for="ConfirmPassword" class="control-label">New Password</label>            
-            <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="k-textbox" style="width: 100%;"/>           
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Change password" class="btn btn-ar btn-primary" />
+    <div class="container">
+        @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                <label for="OldPassword" class="control-label ">Old Password</label>
+                <input type="password" 
+                       name="OldPassword" 
+                       id="OldPassword" 
+                       class="k-textbox" 
+                       style="width: 100%;" />
             </div>
-        </div>
-    }
+            <div class="form-group">
+                <label for="NewPassword" class="control-label">New Password</label>
+                <input type="password" 
+                       name="NewPassword" 
+                       id="NewPassword" 
+                       class="k-textbox" 
+                       style="width: 100%;" />
+            </div>
+            <div class="form-group">
+                <label for="ConfirmPassword" class="control-label">Confirm Password</label>
+                <input type="password" 
+                       name="ConfirmPassword" 
+                       id="ConfirmPassword" 
+                       class="k-textbox" 
+                       style="width: 100%;" />
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Change password" class="btn btn-ar btn-primary" />
+                </div>
+            </div>
+            }
+    </div>
+    
+    
 </div>
 
 @section Scripts {

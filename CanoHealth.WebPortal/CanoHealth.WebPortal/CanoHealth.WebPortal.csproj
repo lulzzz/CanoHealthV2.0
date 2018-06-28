@@ -1457,6 +1457,7 @@
     <Content Include="Views\UsersAdmin\IndexOriginal.cshtml" />
     <Content Include="Views\UsersAdmin\EditorTemplates\UserForm.cshtml" />
     <Content Include="Views\Manage\ChangePasswordWhenInit.cshtml" />
+    <Content Include="Views\Shared\_ChangeUserPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

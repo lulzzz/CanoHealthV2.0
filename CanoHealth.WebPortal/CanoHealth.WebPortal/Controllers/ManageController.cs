@@ -254,15 +254,25 @@ namespace IdentitySample.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult ChangePasswordWhenInit()
         {
-            return View();
+            var requestQueryString = Request.QueryString;
+            var userId = requestQueryString["UserId"];
+            var model = new ChangePasswordInitViewModel
+            {
+                UserId = userId
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> ChangePasswordWhenInit(ChangePasswordInitViewModel model)
         {
+            /*This action is invoke when the user do the first loggin*/
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -271,12 +281,16 @@ namespace IdentitySample.Controllers
             var result = await UserManager.ChangePasswordAsync(model.UserId, model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(model.UserId);
                 if (user != null)
                 {
+                    //Confirm the email and signin
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var confirmEmailResult = await UserManager.ConfirmEmailAsync(user.Id, code);
+
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", "Home");
             }
             AddErrors(result);
             return View(model);

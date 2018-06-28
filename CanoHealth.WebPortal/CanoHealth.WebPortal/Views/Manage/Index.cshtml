@@ -1,76 +1,171 @@
 ﻿@*@model IdentitySample.Models.IndexViewModel*@
+@using Microsoft.AspNet.Identity
 @model CanoHealth.WebPortal.ViewModels.Manage.IndexViewModel
 @{
     ViewBag.Title = "Manage your account";
 }
 
-<h2>@ViewBag.Title.</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-8">
-        <p>
-            @if (Model.HasPassword)
+@*<h2>@ViewBag.Title.</h2>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Pick a password", "SetPassword")
+                }
+            </p>
+            <p>
+                Phone Number: @(Model.PhoneNumber ?? "None") [
+                @if (Model.PhoneNumber != null)
+                {
+                    @Html.ActionLink("Change", "AddPhoneNumber")
+                    @: &nbsp;|&nbsp;
+                    @Html.ActionLink("Remove", "RemovePhoneNumber")
+                }
+                else
+                {
+                    @Html.ActionLink("Add", "AddPhoneNumber")
+                }
+                ]
+            </p>
+            <p>
+                External Logins: @Model.Logins.Count
+                @Html.ActionLink("[Manage]", "ManageLogins")
+            </p>
+            @if (Model.TwoFactor)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                <form method="post" action="/Manage/DisableTFA">
+                    <p>
+                        Two factor is currently enabled:
+                        <input type="submit" value="Disable" class="btn btn-default"/>
+                    </p>
+                </form>
             }
             else
             {
-                @Html.ActionLink("Pick a password", "SetPassword")
+                <form method="post" action="/Manage/EnableTFA">
+                    <p>
+                        Two factor is currently disabled:
+                        <input type="submit" value="Enable" class="btn btn-default"/>
+                    </p>
+                </form>
             }
-        </p>
-        <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null)
+            @if (Model.BrowserRemembered)
             {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
+                <form method="post" action="/Manage/ForgetBrowser">
+                    <p>
+                        Browser is curently remembered for two factor:
+                        <input type="submit" value="Forget Browser" class="btn btn-default" />
+                    </p>
+                </form>
             }
             else
             {
-                @Html.ActionLink("Add", "AddPhoneNumber")
+                <form method="post" action="/Manage/RememberBrowser">
+                    <p>
+                        Browser is curently not remembered for two factor:
+                        <input type="submit" value="Remember Browser" class="btn btn-default"/>
+                    </p>
+                </form>
             }
-            ]
-        </p>
-        <p>
-            External Logins: @Model.Logins.Count
-            @Html.ActionLink("[Manage]", "ManageLogins")
-        </p>
-        @if (Model.TwoFactor)
-        {
-            <form method="post" action="/Manage/DisableTFA">
-                <p>
-                    Two factor is currently enabled:
-                    <input type="submit" value="Disable" class="btn btn-default"/>
-                </p>
-            </form>
-        }
-        else
-        {
-            <form method="post" action="/Manage/EnableTFA">
-                <p>
-                    Two factor is currently disabled:
-                    <input type="submit" value="Enable" class="btn btn-default"/>
-                </p>
-            </form>
-        }
-        @if (Model.BrowserRemembered)
-        {
-            <form method="post" action="/Manage/ForgetBrowser">
-                <p>
-                    Browser is curently remembered for two factor:
-                    <input type="submit" value="Forget Browser" class="btn btn-default" />
-                </p>
-            </form>
-        }
-        else
-        {
-            <form method="post" action="/Manage/RememberBrowser">
-                <p>
-                    Browser is curently not remembered for two factor:
-                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
-                </p>
-            </form>
-        }
+        </div>
+    </div>*@
+
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title"></h1>
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home", new {area = ""})"> <i class="fa fa-home"></i> HOME</a></li>
+            <li class="active">Account Details</li>
+        </ol>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+            <h2 class="section-title no-margin-top">@ViewBag.Title</h2>
+            @if (ViewBag.StatusMessage != null)
+            {
+                string aux = ViewBag.StatusMessage;
+                if (aux.Contains("error"))
+                {
+                    <div class="alert alert-border alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong><i class="fa fa-times-circle-o"></i> Error!</strong> @ViewBag.StatusMessage
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-border alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong><i class="fa fa-check"></i> Success!</strong> @ViewBag.StatusMessage
+                    </div>
+                }
+            }
+            <section class="css-section">
+                <div class="border-box" style="background-color: white;">
+                    <div class="UserNamePass">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>USERNAME</h6>
+                                <p class="lead lead-sm">@User.Identity.GetUserName()</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>PASSWORD</h6>
+                                <p style="font-size: 20px; line-height: 27px; margin-bottom: 27px;">
+                                    <strong>********</strong>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="javascript:void(0);" id="btnUserPass" class="btn-social lg twitter pull-right"><i class="fa fa-lock"></i> Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ChangeUserNamePass" hidden>
+                        @Html.Partial("_ChangeUserPassword", new CanoHealth.WebPortal.ViewModels.Manage.ChangePasswordInitViewModel { UserId = User.Identity.GetUserId() })
+                    </div>
+                    <hr class="color" />
+                    <div class="RememberBrowser">
+                        <div class="row">
+                            <h6 style="margin-left:13px;">REMEMBER BROWSER</h6>
+                            @if (Model.BrowserRemembered)
+                            {
+                                <div class="col-md-6">
+                                    <p class="lead lead-sm">Remembered</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <form method="post" action="/Manage/ForgetBrowser">
+                                        <p>
+                                            <input type="submit" value="Forget Browser" class="btn-social lg twitter" />
+                                        </p>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <p class="lead lead-sm">Not Remembered</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <form method="post" action="/Manage/RememberBrowser">
+                                        <p>
+                                            <input type="submit" value="Remember Browser" class="btn-social lg twitter" />
+                                        </p>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 </div>
