@@ -1,5 +1,6 @@
 ﻿using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.ViewModels.Admin;
+using Elmah;
 using IdentitySample.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -56,7 +57,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Roles/
-        public ActionResult Index()
+        public ActionResult IndexOriginal()
         {
             return View(RoleManager.Roles);
         }
@@ -141,6 +142,7 @@ namespace IdentitySample.Controllers
             {
                 var role = await RoleManager.FindByIdAsync(roleModel.Id);
                 role.Name = roleModel.Name;
+                role.Active = roleModel.Active;
                 await RoleManager.UpdateAsync(role);
                 return RedirectToAction("Index");
             }
@@ -201,6 +203,11 @@ namespace IdentitySample.Controllers
 
         #region Telerik
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult ReadActiveRoles([DataSourceRequest] DataSourceRequest request)
         {
             var roles = RoleManager.Roles
@@ -213,6 +220,82 @@ namespace IdentitySample.Controllers
                 })
                 .ToList();
             return Json(roles.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ReadAllRoles([DataSourceRequest] DataSourceRequest request)
+        {
+            var roles = RoleManager.Roles
+               .Select(r => new RoleViewModel
+               {
+                   Id = r.Id,
+                   Name = r.Name,
+                   Active = r.Active
+               })
+               .ToList();
+            return Json(roles.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> CreateRole([DataSourceRequest] DataSourceRequest request, RoleViewModel roleViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var roleInDb = await RoleManager.FindByNameAsync(roleViewModel.Name);
+                    if (roleInDb != null)
+                    {
+                        ModelState.AddModelError("Name", "Duplicate Role. Please try again.");
+                        return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+
+                    var role = new ApplicationRole(roleViewModel.Name, roleViewModel.Active);
+                    var roleresult = await RoleManager.CreateAsync(role);
+                    if (!roleresult.Succeeded)
+                    {
+                        ModelState.AddModelError("", roleresult.Errors.First());
+                        return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+                    roleViewModel.Id = role.Id;
+                }
+                catch (System.Exception ex)
+                {
+                    ErrorSignal.FromCurrentContext().Raise(ex);
+                    ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again.");
+                }
+            }
+            return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
+        }
+
+        public async Task<ActionResult> UpdateRole([DataSourceRequest] DataSourceRequest request, RoleViewModel roleViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var roleInDb = await RoleManager.FindByNameAsync(roleViewModel.Name);
+                    if (roleInDb != null && roleInDb.Id != roleViewModel.Id)
+                    {
+                        ModelState.AddModelError("Name", "Duplicate Role. Please try again.");
+                        return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+
+                    var role = await RoleManager.FindByIdAsync(roleViewModel.Id);
+                    if (role == null)
+                    {
+                        ModelState.AddModelError("", "Role not found.");
+                        return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+                    role.Name = roleViewModel.Name;
+                    role.Active = roleViewModel.Active;
+                    await RoleManager.UpdateAsync(role);
+                }
+                catch (System.Exception ex)
+                {
+                    ErrorSignal.FromCurrentContext().Raise(ex);
+                    ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again.");
+                }
+            }
+            return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
         }
 
         #endregion

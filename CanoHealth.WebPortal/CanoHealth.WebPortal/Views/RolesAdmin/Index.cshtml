@@ -1,36 +1,68 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>Index</h2>
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Users</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Users</li>
+        </ol>
+    </div>
+</header>
 
-        </th>
-    </tr>
+<div class="container-fluid">
+    @(Html.Kendo().Grid<CanoHealth.WebPortal.ViewModels.Admin.RoleViewModel>()
+            .Name("Roles")
+            .ToolBar(tool =>
+            {
+                tool.Create().Text("NEW");
+                tool.Excel().Text("EXCEL");
+            })
+            .Excel(ex => {
+                ex.AllPages(true);
+                ex.FileName("Roles");
+            })
+            .Columns(col => {
+                col.Bound(r => r.Id).Hidden();
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+                col.Bound(r => r.Name).Title("ROLE");
 
-</table>
+                col.Bound(r => r.Active).ClientTemplate("#=Active ? 'YES':'NO'#").Title("ACTIVE");
+
+                col.Command(cmd => {
+                    cmd.Edit();
+                }).Title("ACTIONS").Width(100);
+            })
+            .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(10)
+                .Model(mod => {
+                    mod.Id(r => r.Id);
+                    mod.Field(r => r.Id).Editable(false);
+                })
+                .Events(ev =>
+                {
+                    ev.Error("RolesController.roleserverSideErrorHandlers");
+                })
+                .Read(r => r.Action("ReadAllRoles", "RolesAdmin"))
+                .Create(c => c.Action("CreateRole", "RolesAdmin"))
+                .Update(u => u.Action("UpdateRole", "RolesAdmin"))
+        ))
+</div>
+
+<script type="text/kendo-template" id="serverside-errorhandler-Template">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage" role="alert">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+@section Scripts{
+    <script src="~/Scripts/controllers/rolesController.js"></script>
+}

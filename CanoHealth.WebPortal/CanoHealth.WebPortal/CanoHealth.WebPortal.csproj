@@ -1278,6 +1278,7 @@
     <Content Include="Scripts\controllers\placeOfServiceController.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\controllers\rolesController.js" />
     <Content Include="Scripts\controllers\searchEngineController.js" />
     <Content Include="Scripts\controllers\usersController.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -1403,7 +1404,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\RolesAdmin\IndexOriginal.cshtml" />
     <Content Include="Views\RolesAdmin\Edit.cshtml" />
     <Content Include="Views\RolesAdmin\Details.cshtml" />
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
@@ -1459,6 +1460,7 @@
     <Content Include="Views\UsersAdmin\EditorTemplates\UserForm.cshtml" />
     <Content Include="Views\Manage\ChangePasswordWhenInit.cshtml" />
     <Content Include="Views\Shared\_ManageProfileChangePassword.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />
