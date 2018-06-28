@@ -91,7 +91,7 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-10">
             <h2 class="section-title no-margin-top">@ViewBag.Title</h2>
-            @if (ViewBag.StatusMessage != null)
+            @if (!String.IsNullOrEmpty(ViewBag.StatusMessage))
             {
                 string aux = ViewBag.StatusMessage;
                 if (aux.Contains("error"))
@@ -111,7 +111,7 @@
             }
             <section class="css-section">
                 <div class="border-box" style="background-color: white;">
-                    <div class="UserNamePass">
+                    <div class="js-usernamepassword-details">
                         <div class="row">
                             <div class="col-md-4">
                                 <h6>USERNAME</h6>
@@ -124,12 +124,12 @@
                                 </p>
                             </div>
                             <div class="col-md-4">
-                                <a href="javascript:void(0);" id="btnUserPass" class="btn-social lg twitter pull-right"><i class="fa fa-lock"></i> Change Password</a>
+                                <a href="javascript:void(0);" id="js-btn-changeusernamepassword" class="btn-social lg twitter pull-right"><i class="fa fa-lock"></i> Change Password</a>
                             </div>
                         </div>
                     </div>
-                    <div class="ChangeUserNamePass" hidden>
-                        @Html.Partial("_ChangeUserPassword", new CanoHealth.WebPortal.ViewModels.Manage.ChangePasswordInitViewModel { UserId = User.Identity.GetUserId() })
+                    <div class="js-changeusernamepassword-form" hidden>
+                        @Html.Partial("_ManageProfileChangePassword", new CanoHealth.WebPortal.ViewModels.Manage.ChangePasswordViewModel())
                     </div>
                     <hr class="color" />
                     <div class="RememberBrowser">
@@ -169,3 +169,12 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/controllers/manageController.js"></script>
+    <script>
+        $(document).ready(function () {
+            ManageController.init(".container-fluid");
+        });
+    </script>
+}

@@ -296,6 +296,19 @@ namespace IdentitySample.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> ManageProfileChangePassword([Bind(Include = "UserId, OldPassword, NewPassword, ConfirmPassword")] ChangePasswordInitViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Manage", new { message = ManageMessageId.ChangePasswordSuccess });
+                }
+            }
+            return RedirectToAction("Index", "Manage", new { message = ManageMessageId.Error });
+        }
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

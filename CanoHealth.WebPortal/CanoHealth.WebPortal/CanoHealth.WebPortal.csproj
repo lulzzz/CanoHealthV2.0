@@ -1273,6 +1273,7 @@
     <Content Include="Scripts\controllers\insuranceController.js" />
     <Content Include="Scripts\controllers\linkedContractController.js" />
     <Content Include="Scripts\controllers\linkedContractDetailController.js" />
+    <Content Include="Scripts\controllers\manageController.js" />
     <Content Include="Scripts\controllers\personalFileController.js" />
     <Content Include="Scripts\controllers\placeOfServiceController.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -1457,7 +1458,7 @@
     <Content Include="Views\UsersAdmin\IndexOriginal.cshtml" />
     <Content Include="Views\UsersAdmin\EditorTemplates\UserForm.cshtml" />
     <Content Include="Views\Manage\ChangePasswordWhenInit.cshtml" />
-    <Content Include="Views\Shared\_ChangeUserPassword.cshtml" />
+    <Content Include="Views\Shared\_ManageProfileChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

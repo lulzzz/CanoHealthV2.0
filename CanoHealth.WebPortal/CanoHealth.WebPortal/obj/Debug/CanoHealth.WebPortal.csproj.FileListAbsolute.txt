@@ -437,4 +437,3 @@ D:\PAYMENTS\Infiniti Lease\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\C
 \\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.csproj.CopyComplete
 \\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.dll
 \\cmbs-svr\users$\greidys\My Documents\My Videos\CanoHealth\CanoHealth.WebPortal\CanoHealth.WebPortal\obj\Debug\CanoHealth.WebPortal.pdb
-C:\Projects\CanoHealthV2.0\CanoHealth.WebPortal\CanoHealth.WebPortal\bin\ro-RO\Kendo.Mvc.resources.dll
