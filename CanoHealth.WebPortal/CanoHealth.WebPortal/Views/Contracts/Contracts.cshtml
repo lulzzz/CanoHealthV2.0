@@ -21,86 +21,82 @@
     </div>
 </header>
 
-<div class="container-fluid">
-    <div class="col-md-offset-8 col-md-4">
-        @{ Html.RenderAction("RenderCorporationInLayout", "Corporation", new { Area = "", currentUserId = User.Identity.GetUserId() }); }
-    </div>
-</div>
+@Html.Partial("_CommonHeader")
 
 <br />
 
 <div class="container-fluid">
 
     @(Html.Kendo().Grid<ContractFormViewModel>()
-          .Name("Contracts")
+                  .Name("Contracts")
 
-          .ToolBar(tool =>
-          {
-              tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW").Url("javascript: onEnableContractFormWindow()");
-              tool.Excel().Text("EXCEL");
-          })
-          .Excel(ex =>
-          {
-              ex.FileName("Contracts");
-              ex.AllPages(true);
-          })
+                  .ToolBar(tool =>
+                  {
+                      tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW").Url("javascript: onEnableContractFormWindow()");
+                      tool.Excel().Text("EXCEL");
+                  })
+                  .Excel(ex =>
+                  {
+                      ex.FileName("Contracts");
+                      ex.AllPages(true);
+                  })
 
-          .Columns(col =>
-          {
-              col.Bound(c => c.ContractId).Hidden(true);
+                  .Columns(col =>
+                  {
+                      col.Bound(c => c.ContractId).Hidden(true);
 
-              col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
-                  .Title("CORPORATION").Width(200);
+                      col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+                          .Title("CORPORATION").Width(200);
 
-              col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
+                      col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
 
-              col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
+                      col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
 
-              col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
+                      col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
 
-              col.Command(cmd =>
-              {
-                  cmd.Edit();
-                  cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
-                     .HtmlAttributes(new { @class = "js-inactive" })
-                     .Click("onClickInactivateContractButton");
+                      col.Command(cmd =>
+                      {
+                          cmd.Edit();
+                          cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
+                             .HtmlAttributes(new { @class = "js-inactive" })
+                             .Click("onClickInactivateContractButton");
 
-                  cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
-                    .HtmlAttributes(new { @class = "js-active" })
-                    .Click("onClickActivateContractButton");
-              }).Width(200).Title("ACTIONS");
+                          cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
+                            .HtmlAttributes(new { @class = "js-active" })
+                            .Click("onClickActivateContractButton");
+                      }).Width(200).Title("ACTIONS");
 
-          })
+                  })
 
-          .ClientDetailTemplateId("contract-detail-template")
+                  .ClientDetailTemplateId("contract-detail-template")
 
-          .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
+                  .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
 
-          .Filterable()
-          .Sortable()
-          .Groupable()
-          .Resizable(r => r.Columns(true))
-          .Scrollable(s => s.Height("auto"))
-          .Pageable(ps =>
-          {
-              ps.Refresh(true);
-              ps.PreviousNext(true);
-              ps.PageSizes(new object[] { 25, 50, 100, "All" });
-          })
+                  .Filterable()
+                  .Sortable()
+                  .Groupable()
+                  .Resizable(r => r.Columns(true))
+                  .Scrollable(s => s.Height("auto"))
+                  .Pageable(ps =>
+                  {
+                      ps.Refresh(true);
+                      ps.PreviousNext(true);
+                      ps.PageSizes(new object[] { 25, 50, 100, "All" });
+                  })
 
-          .DataSource(ds => ds
-              .Ajax()
-              .ServerOperation(true)
-              .PageSize(25)
-              .Model(model =>
-              {
-                  model.Id(c => c.ContractId);
-                  model.Field(c => c.ContractId).Editable(false);
-                  model.Field(c => c.Active).Editable(false);
-              })
-              .Read(read => read.Action("ReadContracts", "Contracts"))
-              .Update(update => update.Action("UpdateContracts", "Contracts"))
-          ))
+                  .DataSource(ds => ds
+                      .Ajax()
+                      .ServerOperation(true)
+                      .PageSize(25)
+                      .Model(model =>
+                      {
+                          model.Id(c => c.ContractId);
+                          model.Field(c => c.ContractId).Editable(false);
+                          model.Field(c => c.Active).Editable(false);
+                      })
+                      .Read(read => read.Action("ReadContracts", "Contracts"))
+                      .Update(update => update.Action("UpdateContracts", "Contracts"))
+                  ))
 </div>
 
 <div class="js-notification-dialog"></div>
@@ -152,11 +148,11 @@
     <div class="form-group">
         <label class="control-label text-uppercase">contract</label>
         @(Html.Kendo().Upload()
-              .Name("Addendum")
-              .Multiple(false)
-              .HtmlAttributes(new { style = "width:100%" })
-              .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" })
-                  .MaxFileSize(50000000)))
+                      .Name("Addendum")
+                      .Multiple(false)
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" })
+                          .MaxFileSize(50000000)))
     </div>
     <div class="pull-left">
         <a class="btn btn-ar btn-primary" data-bind="events: { click: onSaveContract }"><i class="fa fa-check-circle"></i> Save</a>
@@ -325,12 +321,12 @@
                 <div class="form-group">
                     <label class="control-label">FILE: </label>
                     @(Html.Kendo().Upload()
-                          .Name("UniqueFileName_#=contractId#")
-                          .Multiple(false)
-                          .HtmlAttributes(new { style = "width:100%" })
-                          .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
-                          .Events(ev => ev.Select("onSelectContractAddendumFile").Remove("onRemoveContractAddendumFile"))
-                          .ToClientTemplate())
+                                  .Name("UniqueFileName_#=contractId#")
+                                  .Multiple(false)
+                                  .HtmlAttributes(new { style = "width:100%" })
+                                  .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
+                                  .Events(ev => ev.Select("onSelectContractAddendumFile").Remove("onRemoveContractAddendumFile"))
+                                  .ToClientTemplate())
                 </div>
                 <div class="form-group">
                     <label class="control-label text-uppercase">Notes: </label>
