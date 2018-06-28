@@ -260,6 +260,13 @@ namespace IdentitySample.Controllers
             {
                 try
                 {
+                    var userInDb = await UserManager.FindByEmailAsync(userFormViewModel.Email);
+                    if (userInDb != null)
+                    {
+                        ModelState.AddModelError("Email", "Duplicate user. Please try again.");
+                        return Json(new[] { userFormViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+
                     var user = userFormViewModel.Convert();
                     var adminresult = await UserManager.CreateAsync(user, userFormViewModel.Password);
 
@@ -313,6 +320,13 @@ namespace IdentitySample.Controllers
             {
                 try
                 {
+                    var userInDb = await UserManager.FindByEmailAsync(userFormViewModel.Email);
+                    if (userInDb != null && userInDb.Id != userFormViewModel.Id)
+                    {
+                        ModelState.AddModelError("Email", "Duplicate user. Please try again.");
+                        return Json(new[] { userFormViewModel }.ToDataSourceResult(request, ModelState));
+                    }
+
                     var user = await UserManager.FindByIdAsync(userFormViewModel.Id);
                     if (user == null)
                     {
