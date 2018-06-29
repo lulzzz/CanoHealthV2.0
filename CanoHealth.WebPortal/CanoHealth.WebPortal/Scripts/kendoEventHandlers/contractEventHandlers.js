@@ -28,7 +28,7 @@ function onExpandContractRow(e) {
     var contract = e.sender.dataItem(e.masterRow);
     
     ContractsController.createAddendumViewModel(contract.ContractId, contract.Active);
-    ContractsController.createContractBusinessLineViewModel(contract.ContractId, contract.CorporationId, contract.Active);
+    ContractsController.createContractBusinessLineViewModel(contract.ContractId, contract.CorporationId, contract.Active, contract.InsuranceId);
 }
 
 function onDataBoundContractGrid(e) {

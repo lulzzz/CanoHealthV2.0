@@ -44,6 +44,7 @@
                   .Columns(col =>
                   {
                       col.Bound(c => c.ContractId).Hidden(true);
+                      col.Bound(c => c.InsuranceId).Hidden(true);
 
                       col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
                           .Title("CORPORATION").Width(200);

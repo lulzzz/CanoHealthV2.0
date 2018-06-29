@@ -766,6 +766,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cano-logo.css" />
+    <Content Include="Content\Images\back.jpg" />
     <Content Include="Content\Images\cano_symbol.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\fonts\socialglyphs-webfont.svg" />

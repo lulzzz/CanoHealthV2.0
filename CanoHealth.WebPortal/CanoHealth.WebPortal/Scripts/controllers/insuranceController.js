@@ -86,12 +86,12 @@
             $(".js-insurancebusinessline-addbtn").show();
         }
         insuranceService.availableBusinessLinesForTheInsurance(insurance.InsuranceId, success, fail);
-    }
+    }   
 
     //access to private members
     return {
         insuranceExpandedRow: insuranceExpandedRow,
         checkIfThereAreBusinessLinesToSelect: checkIfThereAreBusinessLinesToSelect,
-        init: init
+        init: init       
     }
 }(InsuranceService)

@@ -445,7 +445,7 @@
         kendo.bind($(".js-addendum-" + contractId), addendumViewModel);
     };
 
-    var createContractBusinessLineViewModel = function(contractId, corporationId, isContractActive) {
+    var createContractBusinessLineViewModel = function(contractId, corporationId, isContractActive, insuranceId) {
         var contractBusinessLineViewModel = kendo.observable({
             enableBusinessLineButtons: isContractActive,
             //Business Lines Section
@@ -459,8 +459,13 @@
                 transport: {
                     read: {
                         method: 'GET',
-                        url: '/api/businesslines',
-                        data: {contractId: contractId},
+                        //url: '/api/businesslines', //Original Code shows all Line of Business in Database
+                        //data: {contractId: contractId}, //Original Code
+                        url: '/api/InsuranceBusinessLines',
+                        data: {
+                            contractId: contractId,
+                            insuranceId: insuranceId
+                        },
                         dataType: 'json'
                     }
                 }
