@@ -300,7 +300,7 @@
             <%
             _.each(notifications, function(notification){
                 if(notification.source === 'DoctorMedicalLicense'){%> <!--Medical License-->
-                    <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire moment(<%=notification.expirationDate%>).format('L')</li>
+            <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire <%=moment(notification.expirationDate).format('L')%></li>
                 <%}
                 else{%>
 

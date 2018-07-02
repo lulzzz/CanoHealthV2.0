@@ -76,6 +76,10 @@ textarea:focus {
      box-shadow: none; 
 }
 
+.popover{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
 
 
 /*--------- OVERRIDING KENDO STYLES RESPONSIVE GRID-----------*/
