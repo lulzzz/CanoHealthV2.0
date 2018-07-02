@@ -118,7 +118,8 @@ namespace CanoHealth.WebPortal
                     "~/Content/syntaxhighlighter/shCore.css",
                     "~/Content/style-green.css",
                     "~/Content/width-full.css",
-                    "~/Content/Site_razonartificial_theme.css"
+                    "~/Content/Site_razonartificial_theme.css",
+                    "~/Content/animate.css"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/kendo").Include(

@@ -273,6 +273,7 @@
     <Compile Include="Controllers\Api\LinkedContractsController.cs" />
     <Compile Include="Controllers\Api\MedicalLicensesController.cs" />
     <Compile Include="Controllers\Api\MedicalLicenseTypesController.cs" />
+    <Compile Include="Controllers\Api\NotificationsController.cs" />
     <Compile Include="Controllers\Api\NpiRecordsController.cs" />
     <Compile Include="Controllers\Api\OutofNetworkContractsController.cs" />
     <Compile Include="Controllers\Api\PersonalFilesController.cs" />
@@ -339,6 +340,7 @@
     <Compile Include="Core\Dtos\DoctorFileTypeDto.cs" />
     <Compile Include="Core\Dtos\DoctorLinkedToLineOfBusinessDto.cs" />
     <Compile Include="Core\Dtos\DoctorPersonalFileDto.cs" />
+    <Compile Include="Core\Dtos\NotificationDto.cs" />
     <Compile Include="Core\Dtos\SearchResultLocationInfoDto.cs" />
     <Compile Include="Core\Dtos\SearchResultDoctorInfoDto.cs" />
     <Compile Include="Core\Dtos\ClinicLineofBusinessContractDto.cs" />
@@ -379,6 +381,7 @@
     <Compile Include="Core\Repositories\ICorporationRepository.cs" />
     <Compile Include="Core\Repositories\IDoctorLinkedContractRepository.cs" />
     <Compile Include="Core\Repositories\IDoctorRepository.cs" />
+    <Compile Include="Core\Repositories\IExpireDateNotificationRepository.cs" />
     <Compile Include="Core\Repositories\IIndividualProviderRepository.cs" />
     <Compile Include="Core\Repositories\IInsuranceBusinessLineRepository.cs" />
     <Compile Include="Core\Repositories\IInsuranceRepository.cs" />
@@ -675,6 +678,7 @@
     <Compile Include="Persistance\ApplicationDbContext.cs" />
     <Compile Include="Persistance\Repositories\AddendumRepository.cs" />
     <Compile Include="Persistance\Repositories\AuditLogRepository.cs" />
+    <Compile Include="Persistance\Repositories\ExpireDateNotificationRepository.cs" />
     <Compile Include="Persistance\Repositories\PersonalFileTypeRepository.cs" />
     <Compile Include="Persistance\Repositories\ClinicDoctorRepository.cs" />
     <Compile Include="Persistance\Repositories\ContractBusinessLineClinicRepository.cs" />

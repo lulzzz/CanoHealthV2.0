@@ -59,6 +59,8 @@ namespace CanoHealth.WebPortal.Core
 
         IUserCorporationAccessRepository UserCorporationAccessRepository { get; }
 
+        IExpireDateNotificationRepository ExpireDateNotificationRepository { get; }
+
         int Complete();
     }
 }

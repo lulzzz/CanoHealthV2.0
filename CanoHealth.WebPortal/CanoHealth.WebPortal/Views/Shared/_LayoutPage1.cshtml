@@ -245,56 +245,7 @@
                 @RenderBody()
             </div>
 
-            @*<aside id="footer-widgets">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 class="footer-widget-title">Sitemap</h3>
-                            <ul class="list-unstyled three_cols">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="portfolio_sidebar.html">Portafolio</a></li>
-                                <li><a href="portfolio_topvar.html">Works</a></li>
-                                <li><a href="page_timeline_left.html">Timeline</a></li>
-                                <li><a href="page_pricing.html">Pricing</a></li>
-                                <li><a href="page_about2.html">About Us</a></li>
-                                <li><a href="page_team.html">Our Team</a></li>
-                                <li><a href="page_services.html">Services</a></li>
-                                <li><a href="page_support.html">FAQ</a></li>
-                                <li><a href="page_login_full.html">Login</a></li>
-                                <li><a href="page_contact.html">Contact</a></li>
-                            </ul>
-                            <h3 class="footer-widget-title">Subscribe</h3>
-                            <p>Lorem ipsum Amet fugiat elit nisi anim mollit minim labore ut esse Duis ullamco ad dolor veniam velit.</p>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Email Adress">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-ar btn-primary" type="button">Subscribe</button>
-                                </span>
-                            </div><!-- /input-group -->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="footer-widget">
-                                <h3 class="footer-widget-title">Recent Works</h3>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-3 col-xs-6">
-                                        <a href="#" class="thumbnail"><img src="" class="img-responsive" alt="Image"></a>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-3 col-xs-6">
-                                        <a href="#" class="thumbnail"><img src="" class="img-responsive" alt="Image"></a>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-3 col-xs-6">
-                                        <a href="#" class="thumbnail"><img src="" class="img-responsive" alt="Image"></a>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-3 col-xs-6">
-                                        <a href="#" class="thumbnail"><img src="" class="img-responsive" alt="Image"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- container -->
-            </aside> <!-- footer-widgets -->*@
+           
             <br /><br />
             <footer id="footer">
                 <p style="text-align: center; color: #adabab; font-size: 0.7em">
@@ -343,5 +294,50 @@
 
 
     @RenderSection("scripts", required: false)
+
+    <script type="text/x-template" id="notifications-template">
+        <ul class="notifications">
+            <%
+            _.each(notifications, function(notification){
+                if(notification.source === 'DoctorMedicalLicense'){%> <!--Medical License-->
+                    <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire moment(<%=notification.expirationDate%>).format('L')</li>
+                <%}
+                else{%>
+
+                <%}
+            });
+            %>
+        </ul>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var getNotificationSuccess = function (notifications) {
+                if (notifications.length === 0)
+                    return; 
+
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
+
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function () {
+                        var compile = _.template($("#notifications-template").html());
+                        return compile({ notifications: notifications });                        
+                    },
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                });
+            };
+            var getNotificationsFails = function (response) {
+                console.log("Get notification failed: ", response);                
+            };
+
+            AjaxCallGet("/api/notifications", {}, getNotificationSuccess, getNotificationsFails);            
+        });
+    </script>
 </body>
 </html>

@@ -64,6 +64,8 @@ namespace CanoHealth.WebPortal.Persistance
 
         public IUserCorporationAccessRepository UserCorporationAccessRepository { get; private set; }
 
+        public IExpireDateNotificationRepository ExpireDateNotificationRepository { get; private set; }
+
         //Impplement the constructor
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -95,6 +97,7 @@ namespace CanoHealth.WebPortal.Persistance
             PersonalFileRepository = new PersonalFileRepository(_context);
             PersonalFileTypeRepository = new PersonalFileTypeRepository(_context);
             UserCorporationAccessRepository = new UserCorporationAccessRepository(_context);
+            ExpireDateNotificationRepository = new ExpireDateNotificationRepository(_context);
         }
 
         public int Complete()

@@ -4,6 +4,17 @@
     border-bottom-color: #fff;
 }
 
+.navbar-inverse .notifications {
+    position: relative;
+}
+
+.navbar-inverse .notifications .badge {
+    position: absolute;
+    top: 8px;
+    right: -1px;
+    background-color: #0a8060;
+}
+
 .navbar-brand {
     font-weight: 700;
 }
@@ -64,6 +75,8 @@ textarea:focus {
     -webkit-box-shadow: none; 
      box-shadow: none; 
 }
+
+
 
 /*--------- OVERRIDING KENDO STYLES RESPONSIVE GRID-----------*/
 
@@ -254,4 +267,27 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
     font-style: italic;
     font-size: .9em;
     padding-top: 1em;
+}
+
+.popover-notifications .popover-content{
+    padding: 0;
+}
+
+.popover-notifications ul.notifications {
+    list-style: none;
+    padding-left: 0;
+}
+
+.popover-notifications ul.notifications > li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px; /*First number is vertical, second horizontal*/
+}
+
+.popover-notifications ul.notifications > li:last-child {
+    border-bottom: none;
+}
+
+.popover-notifications ul.notifications .highlight{
+    font-weight: bold;
+
 }
