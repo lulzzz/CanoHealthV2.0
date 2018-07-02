@@ -1,0 +1,13 @@
+﻿Installing assembly 'C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.InstallLog
+   assemblypath = C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe
+Installing service ExpirationDateService...
+Service ExpirationDateService has been successfully installed.
+Creating EventLog source ExpirationDateService in log Application...
+Committing assembly 'C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.InstallLog
+   assemblypath = C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe

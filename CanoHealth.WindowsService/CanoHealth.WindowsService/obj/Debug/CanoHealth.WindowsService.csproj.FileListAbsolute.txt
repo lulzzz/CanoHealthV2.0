@@ -1,0 +1,15 @@
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe.config
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.exe
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\CanoHealth.WindowsService.pdb
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\EntityFramework.dll
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\EntityFramework.xml
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.csproj.CoreCompileInputs.cache
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.csproj.CopyComplete
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.exe
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.pdb
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.ExpirationDateService.resources
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.csproj.GenerateResource.cache
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.csprojResolveAssemblyReference.cache
+C:\Projects\CanoHealth.WindowsService\CanoHealth.WindowsService\obj\Debug\CanoHealth.WindowsService.ProjectInstaller.resources

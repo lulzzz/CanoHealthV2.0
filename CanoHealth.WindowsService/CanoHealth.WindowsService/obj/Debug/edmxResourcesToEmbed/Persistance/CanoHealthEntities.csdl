@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CanoHealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CanoHealthEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetLicenseExpirationDates" ReturnType="Collection(CanoHealthModel.GetLicenseExpirationDates_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetLicenseExpirationDates_Result">
+    <Property Type="String" Name="Source" Nullable="false" MaxLength="21" />
+    <Property Type="DateTime" Name="ExpirationDate" Nullable="true" Precision="23" />
+    <Property Type="Guid" Name="DoctorId" Nullable="true" />
+    <Property Type="String" Name="DoctorFullName" Nullable="true" MaxLength="101" />
+    <Property Type="Guid" Name="InsurnaceId" Nullable="true" />
+    <Property Type="String" Name="InsuranceName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="LicenseType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>

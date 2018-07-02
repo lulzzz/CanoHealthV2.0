@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CanoHealthModelStoreContainer" CdmEntityContainer="CanoHealthEntities">
+    <FunctionImportMapping FunctionImportName="GetLicenseExpirationDates" FunctionName="CanoHealthModel.Store.GetLicenseExpirationDates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CanoHealthModel.GetLicenseExpirationDates_Result">
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="DoctorFullName" ColumnName="DoctorFullName" />
+          <ScalarProperty Name="InsurnaceId" ColumnName="InsurnaceId" />
+          <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+          <ScalarProperty Name="LicenseType" ColumnName="LicenseType" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
