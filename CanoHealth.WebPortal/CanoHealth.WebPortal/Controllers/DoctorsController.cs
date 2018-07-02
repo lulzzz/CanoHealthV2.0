@@ -51,6 +51,9 @@ namespace CanoHealth.WebPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    _unitOfWork.Doctors.GetAll();
+                    _unitOfWork.Corporations.GetAll();
+
                     doctor.DoctorId = Guid.NewGuid();
 
                     var duplicateSsn = _unitOfWork.Doctors.DuplicateSocialSecurityNumber(doctor.DoctorId.Value, doctor.SocialSecurityNumber);
