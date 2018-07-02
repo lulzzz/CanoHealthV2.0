@@ -34,24 +34,4 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6C557D6-16E4-426A-BA00-79BEABDDC6AA}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://harnierprogramming.visualstudio.com/
-		SccProjectUniqueName0 = CanoHealth.WebPortal.IntegrationTest\\CanoHealth.WebPortal.IntegrationTest.csproj
-		SccProjectName0 = CanoHealth.WebPortal.IntegrationTest
-		SccAuxPath0 = https://harnierprogramming.visualstudio.com
-		SccLocalPath0 = CanoHealth.WebPortal.IntegrationTest
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = CanoHealth.WebPortal.Test\\CanoHealth.WebPortal.Test.csproj
-		SccProjectName1 = CanoHealth.WebPortal.Test
-		SccAuxPath1 = https://harnierprogramming.visualstudio.com
-		SccLocalPath1 = CanoHealth.WebPortal.Test
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName2 = CanoHealth.WebPortal\\CanoHealth.WebPortal.csproj
-		SccProjectName2 = CanoHealth.WebPortal
-		SccAuxPath2 = https://harnierprogramming.visualstudio.com
-		SccLocalPath2 = CanoHealth.WebPortal
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 EndGlobal
