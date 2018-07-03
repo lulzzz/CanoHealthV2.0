@@ -300,7 +300,7 @@
             <%
             _.each(notifications, function(notification){
                 if(notification.source === 'DoctorMedicalLicense'){%> <!--Medical License-->
-            <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire <%=moment(notification.expirationDate).format('L')%></li>
+                    <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire <%=moment(notification.expirationDate).format('L')%></li>
                 <%}
                 else{%>
 
@@ -325,11 +325,13 @@
                     html: true,
                     title: "Notifications",
                     content: function () {
-                        var compile = _.template($("#notifications-template").html());
-                        return compile({ notifications: notifications });                        
+                        "Hola mundo";
+                        //var compile = _.template($("#notifications-template").html());
+                        //return compile({ notifications: notifications });                        
                     },
                     placement: "bottom",
-                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    trigger: "focus"
                 });
             };
             var getNotificationsFails = function (response) {
