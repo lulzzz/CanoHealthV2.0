@@ -252,11 +252,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommonTools\CurrentDateTime\CurrentDateTimeService.cs" />
     <Compile Include="CommonTools\CurrentDateTime\ICurrentDateTimeService.cs" />
+    <Compile Include="CommonTools\ExpireLicense\ExpireLicenseSource.cs" />
     <Compile Include="CommonTools\ExtensionMethods\ConvertClinicInfo.cs" />
     <Compile Include="CommonTools\ExtensionMethods\InsuranceBusinessLineExtensions.cs" />
     <Compile Include="CommonTools\ExtensionMethods\UserExtensions.cs" />
     <Compile Include="CommonTools\ModelState\ConvertModelState.cs" />
     <Compile Include="CommonTools\ModelState\IConvertModelState.cs" />
+    <Compile Include="CommonTools\Roles\RoleName.cs" />
     <Compile Include="CommonTools\User\IUserService.cs" />
     <Compile Include="CommonTools\User\UserService.cs" />
     <Compile Include="Controllers\AccountController.cs" />

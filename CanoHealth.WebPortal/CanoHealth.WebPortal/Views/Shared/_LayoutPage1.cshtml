@@ -295,27 +295,31 @@
 
     @RenderSection("scripts", required: false)
 
-    <script type="text/x-template" id="notifications-template">
+    
+    <script type="text/x-kendo-template" id="notifications-kendo-template">
         <ul class="notifications">
-            <%
-            _.each(notifications, function(notification){
-                if(notification.source === 'DoctorMedicalLicense'){%> <!--Medical License-->
-                    <li><span class="highlight"><%=notification.licenseType%></span> License for Doctor <%=notification.doctorFullName%> is going to expire <%=moment(notification.expirationDate).format('L')%></li>
-                <%}
-                else{%>
+            # for (var i = 0; i < data.length; i++) { #
+                #if(data[i].source === 'DoctorMedicalLicense'){#
+                <li><span class="highlight">#=data[i].licenseType#</span> License for Doctor #=data[i].doctorFullName# will expire #=moment(data[i].expirationDate).format('L')#</li>
+                #}else if(data[i].source === "LocationLicense"){#
+                <li><span class="highlight">#=data[i].licenseType#</span> License for #=data[i].location# Location  will expire #=moment(data[i].expirationDate).format('L')#</li>
+                #}#
 
-                <%}
-            });
-            %>
+            # } #
         </ul>
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var getNotificationSuccess = function (notifications) {
-                if (notifications.length === 0)
+                console.log("notifications: ", notifications);
+                //if there is no notifications to show hide the icon
+                if (notifications.length === 0) {
+                    $(".notifications").hide();
                     return; 
-
+                }                    
+                //else show the icon
+                $(".notifications").show();
                 $(".js-notifications-count")
                     .text(notifications.length)
                     .removeClass("hide")
@@ -324,17 +328,19 @@
                 $(".notifications").popover({
                     html: true,
                     title: "Notifications",
-                    content: function () {
-                        "Hola mundo";
-                        //var compile = _.template($("#notifications-template").html());
-                        //return compile({ notifications: notifications });                        
+                    content: function() {
+                        
+                        var template = kendo.template($("#notifications-kendo-template").html());
+                        return template(notifications);
                     },
                     placement: "bottom",
                     template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     trigger: "focus"
+                }).on("show.bs.popover", function () {
+                    console.log("popover shown");
                 });
             };
-            var getNotificationsFails = function (response) {
+            var getNotificationsFails = function(response) {
                 console.log("Get notification failed: ", response);                
             };
 

@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class DoctorsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,6 +22,7 @@ namespace CanoHealth.WebPortal.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
         public ActionResult Index()
         {
             return View("Doctors");

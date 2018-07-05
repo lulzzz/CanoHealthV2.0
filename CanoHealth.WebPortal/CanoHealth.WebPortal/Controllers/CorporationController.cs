@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class CorporationController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -58,6 +59,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
         [ChildActionOnly]
         [OutputCache(Duration = 3600, VaryByParam = "currentUserId")]
         public ActionResult RenderCorporationInLayout(string currentUserId)

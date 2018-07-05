@@ -19,6 +19,14 @@
             $(".k-grid-update").hide();
         } else {
             var checkAvailabilitySuccess = function (response) {
+                console.log("user: ", response);
+                //Authorization has been denied for this request. Returns 200 with an error message instead a 401 unauthorized
+                if (response && response.message) {
+                    toastr.error(response.message);
+                    $(".k-popup-edit-form").data('kendoWindow').close();
+                    $("#Users").data("kendoGrid").dataSource.cancelChanges();
+                    return;
+                }
                 //If a user was found with the same username and the admin is creating a new user show message and hide button
                 //if a user is found with the same username and the admin is updating the user and the ids are differents then show message an hide the button.
                 if ((response && !user) || (response && user && user.id !== response.id)) {

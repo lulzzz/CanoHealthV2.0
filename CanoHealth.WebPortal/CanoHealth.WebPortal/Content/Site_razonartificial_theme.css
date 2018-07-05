@@ -285,6 +285,7 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
 .popover-notifications ul.notifications > li {
     border-bottom: 1px solid #ddd;
     padding: 10px; /*First number is vertical, second horizontal*/
+    color: #21ba91;
 }
 
 .popover-notifications ul.notifications > li:last-child {

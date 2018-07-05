@@ -15,6 +15,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class ContractsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

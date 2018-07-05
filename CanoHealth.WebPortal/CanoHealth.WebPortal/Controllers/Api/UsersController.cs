@@ -3,6 +3,7 @@ using System.Web.Http;
 
 namespace CanoHealth.WebPortal.Controllers.Api
 {
+    [Authorize(Roles = "ADMIN")]
     public class UsersController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;

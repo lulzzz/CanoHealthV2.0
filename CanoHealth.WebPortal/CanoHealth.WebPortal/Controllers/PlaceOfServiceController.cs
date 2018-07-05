@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class PlaceOfServiceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -35,6 +36,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
         public JsonResult GetLocations(Guid? corporationId)
         {
             var result = _unitOfWork
