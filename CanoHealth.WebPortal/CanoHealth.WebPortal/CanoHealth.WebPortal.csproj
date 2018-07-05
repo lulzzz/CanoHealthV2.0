@@ -304,6 +304,7 @@
     <Compile Include="Controllers\LinkedContractsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicalLicensesController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PersonalFilesController.cs" />
     <Compile Include="Controllers\PlaceOfServiceController.cs" />
     <Compile Include="Controllers\PosLicenseController.cs" />
@@ -1480,7 +1481,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="Persistance\EntityConfigurations\" />
-    <Folder Include="Views\PersonalFiles\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Persistance\Migrations\201805271537364_CreateUserCorporationAccessTable.resx">
