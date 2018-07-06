@@ -26,103 +26,103 @@
 
 <div class="container-fluid">
     @(Html.Kendo().Grid<DoctorFormViewModel>()
-                .Name("Doctors")
-                .ToolBar(tool =>
+            .Name("Doctors")
+            .ToolBar(tool =>
+            {
+                tool.Create().Text("NEW");
+                tool.Excel().Text("EXCEL");
+            })
+            .Excel(ex =>
+            {
+                ex.AllPages(true);
+                ex.FileName("Doctors");
+            })
+            .Columns(col =>
+            {
+                col.Bound(d => d.DoctorId).Hidden(true);
+
+                col.Bound(d => d.Degree).Title("DEGREE").Width(150);
+
+                col.Bound(d => d.FirstName).Title("FIRST NAME").Width(200);
+
+                col.Bound(d => d.LastName).Title("LAST NAME").Width(200);
+
+                col.Bound(d => d.DateOfBirth).Title("DOB").Format("{0: MM/dd/yyyy}").Width(100);
+
+                col.Bound(d => d.SocialSecurityNumber).Title("SSN").Width(150);
+
+                col.Bound(d => d.NpiNumber).Title("NPI").Width(150);
+
+                col.Bound(d => d.CaqhNumber).Title("CAQH").Width(150);
+
+                col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(100);
+
+                col.Command(cmd =>
                 {
-                    tool.Create().Text("NEW");
-                    tool.Excel().Text("EXCEL");
-                })
-                .Excel(ex =>
+                    cmd.Edit();
+
+                    cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
+                        .HtmlAttributes(new { @class = "js-inactive-doctor" })
+                        .Click("onClickInactivateDoctorButton");
+
+                    cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
+                        .HtmlAttributes(new { @class = "js-active-doctor" })
+                        .Click("onClickActivateDoctorButton");
+
+                //cmd.Custom("release").Text("<i class='fa fa-times'></i> Release").Click("inactivateDoctor");
+                }).Width(250);
+            })
+
+            .Editable(ed =>
+            {
+                ed.Mode(GridEditMode.PopUp);
+                ed.TemplateName("DoctorForm");
+                ed.Window(builder => builder
+                    .Modal(true)
+                    .Title("DOCTOR")
+                    .Width(600));
+            })
+
+            .ClientDetailTemplateId("doctor-detail-template")
+
+            .Events(ev => ev.DetailExpand("onExpandDoctorRow")
+                .DataBound("onDataBoundDoctorGrid")
+                .Cancel("onCancelEditDoctorItem")
+                .Edit("onSaveDoctorItem"))
+
+            .Filterable()
+            .Sortable()
+            .Groupable()
+            .Resizable(r => r.Columns(true))
+            .Pageable(pager => pager
+
+                .Numeric(true)
+                .Info(true)
+                .PreviousNext(true)
+                .Refresh(true)
+                .PageSizes(new object[] { 25, 50, 100, "All" })
+            )
+            .Scrollable(s => s.Height("auto"))
+
+            .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(25)
+                .Model(model =>
                 {
-                    ex.AllPages(true);
-                    ex.FileName("Doctors");
+                    model.Id(d => d.DoctorId);
+                    model.Field(d => d.DoctorId).Editable(false);
+                    model.Field(d => d.Active).Editable(false);
                 })
-                .Columns(col =>
+                .Events(ev =>
                 {
-                    col.Bound(d => d.DoctorId).Hidden(true);
-
-                    col.Bound(d => d.Degree).Title("DEGREE").Width(150);
-
-                    col.Bound(d => d.FirstName).Title("FIRST NAME").Width(200);
-
-                    col.Bound(d => d.LastName).Title("LAST NAME").Width(200);
-
-                    col.Bound(d => d.DateOfBirth).Title("DOB").Format("{0: MM/dd/yyyy}").Width(100);
-
-                    col.Bound(d => d.SocialSecurityNumber).Title("SSN").Width(150);
-
-                    col.Bound(d => d.NpiNumber).Title("NPI").Width(150);
-
-                    col.Bound(d => d.CaqhNumber).Title("CAQH").Width(150);
-
-                    col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(100);
-
-                    col.Command(cmd =>
-                    {
-                        cmd.Edit();
-
-                        cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
-                            .HtmlAttributes(new { @class = "js-inactive-doctor" })
-                            .Click("onClickInactivateDoctorButton");
-
-                        cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
-                            .HtmlAttributes(new { @class = "js-active-doctor" })
-                            .Click("onClickActivateDoctorButton");
-
-            //cmd.Custom("release").Text("<i class='fa fa-times'></i> Release").Click("inactivateDoctor");
-        }).Width(250);
+                    ev.Error("doctorserverSideErrorHandlers");
                 })
-
-                .Editable(ed =>
-                {
-                    ed.Mode(GridEditMode.PopUp);
-                    ed.TemplateName("DoctorForm");
-                    ed.Window(builder => builder
-                        .Modal(true)
-                        .Title("DOCTOR")
-                        .Width(600));
-                })
-
-                .ClientDetailTemplateId("doctor-detail-template")
-
-                .Events(ev => ev.DetailExpand("onExpandDoctorRow")
-                    .DataBound("onDataBoundDoctorGrid")
-                    .Cancel("onCancelEditDoctorItem")
-                    .Edit("onSaveDoctorItem"))
-
-                .Filterable()
-                .Sortable()
-                .Groupable()
-                .Resizable(r => r.Columns(true))
-                .Pageable(pager => pager
-
-                    .Numeric(true)
-                    .Info(true)
-                    .PreviousNext(true)
-                    .Refresh(true)
-                    .PageSizes(new object[] { 25, 50, 100, "All" })
-                )
-                .Scrollable(s => s.Height("auto"))
-
-                .DataSource(ds => ds
-                    .Ajax()
-                    .ServerOperation(true)
-                    .PageSize(25)
-                    .Model(model =>
-                    {
-                        model.Id(d => d.DoctorId);
-                        model.Field(d => d.DoctorId).Editable(false);
-                        model.Field(d => d.Active).Editable(false);
-                    })
-                    .Events(ev =>
-                    {
-                        ev.Error("doctorserverSideErrorHandlers");
-                    })
-                    .Read(read => read.Action("ReadDoctors", "Doctors"))
-                    .Create(create => create.Action("CreateDoctor", "Doctors"))
-                    .Update(update => update.Action("UpdateDoctor", "Doctors"))
-                    .Destroy(destroy => destroy.Action("InactivateDoctor", "Doctors"))
-                ))
+                .Read(read => read.Action("ReadDoctors", "Doctors"))
+                .Create(create => create.Action("CreateDoctor", "Doctors"))
+                .Update(update => update.Action("UpdateDoctor", "Doctors"))
+                .Destroy(destroy => destroy.Action("InactivateDoctor", "Doctors"))
+     ))
 </div>
 
 <div class="js-release-doctor-wnd"></div>
@@ -156,7 +156,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="medicallicense_#=DoctorId#">
-            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="events: { click: onAddMedicalLicense }">
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="enabled: enableNewMedicalLicenseButton, events: { click: onAddMedicalLicense }">
                 <i class="fa fa-upload"></i> NEW
             </a>
             <br /><br />
@@ -172,7 +172,7 @@
 
         </div>
         <div class="tab-pane" id="personalprofile_#=DoctorId#">
-            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="events: { click: onAddPersonalFiles }">
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="enabled: enableNewPersonalFileButton, events: { click: onAddPersonalFiles }">
                 <i class="fa fa-upload"></i> NEW
             </a>
             <br /><br />
@@ -212,7 +212,7 @@
 
             <a class="btn btn-ar btn-primary js-individualprovider-addbtn"
                data-doctor-id="#=DoctorId#"
-               data-bind="events: { click: onAddIndividualProvider }"
+               data-bind="enabled: enableNewIndividualProviderButton, events: { click: onAddIndividualProvider }"
                style="margin-left: 16px;">
                 <i class="fa fa-plus-circle"></i> NEW
             </a>

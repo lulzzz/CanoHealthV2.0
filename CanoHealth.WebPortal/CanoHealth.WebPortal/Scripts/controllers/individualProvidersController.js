@@ -21,6 +21,8 @@
     var createDoctorIndividualProviderViewModel = function(doctor) {
         var viewModel = kendo.observable({
             InsuranceId: null,
+
+            enableNewIndividualProviderButton: doctor.Active,
             
             insuranceDataSource: new kendo.data.DataSource({
                 schema: {

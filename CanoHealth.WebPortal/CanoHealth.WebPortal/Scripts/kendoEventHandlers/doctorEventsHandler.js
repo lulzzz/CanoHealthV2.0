@@ -67,6 +67,19 @@ function onExpandDoctorRow(e) {
     }
     DoctorsController.doctorExpandedRow = e.masterRow; //actualiza doctorExpandedRow a la actual fila expandida.
 
+    
+    if (!doctor.Active) {
+        //if doctor is inactive hide all k-edit-button related to those list view components
+        $(".k-edit-button").hide();
+        //hide the add linked contract button.
+        $(".js-addLinkedContractBtn_" + doctor.DoctorId).attr("disabled", true);
+    }        
+    else {
+        $(".k-edit-button").show();
+        $(".js-addLinkedContractBtn_" + doctor.DoctorId).attr("disabled", false);
+    }
+        
+
     DoctorsController.createDoctorMedicalLicenseViewModel(doctor);
 
     PersonalFilesController.createDoctorPersonalFileViewModel(doctor);

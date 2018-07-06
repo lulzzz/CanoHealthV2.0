@@ -5,9 +5,13 @@
 
     //Private Methods
     var createDoctorMedicalLicenseViewModel = function (doctor) {
+        console.log("Doctor from Medical License ViewModel: ", doctor);
         
         var medicalLicenseViewModel = kendo.observable({
             //MedicalLicense Section
+            //if doctor is Active enable New MedicalLicense button
+            enableNewMedicalLicenseButton: doctor.Active,
+
             onAddMedicalLicense: function() {
                 var medicalLicenseListViewComponents = $("#medicallicense-listview-" + doctor.DoctorId).data("kendoListView");
                 medicalLicenseListViewComponents.add();

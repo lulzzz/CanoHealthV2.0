@@ -4,7 +4,7 @@
     .ToolBar(tool =>
     {
         tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW")
-            .HtmlAttributes(new { @class = "btn btn-ar btn-primary" })
+            .HtmlAttributes(new { @class = "btn btn-ar btn-primary js-addLinkedContractBtn_#=DoctorId#" })
             .Url("javascript: onEnableLinkedContractFormWindow('#=DoctorId#')");
     })
     .Columns(col =>

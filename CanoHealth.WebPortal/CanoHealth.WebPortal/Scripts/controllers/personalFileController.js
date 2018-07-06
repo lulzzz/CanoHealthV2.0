@@ -4,6 +4,8 @@
 
     var createDoctorPersonalFileViewModel = function(doctor) {
         var personalFileViewModel = kendo.observable({
+            enableNewPersonalFileButton: doctor.Active,
+
             onAddPersonalFiles: function () {
                 var perosnalFileListViewComponents = $("#personalfiles-listview-" + doctor.DoctorId).data("kendoListView");
                 perosnalFileListViewComponents.add();
