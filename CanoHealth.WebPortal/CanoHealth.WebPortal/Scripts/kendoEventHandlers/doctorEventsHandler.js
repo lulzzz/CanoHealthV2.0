@@ -255,4 +255,3 @@ function locationProvidersErrorHandler(args) {
         args.sender.cancelChanges();
     }
 }
-

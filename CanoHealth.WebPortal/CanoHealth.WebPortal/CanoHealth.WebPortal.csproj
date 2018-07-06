@@ -1268,8 +1268,6 @@
     <Content Include="Content\kendo\2018.1.221\images\kendoui.ttf" />
     <Content Include="Content\kendo\2018.1.221\images\kendoui.woff" />
     <Compile Include="Core\Dtos\DoctorClinicDto.cs" />
-    <None Include="Properties\PublishProfiles\canohealth - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\CanoLocal.pubxml" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1284,7 +1282,8 @@
     <Content Include="Scripts\controllers\manageController.js" />
     <Content Include="Scripts\controllers\personalFileController.js" />
     <Content Include="Scripts\controllers\placeOfServiceController.js" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\canohealth - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\canohealth - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\controllers\rolesController.js" />
     <Content Include="Scripts\controllers\searchEngineController.js" />
