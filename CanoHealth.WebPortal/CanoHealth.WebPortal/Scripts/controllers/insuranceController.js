@@ -86,12 +86,34 @@
             $(".js-insurancebusinessline-addbtn").show();
         }
         insuranceService.availableBusinessLinesForTheInsurance(insurance.InsuranceId, success, fail);
-    }   
+    }  
+
+    var onAddEditInsurance = function (e) {
+        var currentUid = e.model.uid;
+        var grid = e.sender;
+        var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+        var activateButton = $(currenRow).find(".js-active");
+        var inactivateButton = $(currenRow).find(".js-inactive");
+
+        if (e.model.isNew()) {            
+            activateButton.hide();
+            inactivateButton.show();           
+        } else {
+            if (e.model.Active === true) {
+                activateButton.hide();
+                inactivateButton.show();
+            } else {
+                activateButton.show();
+                inactivateButton.hide();
+            }
+        }
+    };
 
     //access to private members
     return {
         insuranceExpandedRow: insuranceExpandedRow,
         checkIfThereAreBusinessLinesToSelect: checkIfThereAreBusinessLinesToSelect,
-        init: init       
+        init: init,
+        onAddEditInsurance: onAddEditInsurance
     }
 }(InsuranceService)

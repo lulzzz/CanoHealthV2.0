@@ -6,11 +6,11 @@
 
 <header class="main-header main-header-inverse">
     <div class="container">
-        <h1 class="page-title">Users</h1>
+        <h1 class="page-title">Roles</h1>
 
         <ol class="breadcrumb pull-right">
             <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-            <li class="active">Users</li>
+            <li class="active">Roles</li>
         </ol>
     </div>
 </header>
@@ -30,14 +30,26 @@
             .Columns(col => {
                 col.Bound(r => r.Id).Hidden();
 
-                col.Bound(r => r.Name).Title("ROLE");
+                col.Bound(r => r.Name).Title("ROLE").Width(110);
 
-                col.Bound(r => r.Active).ClientTemplate("#=Active ? 'YES':'NO'#").Title("ACTIVE");
+                col.Bound(r => r.Active).ClientTemplate("#=Active ? 'YES':'NO'#").Title("ACTIVE").Width(110);
 
                 col.Command(cmd => {
                     cmd.Edit();
                 }).Title("ACTIONS").Width(100);
             })
+            .Filterable()
+            .Sortable()
+            .Groupable()
+            .Resizable(r => r.Columns(true))
+            .Pageable(pager => pager
+                .Numeric(true)
+                .Info(true)
+                .PreviousNext(true)
+                .Refresh(true)
+                .PageSizes(new object[] { 25, 50, 100, "All" })
+            )
+            .Scrollable(s => s.Height("auto"))
             .DataSource(ds => ds
                 .Ajax()
                 .ServerOperation(true)

@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class InsurancesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

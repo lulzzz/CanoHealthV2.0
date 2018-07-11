@@ -75,10 +75,10 @@
         .ClientDetailTemplateId("insurance-detail-template")
 
         .Pageable(ps => ps
-        .Refresh(true)
-        .PreviousNext(true)
-        .ButtonCount(5)
-        .PageSizes(new object[] { 25, 50, 100, "All" })
+            .Refresh(true)
+            .PreviousNext(true)
+            .ButtonCount(5)
+            .PageSizes(new object[] { 25, 50, 100, "All" })
         )
 
         .Sortable()
@@ -87,7 +87,9 @@
         .Resizable(r => r.Columns(true))
         .Scrollable(s => s.Height("auto"))
 
-        .Events(ev => ev.DataBound("onDataBoundInsuranceGrid").DetailExpand("onExpandInsuranceDetails"))//
+        .Events(ev => ev.DataBound("onDataBoundInsuranceGrid")
+            .DetailExpand("onExpandInsuranceDetails")
+            .Edit("InsuranceController.onAddEditInsurance"))
 
         .DataSource(ds => ds
             .Ajax()
