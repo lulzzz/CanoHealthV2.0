@@ -30,9 +30,25 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
             //    usersFormViewModels.Add(userresult);
             //}
             //return usersFormViewModels;
+            //return (from user in users
+            //        let corporations = GetCorporationAccessByUser(user.Id)
+            //        let roles = GetUserRoles(user.Roles.Select(x => x.RoleId).ToList())
+            //        select new UserFormViewModel
+            //        {
+            //            Id = user.Id,
+            //            FirstName = user.FirstName,
+            //            LastName = user.LastName,
+            //            Email = user.Email,
+            //            Active = user.Active,
+            //            Password = user.PasswordHash,
+            //            ConfirmPassword = user.PasswordHash,
+            //            Roles = roles,//user.Roles.Select(d => new RoleViewModel { Id = d.RoleId }),
+            //            Corporations = corporations
+            //        }).ToList();
+
             return (from user in users
-                    let corporations = GetCorporationAccessByUser(user.Id)
-                    let roles = GetUserRoles(user.Roles.Select(x => x.RoleId).ToList())
+                    let data = GetCorporationAndRolesOfUser(user)
+
                     select new UserFormViewModel
                     {
                         Id = user.Id,
@@ -42,8 +58,8 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
                         Active = user.Active,
                         Password = user.PasswordHash,
                         ConfirmPassword = user.PasswordHash,
-                        Roles = roles,//user.Roles.Select(d => new RoleViewModel { Id = d.RoleId }),
-                        Corporations = corporations
+                        Roles = data.Roles,//user.Roles.Select(d => new RoleViewModel { Id = d.RoleId }),
+                        Corporations = data.Corporations
                     }).ToList();
         }
 
@@ -70,6 +86,43 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
                     .ToList();
             }
             return roles;
+        }
+
+        private static CorporationRolesViewModel GetCorporationAndRolesOfUser(ApplicationUser user)
+        {
+            using (var unitOfWork = new UnitOfWork(new ApplicationDbContext()))
+            {
+                var corporations = unitOfWork.UserCorporationAccessRepository
+                    .GetCorporationAccessByUser(user.Id)
+                    .Select(Mapper.Map<Corporation, CorporationViewModel>)
+                    .ToList();
+
+                var rolesId = user.Roles.Select(x => x.RoleId).ToList();
+
+                var roles = unitOfWork.RoleRepository.EnumarableGetAll(r => rolesId.Contains(r.Id))
+                   .Select(Mapper.Map<ApplicationRole, RoleViewModel>)
+                   .ToList();
+
+                return new CorporationRolesViewModel
+                {
+                    Corporations = corporations,
+                    Roles = roles
+                };
+            }
+        }
+    }
+
+
+    public class CorporationRolesViewModel
+    {
+        public List<CorporationViewModel> Corporations { get; set; }
+
+        public List<RoleViewModel> Roles { get; set; }
+
+        public CorporationRolesViewModel()
+        {
+            Corporations = new List<CorporationViewModel>();
+            Roles = new List<RoleViewModel>();
         }
     }
 }

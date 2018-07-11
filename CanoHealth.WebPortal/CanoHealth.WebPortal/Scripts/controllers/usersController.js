@@ -52,6 +52,18 @@
             $("#js-password").show();
             $("#js-confirmpassword").show();
             $("#js-active").hide();
+
+            $("#Password").popover({
+                html: true,
+                content: '<ul><li>At least 6 characters</li><li>Include all of these elements:<ol><li>One UPPER CASE letter</li><li>One lower case letter</li><li>One special character</li><li>One number</li></ol></li></ul>',
+                toggle: "popover",
+                title: '<strong>Secure Password</strong>',
+                container: "body",
+                trigger: "focus",
+                tabindex: "0",
+                //role: "password-input",
+                placement: "top"
+            });
         } else {
             console.log(e.model);
             e.model.dirty = true;
