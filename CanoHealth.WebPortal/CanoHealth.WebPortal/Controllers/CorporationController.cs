@@ -9,7 +9,6 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
@@ -86,7 +85,8 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, String.Format("An exception has occurred: {0}", ex));
+                    //return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, String.Format("An exception has occurred: {0}", ex));
+                    ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again.");
                 }
             }
             return Json(new[] { corporation }.ToDataSourceResult(request, ModelState));

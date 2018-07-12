@@ -1275,6 +1275,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\controllers\accountsController.js" />
     <Content Include="Scripts\controllers\contractsController.js" />
+    <Content Include="Scripts\controllers\corporationsController.js" />
     <Content Include="Scripts\controllers\doctorsController.js" />
     <Content Include="Scripts\controllers\individualProvidersController.js" />
     <Content Include="Scripts\controllers\insuranceController.js" />

@@ -47,6 +47,12 @@ namespace CanoHealth.WebPortal
                 "~/Scripts/kendoEventHandlers/insuranceEventsHandler.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/corporations").Include(
+
+                "~/Scripts/controllers/corporationsController.js"
+
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/placeofservices").Include(
                 "~/Scripts/services/placeOfService.js",
                 "~/Scripts/controllers/placeOfServiceController.js",
