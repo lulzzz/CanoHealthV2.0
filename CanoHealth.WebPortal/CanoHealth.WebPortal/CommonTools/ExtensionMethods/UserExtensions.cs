@@ -13,39 +13,6 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
     {
         public static IEnumerable<UserFormViewModel> Convert(this IEnumerable<ApplicationUser> users)
         {
-            //var usersFormViewModels = new List<UserFormViewModel>();
-            //foreach (var user in users)
-            //{
-            //    var corporations = GetCorporationAccessByUser(user.Id);
-            //    var userresult = new UserFormViewModel
-            //    {
-            //        Id = user.Id,
-            //        FirstName = user.FirstName,
-            //        LastName = user.LastName,
-            //        Email = user.Email,
-            //        Active = user.Active,
-            //        Roles = user.Roles.Select(d => new RoleViewModel { Id = d.RoleId }),
-            //        Corporations = corporations
-            //    };
-            //    usersFormViewModels.Add(userresult);
-            //}
-            //return usersFormViewModels;
-            //return (from user in users
-            //        let corporations = GetCorporationAccessByUser(user.Id)
-            //        let roles = GetUserRoles(user.Roles.Select(x => x.RoleId).ToList())
-            //        select new UserFormViewModel
-            //        {
-            //            Id = user.Id,
-            //            FirstName = user.FirstName,
-            //            LastName = user.LastName,
-            //            Email = user.Email,
-            //            Active = user.Active,
-            //            Password = user.PasswordHash,
-            //            ConfirmPassword = user.PasswordHash,
-            //            Roles = roles,//user.Roles.Select(d => new RoleViewModel { Id = d.RoleId }),
-            //            Corporations = corporations
-            //        }).ToList();
-
             return (from user in users
                     let data = GetCorporationAndRolesOfUser(user)
 
@@ -109,20 +76,6 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
                     Roles = roles
                 };
             }
-        }
-    }
-
-
-    public class CorporationRolesViewModel
-    {
-        public List<CorporationViewModel> Corporations { get; set; }
-
-        public List<RoleViewModel> Roles { get; set; }
-
-        public CorporationRolesViewModel()
-        {
-            Corporations = new List<CorporationViewModel>();
-            Roles = new List<RoleViewModel>();
         }
     }
 }

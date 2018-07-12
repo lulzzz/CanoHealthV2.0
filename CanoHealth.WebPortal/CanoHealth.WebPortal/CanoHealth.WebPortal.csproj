@@ -723,6 +723,7 @@
     <Compile Include="ViewModels\ContractFormViewModel.cs" />
     <Compile Include="ViewModels\CorporationFormViewModel.cs" />
     <Compile Include="ViewModels\CorporationInsuranceContractViewModel.cs" />
+    <Compile Include="ViewModels\CorporationRolesViewModel.cs" />
     <Compile Include="ViewModels\CorporationViewModel.cs" />
     <Compile Include="ViewModels\DoctorFileFormViewModel.cs" />
     <Compile Include="ViewModels\DoctorFormViewModel.cs" />

@@ -247,9 +247,8 @@ namespace IdentitySample.Controllers
 
         public ActionResult ReadUsers([DataSourceRequest] DataSourceRequest request)
         {
-            var result = UserManager.Users
-                .Convert()
-                .ToList();
+            var result = UserManager.Users.ToList()
+                .Convert();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
