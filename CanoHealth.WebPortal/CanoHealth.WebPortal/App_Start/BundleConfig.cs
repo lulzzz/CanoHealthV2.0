@@ -63,13 +63,14 @@ namespace CanoHealth.WebPortal
 
             bundles.Add(new ScriptBundle("~/bundles/razontheme").Include(
                         "~/Scripts/jquery-2.2.4.js", //"~/Scripts/jquery-{version}.js",
-                        "~/Scripts/underscore-min.js",
+                                                     //"~/Scripts/underscore-min.js",
                         "~/Scripts/moment.js",
-                        "~/Scripts/bootstrap.js",
+                        //"~/Scripts/bootstrap.js", //Seems to be a conflict with vendors.js 
                         "~/Scripts/respond.js",
                         "~/Scripts/bootbox.min.js",
                         "~/Scripts/toastr.js",
                         "~/Scripts/app/app.js",
+
                         "~/Scripts/kendo/2018.1.221/jszip.min.js",
                         "~/Scripts/kendo/2018.1.221/kendo.all.min.js",
                         "~/Scripts/kendo/2018.1.221/kendo.aspnetmvc.min.js",
