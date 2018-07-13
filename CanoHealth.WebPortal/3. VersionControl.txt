@@ -29,4 +29,11 @@ tested with PlaceOfService.cshtml
 V04/03/2018
 09:38 PM Actualizando la version de Kendo a v20180.1.221
 
+V07/12/2018 16:11 PM
+	Version deployed in Azure
+
+V07/13/2018 10:37
+	Moving from .NET Framework v4.5 to v4.5.2
+	Installing SendGrid package
+
 

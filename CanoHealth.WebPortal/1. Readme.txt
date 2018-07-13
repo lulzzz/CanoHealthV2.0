@@ -13,6 +13,7 @@ Tools\Extensions and Updates\Online\Web Essentials 2013.5
 Tools\Extensions and Updates\Online\Productivity Power Tools
 Install-Package Moment.js (work with dates and times)
 Bootbox.js (Bootstrap modals made easy)
+Install-Package SendGrid
 
 TEST
 install-package moq -version:4.2.1510.2205 (under unit test)
@@ -27,3 +28,6 @@ Unit of Work
 TEST SOLUTIONS
 UnitTest
 IntegrationTest
+
+SENDGRID
+apikey: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

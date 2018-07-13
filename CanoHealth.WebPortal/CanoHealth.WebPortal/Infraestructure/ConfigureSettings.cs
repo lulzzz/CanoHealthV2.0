@@ -100,6 +100,52 @@ namespace CanoHealth.WebPortal.Infraestructure
             get { return personalFiles; }
         }
 
+        /*SENDGRID SECTION*/
+        private readonly static string sendgridHost = GetSettingsValue("SendGrid.server", "smtp.sendgrid.net");
+        public static string GetSendGridHost
+        {
+            get
+            {
+                return sendgridHost;
+            }
+        }
+
+        private readonly static int sendgridPort = GetSettingsValue("SendGrid.port", 587);
+        public static int GetSendGridPort
+        {
+            get
+            {
+                return sendgridPort;
+            }
+        }
+
+        private readonly static string sendgridFrom = GetSettingsValue("SendGrid.sentfrom", "emedservicecorp@gmail.com");
+        public static string GetSendGridFromAddress
+        {
+            get
+            {
+                return sendgridFrom;
+            }
+        }
+
+        private readonly static string sendgridUser = GetSettingsValue("SendGrid.username", "tikikon11252014");
+        public static string GetSendGridUser
+        {
+            get
+            {
+                return sendgridUser;
+            }
+        }
+
+        private readonly static string sendgridPassword = GetSettingsValue("SendGrid.password", "/*harnier123");
+        public static string GetSendGridPassword
+        {
+            get
+            {
+                return sendgridPassword;
+            }
+        }
+
         public static T GetSettingsValue<T>(string key, T defaultValue)
         {
             object result = null;
