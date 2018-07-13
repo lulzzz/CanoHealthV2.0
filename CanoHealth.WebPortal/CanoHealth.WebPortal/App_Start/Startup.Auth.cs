@@ -24,6 +24,7 @@ namespace IdentitySample
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
+                ExpireTimeSpan = TimeSpan.FromMinutes(15),//Probar si esta linea de codigo saca al usuario por inactividad y si no entra en conflicto con las siguientes configurariones
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
