@@ -79,21 +79,23 @@
             },
             isValidContract: function() {
                 var isValid = true,
-                    errorMessage ='';
+                    corporationmessage = "",
+                    insurancemessage = "",
+                    groupnumbermessage = "";
                 if (isEmptyValue(this.get('CorporationId'))) {
                     isValid = false;
-                    errorMessage = "The Corporation field is required.";
+                    corporationmessage = "<li>The Corporation field is required.</li>";
                 }
                 if (isEmptyValue(this.get('InsuranceName'))) {
                     isValid = false;
-                    errorMessage = errorMessage + ' ' + "The Insurance field is required.";
+                    insurancemessage = "<li>The Insurance field is required.</li>";
                 }
                 if (isEmptyValue(this.get('GroupNumber'))) {
                     isValid = false;
-                    errorMessage = errorMessage + ' ' + "The Group Number field is required.";
+                    groupnumbermessage = "<li>The Group Number field is required.</li>";
                 }
                 if (!isValid)
-                    toastr.error(errorMessage);
+                    toastr.error(`<ul>${corporationmessage}${insurancemessage}${groupnumbermessage}</ul>`);
                 return isValid;
             },
             onSaveContract: function() {
