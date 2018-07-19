@@ -37,8 +37,9 @@
         $.ajax({
             method: 'GET',
             url: url,
+            crossDomain: true,
             contentType: "application/json; charset=utf-8",
-            dataType: "jsonp",
+            dataType: "json",
             success: success,
             error: fail
         });
