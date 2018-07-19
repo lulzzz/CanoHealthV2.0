@@ -507,19 +507,21 @@
             },
             isValidBusinessContractModel: function () {
                 var valid = true,
-                    messageQueue = '';
+                    selectedBusinessLineMessage = "",
+                    selectedPlaceOfServiceMessage = "";
+
                 if (!this.get('selectedBusinessLine')) {
                     valid = false;
-                    messageQueue = "The Line of Business field is required." + "\n";
+                    selectedBusinessLineMessage = "<li>The Line of Business field is required.</li>" ;
                 }
 
                 if (!this.get('selectedPlaceOfService') || (this.get('selectedPlaceOfService') != null && this.get('selectedPlaceOfService').length === 0)) {
                     valid = false;
-                    messageQueue = messageQueue + "The Location field is required.";
+                    selectedPlaceOfServiceMessage = "<li>The Location field is required.</li>";
                 }
 
                 if (!valid) {
-                    toastr.error(messageQueue);
+                    toastr.error(`<ul>${selectedBusinessLineMessage}${selectedPlaceOfServiceMessage}</ul>`);
                 }
                 return valid;
             },

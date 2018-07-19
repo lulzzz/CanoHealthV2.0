@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using IdentitySample.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using IdentitySample.Models;
 using Owin;
 using System;
 
@@ -24,7 +24,7 @@ namespace IdentitySample
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                ExpireTimeSpan = TimeSpan.FromMinutes(15),//Probar si esta linea de codigo saca al usuario por inactividad y si no entra en conflicto con las siguientes configurariones
+                ExpireTimeSpan = TimeSpan.FromMinutes(60),//Probar si esta linea de codigo saca al usuario por inactividad y si no entra en conflicto con las siguientes configurariones
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider

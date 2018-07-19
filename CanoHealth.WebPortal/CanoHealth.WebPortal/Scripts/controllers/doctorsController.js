@@ -405,44 +405,50 @@
             npiRegistryThirdPartyBaseUrl: 'https://npiregistry.cms.hhs.gov/api?',
             isValidModelState: function() {
                 var isValid = true,
-                    message = "";
+                    firstnamemessage = "",
+                    lastnamemessage = "",
+                    degreemessage = "",
+                    dobmessage = "",
+                    ssnmessage = "",
+                    npimessage = "",
+                    caqhmessage = "";
                 if (!this.get('FirstName') || (this.get('FirstName') && this.get('FirstName').trim().length === 0)) {
                     isValid = false;
-                    message = message + " " + "The FIRST NAME field is required. \r\n  ";
+                    firstnamemessage = "<li> The FIRST NAME field is required. </li>";
                 }
 
                 if (!this.get('LastName') || (this.get('LastName') && this.get('LastName').trim().length === 0)) {
                     isValid = false;
-                    message = message + " " + "The LAST NAME field is required. \r\n  ";
+                    lastnamemessage = "<li> The LAST NAME field is required. </li>";
                 }
 
                 if (!this.get('Degree') || (this.get('Degree') && this.get('Degree').trim().length === 0)) {
                     isValid = false;
-                    message = message + " " + "The DEGREE field is required. \r\n  ";
+                    degreemessage = "<li> The DEGREE field is required. </li>";
                 }
 
                 if (!this.get('DateOfBirth')) {
                     isValid = false;
-                    message = message + " " + "The DOB field is required. \r\n  ";
+                    dobmessage = "<li> The DOB field is required. </li>";
                 }
 
                 if (!this.get('SocialSecurityNumber') || (this.get('SocialSecurityNumber') && this.get('SocialSecurityNumber').indexOf('_') !== -1)) {
                     isValid = false;
-                    message = message + " " + "Invalid Social Security Number. \r\n  ";
+                    ssnmessage = "<li> Invalid Social Security Number. </li>";
                 }
 
                 if (!this.get('NpiNumber') || (this.get('NpiNumber') && this.get('NpiNumber').indexOf('_') !== -1)) {
                     isValid = false;
-                    message = message + " " + "Invalid NPI number. \r\n  ";
+                    npimessage = "<li> Invalid NPI number. </li>";
                 }
 
                 if (!this.get('CaqhNumber') || (this.get('CaqhNumber') && this.get('CaqhNumber').trim().length === 0)) {
                     isValid = false;
-                    message = message + " " + "The CAQH field is required. \r\n  ";
+                    caqhmessage = "<li> The CAQH field is required. </li>";
                 }
 
                 if (!isValid)
-                    toastr.error(message);
+                    toastr.error(`<ul>${firstnamemessage}${lastnamemessage}${degreemessage}${dobmessage}${ssnmessage}${npimessage}${caqhmessage}</ul>`);
                 return isValid;
             },
             assignDoctorToPlaceOfService: function () {
@@ -529,17 +535,16 @@
             getProviderInfoFail: function(response) {
                 console.log("Fail Respuesta del 3rd party: ", response);
                 doctorFormViewModel.set('isEnableAssignBtn', true);
-            }
-            
+            }            
         });
         kendo.bind($(".js-doctor-form-window"), doctorFormViewModel);
-    };
+    };    
     
     //Access to private members
     return {
         doctorExpandedRow: doctorExpandedRow,
         medicalLicenseFilesFromKendoUpload: medicalLicenseFilesFromKendoUpload,
         createDoctorMedicalLicenseViewModel: createDoctorMedicalLicenseViewModel,
-        createDoctorFormViewModel: createDoctorFormViewModel
+        createDoctorFormViewModel: createDoctorFormViewModel       
     };
 }(DoctorService);

@@ -39,19 +39,26 @@
         <label class="control-label text-uppercase">ssn <sup class="text-danger">*</sup></label>
         <input id="SocialSecurityNumber" name="SocialSecurityNumber" data-role="maskedtextbox"
                data-mask="000-00-0000"
-               data-bind="value: SocialSecurityNumber"
-               required="required"
-               data-val-required="The Last Name field is required."
+               data-bind="value: SocialSecurityNumber"              
+               data-val="true"
+               data-val-required="The SSN field is required."
                style="width: 100%">
     </div>
 
     <div class="form-group">
         <label class="control-label text-uppercase">npi <sup class="text-danger">*</sup></label>
-        <input class="k-textbox" id="NpiNumber" name="NpiNumber"
+        <input id="NpiNumber" name="NpiNumber"
+               data-role="maskedtextbox"
+               data-mask="AAAAAAAAAA"
+               data-bind="value: NpiNumber"
                data-val="true"
-               data-val-length="The field NPI must be a string with a maximum length of 50."
-               data-val-length-max="50"
-               data-val-required="The NPI field is required." style="width: 100%;">
+               data-val-required="The NPI field is required."
+               style="width: 100%">
+        @*<input class="k-textbox" id="NpiNumber" name="NpiNumber"
+        data-val="true"
+        data-val-length="The field NPI must be a string with a maximum length of 10."
+        data-val-length-max="10"
+        data-val-required="The NPI field is required." style="width: 100%;">*@
     </div>
 
     <div class="form-group">
@@ -63,3 +70,4 @@
                data-val-required="The CAQH field is required." style="width: 100%;">
     </div>
 </div>
+

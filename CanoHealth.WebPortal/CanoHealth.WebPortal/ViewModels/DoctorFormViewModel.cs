@@ -29,7 +29,7 @@ namespace CanoHealth.WebPortal.ViewModels
         public string SocialSecurityNumber { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(10)]
         public string NpiNumber { get; set; }
 
         [StringLength(20)]

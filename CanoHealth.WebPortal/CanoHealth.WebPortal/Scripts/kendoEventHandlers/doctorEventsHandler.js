@@ -198,6 +198,47 @@ function onSaveDoctorItem(e) {
     if (e.model.isNew())
         e.model.Active = true;
     console.log(e.model);
+
+    var ssnMaskedtextbox = $("#SocialSecurityNumber").data("kendoMaskedTextBox");
+
+    var npiMaskedtextbox = $("#NpiNumber").data("kendoMaskedTextBox");
+
+    ssnMaskedtextbox.bind("change", function () {
+        var value = this.value();
+        console.log(value); //value is the selected date in the maskedtextbox
+        if (value.indexOf(this.options.promptChar) !== -1) {
+            toastr.error("SSN is incomplete.");
+            //means the ssn is incomplete hide the edit button
+            $(".k-grid-update").hide();
+        } else {
+            //means the ssn is completed but we have to check if npi is complete
+            if (npiMaskedtextbox.value().indexOf(this.options.promptChar) === -1)
+                $(".k-grid-update").show();
+        }
+    });
+
+    npiMaskedtextbox.bind("change", function () {
+        var value = this.value();
+        console.log(value); //value is the selected date in the maskedtextbox
+        if (value.indexOf(this.options.promptChar) !== -1) {
+            toastr.error("NPI is incomplete.");
+            //means the npi is incomplete hide the edit button
+            $(".k-grid-update").hide();
+        } else {
+            //means the npi is completed
+            DoctorService.getProviderInfo("https://npiregistry.cms.hhs.gov/api/?number=" + value + '&pretty=on', getProviderInfoSuccessWhenNpiChange, getProviderInfoFailWhenNpiChange);
+            var getProviderInfoSuccessWhenNpiChange = function (response) {
+                console.log("get Provider Info Success When Npi Change: ", response);
+            };
+            var getProviderInfoFailWhenNpiChange = function (response) {
+                console.log("get Provider Info Fail When Npi Change: ", response);
+            };
+
+            //we have to check if ssn is complete in order to display the edit button
+            if (ssnMaskedtextbox.value().indexOf(this.options.promptChar) === -1)
+                $(".k-grid-update").show();
+        }
+    });
 }
 
 //Doctor Medical Licenses Section
