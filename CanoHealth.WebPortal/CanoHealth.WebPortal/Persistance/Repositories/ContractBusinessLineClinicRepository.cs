@@ -35,7 +35,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return auditLogs;
         }
 
-        public IEnumerable<PlaceOfService> GetLocationsByBusinessLines(Guid contractLineofBusinessId)
+        public IEnumerable<PlaceOfService> GetLocationsByBusinessLines(
+            Guid contractLineofBusinessId)
         {
             var result = EnumarableGetAll(x => x.ContractLineofBusinessId == contractLineofBusinessId,
                 includeProperties: new Expression<Func<ClinicLineofBusinessContract, object>>[]

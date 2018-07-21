@@ -23,11 +23,15 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                                   x.DoctorCorporationContractLinkId != doctorCorporationContractLinkId);
         }
 
-        /*Get the list of all active doctors who are linked to an specific contract and line of business*/
+        /*Get the list of all active doctors who are linked to specific contract and line of business*/
         public IEnumerable<DoctorCorporationContractLink> GetDoctorsLinkedToLineOfBusiness(Guid contractLineOfBusinessId)
         {
             var result = EnumarableGetAll(dccl => dccl.ContractLineofBusinessId == contractLineOfBusinessId,
-                 includeProperties: new Expression<Func<DoctorCorporationContractLink, object>>[] { d => d.Doctor })
+                 includeProperties: new Expression<Func<DoctorCorporationContractLink, object>>[]
+                 {
+                     d => d.Doctor,
+                     ipbl => ipbl.ProvidersByLocations //Individual provider by location
+                 })
                  .ToList();
             return result;
         }

@@ -185,7 +185,8 @@
                                             contractLineofBusinessId: { type: "string" },
                                             groupNumber: { type: "string" },
                                             code: { type: "string" },
-                                            name: { type: "string" }                                            
+                                            name: { type: "string" },
+                                            insuranceId: "insuranceId"
                                         }
                                     }
                                 },
@@ -218,7 +219,8 @@
                                         contractLineofBusinessId: { type: "string" },
                                         groupNumber: { type: "string" },
                                         code: { type: "string" },
-                                        name: { type: "string" }
+                                        name: { type: "string" },
+                                        insuranceId: "insuranceId"
                                     }
                                 }
                             },
@@ -234,7 +236,6 @@
                         });
                         grid.setDataSource(newDataSource);
                     }
-
                 };
                
                 AjaxCallGet("/api/searchengine/GetResultByCorporationAndInsurance", paramsToServer, getLineOfBusinessInfoSuccess, getServerInfoFails);
@@ -429,8 +430,9 @@
 
     var onBoundDoctorToListView = function (e) {
         console.log("listview: ", e, e.sender, e.sender.element[0].id);
-        var listViewId = e.sender.element[0].id;
-        if (e.sender.dataSource.data().length ===0) {
+        var listViewId = e.sender.element[0].id,
+            listOfDoctorFound = e.sender.dataSource.data();
+        if (e.sender.dataSource.data().length === 0) {
             //custom logic
             var noDoctorFoundTemplate = kendo.template($("#no-doctor-found").html());
             $("#" + listViewId).append(noDoctorFoundTemplate);

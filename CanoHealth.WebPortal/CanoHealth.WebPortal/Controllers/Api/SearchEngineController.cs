@@ -15,8 +15,10 @@ namespace CanoHealth.WebPortal.Controllers.Api
             _unitOfWork = unitOfWork;
         }
 
+        //When just Corporation and Insurance are set
         [HttpGet]
-        public IHttpActionResult GetResultByCorporationAndInsurance(Guid corporationId, Guid insuranceId)
+        public IHttpActionResult GetResultByCorporationAndInsurance(
+            Guid corporationId, Guid insuranceId)
         {
             var corporation = _unitOfWork.Corporations.Get(corporationId);
             if (corporation == null)
@@ -26,12 +28,14 @@ namespace CanoHealth.WebPortal.Controllers.Api
             if (insurance == null)
                 return Content(HttpStatusCode.NotFound, "Insurance not found.");
 
-            var contract = _unitOfWork.Contracts.GetContractByCorporationAndInsurance(corporationId, insuranceId);
+            var contract = _unitOfWork.Contracts
+                .GetContractByCorporationAndInsurance(corporationId, insuranceId);
             if (contract == null)
                 return Content(HttpStatusCode.NotFound, "Contract not found.");
 
             var result = contract.ContractBusinessLines.Select(x => new
             {
+                insuranceId,
                 contract.GroupNumber,
                 x.ContractLineofBusinessId,
                 x.LineOfBusiness.Code,
@@ -164,7 +168,8 @@ namespace CanoHealth.WebPortal.Controllers.Api
         }
 
         [HttpGet]
-        public IHttpActionResult GetSearchByInsuranceDoctor(Guid corporationId, Guid insuranceId, Guid doctorId)
+        public IHttpActionResult GetSearchByInsuranceDoctor(
+            Guid corporationId, Guid insuranceId, Guid doctorId)
         {
             var corporation = _unitOfWork.Corporations.Get(corporationId);
             if (corporation == null)

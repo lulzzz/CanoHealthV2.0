@@ -19,5 +19,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
         public string FaxNumber { get; set; }
 
         public bool Active { get; set; }
+
+        /*This property is setup just when the insurance is passed*/
+        public Guid? InsuranceId { get; set; }
     }
 }

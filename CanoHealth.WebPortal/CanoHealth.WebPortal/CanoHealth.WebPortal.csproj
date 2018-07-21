@@ -764,6 +764,7 @@
     <Compile Include="ViewModels\PlaceOfServiceFormViewModel.cs" />
     <Compile Include="ViewModels\PlaceOfServiceLicenseFormViewModel.cs" />
     <Compile Include="ViewModels\SearchCredentialsResultViewModel.cs" />
+    <Compile Include="ViewModels\SearchDoctorResultViewModel.cs" />
     <Compile Include="ViewModels\SearchInsuranceDoctorViewModel.cs" />
     <Compile Include="ViewModels\SearchInsuranceLocationViewModel.cs" />
   </ItemGroup>

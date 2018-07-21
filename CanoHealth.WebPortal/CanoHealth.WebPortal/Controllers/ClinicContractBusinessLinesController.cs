@@ -17,7 +17,9 @@ namespace CanoHealth.WebPortal.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public ActionResult GetLocationsByContractLineOfBusiness([DataSourceRequest] DataSourceRequest request, Guid contractLineofBusinessId)
+        public ActionResult GetLocationsByContractLineOfBusiness(
+            [DataSourceRequest] DataSourceRequest request,
+            Guid contractLineofBusinessId, Guid? insuranceId = null)
         {
             //Get active locations related to an specific line of business.
             var locations = _unitOfWork.ContracBusinessLineClinicRepository
@@ -31,7 +33,8 @@ namespace CanoHealth.WebPortal.Controllers
                                            Address = x.Address,
                                            PhoneNumber = x.PhoneNumber,
                                            FaxNumber = x.FaxNumber,
-                                           Active = x.Active
+                                           Active = x.Active,
+                                           InsuranceId = insuranceId
                                        })
                                        .ToList();
 

@@ -185,23 +185,25 @@
     @(Html.Kendo().Grid<CanoHealth.WebPortal.Core.Dtos.ContractBusinessLineLocationDto>()
           .Name("Locations_#=contractLineofBusinessId#")
           .Columns(col =>
-            {
-                col.Bound(c => c.PlaceOfServiceId).Hidden();
+          {
+              col.Bound(c => c.PlaceOfServiceId).Hidden();
 
-                col.Bound(c => c.CorporationId).Hidden();
+              col.Bound(c => c.CorporationId).Hidden();
 
-                col.Bound(c => c.ContractLineofBusinessId).Hidden();
+              col.Bound(c => c.InsuranceId).Hidden();
 
-                col.Bound(c => c.Name).Title("LOCATION");
+              col.Bound(c => c.ContractLineofBusinessId).Hidden();
 
-                col.Bound(c => c.Address).Title("ADDRESS");
+              col.Bound(c => c.Name).Title("LOCATION");
 
-                col.Bound(c => c.PhoneNumber).Title("PHONE NUMBER");
+              col.Bound(c => c.Address).Title("ADDRESS");
 
-                col.Bound(c => c.FaxNumber).Title("FAX NUMBER");
+              col.Bound(c => c.PhoneNumber).Title("PHONE NUMBER");
 
-                col.Bound(c => c.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#").Title("ACTIVE");
-            })
+              col.Bound(c => c.FaxNumber).Title("FAX NUMBER");
+
+              col.Bound(c => c.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#").Title("ACTIVE");
+          })
             .ClientDetailTemplateId("doctor-list-template")
             .DataSource(ds => ds
                 .Ajax()
@@ -211,7 +213,10 @@
                 {
                     model.Id(x => x.PlaceOfServiceId);
                 })
-                .Read(read => read.Action("GetLocationsByContractLineOfBusiness", "ClinicContractBusinessLines", new { contractLineofBusinessId = "#=contractLineofBusinessId#" }))
+                .Read(read => read.Action("GetLocationsByContractLineOfBusiness", "ClinicContractBusinessLines", new {
+                    contractLineofBusinessId = "#=contractLineofBusinessId#",
+                    insuranceId = "#=insuranceId#"
+                }))
             )
             .Filterable()
             .Sortable()
@@ -237,7 +242,8 @@
                       "SearchEngine", new
                       {
                           locationId = "#=PlaceOfServiceId#",
-                          contractLineofBusinessId = "#=ContractLineofBusinessId#"
+                          contractLineofBusinessId = "#=ContractLineofBusinessId#",
+                          insuranceId = "#=InsuranceId#"
                       }));
               })
               .Events(ev => ev.DataBound("SearchEngine.onBoundDoctorToListView"))
@@ -257,6 +263,10 @@
             <p> <strong>DOB:</strong> #=moment(DateOfBirth).format('L')#</p>
             <p> <strong>NPI:</strong> #=NpiNumber#</p>
             <p> <strong>CAQH:</strong> #=CaqhNumber#</p>
+            <p> <strong>IPN <sup class="text-danger">*</sup>:</strong> #=IndividualProviderNumber#</p>
+            <p> <strong>IPNBL <sup class="text-danger">**</sup>:</strong> #=IndividualProviderByLocation#</p>
+            <sup class="text-danger">*</sup> <span class="demo-hint">Individual Provider Number</span>
+            <sup class="text-danger">**</sup> <span class="demo-hint">Individual Provider Number by Location</span>
         </div>
     </div>
 </script>
