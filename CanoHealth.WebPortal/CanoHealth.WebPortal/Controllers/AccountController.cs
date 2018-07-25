@@ -189,7 +189,14 @@ namespace IdentitySample.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            /*Original Code*/
+            //return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ChangePasswordWhenInit", "Manage", new { UserId = userId });
+            }
+            else
+                return View("Error");
         }
 
         //

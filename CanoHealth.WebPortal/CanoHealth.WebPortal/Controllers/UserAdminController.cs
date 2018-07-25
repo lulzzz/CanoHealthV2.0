@@ -12,12 +12,12 @@ using Kendo.Mvc.UI;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
 //using CanoHealth.WebPortal.ViewModels;
 
 namespace IdentitySample.Controllers
@@ -112,6 +112,30 @@ namespace IdentitySample.Controllers
                             return View();
                         }
                     }
+                    var code = await UserManager
+                                    .GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+
+                    string body = string.Format(CultureInfo.InvariantCulture,
+                                    @"<center>
+                                    <h3> Hi {0} !</h3>
+                                    <div> Congratulations on your new CanoHealth Credentialing account! Getting set up with CanoHealth Credentialing is quick and easy.You can get integrated in minutes. </div>
+                                    <div> Your User is: {0} </div>
+                                    <div> Your Password is: {2} </div>
+                                    <div> Let's confirm your account by clicking on the following link. </div>
+                                    <div> <a href='{1}' target='_top'>Confirm</a></div>                                    
+                                    </center>",
+                                        user.Email, callbackUrl, userViewModel.Password);
+                    string Subject = "Confirm your account.";
+
+                    var email = new CanoHealth.WebPortal.Services.Email.EmailService();
+                    email.To.Add("suarezhar@gmail.com");
+                    email.Subject = Subject;
+
+
+                    email.Body = body;
+                    await email.SendSmtpEmailAsync();
                 }
                 else
                 {
@@ -295,6 +319,31 @@ namespace IdentitySample.Controllers
                             unitOfWork.Complete();
                         }
                         userFormViewModel.Id = user.Id;
+
+                        var code = await UserManager
+                                    .GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+
+                        string body = string.Format(CultureInfo.InvariantCulture,
+                                        @"<center>
+                                    <h3> Hi {0} !</h3>
+                                    <div> Congratulations on your new CanoHealth Credentialing account! Getting set up with CanoHealth Credentialing is quick and easy.You can get integrated in minutes. </div>
+                                    <div> Your User is: {0} </div>
+                                    <div> Your Password is: {2} </div>
+                                    <div> Let's confirm your account by clicking on the following link. </div>
+                                    <div> <a href='{1}' target='_top'>Confirm</a></div>                                    
+                                    </center>",
+                                            user.Email, callbackUrl, userFormViewModel.Password);
+                        string Subject = "Confirm your account.";
+
+                        var email = new CanoHealth.WebPortal.Services.Email.EmailService();
+                        email.To.Add(user.Email);
+                        email.Subject = Subject;
+
+
+                        email.Body = body;
+                        await email.SendSmtpEmailAsync();
                     }
                     else
                     {

@@ -1,5 +1,4 @@
 ﻿using CanoHealth.WebPortal.Services.Email;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
@@ -38,16 +37,8 @@ namespace CanoHealth.WebPortal.Controllers
             _email = email;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            //var email = new EmailService();
-            //email.To.Add("suarezhar@gmail.com");
-            //email.Subject = "Confirm your account";
-
-
-            //email.Body = "<strong>Hello World</strong>";
-            //await email.SendSmtpEmailAsync();
-
             ViewBag.Message = "Welcome to ASP.NET MVC!";
 
             return View();
