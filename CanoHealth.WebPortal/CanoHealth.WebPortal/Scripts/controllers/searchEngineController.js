@@ -44,6 +44,7 @@
                                 address: { type: "string" },
                                 phoneNumber: { type: "string" },
                                 faxNumber: { type: "string" },
+                                providerNumberByInsurance: "providerNumberByInsurance",
                                 lineOfBusiness: "lineOfBusiness"
                             }
                         }
@@ -63,7 +64,8 @@
                     { field: "location", title: "LOCATION", width: "210px" },
                     { field: "address", title: "ADDRESS", width: "210px" },
                     { field: "phoneNumber", title: "PHONE NUMBER", width: "210px" },
-                    { field: "faxNumber", title: "FAX NUMBER", width: "210px" }
+                    { field: "faxNumber", title: "FAX NUMBER", width: "210px" },
+                    { field: "providerNumberByInsurance", title: "Provider by Insurance", width: "210px" }
                 ]
             });
         } else {
@@ -90,7 +92,8 @@
                     { field: "location", title: "LOCATION", width: "210px" },
                     { field: "address", title: "ADDRESS", width: "210px" },
                     { field: "phoneNumber", title: "PHONE NUMBER", width: "210px" },
-                    { field: "faxNumber", title: "FAX NUMBER", width: "210px" }
+                    { field: "faxNumber", title: "FAX NUMBER", width: "210px" },
+                    { field: "providerNumberByInsurance", title: "Provider by Insurance", width: "210px" }
                 ],
                 detailTemplate: kendo.template($("#lineofbusiness-detail-template").html()),
             });
@@ -305,6 +308,7 @@
                                             dateOfBirth: { type: "date" },
                                             npiNumber: { type: "string" },
                                             caqhNumber: { type: "string" },
+                                            providerNumberByInsurance: "providerNumberByInsurance",
                                             lineOfBusiness: "lineOfBusiness"
                                         }
                                     }
@@ -325,7 +329,8 @@
                                 { field: "fullName", title: "NAME", width: "210px" },
                                 { field: "dateOfBirth", title: "DOB", format: "{0:MM/dd/yyyy}", width: "210px" },
                                 { field: "npiNumber", title: "NPI NUMBER", width: "210px" },
-                                { field: "caqhNumber", title: "CAQH NUMBER", width: "210px" }
+                                { field: "caqhNumber", title: "CAQH NUMBER", width: "210px" },
+                                { field: "providerNumberByInsurance", title: "Provider By Insurance", width: "210px", headerAttributes: { "title": "Provider Number By Insurance" } }
                             ]
                         });
                     } else {
@@ -340,6 +345,7 @@
                                         dateOfBirth: { type: "date" },
                                         npiNumber: { type: "string" },
                                         caqhNumber: { type: "string" },
+                                        providerNumberByInsurance: "providerNumberByInsurance",
                                         lineOfBusiness: "lineOfBusiness"
                                     }
                                 }
@@ -352,14 +358,13 @@
                                 { field: "fullName", title: "NAME", width: "210px" },
                                 { field: "dateOfBirth", title: "DOB", format: "{0:MM/dd/yyyy}", width: "210px" },
                                 { field: "npiNumber", title: "NPI NUMBER", width: "210px" },
-                                { field: "caqhNumber", title: "CAQH NUMBER", width: "210px" }
+                                { field: "caqhNumber", title: "CAQH NUMBER", width: "210px" },
+                                { field: "providerNumberByInsurance", title: "Provider By Insurance", width: "210px" }
                             ],
                             detailTemplate: kendo.template($("#lineofbusiness-detail-template").html()),
                         });
                         grid.setDataSource(newDataSource);
-                    }
-
-                    
+                    }                    
                 }
                
                 AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocation", paramsToServer, getDoctorInfoSuccess, getServerInfoFails);

@@ -1,4 +1,5 @@
 ﻿using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Infraestructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -6,6 +7,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Data.Entity;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -84,10 +86,32 @@ namespace IdentitySample.Models
 
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage messageByParam)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Configure the client:
+            var client = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(ConfigurationDAL.GetSendGridPort));
+
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            // Creatte the credentials:
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationDAL.GetSendGridUser, ConfigurationDAL.GetSendGridPassword);
+
+            //client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            MailMessage message = new MailMessage(new MailAddress(ConfigurationDAL.GetSendGridFromAddress),
+                new MailAddress(messageByParam.Destination));
+
+            message.Subject = messageByParam.Subject;
+            message.Body = messageByParam.Body;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            message.IsBodyHtml = true;
+
+            await client.SendMailAsync(message);
         }
     }
 

@@ -56,7 +56,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                     FullName = d.FullName,
                     DateOfBirth = d.DateOfBirth,
                     NpiNumber = d.NpiNumber,
-                    CaqhNumber = d.CaqhNumber
+                    CaqhNumber = d.CaqhNumber,
+                    ProviderNumberByInsurance = d.ProviderNumberByInsurance
                 }).FirstOrDefault(x => x.NpiNumber == npi);
                 if (doctor != null)
                     doctors.Add(doctor);
@@ -70,7 +71,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                         {
                             LineOfBusinessName = lb.LineOfBusiness,
                             EffectiveDate = lb.EffectiveDate,
-                            Note = lb.Note
+                            Note = lb.Note,
+                            ProviderNumberByLocation = lb.ProviderNumberByLocation
                         })
                     .ToList();
                 doctor.LineOfBusiness = lineOfBusiness;
@@ -91,7 +93,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                     Location = l.Location,
                     PhoneNumber = l.PhoneNumber,
                     FaxNumber = l.FaxNumber,
-                    Address = l.Address
+                    Address = l.Address,
+                    ProviderNumberByInsurance = l.ProviderNumberByInsurance
                 }).FirstOrDefault(x => x.PlaceOfServiceId == loc);
                 if (location != null)
                     locations.Add(location);
@@ -104,7 +107,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                         {
                             LineOfBusinessName = lb.LineOfBusiness,
                             EffectiveDate = lb.EffectiveDate,
-                            Note = lb.Note
+                            Note = lb.Note,
+                            ProviderNumberByLocation = lb.ProviderNumberByLocation
                         })
                     .ToList();
                 location.LineOfBusiness = lineOfBusiness;

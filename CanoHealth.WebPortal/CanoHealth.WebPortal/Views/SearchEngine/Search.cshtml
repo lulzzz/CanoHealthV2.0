@@ -165,6 +165,7 @@
                     <th>Line of Business</th>
                     <th>Effective Date</th>
                     <th>Notes</th>
+                    <th>Provider by Location</th>
                 </tr>
             </thead>
             <tbody>
@@ -173,6 +174,11 @@
                     <td>#=lineOfBusiness[i].lineOfBusinessName#</td>
                     <td>#=moment(lineOfBusiness[i].effectiveDate).format('L')#</td>
                     <td> #=lineOfBusiness[i].note#</td>
+                    #if(lineOfBusiness[i].providerNumberByLocation){#
+                        <td>#=lineOfBusiness[i].providerNumberByLocation#</td>
+                    #}else{#
+                        <td>N/A</td>
+                    #}#                    
                 </tr>
                 #}#
             </tbody>

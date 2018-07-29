@@ -15,7 +15,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using IdentitySample.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using StructureMap;
+using System.Data.Entity;
 
 namespace CanoHealth.WebPortal.DependencyResolution
 {
@@ -32,7 +36,10 @@ namespace CanoHealth.WebPortal.DependencyResolution
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                 });
-            //For<IExample>().Use<Example>();   
+            //For<IExample>().Use<Example>(); 
+            //For<IUserStore<ApplicationUser>>().Use<UserStore<ApplicationUser>>();
+            //For<DbContext>().Use<ApplicationDbContext>();
+
             //this.For<IUserStore<ApplicationUser>>().Use(ctx => ctx.GetInstance<UserStore<ApplicationUser>>());
         }
 

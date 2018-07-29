@@ -101,7 +101,7 @@
     };
 
     var onOpenUserFormWindow = function () {
-        //$(".container-fluid").on("change", ".js-email", validateEmail);        
+        $(".container-fluid").on("change", ".js-email", validateEmail);        
     };
 
     return {

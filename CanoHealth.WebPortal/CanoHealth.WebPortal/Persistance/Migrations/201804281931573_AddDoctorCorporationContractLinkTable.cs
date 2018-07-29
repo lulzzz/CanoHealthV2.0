@@ -19,7 +19,6 @@ namespace CanoHealth.WebPortal.Migrations
                 .ForeignKey("dbo.Doctors", t => t.DoctorId)//, cascadeDelete: true
                 .Index(t => t.ContractLineofBusinessId)
                 .Index(t => t.DoctorId);
-
         }
 
         public override void Down()

@@ -162,7 +162,8 @@ namespace CanoHealth.WebPortal.Controllers.Api
             if (contract == null)
                 return Content(HttpStatusCode.NotFound, "Contract not found.");
 
-            var result = _unitOfWork.SearchCredentialsRepository.GetSearchResultsByInsuranceAndLocation(corporationId, insuranceId, locationId);
+            var result = _unitOfWork.SearchCredentialsRepository
+                .GetSearchResultsByInsuranceAndLocation(corporationId, insuranceId, locationId);
 
             return Ok(result);
         }
@@ -188,7 +189,8 @@ namespace CanoHealth.WebPortal.Controllers.Api
             if (contract == null)
                 return Content(HttpStatusCode.NotFound, "Contract not found.");
 
-            var result = _unitOfWork.SearchCredentialsRepository.GetSearchResultsByInsuranceAndDoctor(corporationId, insuranceId, doctorId);
+            var result = _unitOfWork.SearchCredentialsRepository
+                .GetSearchResultsByInsuranceAndDoctor(corporationId, insuranceId, doctorId);
 
             return Ok(result);
         }

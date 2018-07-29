@@ -1,5 +1,4 @@
-﻿using CanoHealth.WebPortal.Services.Email;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
@@ -29,12 +28,9 @@ namespace CanoHealth.WebPortal.Controllers
     {
         private readonly IMessageProvider _messageProvider;
 
-        private readonly IEmailService _email;
-
-        public HomeController(IMessageProvider messageProvider, IEmailService email)
+        public HomeController(IMessageProvider messageProvider)
         {
             _messageProvider = messageProvider;
-            _email = email;
         }
 
         public ActionResult Index()

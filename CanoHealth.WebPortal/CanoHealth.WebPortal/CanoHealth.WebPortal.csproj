@@ -329,6 +329,7 @@
     <Compile Include="Core\Domain\DoctorFile.cs" />
     <Compile Include="Core\Domain\DoctorFileType.cs" />
     <Compile Include="Core\Domain\DoctorIndividualProvider.cs" />
+    <Compile Include="Core\Domain\Emails.cs" />
     <Compile Include="Core\Domain\Insurance.cs" />
     <Compile Include="Core\Domain\InsuranceBusinessLine.cs" />
     <Compile Include="Core\Domain\LicenseType.cs" />
@@ -419,6 +420,14 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs" />
+    <Compile Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.Designer.cs">
+      <DependentUpon>201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201807291449405_CreateUniqueConstraintInProvidersByLocationTable.cs" />
+    <Compile Include="Persistance\Migrations\201807291449405_CreateUniqueConstraintInProvidersByLocationTable.Designer.cs">
+      <DependentUpon>201807291449405_CreateUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201805271537364_CreateUserCorporationAccessTable.cs" />
     <Compile Include="Persistance\Migrations\201805271537364_CreateUserCorporationAccessTable.Designer.cs">
       <DependentUpon>201805271537364_CreateUserCorporationAccessTable.cs</DependentUpon>
@@ -715,8 +724,8 @@
     <Compile Include="Persistance\Migrations\201802172115045_OverrrideConventionsForCorporationTable.Designer.cs">
       <DependentUpon>201802172115045_OverrrideConventionsForCorporationTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\Email\EmailService.cs" />
-    <Compile Include="Services\Email\IEmailService.cs" />
+    <Compile Include="Services\Email\CustomEmailService.cs" />
+    <Compile Include="Services\Email\ICustomEmailService.cs" />
     <Compile Include="Services\Files\FileService.cs" />
     <Compile Include="Services\Files\IFileService.cs" />
     <Compile Include="ViewModels\Admin\UserFormViewModel.cs" />
@@ -1490,6 +1499,12 @@
     <Folder Include="Persistance\EntityConfigurations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.resx">
+      <DependentUpon>201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201807291449405_CreateUniqueConstraintInProvidersByLocationTable.resx">
+      <DependentUpon>201807291449405_CreateUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201805271537364_CreateUserCorporationAccessTable.resx">
       <DependentUpon>201805271537364_CreateUserCorporationAccessTable.cs</DependentUpon>
     </EmbeddedResource>

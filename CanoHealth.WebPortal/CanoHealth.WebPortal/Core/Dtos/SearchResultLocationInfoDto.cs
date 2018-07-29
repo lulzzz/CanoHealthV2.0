@@ -15,6 +15,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
 
         public string Address { get; set; }
 
+        public string ProviderNumberByInsurance { get; set; }
+
         public List<DoctorLinkedToLineOfBusinessDto> LineOfBusiness { get; set; }
 
         public SearchResultLocationInfoDto()

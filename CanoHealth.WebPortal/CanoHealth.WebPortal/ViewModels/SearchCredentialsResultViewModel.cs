@@ -28,6 +28,9 @@ namespace CanoHealth.WebPortal.ViewModels
 
         public string CaqhNumber { get; set; }
 
+        //Doctor Provider Number by Insurance
+        public string ProviderNumberByInsurance { get; set; }
+
         //Location Info
         public Guid? PlaceOfServiceId { get; set; }
 
@@ -49,6 +52,9 @@ namespace CanoHealth.WebPortal.ViewModels
 
         //Note releated to the linked action.
         public string Note { get; set; }
+
+        //When there is a Provider number at Location level by line of business. Ex: Care Plus insurance
+        public string ProviderNumberByLocation { get; set; }
 
         /*Key: Doctor, Details: List of Line of Business*/
     }
