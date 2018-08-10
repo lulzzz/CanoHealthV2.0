@@ -1,4 +1,4 @@
-﻿var domainName = "http://" + window.location.host.toString();
+﻿var domainName = location.protocol + "//" + window.location.host.toString();
 
 function AjaxCallGet(url, json, onSuccess, onError) {
     $.ajax({

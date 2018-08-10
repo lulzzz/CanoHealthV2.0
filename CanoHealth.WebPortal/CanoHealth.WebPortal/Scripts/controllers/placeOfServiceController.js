@@ -122,12 +122,20 @@
                     return;
                 } else {
                     //Download the file
-                    window.location = domainName + '/GlobalFiles/Download?originalFileName=' + e.data.originalFileName +
-                        '&uniqueFileName=' + e.data.uniqueFileName +
-                        '&contentType=' + e.data.contentType +
-                        '&serverLocation=' + e.data.serverLocation;
+                    //window.location = domainName + '/GlobalFiles/Download?originalFileName=' + e.data.originalFileName +
+                    //    '&uniqueFileName=' + e.data.uniqueFileName +
+                    //    '&contentType=' + e.data.contentType +
+                    //    '&serverLocation=' + e.data.serverLocation;
+
+                    window.location = domainName + "/api/Files/Download?originalFileName=" + e.data.originalFileName +
+                        "&uniqueFileName=" + e.data.uniqueFileName +
+                        "&contentType=" + e.data.contentType;
                 }
             },
+
+            //linkExport: domainName + "/api/Files/Download?originalFileName=" + e.data.originalFileName +
+            //            "&uniqueFileName=" + e.data.uniqueFileName +
+            //            "&contentType=" + e.data.contentType,
 
             licenseTypeDataSource: new kendo.data.DataSource({
                schema: {
@@ -342,8 +350,6 @@
         });
         kendo.bind($(".js-license-" + placeOfServiceId), licenseViewModel);
     }
-
-
     return {
         getPlaceOfServiceItem: getPlaceOfServiceItem,
         createLicenseViewModel: createLicenseViewModel,

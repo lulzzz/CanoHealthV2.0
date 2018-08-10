@@ -28,3 +28,8 @@ Unit of Work
 TEST SOLUTIONS
 UnitTest
 IntegrationTest
+
+
+Server name
+canohealthsrv.database.windows.net
+u: suarezhar

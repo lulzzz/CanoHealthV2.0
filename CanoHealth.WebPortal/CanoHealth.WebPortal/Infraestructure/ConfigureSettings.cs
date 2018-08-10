@@ -146,6 +146,34 @@ namespace CanoHealth.WebPortal.Infraestructure
             }
         }
 
+        /*AZURE STORAGE ACCOUNT*/
+        private readonly static string share = GetSettingsValue("StorageShare", "canohealth");
+        public static string GetShare
+        {
+            get
+            {
+                return share;
+            }
+        }
+
+        private readonly static string locationContainer = GetSettingsValue("LocationContainer", "PlaceOfServiceLicenses");
+        public static string GetLocationContainer
+        {
+            get
+            {
+                return locationContainer;
+            }
+        }
+
+        private readonly static string localFileSystem = GetSettingsValue("LocalFileSystem", @"Documents\");
+        public static string GetLocalFileSystem
+        {
+            get
+            {
+                return localFileSystem;
+            }
+        }
+
         public static T GetSettingsValue<T>(string key, T defaultValue)
         {
             object result = null;
