@@ -165,6 +165,33 @@ namespace CanoHealth.WebPortal.Infraestructure
             }
         }
 
+        private readonly static string addendumsContainer = GetSettingsValue("AddendumsContainer", "ContractAddendums");
+        public static string GetAddendumsContainer
+        {
+            get
+            {
+                return addendumsContainer;
+            }
+        }
+
+        private readonly static string personalContainer = GetSettingsValue("PersonalContainer", "DoctorPersonalFiles");
+        public static string GetPersonalContainer
+        {
+            get
+            {
+                return personalContainer;
+            }
+        }
+
+        private readonly static string medicalContainer = GetSettingsValue("MedicalContainer", "DoctorMedicalLicenses");
+        public static string GetMedicalContainer
+        {
+            get
+            {
+                return medicalContainer;
+            }
+        } 
+
         private readonly static string localFileSystem = GetSettingsValue("LocalFileSystem", @"Documents\");
         public static string GetLocalFileSystem
         {

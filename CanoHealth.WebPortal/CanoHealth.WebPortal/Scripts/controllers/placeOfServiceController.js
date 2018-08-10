@@ -129,7 +129,8 @@
 
                     window.location = domainName + "/api/Files/Download?originalFileName=" + e.data.originalFileName +
                         "&uniqueFileName=" + e.data.uniqueFileName +
-                        "&contentType=" + e.data.contentType;
+                        "&contentType=" + e.data.contentType +
+                        "&container=PlaceOfServiceLicenses";
                 }
             },
 

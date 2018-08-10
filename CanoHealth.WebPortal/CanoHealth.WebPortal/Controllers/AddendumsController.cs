@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Infraestructure;
 using CanoHealth.WebPortal.Services.Files;
 using CanoHealth.WebPortal.ViewModels;
 using Elmah;
@@ -47,15 +48,20 @@ namespace CanoHealth.WebPortal.Controllers
                         UniqueName = addendumToStore.UniqueFileName
                     }
                 };
-                _file.AddFiles(filesCollection, addendumToStore.ServerLocation, originalUniqueNameViewModels);
+
+                //_file.AddFiles(filesCollection, addendumToStore.ServerLocation, originalUniqueNameViewModels);
+
+                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
 
                 _unitOfWork.Addendums.SaveAddendums(new List<ContractAddendum> { addendumToStore });
                 _unitOfWork.Complete();
+
                 addendum.ContractAddendumId = addendumToStore.ContractAddendumId;
                 addendum.UploadDateTime = addendumToStore.UploadDateTime;
                 addendum.UploadBy = addendumToStore.UploadBy;
                 addendum.ServerLocation = addendumToStore.ServerLocation;
                 addendum.UniqueFileName = addendumToStore.UniqueFileName;
+                addendum.ContentType = addendumToStore.ContentType;
             }
             catch (Exception ex)
             {
@@ -92,10 +98,19 @@ namespace CanoHealth.WebPortal.Controllers
                             UniqueName = contractAddendumConverted.UniqueFileName
                         }
                     };
-                    _file.AddFiles(filesCollection, contractAddendumConverted.ServerLocation, originalUniqueNameViewModels);
+                    //_file.AddFiles(filesCollection, contractAddendumConverted.ServerLocation, originalUniqueNameViewModels);
+
+                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
                 }
                 _unitOfWork.Addendums.SaveAddendums(new List<ContractAddendum> { contractAddendumConverted });
                 _unitOfWork.Complete();
+
+                addendum.ContractAddendumId = contractAddendumConverted.ContractAddendumId;
+                addendum.UploadDateTime = contractAddendumConverted.UploadDateTime;
+                addendum.UploadBy = contractAddendumConverted.UploadBy;
+                addendum.ServerLocation = contractAddendumConverted.ServerLocation;
+                addendum.UniqueFileName = contractAddendumConverted.UniqueFileName;
+                addendum.ContentType = contractAddendumConverted.ContentType;
             }
             catch (Exception ex)
             {

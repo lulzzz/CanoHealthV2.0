@@ -138,14 +138,24 @@ namespace CanoHealth.WebPortal.Controllers
 
                 _unitOfWork.AuditLogs.AddRange(updateLogsGenereted);
 
-                _file.AddFiles(filesCollection, licenseToStore.ServerLocation,
-                    new List<OriginalUniqueNameViewModel>
+                //_file.AddFiles(filesCollection, licenseToStore.ServerLocation,
+                //    new List<OriginalUniqueNameViewModel>
+                //    {
+                //        new OriginalUniqueNameViewModel {OriginalName = licenseToStore.OriginalFileName, UniqueName = licenseToStore.UniqueFileName}
+                //    });
+
+                _file.SaveFileAzureStorageAccount(filesCollection, new List<OriginalUniqueNameViewModel>
                     {
                         new OriginalUniqueNameViewModel {OriginalName = licenseToStore.OriginalFileName, UniqueName = licenseToStore.UniqueFileName}
-                    });
+                    },
+                    ConfigureSettings.GetLocationContainer);
 
                 _unitOfWork.Complete();
 
+
+                license.PosLicenseId = licenseToStore.PosLicenseId;
+                license.UniqueFileName = licenseToStore.UniqueFileName;
+                license.ContentType = licenseToStore.ContentType;
                 license.ServerLocation = licenseToStore.ServerLocation;
                 license.UploaDateTime = licenseToStore.UploaDateTime;
                 license.UploadBy = licenseToStore.UploadBy;

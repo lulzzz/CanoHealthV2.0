@@ -19,7 +19,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
         }
 
         [HttpGet]
-        public HttpResponseMessage Download(string originalFileName, string uniqueFileName, string contentType)
+        public HttpResponseMessage Download(string originalFileName, string uniqueFileName, string contentType, string container)
         {
             var content = new HttpResponseMessage();
             try
@@ -38,7 +38,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
 
                 //Download the file from Storage Account to local file system
                 _fileService.DownloadFile(uniqueFileName,
-                    ConfigureSettings.GetLocationContainer,
+                    container,
                     localFileSystemDirectory);
 
                 //Ge the file's info.
