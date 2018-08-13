@@ -29,6 +29,7 @@
                     //    '&contentType=' + e.data.contentType +
                     //    '&serverLocation=' + e.data.serverLocation;
 
+                    //Download from Azure Storage Account
                     window.location = domainName + "/api/Files/Download?originalFileName=" + e.data.originalFileName +
                         "&uniqueFileName=" + e.data.uniqueFileName +
                         "&contentType=" + e.data.contentType +
