@@ -3,6 +3,7 @@ using CanoHealth.WebPortal.CommonTools.ModelState;
 using CanoHealth.WebPortal.CommonTools.User;
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Infraestructure;
 using CanoHealth.WebPortal.Services.Files;
 using CanoHealth.WebPortal.ViewModels;
 using Elmah;
@@ -67,7 +68,10 @@ namespace CanoHealth.WebPortal.Controllers
                         UniqueName = licenseToStore.UniqueFileName
                     }
                 };
-                _file.AddFiles(filesCollection, licenseToStore.ServerLocation, originalUniqueNameViewModels);
+                //_file.AddFiles(filesCollection, licenseToStore.ServerLocation, originalUniqueNameViewModels);
+
+                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                  ConfigureSettings.GetMedicalContainer);
 
                 var auditLogs = new List<AuditLog>();
 
@@ -132,7 +136,10 @@ namespace CanoHealth.WebPortal.Controllers
                         }
                     };
                     //Save file in Physical Path
-                    _file.AddFiles(filesCollection, medicalLicenseViewModel.ServerLocation, originalUniqueNameViewModels);
+                    //_file.AddFiles(filesCollection, medicalLicenseViewModel.ServerLocation, originalUniqueNameViewModels);
+
+                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                            ConfigureSettings.GetMedicalContainer);
                 }
 
                 var medicalLicense = new MedicalLicense

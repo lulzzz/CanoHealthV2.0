@@ -24,10 +24,15 @@
                     return;
                 } else {
                     //Download the file
-                    window.location = domainName + '/GlobalFiles/Download?originalFileName=' + e.data.originalFileName +
-                        '&uniqueFileName=' + e.data.uniqueFileName +
-                        '&contentType=' + e.data.contentType +
-                        '&serverLocation=' + e.data.serverLocation;
+                    //window.location = domainName + '/GlobalFiles/Download?originalFileName=' + e.data.originalFileName +
+                    //    '&uniqueFileName=' + e.data.uniqueFileName +
+                    //    '&contentType=' + e.data.contentType +
+                    //    '&serverLocation=' + e.data.serverLocation;
+
+                    window.location = domainName + "/api/Files/Download?originalFileName=" + e.data.originalFileName +
+                        "&uniqueFileName=" + e.data.uniqueFileName +
+                        "&contentType=" + e.data.contentType +
+                        "&container=DoctorPersonalFiles";
                 }
             },
 

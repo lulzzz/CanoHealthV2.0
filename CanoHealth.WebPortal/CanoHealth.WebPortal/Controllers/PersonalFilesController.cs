@@ -2,6 +2,7 @@
 using CanoHealth.WebPortal.CommonTools.User;
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Infraestructure;
 using CanoHealth.WebPortal.Services.Files;
 using CanoHealth.WebPortal.ViewModels;
 using Elmah;
@@ -78,7 +79,9 @@ namespace CanoHealth.WebPortal.Controllers
                     }
                 };
                 //Save file in Physical Path
-                _file.AddFiles(filesCollection, doctorFileToStore.ServerLocation, originalUniqueNameViewModels);
+                //_file.AddFiles(filesCollection, doctorFileToStore.ServerLocation, originalUniqueNameViewModels);
+                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                   ConfigureSettings.GetPersonalContainer);
 
                 //Save file info in Database
                 var fileLogs = _unitOfWork.PersonalFileRepository.SavePersonalFiles(new List<DoctorFile> { doctorFileToStore });
@@ -160,7 +163,9 @@ namespace CanoHealth.WebPortal.Controllers
                         }
                     };
                     //Save file in Physical Path
-                    _file.AddFiles(filesCollection, doctorFileForm.ServerLocation, originalUniqueNameViewModels);
+                    //_file.AddFiles(filesCollection, doctorFileForm.ServerLocation, originalUniqueNameViewModels);
+                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                  ConfigureSettings.GetPersonalContainer);
                 }
 
                 var newDoctorFile = doctorFileForm.Convert();
