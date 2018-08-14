@@ -83,11 +83,13 @@ namespace CanoHealth.WebPortal.Controllers
                 _unitOfWork.AuditLogs.AddRange(auditLogs);
                 _unitOfWork.Complete();
 
+                medicalLicenseViewModel.MedicalLicenseId = licenseToStore.MedicalLicenseId;
                 medicalLicenseViewModel.UploadBy = licenseToStore.UploadBy;
                 medicalLicenseViewModel.UploaDateTime = licenseToStore.UploaDateTime;
                 medicalLicenseViewModel.Active = licenseToStore.Active;
                 medicalLicenseViewModel.UniqueFileName = licenseToStore.UniqueFileName;
                 medicalLicenseViewModel.ServerLocation = licenseToStore.ServerLocation;
+
             }
             catch (Exception ex)
             {

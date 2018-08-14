@@ -112,7 +112,7 @@
                                     licenseNumber: doctor.licenseNumber,
                                     effectiveDate: moment(doctor.effectiveDate).format('L'),
                                     expireDate: moment(doctor.expireDate).format('L'),
-                                    note: doctor.note,
+                                    note: doctor.note !== null ? doctor.note : "None.",
                                     serverLocation: doctor.serverLocation,
                                     originalFileName: doctor.originalFileName,
                                     uniqueFileName: doctor.uniqueFileName,
@@ -120,7 +120,7 @@
                                     fileSize: doctor.fileSize,
                                     contentType: doctor.contentType,
                                     uploadBy: doctor.uploadBy,
-                                    uploaDateTime: moment(doctor.uploaDateTime).format('L h:mm:ss a'),
+                                    uploaDateTime: doctor.uploaDateTime != null ? moment(doctor.uploaDateTime).format('L h:mm:ss a') : null,
                                     active: doctor.active
                                 };
                             });
@@ -162,6 +162,8 @@
                             }
                             var createMedicalLicensesSuccess = function (response) {
                                 response = {
+                                    medicalLicenseId: response.MedicalLicenseId,
+                                    doctorId: response.DoctorId,
                                     active: response.Active,
                                     contentType: response.ContentType,
                                     effectiveDate: moment(response.EffectiveDate).format('L'),
@@ -169,14 +171,12 @@
                                     fileExtension: response.FileExtension,
                                     FileSize: response.FileSize,
                                     licenseNumber: response.LicenseNumber,
-                                    licenseName: response.LicenseTypeName,
-                                    note: response.Note,
-                                    originalFileName: response.OriginalFileName,
-                                    placeOfServiceId: response.PlaceOfServiceId,
-                                    posLicenseId: response.PosLicenseId,
+                                    medicalLicenseType: response.MedicalLicenseTypeName,
+                                    note: response.Note != null ? response.Note : "None.",
+                                    originalFileName: response.OriginalFileName,                                    
                                     serverLocation: response.ServerLocation,
                                     uniqueFileName: response.UniqueFileName,
-                                    uploaDateTime: response.UploaDateTime,
+                                    uploaDateTime: response.UploaDateTime != null ? moment(response.UploaDateTime).format('L h:mm:ss a') : null,
                                     uploadBy: response.UploadBy
                                 };
                                 DoctorsController.medicalLicenseFilesFromKendoUpload = [];
@@ -242,6 +242,8 @@
 
                             var updateMedicalLicensesSuccess = function (response) {
                                 response = {
+                                    medicalLicenseId: response.MedicalLicenseId,
+                                    doctorId: response.DoctorId,
                                     active: response.Active,
                                     contentType: response.ContentType,
                                     effectiveDate: moment(response.EffectiveDate).format('L'),
@@ -249,14 +251,12 @@
                                     fileExtension: response.FileExtension,
                                     FileSize: response.FileSize,
                                     licenseNumber: response.LicenseNumber,
-                                    licenseName: response.LicenseTypeName,
-                                    note: response.Note,
-                                    originalFileName: response.OriginalFileName,
-                                    placeOfServiceId: response.PlaceOfServiceId,
-                                    posLicenseId: response.PosLicenseId,
+                                    medicalLicenseType: response.MedicalLicenseTypeName,
+                                    note: response.Note != null ? response.Note : "None.",
+                                    originalFileName: response.OriginalFileName,                                    
                                     serverLocation: response.ServerLocation,
                                     uniqueFileName: response.UniqueFileName,
-                                    uploaDateTime: response.UploaDateTime,
+                                    uploaDateTime: response.UploaDateTime != null ? moment(response.UploaDateTime).format('L h:mm:ss a') : null,
                                     uploadBy: response.UploadBy
                                 };
                                 DoctorsController.medicalLicenseFilesFromKendoUpload = [];
