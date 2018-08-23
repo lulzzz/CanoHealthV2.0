@@ -145,6 +145,15 @@ namespace CanoHealth.WebPortal.Infraestructure
                 return sendgridPassword;
             }
         }
+        
+        private readonly static string credentialingContact = GetSettingsValue("CredentialingContact", "afernandez@canohealth.com");
+        public static string GetCredentialingContact
+        {
+            get
+            {
+                return credentialingContact;
+            }
+        }
 
         /*AZURE STORAGE ACCOUNT*/
         private readonly static string share = GetSettingsValue("StorageShare", "canohealth");
