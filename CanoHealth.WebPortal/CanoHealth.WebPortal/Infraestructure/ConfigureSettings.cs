@@ -190,7 +190,7 @@ namespace CanoHealth.WebPortal.Infraestructure
             {
                 return medicalContainer;
             }
-        } 
+        }
 
         private readonly static string localFileSystem = GetSettingsValue("LocalFileSystem", @"Documents\");
         public static string GetLocalFileSystem
@@ -199,6 +199,18 @@ namespace CanoHealth.WebPortal.Infraestructure
             {
                 return localFileSystem;
             }
+        }
+
+        private static readonly string medicalLicense = GetSettingsValue("Source.MedicalLicense", "DoctorMedicalLicense");
+        public static string GetMedicalLicense
+        {
+            get { return medicalLicense; }
+        }
+
+        private static readonly string locationLicense = GetSettingsValue("Source.LocationLicense", "LocationLicense");
+        public static string GetLocationLicense
+        {
+            get { return locationLicense; }
         }
 
         public static T GetSettingsValue<T>(string key, T defaultValue)
