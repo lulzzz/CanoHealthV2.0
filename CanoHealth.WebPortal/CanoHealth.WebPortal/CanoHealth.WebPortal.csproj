@@ -735,7 +735,9 @@
       <DependentUpon>201802172115045_OverrrideConventionsForCorporationTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\Email\CustomEmailService.cs" />
+    <Compile Include="Services\Email\EmailFactory.cs" />
     <Compile Include="Services\Email\ICustomEmailService.cs" />
+    <Compile Include="Services\Email\IEmailFactory.cs" />
     <Compile Include="Services\Files\FileService.cs" />
     <Compile Include="Services\Files\IFileService.cs" />
     <Compile Include="ViewModels\Admin\UserFormViewModel.cs" />
