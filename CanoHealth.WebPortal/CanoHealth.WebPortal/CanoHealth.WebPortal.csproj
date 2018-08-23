@@ -1309,8 +1309,9 @@
     <Content Include="Scripts\controllers\manageController.js" />
     <Content Include="Scripts\controllers\personalFileController.js" />
     <Content Include="Scripts\controllers\placeOfServiceController.js" />
-    <None Include="Properties\PublishProfiles\canohealth - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\canohealth - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\canohealthcr - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CanoLocal.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\controllers\rolesController.js" />
     <Content Include="Scripts\controllers\searchEngineController.js" />

@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -24,7 +25,7 @@ namespace CanoHealth.WebPortal.Controllers
             _file = file;
         }
 
-        public ActionResult CreateLicense(PlaceOfServiceLicenseFormViewModel license)
+        public async Task<ActionResult> CreateLicense(PlaceOfServiceLicenseFormViewModel license)
         {
             try
             {
@@ -76,7 +77,7 @@ namespace CanoHealth.WebPortal.Controllers
                     }
                 };
                 //_file.AddFiles(filesCollection, licenseToStore.ServerLocation, originalUniqueNameViewModels);
-                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
                     ConfigureSettings.GetLocationContainer);
 
                 var locationLogs = _unitOfWork.Licenses.SaveLocationLicenses(new List<PosLicense> { licenseToStore });
@@ -101,7 +102,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(license);
         }
 
-        public ActionResult UpdateLicense(PlaceOfServiceLicenseFormViewModel license)
+        public async Task<ActionResult> UpdateLicense(PlaceOfServiceLicenseFormViewModel license)
         {
             try
             {
@@ -144,7 +145,7 @@ namespace CanoHealth.WebPortal.Controllers
                 //        new OriginalUniqueNameViewModel {OriginalName = licenseToStore.OriginalFileName, UniqueName = licenseToStore.UniqueFileName}
                 //    });
 
-                _file.SaveFileAzureStorageAccount(filesCollection, new List<OriginalUniqueNameViewModel>
+                await _file.SaveFileAzureStorageAccount(filesCollection, new List<OriginalUniqueNameViewModel>
                     {
                         new OriginalUniqueNameViewModel {OriginalName = licenseToStore.OriginalFileName, UniqueName = licenseToStore.UniqueFileName}
                     },

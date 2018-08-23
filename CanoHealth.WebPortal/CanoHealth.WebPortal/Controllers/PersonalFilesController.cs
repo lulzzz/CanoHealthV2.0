@@ -9,6 +9,7 @@ using Elmah;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,7 +30,7 @@ namespace CanoHealth.WebPortal.Controllers
             _file = file;
         }
 
-        public ActionResult SavePersonalFile(DoctorFileFormViewModel doctorFileForm)
+        public async Task<ActionResult> SavePersonalFile(DoctorFileFormViewModel doctorFileForm)
         {
             try
             {
@@ -80,7 +81,7 @@ namespace CanoHealth.WebPortal.Controllers
                 };
                 //Save file in Physical Path
                 //_file.AddFiles(filesCollection, doctorFileToStore.ServerLocation, originalUniqueNameViewModels);
-                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
                    ConfigureSettings.GetPersonalContainer);
 
                 //Save file info in Database
@@ -108,7 +109,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(doctorFileForm);
         }
 
-        public ActionResult UpdatePersonalFile(DoctorFileFormViewModel doctorFileForm)
+        public async Task<ActionResult> UpdatePersonalFile(DoctorFileFormViewModel doctorFileForm)
         {
             try
             {
@@ -164,8 +165,8 @@ namespace CanoHealth.WebPortal.Controllers
                     };
                     //Save file in Physical Path
                     //_file.AddFiles(filesCollection, doctorFileForm.ServerLocation, originalUniqueNameViewModels);
-                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
-                  ConfigureSettings.GetPersonalContainer);
+                    await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                        ConfigureSettings.GetPersonalContainer);
                 }
 
                 var newDoctorFile = doctorFileForm.Convert();

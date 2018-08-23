@@ -1,5 +1,6 @@
 using CanoHealth.WebPortal.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CanoHealth.WebPortal.Services.Files
@@ -11,7 +12,7 @@ namespace CanoHealth.WebPortal.Services.Files
 
         void DownloadFile(string uniqueFileName, string container, string pathToDownload);
 
-        void SaveFileAzureStorageAccount(HttpFileCollectionBase filesCollection,
+        Task SaveFileAzureStorageAccount(HttpFileCollectionBase filesCollection,
           IEnumerable<OriginalUniqueNameViewModel> originalFileNames, string container);
     }
 }

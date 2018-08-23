@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,7 +27,7 @@ namespace CanoHealth.WebPortal.Controllers
             _file = file;
         }
 
-        public ActionResult CreateAddendum(ContractAddendumFormViewModel addendum)
+        public async Task<ActionResult> CreateAddendum(ContractAddendumFormViewModel addendum)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace CanoHealth.WebPortal.Controllers
 
                 //_file.AddFiles(filesCollection, addendumToStore.ServerLocation, originalUniqueNameViewModels);
 
-                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
+                await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
 
                 _unitOfWork.Addendums.SaveAddendums(new List<ContractAddendum> { addendumToStore });
                 _unitOfWork.Complete();
@@ -71,7 +72,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(addendum);
         }
 
-        public ActionResult UpdateAddendum(ContractAddendumFormViewModel addendum)
+        public async Task<ActionResult> UpdateAddendum(ContractAddendumFormViewModel addendum)
         {
             try
             {
@@ -100,7 +101,7 @@ namespace CanoHealth.WebPortal.Controllers
                     };
                     //_file.AddFiles(filesCollection, contractAddendumConverted.ServerLocation, originalUniqueNameViewModels);
 
-                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
+                    await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
                 }
                 _unitOfWork.Addendums.SaveAddendums(new List<ContractAddendum> { contractAddendumConverted });
                 _unitOfWork.Complete();

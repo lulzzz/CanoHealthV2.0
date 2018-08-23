@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,7 +34,7 @@ namespace CanoHealth.WebPortal.Controllers
             _dateTime = dateTime;
         }
 
-        public ActionResult CreateMedicalLicense(MedicalLicenseFormViewModel medicalLicenseViewModel)
+        public async Task<ActionResult> CreateMedicalLicense(MedicalLicenseFormViewModel medicalLicenseViewModel)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace CanoHealth.WebPortal.Controllers
                 };
                 //_file.AddFiles(filesCollection, licenseToStore.ServerLocation, originalUniqueNameViewModels);
 
-                _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
                   ConfigureSettings.GetMedicalContainer);
 
                 var auditLogs = new List<AuditLog>();
@@ -99,7 +100,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(medicalLicenseViewModel);
         }
 
-        public ActionResult UpdateMedicalLicense(MedicalLicenseFormViewModel medicalLicenseViewModel)
+        public async Task<ActionResult> UpdateMedicalLicense(MedicalLicenseFormViewModel medicalLicenseViewModel)
         {
             try
             {
@@ -140,7 +141,7 @@ namespace CanoHealth.WebPortal.Controllers
                     //Save file in Physical Path
                     //_file.AddFiles(filesCollection, medicalLicenseViewModel.ServerLocation, originalUniqueNameViewModels);
 
-                    _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
+                    await _file.SaveFileAzureStorageAccount(filesCollection, originalUniqueNameViewModels,
                             ConfigureSettings.GetMedicalContainer);
                 }
 

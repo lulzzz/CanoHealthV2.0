@@ -6,6 +6,7 @@ using Microsoft.WindowsAzure.Storage.File;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CanoHealth.WebPortal.Services.Files
@@ -62,7 +63,7 @@ namespace CanoHealth.WebPortal.Services.Files
             file.DownloadToFile(Path.Combine(pathToDownload, uniqueFileName), FileMode.Create);
         }
 
-        public void SaveFileAzureStorageAccount(HttpFileCollectionBase filesCollection,
+        public async Task SaveFileAzureStorageAccount(HttpFileCollectionBase filesCollection,
           IEnumerable<OriginalUniqueNameViewModel> originalFileNames, string container)
         {
             // Parse the connection string and return a reference to the storage account.
@@ -87,9 +88,9 @@ namespace CanoHealth.WebPortal.Services.Files
 
                 if (httpPostedFileBase != null)
                 {
-                    var fileName = originalFileNames.Single(f => f.OriginalName == httpPostedFileBase.FileName);                    
+                    var fileName = originalFileNames.Single(f => f.OriginalName == httpPostedFileBase.FileName);
                     CloudFile file = sampleDir.GetFileReference(fileName.UniqueName);
-                    file.UploadFromStream(httpPostedFileBase.InputStream);
+                    await file.UploadFromStreamAsync(httpPostedFileBase.InputStream);
                 }
             }
         }
