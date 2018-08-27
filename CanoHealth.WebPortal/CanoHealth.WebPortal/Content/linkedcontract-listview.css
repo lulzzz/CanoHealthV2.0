@@ -32,7 +32,7 @@
         height: 16px;
         line-height: 16px;
         text-transform: uppercase;
-        opacity: 0.5;
+        /*opacity: 0.5;*/
     }
     
     .product-view dd
