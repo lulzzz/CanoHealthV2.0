@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-
 namespace CanoHealth.WebPortal.Controllers.Api
 {
     [Authorize]
@@ -31,7 +30,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
         public IHttpActionResult GetNotifications()
         {
             var result = new List<NotificationDto>();
-            if (User.IsInRole(RoleName.Admin))
+            if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.Credentialing))
             {
                 result = _unitOfWork.ExpireDateNotificationRepository
                     .GetNotifications()

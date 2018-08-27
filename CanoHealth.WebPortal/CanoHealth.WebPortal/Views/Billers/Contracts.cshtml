@@ -1,0 +1,220 @@
+﻿@using System.Collections
+@using CanoHealth.WebPortal.ViewModels
+@{
+    ViewBag.Title = "Contracts";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Contracts</h1>
+
+        <ol class="breadcrumb pull-right">
+
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Contracts</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+    @(Html.Kendo().Grid<ContractFormViewModel>()
+        .Name("Contracts")
+
+        .ToolBar(tool =>
+        {
+            tool.Excel().Text("EXCEL");
+        })
+        .Excel(ex =>
+        {
+            ex.FileName("Contracts");
+            ex.AllPages(true);
+        })
+
+        .Columns(col =>
+        {
+            col.Bound(c => c.ContractId).Hidden(true);
+            col.Bound(c => c.InsuranceId).Hidden(true);
+
+            col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+                .Title("CORPORATION").Width(200);
+
+            col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
+
+            col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
+
+            col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
+        })
+
+        .ClientDetailTemplateId("contract-detail-template")
+
+        .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
+
+        .Filterable()
+        .Sortable()
+        .Groupable()
+        .Resizable(r => r.Columns(true))
+        .Scrollable(s => s.Height("auto"))
+        .Pageable(ps =>
+        {
+            ps.Refresh(true);
+            ps.PreviousNext(true);
+            ps.PageSizes(new object[] { 25, 50, 100, "All" });
+        })
+
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(25)
+            .Model(model =>
+            {
+                model.Id(c => c.ContractId);
+                model.Field(c => c.ContractId).Editable(false);
+                model.Field(c => c.Active).Editable(false);
+            })
+            .Read(read => read.Action("ReadContracts", "Billers"))
+        ))
+</div>
+
+
+<script type="text/x-kendo-template" id="contract-detail-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-ar">
+        <li class="active"><a href="\\#addendums-files-#=ContractId#" data-toggle="tab"><i class="fa fa-file"></i> ADDENDUMS</a></li>
+        <li><a href="\\#line-of-business-#=ContractId#" data-toggle="tab"><i class="fa fa-folder-open"></i> LINE OF BUSINESS</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!--Addendums tab-->
+        <div class="tab-pane active js-addendum-#=ContractId#" id="addendums-files-#=ContractId#">
+            <br /><br />
+            <div id="addendum-listview-#=ContractId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-template="detail-addendum-template"
+                 data-bind="source: addendumDataSource">
+            </div> <!--Addendum List view-->
+        </div>
+        
+        <!--Business lines tab-->
+        <div class="tab-pane js-businesslines-#=ContractId#" id="line-of-business-#=ContractId#">
+            <br /><br />
+
+            <div id="businesslines-listview-#=ContractId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-template="detail-businesslines-template"
+                 data-bind="source: contractBusinesslinesDataSource">
+            </div><!--Business Lines List View-->
+        </div>
+    </div>
+</script>
+
+<!--Contracts's addendums details template-->
+<script type="text/x-kendo-template" id="detail-addendum-template">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="text-icon" style="margin-bottom: 10px !important; cursor: pointer;" data-bind="events: {click: onDownloadContractAddendum}">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">File</h5>
+                        <div title="#=originalFileName#">
+                            #if(originalFileName != null && originalFileName.length < 20){#
+                            <p>#:originalFileName#</p>
+                            #}else if(originalFileName != null && originalFileName.length > 20){#
+                            <p>#:originalFileName.substring(0,12) + '...' + originalFileName.substring(originalFileName.length - 5)#</p>
+                            #}else{#
+                            <p>NONE</p>
+                            #}#
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-check-o"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Upload By</h5>
+                        <p> #:uploadBy#  </p>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-hashtag"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Upload Date Time</h5>
+                        <p>#:uploadDateTime#</p>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-pencil-square-o"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Note</h5>
+                        <div title="#=description#">
+                            #if(description != null && description.length < 35){#
+                            <p>#:description#</p>
+                            #}else if(description != null && description.length > 35){#
+                            <p>#:description.substring(0,32) + ' ...' #</p>
+                            #}else{#
+                            <p>NONE</p>
+                            #}#
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--Contract's line of business details template-->
+<script type="text/x-kendo-template" id="detail-businesslines-template">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="content-box box-default">
+            <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
+            <h5 class="content-box-title">#=name#</h5>
+
+
+            <div class="panel-group" id="accordion-#=contractLineofBusinessId#">
+                <div class="panel panel-default" style="text-align: justify !important; box-shadow: none;">
+                    <div class="panel-heading panel-heading-link">
+                        <a data-toggle="collapse" data-parent="\\#accordion-#=contractLineofBusinessId#" href="\\#collapseOne-#=contractLineofBusinessId#" aria-expanded="false" class="collapsed">
+                            <i class="fa fa-hospital-o"></i> Locations
+                        </a>
+                    </div>
+                    <div id="collapseOne-#=contractLineofBusinessId#" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body" style="text-align: justify !important;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-template="clinic-row-template" data-bind="source: clinics"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="clinic-row-template">
+    <tr>
+        <td data-bind="text: name"></td>   
+        <td></td>
+    </tr>
+</script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/contracts")
+}
