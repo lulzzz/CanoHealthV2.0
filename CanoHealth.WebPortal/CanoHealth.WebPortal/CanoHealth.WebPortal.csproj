@@ -352,6 +352,7 @@
     <Compile Include="Core\Domain\PlanType.cs" />
     <Compile Include="Core\Domain\PosLicense.cs" />
     <Compile Include="Core\Domain\ProviderByLocation.cs" />
+    <Compile Include="Core\Domain\Recurrence.cs" />
     <Compile Include="Core\Domain\UserCorporationAccess.cs" />
     <Compile Include="Core\Dtos\ContractBusinessLineLocationDto.cs" />
     <Compile Include="Core\Dtos\DoctorFileTypeDto.cs" />
@@ -431,6 +432,14 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Persistance\Migrations\201809011615157_CreateRecurrenceTable.cs" />
+    <Compile Include="Persistance\Migrations\201809011615157_CreateRecurrenceTable.Designer.cs">
+      <DependentUpon>201809011615157_CreateRecurrenceTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201809011619027_PopulateRecurrenceTable.cs" />
+    <Compile Include="Persistance\Migrations\201809011619027_PopulateRecurrenceTable.Designer.cs">
+      <DependentUpon>201809011619027_PopulateRecurrenceTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs" />
     <Compile Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.Designer.cs">
       <DependentUpon>201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
@@ -1517,6 +1526,12 @@
     <Folder Include="Persistance\EntityConfigurations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Persistance\Migrations\201809011615157_CreateRecurrenceTable.resx">
+      <DependentUpon>201809011615157_CreateRecurrenceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201809011619027_PopulateRecurrenceTable.resx">
+      <DependentUpon>201809011619027_PopulateRecurrenceTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.resx">
       <DependentUpon>201807291404007_CreateUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
     </EmbeddedResource>

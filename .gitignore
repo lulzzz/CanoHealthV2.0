@@ -1,3 +1,8 @@
 
 *.ide
 CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/storage.ide
+CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/storage.ide-wal
+CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/storage.ide-shm
+CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/storage.ide
+CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/storage.ide
+*.ide

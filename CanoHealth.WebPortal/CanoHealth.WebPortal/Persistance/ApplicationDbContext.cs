@@ -27,6 +27,7 @@ namespace IdentitySample.Models
         public DbSet<OutOfNetworkContract> OutOfNetworkContracts { get; set; }
         public DbSet<ProviderByLocation> ProviderByLocations { get; set; }
         public DbSet<UserCorporationAccess> UserCorporationAccess { get; set; }
+        public DbSet<Recurrence> Recurrences { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
