@@ -40,9 +40,12 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public ICollection<DoctorClinic> Clinics { get; set; }
 
+        public ICollection<DoctorSchedule> Schedules { get; set; }
+
         public Doctor()
         {
             Clinics = new Collection<DoctorClinic>();
+            Schedules = new Collection<DoctorSchedule>();
         }
 
         public AuditLog Inactivate()
