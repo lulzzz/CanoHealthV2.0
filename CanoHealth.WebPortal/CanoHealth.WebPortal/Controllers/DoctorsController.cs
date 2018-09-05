@@ -36,6 +36,7 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
         public ActionResult GetActiveDoctors([DataSourceRequest] DataSourceRequest request)
         {
             var result = _unitOfWork

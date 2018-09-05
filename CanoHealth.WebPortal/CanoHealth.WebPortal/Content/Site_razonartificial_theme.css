@@ -103,6 +103,10 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
         width: 100% !important;
 }
 
+.k-scheduler-edit-form .k-edit-form-container, .k-scheduler-timezones .k-edit-form-container {
+    width: 520px !important;
+}
+
  /*ListView effects*/
  .css-listview {
     border: 0 !important;

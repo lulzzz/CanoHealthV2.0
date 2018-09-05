@@ -36,5 +36,13 @@ namespace CanoHealth.WebPortal.ViewModels
         public string CaqhNumber { get; set; }
 
         public bool Active { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

@@ -415,6 +415,7 @@
     <Compile Include="Core\Repositories\IPersonalFileRepository.cs" />
     <Compile Include="Core\Repositories\IPersonalFileTypeRepository.cs" />
     <Compile Include="Core\Repositories\IRoleRepository.cs" />
+    <Compile Include="Core\Repositories\IScheduleRepository.cs" />
     <Compile Include="Core\Repositories\ISearchCredentialsRepository.cs" />
     <Compile Include="Core\Repositories\IOutofNetworkContractRepository.cs" />
     <Compile Include="Core\Repositories\IPlaceOfServiceRepository.cs" />
@@ -746,6 +747,7 @@
     <Compile Include="Persistance\Repositories\PlaceOfServiceRepository.cs" />
     <Compile Include="Persistance\Repositories\ProviderByLocationRepository.cs" />
     <Compile Include="Persistance\Repositories\Repository.cs" />
+    <Compile Include="Persistance\Repositories\ScheduleRepository.cs" />
     <Compile Include="Persistance\Repositories\SearchCredentialsRepository.cs" />
     <Compile Include="Persistance\Repositories\UserCorporationAccessRepository.cs" />
     <Compile Include="Persistance\Repositories\UserRepository.cs" />
@@ -805,6 +807,7 @@
     <Compile Include="ViewModels\OriginalUniqueNameViewModel.cs" />
     <Compile Include="ViewModels\PlaceOfServiceFormViewModel.cs" />
     <Compile Include="ViewModels\PlaceOfServiceLicenseFormViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\SearchCredentialsResultViewModel.cs" />
     <Compile Include="ViewModels\SearchDoctorResultViewModel.cs" />
     <Compile Include="ViewModels\SearchInsuranceDoctorViewModel.cs" />
@@ -1414,6 +1417,7 @@
     <Content Include="Scripts\kendo\2018.1.221\kendo.all.min.js" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.angular.min.js" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\kendo\2018.1.221\kendo.timezones.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\npm.js" />
@@ -1524,6 +1528,7 @@
     <Content Include="Views\Billers\Doctors.cshtml" />
     <Content Include="Views\Billers\Locations.cshtml" />
     <Content Include="Views\Schedulers\Scheduler.cshtml" />
+    <Content Include="Scripts\kendo\2018.1.221\kendo.timezones.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

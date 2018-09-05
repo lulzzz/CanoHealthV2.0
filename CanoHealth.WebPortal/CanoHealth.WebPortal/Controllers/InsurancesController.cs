@@ -22,6 +22,7 @@ namespace CanoHealth.WebPortal.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [AllowAnonymous]
         public ActionResult ReadInsurances([DataSourceRequest] DataSourceRequest request)
         {
             var insurances = _unitOfWork.Insurances
