@@ -76,5 +76,19 @@ namespace CanoHealth.WebPortal.Controllers
 
             return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetActiveDoctors([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = _unitOfWork
+                .Doctors
+                .GetAllActiveDoctors()
+                .Select(doctor => new
+                {
+                    DoctorId = doctor.DoctorId,
+                    FullName = $"{doctor.FirstName} {doctor.LastName}"
+                })
+                .ToList();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
     }
 }

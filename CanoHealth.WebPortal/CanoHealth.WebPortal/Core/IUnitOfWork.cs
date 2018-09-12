@@ -63,6 +63,8 @@ namespace CanoHealth.WebPortal.Core
 
         IScheduleRepository ScheduleRepository { get; }
 
+        IDoctorScheduleRepository DoctorScheduleRepository { get; }
+
         int Complete();
     }
 }

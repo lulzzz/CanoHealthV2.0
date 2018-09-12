@@ -2,6 +2,7 @@
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace CanoHealth.WebPortal.ViewModels
@@ -10,6 +11,7 @@ namespace CanoHealth.WebPortal.ViewModels
     {
         public Guid ScheduleId { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -30,7 +32,6 @@ namespace CanoHealth.WebPortal.ViewModels
         public string StartTimezone { get; set; }
 
         private DateTime end;
-
         public DateTime End
         {
             get
@@ -55,8 +56,10 @@ namespace CanoHealth.WebPortal.ViewModels
 
         public string Timezone { get; set; }
 
+        [Required]
         public Guid LocationId { get; set; }
 
+        [Required]
         public IEnumerable<Guid> Doctors { get; set; }
 
         public ScheduleViewModel()
@@ -78,6 +81,22 @@ namespace CanoHealth.WebPortal.ViewModels
                 IsAllDay = schedule.IsAllDay,
                 LocationId = schedule.PlaceOfServiceId,
                 Doctors = schedule.DoctorSchedules.Select(d => d.DoctorId)
+            };
+        }
+
+        public Schedule ConvertToSchedule()
+        {
+            return new Schedule
+            {
+                ScheduleId = this.ScheduleId != Guid.Empty ? this.ScheduleId : Guid.NewGuid(),
+                Title = this.Title,
+                Description = this.Description,
+                IsAllDay = this.IsAllDay,
+                StartDateTime = this.Start,
+                EndDateTime = this.End,
+                StartTimezone = this.StartTimezone,
+                EndTimeZone = this.EndTimezone,
+                PlaceOfServiceId = this.LocationId
             };
         }
 

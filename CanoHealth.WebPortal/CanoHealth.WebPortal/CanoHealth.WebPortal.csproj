@@ -402,6 +402,7 @@
     <Compile Include="Core\Repositories\ICorporationRepository.cs" />
     <Compile Include="Core\Repositories\IDoctorLinkedContractRepository.cs" />
     <Compile Include="Core\Repositories\IDoctorRepository.cs" />
+    <Compile Include="Core\Repositories\IDoctorScheduleRepository.cs" />
     <Compile Include="Core\Repositories\IExpireDateNotificationRepository.cs" />
     <Compile Include="Core\Repositories\IIndividualProviderRepository.cs" />
     <Compile Include="Core\Repositories\IInsuranceBusinessLineRepository.cs" />
@@ -724,6 +725,7 @@
     <Compile Include="Persistance\ApplicationDbContext.cs" />
     <Compile Include="Persistance\Repositories\AddendumRepository.cs" />
     <Compile Include="Persistance\Repositories\AuditLogRepository.cs" />
+    <Compile Include="Persistance\Repositories\DoctorScheduleRepository.cs" />
     <Compile Include="Persistance\Repositories\ExpireDateNotificationRepository.cs" />
     <Compile Include="Persistance\Repositories\PersonalFileTypeRepository.cs" />
     <Compile Include="Persistance\Repositories\ClinicDoctorRepository.cs" />

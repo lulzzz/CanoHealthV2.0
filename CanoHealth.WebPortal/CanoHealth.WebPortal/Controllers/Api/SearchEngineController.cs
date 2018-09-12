@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace CanoHealth.WebPortal.Controllers.Api
 {
+    [Authorize]
     public class SearchEngineController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;

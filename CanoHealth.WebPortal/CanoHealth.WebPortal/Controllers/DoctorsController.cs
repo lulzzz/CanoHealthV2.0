@@ -45,7 +45,6 @@ namespace CanoHealth.WebPortal.Controllers
                 .Select(DoctorDto.Wrap)
                 .ToList();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult CreateDoctor([DataSourceRequest] DataSourceRequest request, DoctorFormViewModel doctor)

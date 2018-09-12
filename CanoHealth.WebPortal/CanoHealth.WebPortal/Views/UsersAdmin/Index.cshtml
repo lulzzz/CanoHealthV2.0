@@ -1,6 +1,7 @@
 ﻿@using CanoHealth.WebPortal.ViewModels.Admin
 @{
     ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
 <header class="main-header main-header-inverse">
@@ -33,19 +34,19 @@
             col.Bound(u => u.Password).Hidden();
             col.Bound(u => u.ConfirmPassword).Hidden();
 
-            col.Bound(u => u.FirstName).Title("FIRST NAME");
+            col.Bound(u => u.FirstName).Title("FIRST NAME").Width(110);
 
-            col.Bound(u => u.LastName).Title("LAST NAME");
+            col.Bound(u => u.LastName).Title("LAST NAME").Width(110);
 
-            col.Bound(u => u.Email).Title("EMAIL");
+            col.Bound(u => u.Email).Title("EMAIL").Width(110);
 
             col.Bound(u => u.Active).Title("ACTIVE")
-                .ClientTemplate("#=Active ? 'YES': 'NO'#");
+                .ClientTemplate("#=Active ? 'YES': 'NO'#").Width(110);
 
             col.Command(cmd =>
             {
                 cmd.Edit();
-            }).Title("ACTIONS");
+            }).Title("ACTIONS").Width(110);
         })
         .Editable(ed =>
         {
@@ -54,7 +55,8 @@
             ed.Window(wnd =>
             {
                 wnd.Title("");
-                wnd.Width(600);
+                //wnd.Width(600);
+                //wnd.Resizable(w => w.MaxWidth(600).MinWidth(400));
                 wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
             });
         })

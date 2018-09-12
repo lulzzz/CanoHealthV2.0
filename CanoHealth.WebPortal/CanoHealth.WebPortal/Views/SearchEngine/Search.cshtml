@@ -131,7 +131,7 @@
                                   .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
                                   .Transport(transport =>
                                   {
-                                      transport.Read("GetActiveDoctors", "Doctors");
+                                      transport.Read("GetActiveDoctors", "SearchEngine"); //We can use the same action for Doctors Controller
                                   })
                                   .Schema(schema =>
                                   {

@@ -100,8 +100,25 @@
         }
     };
 
-    var onOpenUserFormWindow = function () {
-        $(".container-fluid").on("change", ".js-email", validateEmail);        
+    var onOpenUserFormWindow = function (e) {
+        $(".container-fluid").on("change", ".js-email", validateEmail);
+
+        ////get the window instance
+        //var wnd = e.sender;
+        
+        ////if the screen size is less than the default value: 600px;
+        //if (screen.width < 600) //width by default
+        //{
+        //    //set the window width to 90%
+        //    wnd.setOptions({
+        //        width: "90%"
+        //    });
+        //} else {
+        //    //set the window width to the default value 
+        //    wnd.setOptions({
+        //        width: 600
+        //    })
+        //}
     };
 
     return {

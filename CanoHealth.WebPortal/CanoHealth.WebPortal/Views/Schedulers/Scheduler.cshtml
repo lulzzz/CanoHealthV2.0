@@ -34,9 +34,17 @@
                     wnd.Actions(ac => ac.Minimize().Maximize().Close());
                 })
             )
+            .Views(views =>
+            {
+                views.DayView();
+                views.WeekView();
+                views.MonthView(monthView => monthView.Selected(true));
+                views.AgendaView();
+                views.TimelineView();
+            })
             .StartTime(new DateTime(2018, 9, 3, 7, 00, 00))
             .EndTime(new DateTime(2018, 9, 3, 18, 00, 00))
-            .EventTemplate("template-scheduledetails")
+            //.EventTemplate("template-scheduledetails")
             .Footer(footer =>
             {
                 footer.Command("workDay");
@@ -50,6 +58,7 @@
                     model.Field(m => m.IsAllDay).DefaultValue(true);
                 })
                 .Read("ReadSchedules", "Schedulers")
+                .Create("CreateSchedule", "Schedulers")
             )
             .Resources(resource => {
                 resource.Add(r => r.LocationId)
@@ -68,10 +77,21 @@
                 .DataValueField("DoctorId")
                 .DataTextField("FullName")
                 .Multiple(true)
-                .DataSource(dsd => dsd
-                    .ServerFiltering(true)
-                    .Read(read => read.Action("GetActiveDoctors", "Doctors"))
-                );
+                .DataSource(source =>
+                {
+                    source.Custom()
+                        .ServerFiltering(true)
+                        .Type("aspnetmvc-ajax")
+                        .Transport(transport =>
+                        {
+                            transport.Read("GetActiveDoctors", "Doctors");
+                        })
+                        .Schema(schema =>
+                        {
+                            schema.Data("Data")
+                                .Total("Total");
+                        });
+                });
             })
 
     //.WorkDayEnd()
@@ -79,7 +99,7 @@
 </div>
 
 <script type="text/x-kendo-template" id="template-scheduledetails">
-    <div>Title: #: title #</div>
+    <div>Title: #=Title#</div>
     @*<div>
         Atendees:
         # for (var i = 0; i < resources.length; i++) { #
