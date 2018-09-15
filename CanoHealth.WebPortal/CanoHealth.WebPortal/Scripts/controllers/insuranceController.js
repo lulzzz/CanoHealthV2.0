@@ -15,8 +15,15 @@
 
         var window = $(".js-insurancebusinessline-formwnd").kendoWindow({
             modal: true,
-            width: 600
+            //width: 600,
+            resizable: true,
+            draggable: true
         }).data("kendoWindow");
+
+        if (screen.width < 400)
+            window.setOptions({ width: "100%" });
+        else
+            window.setOptions({ width: "40%" });
 
         window.open().center();
 

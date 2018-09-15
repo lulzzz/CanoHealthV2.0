@@ -67,7 +67,9 @@
             editable.Window(wnd =>
             {
                 wnd.Title("INSURANCE");
-                wnd.Width(500);
+                //wnd.Width(500);
+                wnd.Resizable(w => w.MaxWidth(600));
+                wnd.Draggable();
                 wnd.Actions(ac => ac.Minimize().Maximize().Close());
             });
         })
@@ -128,7 +130,7 @@
 </script>
 
 <script type="text/x-kendo-template" id="businessline-detail-template">
-    <div class="col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
         <div class="content-box box-default insurance-businessline">
             <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
             <h5 class="content-box-title">#:Code#</h5>
@@ -137,7 +139,7 @@
 </script>
 
 <div class="js-insurancebusinessline-formwnd hidden-window">
-    <label class="control-label text-uppercase">business line</label>
+    <label class="control-label text-uppercase">Line of Business</label>
     <select data-role="multiselect"
             data-value-primitive="false"
             data-text-field="Code"

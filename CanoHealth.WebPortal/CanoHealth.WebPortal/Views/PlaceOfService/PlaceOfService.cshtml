@@ -69,7 +69,9 @@
                               editable.Window(wnd =>
                               {
                                   wnd.Title("LOCATIONS");
-                                  wnd.Width(500);
+                                  //wnd.Width(500);
+                                  wnd.Draggable();
+                                  wnd.Resizable();
                                   wnd.Actions(ac => ac.Minimize().Maximize().Close());
                               });
                           })

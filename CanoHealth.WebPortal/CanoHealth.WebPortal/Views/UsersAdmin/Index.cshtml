@@ -56,7 +56,8 @@
             {
                 wnd.Title("");
                 //wnd.Width(600);
-                //wnd.Resizable(w => w.MaxWidth(600).MinWidth(400));
+                wnd.Resizable(w => w.MaxWidth(600).MinWidth(400));
+                wnd.Draggable();
                 wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
             });
         })
