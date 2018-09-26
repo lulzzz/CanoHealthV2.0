@@ -29,6 +29,14 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetDoctorsByLocation(Guid locationId)
+        {
+            var doctors = _unitOfWork.ClinicDoctor.GetListOfDoctorsThatWorkInThisPlaceOfServiceToday(locationId)
+                                     .Select(DoctorDto.Wrap)
+                                     .ToList();
+            return Json(doctors, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetDoctorsLocations([DataSourceRequest] DataSourceRequest request, Guid doctorId)
         {
             var locations = _unitOfWork.ClinicDoctor

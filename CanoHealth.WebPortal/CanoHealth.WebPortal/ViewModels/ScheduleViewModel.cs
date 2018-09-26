@@ -60,6 +60,7 @@ namespace CanoHealth.WebPortal.ViewModels
         public string Timezone { get; set; }
 
         [Required]
+        [Display(Name = "Location")]
         public Guid LocationId { get; set; }
 
         [Required]
