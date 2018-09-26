@@ -7,9 +7,7 @@
 <header class="main-header main-header-inverse">
     <div class="container">
         <h1 class="page-title">Doctor's Schedule</h1>
-
         <ol class="breadcrumb pull-right">
-
             <li><a href="/">Home</a></li>
             <li class="active">Scheduler</li>
         </ol>
@@ -56,9 +54,12 @@
                 {
                     model.Id(m => m.ScheduleId);
                     model.Field(m => m.IsAllDay).DefaultValue(true);
+                    model.Field(m => m.ScheduleId).DefaultValue(Guid.NewGuid());
                 })
                 .Read("ReadSchedules", "Schedulers")
                 .Create("CreateSchedule", "Schedulers")
+                .Update("UpdateSchedule", "Schedulers")
+                .Destroy("DeleteSchedule","Schedulers")
             )
             .Resources(resource => {
                 resource.Add(r => r.LocationId)

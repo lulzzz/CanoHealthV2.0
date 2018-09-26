@@ -15,6 +15,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Services.AuditLogs;
 using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -37,6 +39,7 @@ namespace CanoHealth.WebPortal.DependencyResolution
                     scan.With(new ControllerConvention());
                 });
             //For<IExample>().Use<Example>(); 
+            For<ILogs<DoctorSchedule>>().Use<Logs<DoctorSchedule>>();
             //For<IUserStore<ApplicationUser>>().Use<UserStore<ApplicationUser>>();
             //For<DbContext>().Use<ApplicationDbContext>();
 

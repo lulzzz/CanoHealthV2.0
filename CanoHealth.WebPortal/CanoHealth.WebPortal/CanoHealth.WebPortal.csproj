@@ -759,6 +759,12 @@
     <Compile Include="Persistance\Migrations\201802172115045_OverrrideConventionsForCorporationTable.Designer.cs">
       <DependentUpon>201802172115045_OverrrideConventionsForCorporationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\AuditLogs\DoctorSchedules\DoctorScheduleLog.cs" />
+    <Compile Include="Services\AuditLogs\DoctorSchedules\IDoctorScheduleLog.cs" />
+    <Compile Include="Services\AuditLogs\ILogs.cs" />
+    <Compile Include="Services\AuditLogs\Logs.cs" />
+    <Compile Include="Services\AuditLogs\Schedules\IScheduleLog.cs" />
+    <Compile Include="Services\AuditLogs\Schedules\ScheduleLog.cs" />
     <Compile Include="Services\Email\CustomEmailService.cs" />
     <Compile Include="Services\Email\EmailFactory.cs" />
     <Compile Include="Services\Email\ICustomEmailService.cs" />
