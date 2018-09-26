@@ -70,8 +70,8 @@ namespace CanoHealth.WebPortal.Controllers
                     _unitOfWork.DoctorScheduleRepository.AddRange(doctorSchedules);
 
                     //Create logs                    
-                    //var auditLogs = _doctorScheduleLog.GenerateLogs(doctorSchedules).ToList();
-                    var auditLogs = _logs.GenerateLogs(doctorSchedules).ToList();
+                    var auditLogs = _doctorScheduleLog.GenerateLogs(doctorSchedules).ToList();
+                    //var auditLogs = _logs.GenerateLogs(doctorSchedules).ToList();
 
                     auditLogs.AddRange(_scheduleLog.GenerateLogs(new List<Schedule> { scheduleToStore }));
 
@@ -99,6 +99,15 @@ namespace CanoHealth.WebPortal.Controllers
         public ActionResult DeleteSchedule()
         {
             return Content("");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ExportSchedule(string contentType, string base64, string fileName)
+        {
+            var fileContents = Convert.FromBase64String(base64);
+
+            return File(fileContents, contentType, fileName);
         }
     }
 }

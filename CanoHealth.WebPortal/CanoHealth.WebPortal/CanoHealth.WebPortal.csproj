@@ -1348,6 +1348,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\controllers\rolesController.js" />
+    <Content Include="Scripts\controllers\schedulerController.js" />
     <Content Include="Scripts\controllers\searchEngineController.js" />
     <Content Include="Scripts\controllers\usersController.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -1537,6 +1538,7 @@
     <Content Include="Views\Billers\Locations.cshtml" />
     <Content Include="Views\Schedulers\Scheduler.cshtml" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.timezones.min.js.map" />
+    <Content Include="Views\Schedulers\EditorTemplates\SchedulerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

@@ -29,6 +29,7 @@ namespace CanoHealth.WebPortal.ViewModels
             }
         }
 
+        [Display(Name = "Time Zone")]
         public string StartTimezone { get; set; }
 
         private DateTime end;
@@ -46,12 +47,14 @@ namespace CanoHealth.WebPortal.ViewModels
 
         public string EndTimezone { get; set; }
 
+        [Display(Name = "Repeat")]
         public string RecurrenceRule { get; set; }
 
         public int? RecurrenceID { get; set; }
 
         public string RecurrenceException { get; set; }
 
+        [Display(Name = "All day event")]
         public bool IsAllDay { get; set; }
 
         public string Timezone { get; set; }
