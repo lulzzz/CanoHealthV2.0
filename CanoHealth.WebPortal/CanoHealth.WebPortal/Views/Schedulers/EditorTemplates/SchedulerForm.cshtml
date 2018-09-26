@@ -38,10 +38,10 @@
 </div>
 <div data-container-for="start" class="k-edit-field">
     @(Html.Kendo().DateTimePickerFor(model => model.Start)
-                                                                .HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
+                                                                                                                .HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
 
     @(Html.Kendo().DatePickerFor(model => model.Start)
-                                                                .HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
+                                                                                                                .HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
     <span data-bind="text: startTimezone"></span>
     <span data-for="start" class="k-invalid-msg"></span>
 </div>
@@ -94,7 +94,7 @@
 
         if (!isVisible) {
             var uid = container.attr("data-uid");
-            var scheduler = $("\#scheduler").data("kendoScheduler");
+            var scheduler = $("\#DoctorSchedule").data("kendoScheduler");
             var model = scheduler.dataSource.getByUid(uid);
             model.set("endTimezone", null);
         }
@@ -112,7 +112,7 @@
 </div>
 <div data-container-for="startTimezone" class="k-edit-field">
     @(Html.Kendo().TimezoneEditorFor(model => model.StartTimezone)
-                                        .HtmlAttributes(new { data_bind = "value:startTimezone" }))
+                                      .HtmlAttributes(new { data_bind = "value:startTimezone" }))
 </div>
 
 <div class="k-edit-label">
@@ -139,61 +139,49 @@
 </div>
 
 <div class="k-edit-label">
-    @(Html.LabelFor(model => model.LocationId))
-</div>
-<div data-container-for="LocationId" class="k-edit-field">
-    @(Html.Kendo().DropDownListFor(model => model.LocationId)
-        .HtmlAttributes(new { data_bind = "value:LocationId", style = "width: 100%;" })
-        .DataTextField("Name")
-        .DataValueField("PlaceOfServiceId")
-        .OptionLabel("None")
-        .ValuePrimitive(true)
-        .DataSource(source =>
-        {
-            source.Read(read =>
+        @(Html.LabelFor(model => model.LocationId))
+    </div>
+    <div data-container-for="LocationId" class="k-edit-field">
+        @(Html.Kendo().DropDownListFor(model => model.LocationId)
+            .HtmlAttributes(new { data_bind = "value:LocationId", style = "width: 100%;" })
+            .DataTextField("Name")
+            .DataValueField("PlaceOfServiceId")
+            .OptionLabel("None")
+            .ValuePrimitive(true)
+            .DataSource(source =>
             {
-                read.Action("GetLocations", "PlaceOfService");
+                source.Read(read =>
+                {
+                    read.Action("GetLocations", "PlaceOfService");
+                })
+                .ServerFiltering(true);
             })
-            .ServerFiltering(true);
-        })
-        .Events(e => {
-            e.Change("onChangeLocation");
-        })
-        .ToClientTemplate()
-    )
-</div>
-
-<div class="k-edit-label">
-    @(Html.LabelFor(model => model.Doctors))
-</div>
-<div data-container-for="Doctors" class="k-edit-field">
-    @(Html.Kendo().MultiSelectFor(model => model.Doctors)
-        .HtmlAttributes(new { data_bind = "value:Doctors" })
-        .DataTextField("FullName")
-        .DataValueField("DoctorId")
-        .ValuePrimitive(true)
-        .DataSource(source =>
-        {
-            source.Read(read =>
+            .Events(e =>
             {
-                read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
-                    .Data("filterLocations");
+                e.Change("SchedulersController.onChangeLocation");
             })
-            .ServerFiltering(true);
-        })
-        .ToClientTemplate()
-    )
-</div>
+            .ToClientTemplate()
+        )
+    </div>
 
-<script>
-    function onChangeLocation(e) {
-        var scheduler = e.sender;
-        scheduler.dataSource.read();
-    };
-
-    function filterLocations() {
-        return {
-            locationId: $("#Doctors").val()
-        };
-    };
-</script>
+    <div class="k-edit-label">
+        @(Html.LabelFor(model => model.Doctors))
+    </div>
+    <div data-container-for="Doctors" class="k-edit-field">
+        @(Html.Kendo().MultiSelectFor(model => model.Doctors)
+                    .HtmlAttributes(new { data_bind = "value:Doctors" })
+                    .DataTextField("FullName")
+                    .DataValueField("DoctorId")
+                    .ValuePrimitive(true)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
+                                .Data("SchedulersController.filterLocations");
+                        })
+                        .ServerFiltering(true);
+                    })
+                    .ToClientTemplate()
+        )
+    </div>

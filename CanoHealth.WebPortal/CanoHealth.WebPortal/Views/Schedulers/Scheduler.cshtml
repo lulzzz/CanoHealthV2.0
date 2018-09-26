@@ -20,90 +20,90 @@
 
 <div class="container-fluid">
     @(Html.Kendo().Scheduler<ScheduleViewModel>()
-               .Name("DoctorSchedule")
-               .Date(DateTime.Today)
-               .AllDaySlot(false)
-               .Toolbar(tool => tool.Pdf())
-               .Pdf(pdf =>
-               {
-                   pdf.FileName("Schedule.pdf");
-                   pdf.ProxyURL(Url.Action("ExportSchedule", "Schedulers"));
-               })
-               .Editable(ed => ed
-                   .Confirmation("Are you sure you want to delete this schedule?")
-                   .Resize(true)
-                   .TemplateName("SchedulerForm")
-                   .Window(wnd =>
-                   {
-                       wnd.Resizable(r => r.MaxWidth(600).MinWidth(600));
-                       wnd.Title("Schedule");
-                       wnd.Actions(ac => ac.Minimize().Maximize().Close());
-                   })
-               )
-               .Views(views =>
-               {
-                   views.DayView();
-                   views.WeekView();
-                   views.MonthView(monthView => monthView.Selected(true));
-                   views.AgendaView();
-                   views.TimelineView();
-               })
-               .StartTime(new DateTime(2018, 9, 3, 7, 00, 00))
-               .EndTime(new DateTime(2018, 9, 3, 18, 00, 00))
-               //.EventTemplate("<div>Title: #=description#</div>")
-               .Footer(footer =>
-               {
-                   footer.Command("workDay");
-               })
-               .Timezone("Etc/UTC")
-               .DataSource(ds => ds
-                   .ServerOperation(true)
-                   .Model(model =>
-                   {
-                       model.Id(m => m.ScheduleId);
-                       model.Field(m => m.IsAllDay).DefaultValue(true);
-                       model.Field(m => m.ScheduleId).DefaultValue(Guid.NewGuid());
-                   })
-                   .Events(ev => ev.Error("SchedulersController.serverSideErrorHandlers"))
-                   .Read("ReadSchedules", "Schedulers")
-                   .Create("CreateSchedule", "Schedulers")
-                   .Update("UpdateSchedule", "Schedulers")
-                   .Destroy("DeleteSchedule", "Schedulers")
-               )
-               .Resources(resource =>
-               {
-                   resource.Add(r => r.LocationId)
-                   .DataValueField("PlaceOfServiceId")
-                   .DataTextField("Name")
-                   .Multiple(false)
-                   .Title("Location")
-                   .Name("Location")
-                   .DataSource(dsl => dsl
-                       .ServerFiltering(false)
-                       .Read(read => read.Action("GetLocations", "PlaceOfService"))
-                   );
-                   resource.Add(r => r.Doctors)
-                   .Name("Doctors")
-                   .Title("Doctors")
-                   .DataValueField("DoctorId")
-                   .DataTextField("FullName")
-                   .Multiple(true)
-                   .DataSource(source =>
-                   {
-                       source.Custom()
-                           .ServerFiltering(true)
-                           .Type("aspnetmvc-ajax")
-                           .Transport(transport =>
+                       .Name("DoctorSchedule")
+                       .Date(DateTime.Today)
+                       .AllDaySlot(false)
+                       .Toolbar(tool => tool.Pdf())
+                       .Pdf(pdf =>
+                       {
+                           pdf.FileName("Schedule.pdf");
+                           pdf.ProxyURL(Url.Action("ExportSchedule", "Schedulers"));
+                       })
+                       .Editable(ed => ed
+                           .Confirmation("Are you sure you want to delete this schedule?")
+                           .Resize(true)
+                           .TemplateName("SchedulerForm")
+                           .Window(wnd =>
                            {
-                               transport.Read("GetActiveDoctors", "Doctors");
+                               wnd.Resizable(r => r.MaxWidth(600).MinWidth(600));
+                               wnd.Title("Schedule");
+                               wnd.Actions(ac => ac.Minimize().Maximize().Close());
                            })
-                           .Schema(schema =>
+                       )
+                       .Views(views =>
+                       {
+                           views.DayView();
+                           views.WeekView();
+                           views.MonthView(monthView => monthView.Selected(true));
+                           views.AgendaView();
+                           views.TimelineView();
+                       })
+                       .StartTime(new DateTime(2018, 9, 3, 7, 00, 00))
+                       .EndTime(new DateTime(2018, 9, 3, 18, 00, 00))
+                       //.EventTemplate("<div>Title: #=description#</div>")
+                       .Footer(footer =>
+                       {
+                           footer.Command("workDay");
+                       })
+                       .Timezone("Etc/UTC")
+                       .DataSource(ds => ds
+                           .ServerOperation(true)
+                           .Model(model =>
                            {
-                               schema.Data("Data")
-                                   .Total("Total");
+                               model.Id(m => m.ScheduleId);
+                               model.Field(m => m.IsAllDay).DefaultValue(true);
+                               model.Field(m => m.ScheduleId).DefaultValue(Guid.NewGuid());
+                           })
+                           .Events(ev => ev.Error("SchedulersController.serverSideErrorHandlers"))
+                           .Read("ReadSchedules", "Schedulers")
+                           .Create("CreateSchedule", "Schedulers")
+                           .Update("UpdateSchedule", "Schedulers")
+                           .Destroy("DeleteSchedule", "Schedulers")
+                       )
+                       .Resources(resource =>
+                       {
+                           resource.Add(r => r.LocationId)
+                           .DataValueField("PlaceOfServiceId")
+                           .DataTextField("Name")
+                           .Multiple(false)
+                           .Title("Location")
+                           .Name("Location")
+                           .DataSource(dsl => dsl
+                               .ServerFiltering(false)
+                               .Read(read => read.Action("GetLocations", "PlaceOfService"))
+                           );
+                           resource.Add(r => r.Doctors)
+                           .Name("Doctors")
+                           .Title("Doctors")
+                           .DataValueField("DoctorId")
+                           .DataTextField("FullName")
+                           .Multiple(true)
+                           .DataSource(source =>
+                           {
+                               source.Custom()
+                                   .ServerFiltering(true)
+                                   .Type("aspnetmvc-ajax")
+                                   .Transport(transport =>
+                                   {
+                                       transport.Read("GetActiveDoctors", "Doctors");
+                                   })
+                                   .Schema(schema =>
+                                   {
+                                       schema.Data("Data")
+                                           .Total("Total");
+                                   });
                            });
-                   });
-               })
+                       })
 
             //.WorkDayEnd()
     )
@@ -114,4 +114,17 @@
 @section Scripts{
     <script src="~/Scripts/kendo/2018.1.221/kendo.timezones.min.js"></script>
     <script src="~/Scripts/controllers/schedulerController.js"></script>
+    @*<script>
+        function onChangeLocation(e) {
+            var multiselect = $("#Doctors").data("kendoMultiSelect");
+            multiselect.dataSource.read();
+        };
+
+        function filterLocations() {           
+            return {
+                locationId: $("#LocationId").val()
+            };
+        };
+    </script>*@
+    
 }

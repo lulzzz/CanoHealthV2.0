@@ -31,8 +31,21 @@
         }
     };
 
+    var onChangeLocation = function(e) {
+        var multiselect = $("#Doctors").data("kendoMultiSelect");
+        multiselect.dataSource.read();
+    };
+
+    var filterLocations = function() {
+        return {
+            locationId: $("#LocationId").val()
+        };
+    };
+
     //Access to private members
     return {
-        serverSideErrorHandlers: serverSideErrorHandlers
+        serverSideErrorHandlers: serverSideErrorHandlers,
+        onChangeLocation: onChangeLocation,
+        filterLocations: filterLocations
     };
 }();
