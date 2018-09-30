@@ -38,10 +38,10 @@
 </div>
 <div data-container-for="start" class="k-edit-field">
     @(Html.Kendo().DateTimePickerFor(model => model.Start)
-                                                                                                                .HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
+        .HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
 
     @(Html.Kendo().DatePickerFor(model => model.Start)
-                                                                                                                .HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
+        .HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
     <span data-bind="text: startTimezone"></span>
     <span data-for="start" class="k-invalid-msg"></span>
 </div>
@@ -51,18 +51,18 @@
 </div>
 <div data-container-for="end" class="k-edit-field">
     @(Html.Kendo().DateTimePickerFor(model => model.End)
-                                                        .HtmlAttributes(generateDatePickerAttributes(
-                                                            "endDateTime",
-                                                            "end",
-                                                            "value:end,invisible:isAllDay",
-                                                            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
+        .HtmlAttributes(generateDatePickerAttributes(
+            "endDateTime",
+            "end",
+            "value:end,invisible:isAllDay",
+            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
 
     @(Html.Kendo().DatePickerFor(model => model.End)
-                                                        .HtmlAttributes(generateDatePickerAttributes(
-                                                            "endDate",
-                                                            "end",
-                                                            "value:end,visible:isAllDay",
-                                                            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
+        .HtmlAttributes(generateDatePickerAttributes(
+            "endDate",
+            "end",
+            "value:end,visible:isAllDay",
+            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
 
     <span data-bind="text: endTimezone"></span>
     <span data-for="end" class="k-invalid-msg"></span>

@@ -31,11 +31,13 @@
         }
     };
 
+    //onChange event handler for Location DropdownList
     var onChangeLocation = function(e) {
         var multiselect = $("#Doctors").data("kendoMultiSelect");
         multiselect.dataSource.read();
     };
 
+    //pass the selected locationId to datasource read method for Doctor multiselect component
     var filterLocations = function() {
         return {
             locationId: $("#LocationId").val()

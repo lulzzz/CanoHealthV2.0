@@ -209,6 +209,18 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
     background-color: #21ba91;
 }
 
+/*kendo.bootstrap.min.css overriding line 2440*/
+td.k-state-focused.k-state-selected {
+    -webkit-box-shadow: none !important; /*(original values: ) inset 0 0 10px 3px #3276b1;*/
+    box-shadow: none !important; /*(original values: )inset 0 0 10px 3px #3276b1; */
+}
+
+/*kendo.boostrap.min.css overriding line 838*/
+.k-list > .k-state-focused.k-state-selected, .k-listview > .k-state-focused.k-state-selected, .k-state-focused.k-state-selected, td.k-state-focused.k-state-selected {
+    -webkit-box-shadow: none !important; /*(original values: )inset 0 0 10px 3px #3276b1; */
+    box-shadow: none !important; /*(original values: )inset 0 0 10px 3px #3276b1; */
+}
+
  /*Calendars DatePickers DateTimePickers*/
  .k-calendar td.k-state-focused.k-state-selected.k-state-hover {
      -webkit-box-shadow: none !important;
