@@ -6,6 +6,7 @@ using CanoHealth.WebPortal.ViewModels;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -29,11 +30,23 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetDoctorsByLocation(Guid locationId)
+        public JsonResult GetDoctorsByLocation(Guid? locationId = null)
         {
-            var doctors = _unitOfWork.ClinicDoctor.GetListOfDoctorsThatWorkInThisPlaceOfServiceToday(locationId)
+            var doctors = new List<DoctorDto>();
+
+            if (locationId == null)
+            {
+                doctors = _unitOfWork.Doctors.GetAllActiveDoctors()
                                      .Select(DoctorDto.Wrap)
                                      .ToList();
+            }
+            else
+            {
+                doctors = _unitOfWork.ClinicDoctor.GetListOfDoctorsThatWorkInThisPlaceOfServiceToday(locationId.Value)
+                                     .Select(DoctorDto.Wrap)
+                                     .ToList();
+            }
+
             return Json(doctors, JsonRequestBehavior.AllowGet);
         }
 

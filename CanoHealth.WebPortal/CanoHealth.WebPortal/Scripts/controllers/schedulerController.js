@@ -32,7 +32,19 @@
     };
 
     //onChange event handler for Location DropdownList
-    var onChangeLocation = function(e) {
+    var onChangeLocation = function (e) {
+        onReadDoctorMultiselectDataSource();
+    };
+
+    //onDataBound event handler for Location DropDownList
+    var onDataBoundLocation = function (e) {
+        alert("data bound dropdown" + e.sender.value());
+        var locationId = e.sender.value();
+        if (locationId)
+            onReadDoctorMultiselectDataSource();
+    };
+
+    var onReadDoctorMultiselectDataSource = function () {
         var multiselect = $("#Doctors").data("kendoMultiSelect");
         multiselect.dataSource.read();
     };
@@ -48,6 +60,7 @@
     return {
         serverSideErrorHandlers: serverSideErrorHandlers,
         onChangeLocation: onChangeLocation,
-        filterLocations: filterLocations
+        filterLocations: filterLocations,
+        onDataBoundLocation: onDataBoundLocation
     };
 }();

@@ -158,7 +158,7 @@
             })
             .Events(e =>
             {
-                e.Change("SchedulersController.onChangeLocation");
+                e.Change("SchedulersController.onChangeLocation").DataBound("SchedulersController.onDataBoundLocation");
             })
             .ToClientTemplate()
         )

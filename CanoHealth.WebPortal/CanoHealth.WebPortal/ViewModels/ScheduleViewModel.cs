@@ -103,28 +103,5 @@ namespace CanoHealth.WebPortal.ViewModels
                 PlaceOfServiceId = this.LocationId
             };
         }
-
-        //public Meeting ToEntity()
-        //{
-        //    var meeting = new Meeting
-        //    {
-        //        MeetingID = MeetingID,
-        //        Title = Title,
-        //        Start = Start,
-        //        StartTimezone = StartTimezone,
-        //        End = End,
-        //        EndTimezone = EndTimezone,
-        //        Description = Description,
-        //        IsAllDay = IsAllDay,
-        //        RecurrenceRule = RecurrenceRule,
-        //        RecurrenceException = RecurrenceException,
-        //        RecurrenceID = RecurrenceID,
-        //        RoomID = RoomID
-        //    };
-
-        //    return meeting;
-        //}
     }
-
-    //public class MeetingViewModel : ISchedulerEvent { 
 }
