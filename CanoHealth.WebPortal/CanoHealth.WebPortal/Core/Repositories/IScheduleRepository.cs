@@ -6,6 +6,8 @@ namespace CanoHealth.WebPortal.Core.Repositories
 {
     public interface IScheduleRepository : IRepository<Schedule>
     {
-        IEnumerable<Schedule> GetScheduleDetails(Guid? locationId = null, Guid? doctorId = null);
+        Schedule GetDetailedSchedule(Guid scheduleId);
+
+        IEnumerable<Schedule> GetSchedules();
     }
 }

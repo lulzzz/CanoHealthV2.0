@@ -68,11 +68,11 @@
     <span data-for="end" class="k-invalid-msg"></span>
 </div>
 
-<div class="k-edit-label">
+@*<div class="k-edit-label">
     @(Html.LabelFor(model => model.IsAllDay))
-</div>
+</div>*@
 <div data-container-for="isAllDay" class="k-edit-field">
-    <input data-bind="checked: isAllDay" data-val="true" id="IsAllDay" name="IsAllDay" type="checkbox" />
+    <input data-bind="checked: isAllDay, visible: false" data-val="true" id="IsAllDay" name="IsAllDay" type="checkbox" />
 </div>
 
 <div class="endTimezoneRow">
@@ -119,16 +119,14 @@
     @(Html.LabelFor(model => model.EndTimezone))
 </div>
 <div data-container-for="endTimezone" class="k-edit-field">
-    @(Html.Kendo().TimezoneEditorFor(model => model.EndTimezone)
-                                        .HtmlAttributes(new { data_bind = "value:endTimezone" }))
+    @(Html.Kendo().TimezoneEditorFor(model => model.EndTimezone).HtmlAttributes(new { data_bind = "value:endTimezone" }))
 </div>
 
 <div class="k-edit-label">
     @(Html.LabelFor(model => model.RecurrenceRule))
 </div>
 <div data-container-for="recurrenceRule" class="k-edit-field">
-    @(Html.Kendo().RecurrenceEditorFor(model => model.RecurrenceRule)
-                                        .HtmlAttributes(new { data_bind = "value:recurrenceRule" }))
+    @(Html.Kendo().RecurrenceEditorFor(model => model.RecurrenceRule).HtmlAttributes(new { data_bind = "value:recurrenceRule" }))
 </div>
 
 <div class="k-edit-label">
@@ -158,7 +156,7 @@
             })
             .Events(e =>
             {
-                e.Change("SchedulersController.onChangeLocation").DataBound("SchedulersController.onDataBoundLocation");
+                e.Change("SchedulersController.onChangeLocation").DataBound("SchedulersController.onDataBoundLocation");//
             })
             .ToClientTemplate()
         )
@@ -169,19 +167,19 @@
     </div>
     <div data-container-for="Doctors" class="k-edit-field">
         @(Html.Kendo().MultiSelectFor(model => model.Doctors)
-                    .HtmlAttributes(new { data_bind = "value:Doctors" })
-                    .DataTextField("FullName")
-                    .DataValueField("DoctorId")
-                    .ValuePrimitive(true)
-                    .DataSource(source =>
-                    {
-                        source.Read(read =>
-                        {
-                            read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
-                                .Data("SchedulersController.filterLocations");
-                        })
-                        .ServerFiltering(true);
-                    })
-                    .ToClientTemplate()
+             .HtmlAttributes(new { data_bind = "value:Doctors" })
+             .DataTextField("FullName")
+             .DataValueField("DoctorId")
+             .ValuePrimitive(true)
+             .DataSource(source =>
+             {
+                 source.Read(read =>
+                 {
+                     read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
+                         .Data("SchedulersController.filterLocations");
+                 })
+                 .ServerFiltering(true);
+             })
+             .ToClientTemplate()
         )
     </div>

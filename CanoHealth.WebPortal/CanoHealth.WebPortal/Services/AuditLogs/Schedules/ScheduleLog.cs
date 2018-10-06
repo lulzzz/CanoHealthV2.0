@@ -107,5 +107,97 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
             }
             return auditLogs;
         }
+
+        public IEnumerable<AuditLog> GenerateLogsWhenDelete(IEnumerable<Schedule> schedules)
+        {
+            var auditLogs = new List<AuditLog>();
+            foreach (var schedule in schedules)
+            {
+                auditLogs.AddRange(new List<AuditLog>
+                {
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "Title",
+                        OldValue = schedule.Title,
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "StartDateTime",
+                        OldValue = schedule.StartDateTime.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "EndDateTime",
+                        OldValue = schedule.EndDateTime.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "StartTimezone",
+                        OldValue = schedule.StartTimezone,
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "EndTimeZone",
+                        OldValue = schedule.EndTimeZone,
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "Description",
+                        OldValue = schedule.Description,
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "IsAllDay",
+                        OldValue = schedule.IsAllDay.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "Schedule",
+                        ColumnName = "PlaceOfServiceId",
+                        OldValue = schedule.PlaceOfServiceId.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = schedule.ScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    }
+                });
+            }
+            return auditLogs;
+        }
     }
 }

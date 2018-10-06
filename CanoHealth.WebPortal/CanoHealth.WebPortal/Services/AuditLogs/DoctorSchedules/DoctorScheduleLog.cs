@@ -47,5 +47,37 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.DoctorSchedules
             }
             return auditLogs;
         }
+
+        public IEnumerable<AuditLog> GenerateLogsWhenDelete(IEnumerable<DoctorSchedule> doctorSchedules)
+        {
+            var auditLogs = new List<AuditLog>();
+            foreach (var doctorSchedule in doctorSchedules)
+            {
+                auditLogs.AddRange(new List<AuditLog>
+                {
+                    new AuditLog
+                    {
+                        TableName = "DoctorSchedule",
+                        ColumnName = "ScheduleId",
+                        OldValue = doctorSchedule.ScheduleId.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = doctorSchedule.DoctorScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    },
+                    new AuditLog
+                    {
+                        TableName = "DoctorSchedule",
+                        ColumnName = "DoctorId",
+                        OldValue = doctorSchedule.DoctorId.ToString(),
+                        AuditAction = "Delete",
+                        ObjectId = doctorSchedule.DoctorScheduleId,
+                        UpdatedBy = _user.GetUserName(),
+                        UpdatedOn = _date.GetCurrentDateTime()
+                    }
+                });
+            }
+            return auditLogs;
+        }
     }
 }

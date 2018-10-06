@@ -1,4 +1,5 @@
 ﻿using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Persistance.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
@@ -46,6 +47,12 @@ namespace IdentitySample.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new ScheduleConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

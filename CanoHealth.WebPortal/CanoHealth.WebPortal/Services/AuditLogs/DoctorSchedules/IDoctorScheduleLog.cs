@@ -6,5 +6,6 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.DoctorSchedules
     public interface IDoctorScheduleLog
     {
         IEnumerable<AuditLog> GenerateLogs(IEnumerable<DoctorSchedule> doctorSchedules);
+        IEnumerable<AuditLog> GenerateLogsWhenDelete(IEnumerable<DoctorSchedule> doctorSchedules);
     }
 }

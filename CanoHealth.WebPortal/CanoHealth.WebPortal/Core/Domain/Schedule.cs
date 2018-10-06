@@ -8,50 +8,56 @@ namespace CanoHealth.WebPortal.Core.Domain
     {
         public Guid ScheduleId { get; set; }
 
-        public string Title { get; set; }
-
         public DateTime StartDateTime { get; set; }
 
         public DateTime EndDateTime { get; set; }
 
-        public string StartTimezone { get; set; }
-
-        public string EndTimeZone { get; set; }
+        public string Title { get; set; }
 
         public String Description { get; set; }
 
+        public Guid PlaceOfServiceId { get; set; }
+
         public bool IsAllDay { get; set; }
 
-        public Guid PlaceOfServiceId { get; set; }
+        public string RecurrenceRule { get; set; }
+
+        public Guid? RecurrenceID { get; set; }
+
+        public string RecurrenceException { get; set; }
+
+        public string StartTimezone { get; set; }
+
+        public string EndTimeZone { get; set; }
 
         //Navegation Properties
         public PlaceOfService Location { get; set; }
 
         public ICollection<DoctorSchedule> DoctorSchedules { get; set; }
 
+        public ICollection<Schedule> Schedules1 { get; set; }
+
+        public Schedule Schedule1 { get; set; }
+
         public Schedule()
         {
             DoctorSchedules = new Collection<DoctorSchedule>();
+            Schedules1 = new Collection<Schedule>();
         }
 
-        /*
-         public int MeetingID { get; set; }
-        public string Description { get; set; }
-        public DateTime End { get; set; }
-        public string EndTimezone { get; set; }
-        public bool IsAllDay { get; set; }
-        public string RecurrenceException { get; set; }
-        public int? RecurrenceID { get; set; }
-        public string RecurrenceRule { get; set; }
-        public int? RoomID { get; set; }
-        public DateTime Start { get; set; }
-        public string StartTimezone { get; set; }
-        public string Title { get; set; }
-
-        public virtual ICollection<MeetingAttendee> MeetingAttendees { get; set; }
-        public virtual Meeting Recurrence { get; set; }
-        public virtual ICollection<Meeting> InverseRecurrence { get; set; }
-         
-         */
+        public void Modify(Schedule schedule)
+        {
+            Title = schedule.Title;
+            StartDateTime = schedule.StartDateTime;
+            EndDateTime = schedule.EndDateTime;
+            Description = schedule.Description;
+            IsAllDay = schedule.IsAllDay;
+            PlaceOfServiceId = schedule.PlaceOfServiceId;
+            RecurrenceID = schedule.RecurrenceID;
+            RecurrenceRule = schedule.RecurrenceRule;
+            RecurrenceException = schedule.RecurrenceException;
+            StartTimezone = schedule.StartTimezone;
+            EndTimeZone = schedule.EndTimeZone;
+        }
     }
 }

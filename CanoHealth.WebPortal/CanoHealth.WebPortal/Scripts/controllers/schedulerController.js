@@ -11,7 +11,7 @@
                 e.preventDefault();   // cancel grid rebind if error occurs 
                 for (var error in args.errors) {
                     console.log("error: ", error);
-                    showMessage(scheduler.editable.element, error.toLowerCase(), args.errors[error].errors, scheduler);
+                    showMessage(scheduler.editable.element, error, args.errors[error].errors, scheduler);
                 }
             });
         }
@@ -19,16 +19,18 @@
 
     var showMessage = function (container, name, errors, scheduler) {
         //add the validation message to the form
-        if (name) {
+        if (name && name !== "CancelChanges") {
             console.log($("#" + name).parent());
             $("#" + name).parent().append(validationMessageTmpl({ field: name, message: errors[0] }));
 
             container.find("[data-valmsg-for=" + name + "],[data-val-msg-for=" + name + "]")
                 .replaceWith(validationMessageTmpl({ field: name, message: errors[0] }));
-        } else {
+        } else if (name && name === "CancelChanges") {
             toastr.error(errors[0]);
             scheduler.cancelEvent();
         }
+        else
+            toastr.error(errors[0]);        
     };
 
     //onChange event handler for Location DropdownList
@@ -37,8 +39,7 @@
     };
 
     //onDataBound event handler for Location DropDownList
-    var onDataBoundLocation = function (e) {
-        alert("data bound dropdown" + e.sender.value());
+    var onDataBoundLocation = function (e) {       
         var locationId = e.sender.value();
         if (locationId)
             onReadDoctorMultiselectDataSource();

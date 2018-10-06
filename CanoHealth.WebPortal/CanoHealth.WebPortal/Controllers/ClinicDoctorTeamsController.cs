@@ -34,7 +34,7 @@ namespace CanoHealth.WebPortal.Controllers
         {
             var doctors = new List<DoctorDto>();
 
-            if (locationId == null)
+            if (locationId == null || locationId == Guid.Empty)
             {
                 doctors = _unitOfWork.Doctors.GetAllActiveDoctors()
                                      .Select(DoctorDto.Wrap)

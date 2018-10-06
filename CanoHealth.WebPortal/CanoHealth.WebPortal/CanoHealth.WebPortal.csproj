@@ -424,6 +424,7 @@
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\IUserCorporationAccessRepository.cs" />
     <Compile Include="Core\Repositories\IUserRepository.cs" />
+    <Compile Include="CustomDataAnnotations\DateGreaterThan.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -437,6 +438,19 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.Designer.cs">
+      <DependentUpon>201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201810041936071_AddRecurrenceRuleColumnToScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810041936071_AddRecurrenceRuleColumnToScheduleTable.Designer.cs">
+      <DependentUpon>201810041936071_AddRecurrenceRuleColumnToScheduleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201810041938596_AddRecurrenceExceptionColumnToScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810041938596_AddRecurrenceExceptionColumnToScheduleTable.Designer.cs">
+      <DependentUpon>201810041938596_AddRecurrenceExceptionColumnToScheduleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\EntityConfigurations\ScheduleConfiguration.cs" />
     <Compile Include="Persistance\Migrations\201809021717089_AddScheduleTable.cs" />
     <Compile Include="Persistance\Migrations\201809021717089_AddScheduleTable.Designer.cs">
       <DependentUpon>201809021717089_AddScheduleTable.cs</DependentUpon>
@@ -1550,9 +1564,17 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Persistance\EntityConfigurations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.resx">
+      <DependentUpon>201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201810041936071_AddRecurrenceRuleColumnToScheduleTable.resx">
+      <DependentUpon>201810041936071_AddRecurrenceRuleColumnToScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201810041938596_AddRecurrenceExceptionColumnToScheduleTable.resx">
+      <DependentUpon>201810041938596_AddRecurrenceExceptionColumnToScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201809021717089_AddScheduleTable.resx">
       <DependentUpon>201809021717089_AddScheduleTable.cs</DependentUpon>
     </EmbeddedResource>
