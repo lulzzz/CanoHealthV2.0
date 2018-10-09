@@ -64,16 +64,13 @@ namespace CanoHealth.WebPortal.Controllers
                 var individualProviderByLocation = doctorCorporationContractLink
                     .First(d => d.DoctorId == doctor.DoctorId)
                     .ProvidersByLocations
-                    .First(loc => loc.PlaceOfServiceId == locationId);
+                    .FirstOrDefault(loc => loc.PlaceOfServiceId == locationId);
 
                 if (individualProviderByLocation != null)
                     doctor.IndividualProviderByLocation = individualProviderByLocation.LocacionProviderNumber ?? "N/A";
                 else
                     doctor.IndividualProviderByLocation = "N/A";
             }
-
-
-
             return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
