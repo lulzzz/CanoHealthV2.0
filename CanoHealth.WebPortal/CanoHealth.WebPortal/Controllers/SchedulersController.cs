@@ -38,12 +38,26 @@ namespace CanoHealth.WebPortal.Controllers
             return View("Scheduler");
         }
 
-        public ActionResult ReadSchedules([DataSourceRequest] DataSourceRequest request)
+        [AllowAnonymous]
+        public ActionResult ReadSchedules([DataSourceRequest] DataSourceRequest request, Guid? doctorId = null)
         {
-            var schedules = _unitOfWork.ScheduleRepository
-                .GetSchedules()
-                .Select(ScheduleViewModel.Wrap)
-                .ToList();
+            var schedules = new List<ScheduleViewModel>();
+
+            if (doctorId == null || doctorId == Guid.Empty)
+            {
+                schedules = _unitOfWork.ScheduleRepository
+                   .GetSchedules()
+                   .Select(ScheduleViewModel.Wrap)
+                   .ToList();
+            }
+            else
+            {
+                schedules = _unitOfWork.DoctorScheduleRepository
+                    .GetSchedulesByDoctorId(doctorId.Value)
+                    .Select(s => s.Schedule)
+                    .Select(ScheduleViewModel.Wrap)
+                    .ToList();
+            }
 
             return Json(schedules.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
@@ -119,7 +133,7 @@ namespace CanoHealth.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     //Get the detailed schedule with the collection of DoctorSchedule
-                    var scheduleStoredInDb = _unitOfWork.ScheduleRepository.GetDetailedSchedule(schedule.ScheduleId);
+                    var scheduleStoredInDb = _unitOfWork.ScheduleRepository.GetDetailedSchedule(schedule.ScheduleId.Value);
                     if (scheduleStoredInDb == null)
                     {
                         ModelState.AddModelError("CancelChanges", "Schedule not found. Please try again.");
@@ -179,35 +193,46 @@ namespace CanoHealth.WebPortal.Controllers
         public ActionResult DeleteSchedule([DataSourceRequest] DataSourceRequest request,
             ScheduleViewModel schedule)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //Check if the schedule item exist in our DB
-                var scheduleStoredInDb = _unitOfWork.ScheduleRepository.Get(schedule.ScheduleId);
-                if (scheduleStoredInDb == null)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("CancelChanges", "Schedule not found. Please try again.");
-                    return Json(new[] { schedule }.ToDataSourceResult(request, ModelState));
+                    //Check if the schedule item exist in our DB
+                    var scheduleStoredInDb = _unitOfWork.ScheduleRepository.Get(schedule.ScheduleId.Value);
+                    if (scheduleStoredInDb == null)
+                    {
+                        ModelState.AddModelError("CancelChanges", "Schedule not found. Please try again.");
+                        return Json(new[] { schedule }.ToDataSourceResult(request, ModelState));
+                    }
+
+                    var doctorschedulefound = _unitOfWork.DoctorScheduleRepository
+                        .EnumarableGetAll(ds => ds.ScheduleId == schedule.ScheduleId && schedule.Doctors.Contains(ds.DoctorId)
+                    ).ToList();
+
+                    var recurrenceExceptions = _unitOfWork.ScheduleRepository.EnumarableGetAll(m => m.RecurrenceID == schedule.ScheduleId).ToList();
+
+                    //audit logs
+                    var auditLogs = _doctorScheduleLog.GenerateLogsWhenDelete(doctorschedulefound).ToList();
+                    auditLogs.AddRange(_scheduleLog.GenerateLogsWhenDelete(recurrenceExceptions));
+                    auditLogs.AddRange(_scheduleLog.GenerateLogsWhenDelete(new List<Schedule> { scheduleStoredInDb }));
+
+                    _unitOfWork.ScheduleRepository.RemoveRange(recurrenceExceptions);
+
+                    _unitOfWork.DoctorScheduleRepository.RemoveRange(doctorschedulefound);
+
+                    _unitOfWork.ScheduleRepository.Remove(scheduleStoredInDb);
+
+                    _unitOfWork.AuditLogs.AddRange(auditLogs);
+
+                    _unitOfWork.Complete();
                 }
-
-                var doctorschedulefound = _unitOfWork.DoctorScheduleRepository
-                    .EnumarableGetAll(ds => ds.ScheduleId == schedule.ScheduleId && schedule.Doctors.Contains(ds.DoctorId)
-                ).ToList();
-
-                var recurrenceExceptions = _unitOfWork.ScheduleRepository.EnumarableGetAll(m => m.RecurrenceID == schedule.ScheduleId).ToList();
-
-                //audit logs
-                var auditLogs = _doctorScheduleLog.GenerateLogsWhenDelete(doctorschedulefound).ToList();
-                auditLogs.AddRange(_scheduleLog.GenerateLogsWhenDelete(recurrenceExceptions));
-                auditLogs.AddRange(_scheduleLog.GenerateLogsWhenDelete(new List<Schedule> { scheduleStoredInDb }));
-
-                _unitOfWork.ScheduleRepository.RemoveRange(recurrenceExceptions);
-
-                _unitOfWork.DoctorScheduleRepository.RemoveRange(doctorschedulefound);
-
-                _unitOfWork.ScheduleRepository.Remove(scheduleStoredInDb);
-
-                _unitOfWork.AuditLogs.AddRange(auditLogs);
             }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                ModelState.AddModelError("CancelChanges", "We are sorry, but something went wrong. Please try again.");
+            }
+
             return Json(new[] { schedule }.ToDataSourceResult(request, ModelState));
         }
 

@@ -1,5 +1,4 @@
 ﻿using CanoHealth.WebPortal.Core.Domain;
-using CanoHealth.WebPortal.CustomDataAnnotations;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace CanoHealth.WebPortal.ViewModels
 {
     public class ScheduleViewModel : ISchedulerEvent
     {
-        public Guid ScheduleId { get; set; }
+        public Guid? ScheduleId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -82,10 +81,10 @@ namespace CanoHealth.WebPortal.ViewModels
             {
                 ScheduleId = schedule.ScheduleId,
                 Title = schedule.Title,
-                Start = schedule.StartDateTime,
-                End = schedule.EndDateTime,
+                Start = schedule.Start,
+                End = schedule.End,
                 StartTimezone = schedule.StartTimezone,
-                EndTimezone = schedule.EndTimeZone,
+                EndTimezone = schedule.EndTimezone,
                 Description = schedule.Description,
                 IsAllDay = schedule.IsAllDay,
                 LocationId = schedule.PlaceOfServiceId,
@@ -100,18 +99,18 @@ namespace CanoHealth.WebPortal.ViewModels
         {
             return new Schedule
             {
-                ScheduleId = this.ScheduleId != Guid.Empty ? this.ScheduleId : Guid.NewGuid(),
-                Title = this.Title,
-                StartDateTime = this.Start,
-                StartTimezone = this.StartTimezone,
-                EndDateTime = this.End,
-                EndTimeZone = this.EndTimezone,
-                Description = this.Description,
-                IsAllDay = this.IsAllDay,
-                RecurrenceRule = this.RecurrenceRule,
-                RecurrenceException = this.RecurrenceException,
-                RecurrenceID = this.RecurrenceID,
-                PlaceOfServiceId = this.LocationId
+                ScheduleId = ScheduleId ?? Guid.NewGuid(),
+                Title = Title,
+                Start = Start,
+                StartTimezone = StartTimezone,
+                End = End,
+                EndTimezone = EndTimezone,
+                Description = Description,
+                IsAllDay = IsAllDay,
+                RecurrenceRule = RecurrenceRule,
+                RecurrenceException = RecurrenceException,
+                RecurrenceID = RecurrenceID,
+                PlaceOfServiceId = LocationId
             };
         }
     }

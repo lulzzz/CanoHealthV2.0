@@ -325,6 +325,7 @@
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SchedulersController.cs" />
+    <Compile Include="Controllers\SchedulesController.cs" />
     <Compile Include="Controllers\SearchEngineController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -438,6 +439,18 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.Designer.cs">
+      <DependentUpon>201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201810082014428_RenameStartColumnFromScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810082014428_RenameStartColumnFromScheduleTable.Designer.cs">
+      <DependentUpon>201810082014428_RenameStartColumnFromScheduleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistance\Migrations\201810082017103_RenameEndColumnFromScheduleTable.cs" />
+    <Compile Include="Persistance\Migrations\201810082017103_RenameEndColumnFromScheduleTable.Designer.cs">
+      <DependentUpon>201810082017103_RenameEndColumnFromScheduleTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs" />
     <Compile Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.Designer.cs">
       <DependentUpon>201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs</DependentUpon>
@@ -1553,6 +1566,7 @@
     <Content Include="Views\Schedulers\Scheduler.cshtml" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.timezones.min.js.map" />
     <Content Include="Views\Schedulers\EditorTemplates\SchedulerForm.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />
@@ -1566,6 +1580,15 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.resx">
+      <DependentUpon>201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201810082014428_RenameStartColumnFromScheduleTable.resx">
+      <DependentUpon>201810082014428_RenameStartColumnFromScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistance\Migrations\201810082017103_RenameEndColumnFromScheduleTable.resx">
+      <DependentUpon>201810082017103_RenameEndColumnFromScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810051222182_CreateRecurrenceIDColumnToScheduleTable.resx">
       <DependentUpon>201810051222182_CreateRecurrenceIDColumnToScheduleTable.cs</DependentUpon>
     </EmbeddedResource>

@@ -37,7 +37,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "StartDateTime",
-                        NewValue = schedule.StartDateTime.ToString(),
+                        NewValue = schedule.Start.ToString(),
                         AuditAction = "Insert",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),
@@ -47,7 +47,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "EndDateTime",
-                        NewValue = schedule.EndDateTime.ToString(),
+                        NewValue = schedule.End.ToString(),
                         AuditAction = "Insert",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),
@@ -67,7 +67,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "EndTimeZone",
-                        NewValue = schedule.EndTimeZone,
+                        NewValue = schedule.EndTimezone,
                         AuditAction = "Insert",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),
@@ -129,7 +129,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "StartDateTime",
-                        OldValue = schedule.StartDateTime.ToString(),
+                        OldValue = schedule.Start.ToString(),
                         AuditAction = "Delete",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),
@@ -139,7 +139,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "EndDateTime",
-                        OldValue = schedule.EndDateTime.ToString(),
+                        OldValue = schedule.End.ToString(),
                         AuditAction = "Delete",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),
@@ -159,7 +159,7 @@ namespace CanoHealth.WebPortal.Services.AuditLogs.Schedules
                     {
                         TableName = "Schedule",
                         ColumnName = "EndTimeZone",
-                        OldValue = schedule.EndTimeZone,
+                        OldValue = schedule.EndTimezone,
                         AuditAction = "Delete",
                         ObjectId = schedule.ScheduleId,
                         UpdatedBy = _user.GetUserName(),

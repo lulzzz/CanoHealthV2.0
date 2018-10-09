@@ -37,11 +37,9 @@
     @(Html.LabelFor(model => model.Start))
 </div>
 <div data-container-for="start" class="k-edit-field">
-    @(Html.Kendo().DateTimePickerFor(model => model.Start)
-        .HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
+    @(Html.Kendo().DateTimePickerFor(model => model.Start).HtmlAttributes(generateDatePickerAttributes("startDateTime", "start", "value:start,invisible:isAllDay")))
 
-    @(Html.Kendo().DatePickerFor(model => model.Start)
-        .HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
+    @(Html.Kendo().DatePickerFor(model => model.Start).HtmlAttributes(generateDatePickerAttributes("startDate", "start", "value:start,visible:isAllDay")))
     <span data-bind="text: startTimezone"></span>
     <span data-for="start" class="k-invalid-msg"></span>
 </div>
@@ -51,35 +49,35 @@
 </div>
 <div data-container-for="end" class="k-edit-field">
     @(Html.Kendo().DateTimePickerFor(model => model.End)
-        .HtmlAttributes(generateDatePickerAttributes(
-            "endDateTime",
-            "end",
-            "value:end,invisible:isAllDay",
-            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
+                        .HtmlAttributes(generateDatePickerAttributes(
+                            "endDateTime",
+                            "end",
+                            "value:end,invisible:isAllDay",
+                            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
 
     @(Html.Kendo().DatePickerFor(model => model.End)
-        .HtmlAttributes(generateDatePickerAttributes(
-            "endDate",
-            "end",
-            "value:end,visible:isAllDay",
-            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
+                        .HtmlAttributes(generateDatePickerAttributes(
+                            "endDate",
+                            "end",
+                            "value:end,visible:isAllDay",
+                            new Dictionary<string, object>() { { "data-dateCompare-msg", "End date should be greater than or equal to the start date" } })))
 
     <span data-bind="text: endTimezone"></span>
     <span data-for="end" class="k-invalid-msg"></span>
 </div>
 
-@*<div class="k-edit-label">
+<div class="k-edit-label" data-bind="visible:false">
     @(Html.LabelFor(model => model.IsAllDay))
-</div>*@
+</div>
 <div data-container-for="isAllDay" class="k-edit-field">
-    <input data-bind="checked: isAllDay, visible: false" data-val="true" id="IsAllDay" name="IsAllDay" type="checkbox" />
+    <input data-bind="checked: isAllDay, visible:false" data-val="true" id="IsAllDay" name="IsAllDay" type="checkbox" />
 </div>
 
 <div class="endTimezoneRow">
     <div class="k-edit-label"></div>
     <div class="k-edit-field">
-        <label class="k-check">
-            <input checked="checked" class="k-timezone-toggle" type="checkbox" value="true" />
+        <label class="k-check" data-bind="visible:false">
+            <input checked="checked" class="k-timezone-toggle" type="checkbox" value="true" data-bind="visible:false" />
             Use separate start and end time zones
         </label>
     </div>
@@ -107,19 +105,18 @@
     }
 </script>
 
-<div class="k-edit-label">
+<div class="k-edit-label" data-bind="visible:false">
     @(Html.LabelFor(model => model.StartTimezone))
 </div>
 <div data-container-for="startTimezone" class="k-edit-field">
-    @(Html.Kendo().TimezoneEditorFor(model => model.StartTimezone)
-                                      .HtmlAttributes(new { data_bind = "value:startTimezone" }))
+    @(Html.Kendo().TimezoneEditorFor(model => model.StartTimezone).HtmlAttributes(new { data_bind = "value:startTimezone,visible:false" }))
 </div>
 
-<div class="k-edit-label">
+<div class="k-edit-label" data-bind="visible:false">
     @(Html.LabelFor(model => model.EndTimezone))
 </div>
 <div data-container-for="endTimezone" class="k-edit-field">
-    @(Html.Kendo().TimezoneEditorFor(model => model.EndTimezone).HtmlAttributes(new { data_bind = "value:endTimezone" }))
+    @(Html.Kendo().TimezoneEditorFor(model => model.EndTimezone).HtmlAttributes(new { data_bind = "value:endTimezone,visible:false" }))
 </div>
 
 <div class="k-edit-label">
@@ -137,49 +134,48 @@
 </div>
 
 <div class="k-edit-label">
-        @(Html.LabelFor(model => model.LocationId))
-    </div>
-    <div data-container-for="LocationId" class="k-edit-field">
-        @(Html.Kendo().DropDownListFor(model => model.LocationId)
-            .HtmlAttributes(new { data_bind = "value:LocationId", style = "width: 100%;" })
-            .DataTextField("Name")
-            .DataValueField("PlaceOfServiceId")
-            .OptionLabel("None")
-            .ValuePrimitive(true)
-            .DataSource(source =>
-            {
-                source.Read(read =>
-                {
-                    read.Action("GetLocations", "PlaceOfService");
-                })
-                .ServerFiltering(true);
+    @(Html.LabelFor(model => model.LocationId))
+</div>
+<div data-container-for="LocationId" class="k-edit-field">
+    @(Html.Kendo().DropDownListFor(model => model.LocationId)
+                        .HtmlAttributes(new { data_bind = "value:LocationId", style = "width: 100%;" })
+                        .DataTextField("Name")
+                        .DataValueField("PlaceOfServiceId")
+                        .OptionLabel("None")
+                        .ValuePrimitive(true)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetLocations", "PlaceOfService");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .Events(e =>
+                        {
+                            e.Change("SchedulersController.onChangeLocation").DataBound("SchedulersController.onDataBoundLocation");//
             })
-            .Events(e =>
-            {
-                e.Change("SchedulersController.onChangeLocation").DataBound("SchedulersController.onDataBoundLocation");//
-            })
-            .ToClientTemplate()
-        )
-    </div>
+                        .ToClientTemplate()
+    )
+</div>
 
-    <div class="k-edit-label">
-        @(Html.LabelFor(model => model.Doctors))
-    </div>
-    <div data-container-for="Doctors" class="k-edit-field">
-        @(Html.Kendo().MultiSelectFor(model => model.Doctors)
-             .HtmlAttributes(new { data_bind = "value:Doctors" })
-             .DataTextField("FullName")
-             .DataValueField("DoctorId")
-             .ValuePrimitive(true)
-             .DataSource(source =>
-             {
-                 source.Read(read =>
-                 {
-                     read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
-                         .Data("SchedulersController.filterLocations");
-                 })
-                 .ServerFiltering(true);
-             })
-             .ToClientTemplate()
-        )
-    </div>
+<div class="k-edit-label">
+    @(Html.LabelFor(model => model.Doctors))
+</div>
+<div data-container-for="Doctors" class="k-edit-field">
+    @(Html.Kendo().MultiSelectFor(model => model.Doctors)
+          .HtmlAttributes(new { data_bind = "value:Doctors" })
+          .DataTextField("FullName")
+          .DataValueField("DoctorId")
+          .ValuePrimitive(true)
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
+                      .Data("SchedulersController.filterLocations");
+              })
+              .ServerFiltering(true);
+          })
+          .ToClientTemplate())
+</div>

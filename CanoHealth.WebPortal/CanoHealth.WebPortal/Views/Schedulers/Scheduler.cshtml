@@ -18,13 +18,15 @@
 
 <br />
 
-<div class="container-fluid">
+<div id="js-scheduler" class="container-fluid">
     @(Html.Kendo().Scheduler<ScheduleViewModel>()
        .Name("DoctorSchedule")
        .Date(DateTime.Today)
        .StartTime(DateTime.Today)
        .AllDaySlot(false)
-       .Toolbar(tool => tool.Pdf())
+       .Toolbar(tool => {
+           tool.Pdf();          
+       })
        .Pdf(pdf =>
        {
            pdf.FileName("Schedule.pdf");
@@ -33,7 +35,7 @@
        .Editable(ed => ed
            .Confirmation("Are you sure you want to delete this schedule?")
            .Resize(true)
-           //.TemplateName("SchedulerForm")
+           .TemplateName("SchedulerForm")
            .Window(wnd =>
            {
                wnd.Resizable(r => r.MaxWidth(600).MinWidth(600));
@@ -57,66 +59,48 @@
        .Resources(resource =>
        {
            resource.Add(r => r.LocationId)
-           .DataValueField("PlaceOfServiceId")
-           .DataTextField("Name")
-           .Multiple(false)
-           .Title("Location")
-           .Name("Location")
-           .DataSource(dsl => dsl
-               .ServerFiltering(false)
-               .Read(read => read.Action("GetLocations", "PlaceOfService"))
-           );
+                .DataValueField("PlaceOfServiceId")
+                .DataTextField("Name")
+                .Multiple(false)
+                .Title("Location")
+                .Name("Location")
+                .DataSource(dsl => dsl
+                    .ServerFiltering(false)
+                    .Read(read => read.Action("GetLocations", "PlaceOfService"))
+                );
            resource.Add(r => r.Doctors)
-           .Name("Doctors")
-           .Title("Doctors")
-           .DataValueField("DoctorId")
-           .DataTextField("FullName")
-           .Multiple(true)
-           .ValuePrimitive(true)
-           .DataSource(source =>
-           {
-               source.Read(read =>
-               {
-                   read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
-                       .Data("SchedulersController.filterLocations");
-               })
-               .ServerFiltering(true);
-           });
-           //.DataSource(source =>
-           //{
-           //    source.Custom()
-           //        .ServerFiltering(true)
-           //        .Type("aspnetmvc-ajax")
-           //        .Transport(transport =>
-           //        {
-           //            transport.Read("GetActiveDoctors", "Doctors");
-           //        })
-           //        .Schema(schema =>
-           //        {
-           //            schema.Data("Data")
-           //                .Total("Total");
-           //        });
-           //});
+                .Name("Doctors")
+                .Title("Doctors")
+                .DataValueField("DoctorId")
+                .DataTextField("FullName")
+                .Multiple(true)
+                .ValuePrimitive(true)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
+                            .Data("SchedulersController.filterLocations");
+                    })
+                    .ServerFiltering(true);
+                });
        })
        .DataSource(ds => ds
            .Model(model =>
            {
                model.Id(m => m.ScheduleId);
                model.Field(f => f.Title).DefaultValue("No title");
-               model.Field(m => m.ScheduleId).DefaultValue(Guid.NewGuid());
                model.Field(m => m.IsAllDay).DefaultValue(true);
-               model.Field(f => f.Title).DefaultValue("No title");
                model.RecurrenceId(f => f.RecurrenceID);
+               model.Field(f => f.Title).DefaultValue("No title");
            })
-           //.ServerOperation(true)
            .Events(ev => ev.Error("SchedulersController.serverSideErrorHandlers"))
-           .Read("ReadSchedules", "Schedulers")
+           .Read(read => read.Action("ReadSchedules", "Schedulers").Data("SchedulersController.filterDoctor"))
+           //.Read("ReadSchedules", "Schedulers")
            .Create("CreateSchedule", "Schedulers")
            .Destroy("DeleteSchedule", "Schedulers")
            .Update("UpdateSchedule", "Schedulers")
        )
-
-
     //.WorkDayEnd()
     )
 </div>
@@ -125,5 +109,10 @@
 
 @section Scripts{
     <script src="~/Scripts/kendo/2018.1.221/kendo.timezones.min.js"></script>
-    <script src="~/Scripts/controllers/schedulerController.js"></script>   
+    <script src="~/Scripts/controllers/schedulerController.js"></script>
+    <script>
+        $(document).ready(function () {
+            SchedulersController.setSchedulerSettings();
+        });
+    </script>
 }

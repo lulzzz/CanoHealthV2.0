@@ -1,9 +1,8 @@
 ﻿var AccountsController = function (userService) {
     var getUserInfoResponse;
 
-    var init = function (container) {
-       
-        $(container).on("click", "#js-btn-submit", submitLogginCredentials)
+    var init = function (container) {       
+        $(container).on("click", "#js-btn-submit", submitLogginCredentials);
     };
 
     var submitLogginCredentials = function () {
@@ -16,7 +15,7 @@
                     title: "Change password",
                     modal: true,
                     width: 600,
-                    actions: [],
+                    actions: []
 
                 }).data('kendoWindow');
                 changePasswordWindow.open().center();
@@ -26,15 +25,13 @@
         };
         var getUserFails = function (response) {
             AccountsController.getUserInfoResponse = true;
-        }
+        };
 
         userService.getUserInfo({ username: $("#Email").val() }, getUserSuccess, getUserFails);
         return false;
-    };
-
-   
+    };   
 
     return {
         init: init
-    }
+    };
 }(UserService);

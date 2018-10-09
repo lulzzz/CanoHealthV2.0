@@ -47,6 +47,18 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult GetActiveDoctorsAsJson()
+        {
+            var result = _unitOfWork
+                .Doctors
+                .GetAllActiveDoctors()
+                .Select(DoctorDto.Wrap)
+                .ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult CreateDoctor([DataSourceRequest] DataSourceRequest request, DoctorFormViewModel doctor)
         {
             try

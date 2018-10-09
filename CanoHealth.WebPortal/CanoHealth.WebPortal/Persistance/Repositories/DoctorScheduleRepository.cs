@@ -22,8 +22,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 var nextday = schedule.Start.AddDays(1);
                 doctorschedulesfound = EnumarableGetAll(
                                 filter: ds => ds.ScheduleId != schedule.ScheduleId &&
-                                ds.Schedule.StartDateTime >= schedule.Start &&
-                                ds.Schedule.StartDateTime < nextday &&
+                                ds.Schedule.Start >= schedule.Start &&
+                                ds.Schedule.Start < nextday &&
                                 schedule.Doctors.Contains(ds.DoctorId),
                                 includeProperties: new Expression<Func<DoctorSchedule, object>>[]
                                 {
@@ -35,8 +35,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             {
                 doctorschedulesfound = EnumarableGetAll(
                                filter: ds => ds.ScheduleId != schedule.ScheduleId &&
-                               ds.Schedule.StartDateTime <= schedule.Start &&
-                               ds.Schedule.EndDateTime > schedule.Start &&
+                               ds.Schedule.Start <= schedule.Start &&
+                               ds.Schedule.End > schedule.Start &&
                                schedule.Doctors.Contains(ds.DoctorId),
                                includeProperties: new Expression<Func<DoctorSchedule, object>>[]
                                {
@@ -44,6 +44,19 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                                     d => d.Doctor
                                }).ToList();
             }
+
+            return doctorschedulesfound;
+        }
+
+        public IEnumerable<DoctorSchedule> GetSchedulesByDoctorId(Guid doctorId)
+        {
+            var doctorschedulesfound = EnumarableGetAll(
+                                filter: ds => ds.DoctorId == doctorId,
+                                includeProperties: new Expression<Func<DoctorSchedule, object>>[]
+                                {
+                                    s => s.Schedule,
+                                    d => d.Doctor
+                                }).ToList();
 
             return doctorschedulesfound;
         }

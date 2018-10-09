@@ -4,6 +4,37 @@
     var validationMessageTmpl = kendo.template($("#serverSideErrorHandlerTemp").html());
 
     //Private methods
+    var setSchedulerSettings = function () {
+        var scheduler = $("#DoctorSchedule").data("kendoScheduler");
+
+        var toolbar = $(scheduler.toolbar);
+
+        var label = $("<label class='control-label col-xs-offset-1 col-sm-offset-1 col-md-offset-8' for='doctor'>Show schedule by doctor:</label>");
+
+        var dropDown = $("<input id='js-activedoctors'/>");          
+
+        toolbar.append(label);
+        toolbar.append(dropDown);        
+
+        $("#js-activedoctors").kendoDropDownList({
+            dataTextField: "FullName",
+            dataValueField: "DoctorId",
+            optionLabel: "All",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: "/Doctors/GetActiveDoctorsAsJson",
+                    }
+                }
+            },
+            change: function (e) {
+                var value = this.value();                
+                scheduler.dataSource.read();
+            }
+        });  
+    };
+
     var serverSideErrorHandlers = function (args) {
         if (args.errors) {
             var scheduler = $("#DoctorSchedule").data("kendoScheduler");
@@ -57,11 +88,20 @@
         };
     };
 
+    //pass the selected doctorId to datasource read method for scheduler component
+    var filterDoctor = function () {
+        return {
+            doctorId: $("#js-activedoctors").val()
+        };
+    };    
+
     //Access to private members
     return {
         serverSideErrorHandlers: serverSideErrorHandlers,
         onChangeLocation: onChangeLocation,
         filterLocations: filterLocations,
-        onDataBoundLocation: onDataBoundLocation
+        filterDoctor: filterDoctor,
+        onDataBoundLocation: onDataBoundLocation,
+        setSchedulerSettings: setSchedulerSettings        
     };
 }();
