@@ -190,7 +190,7 @@ function onClickActivateDoctorButton(e) {
     var onFailActivateDoctor = function (response) {
         console.log("Activate contract call fails: ", response);
         toastr.error(response.statusText);
-    }
+    };
     AjaxCallPost("/api/doctors/", JSON.stringify(dataItem), onSuccessActivateDoctor, onFailActivateDoctor);
 }
 

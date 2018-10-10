@@ -622,7 +622,7 @@
                                 PlaceOfServiceId: pos.placeOfServiceId,
                                 Name: pos.name,
                                 ContractLineofBusinessId: originalContractBusinessLineItem.contractLineofBusinessId
-                            }
+                            };
                         });
                     
                    

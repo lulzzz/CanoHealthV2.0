@@ -2,6 +2,7 @@
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Dtos;
+using CanoHealth.WebPortal.Services.AuditLogs.DoctorProviderByLocation;
 using Elmah;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,12 @@ namespace CanoHealth.WebPortal.Controllers.Api
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ContractBusinessLinesController(IUnitOfWork unitOfWork)
+        private readonly IProviderByLocationLog _providerByLocationLog;
+
+        public ContractBusinessLinesController(IUnitOfWork unitOfWork, IProviderByLocationLog providerByLocationLog)
         {
             _unitOfWork = unitOfWork;
+            _providerByLocationLog = providerByLocationLog;
         }
 
         [HttpGet]
@@ -139,21 +143,38 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
+                //Get the Contract and the specific Line of Business. Table: ContractLineofBusinesses
                 var contractBusinessLineStoredInDb = _unitOfWork.ContracBusinessLineRepository
                     .GetContractBusinessLineItemWithClinics(contractBusinessLinesDto.ContractLineofBusinessId);
 
                 if (contractBusinessLineStoredInDb == null)
                     return NotFound();
 
+                //Get the Locations associated to this specific Line of Business throw the Contract. Table: ClinicLineofBusinessContracts
                 var logs = _unitOfWork.ContracBusinessLineClinicRepository
                     .GetLogsWhileRemoveItems(contractBusinessLineStoredInDb.ClinicLineofBusiness)
                     .ToList();
+
+                //Get the list of doctors with their provider by locations linked to this contract and this specific line of business.
+                //Table: DoctorCorporationContractLinks
+                var doctorsLinkedToContract = _unitOfWork.DoctorLinkedContracts
+                    .GetDoctorsLinkedToLineOfBusiness(contractBusinessLineStoredInDb.ContractLineofBusinessId).ToList();
+
+                foreach (var doctor in doctorsLinkedToContract)
+                {
+                    var providersByLocation = doctor.ProvidersByLocations.ToList();
+                    logs.AddRange(_providerByLocationLog.GenerateLogsWhenDelete(providersByLocation));
+                    _unitOfWork.ProviderByLocationRepository.RemoveRange(providersByLocation);
+                }
+
+                var doctorsLinkedContractLogs = _unitOfWork.DoctorLinkedContracts.RemoveLinkedContracts(doctorsLinkedToContract);
 
                 var contractBusinessLinesLogs = _unitOfWork.ContracBusinessLineRepository
                     .GetLogsWhileRemoveItems(new List<ContractLineofBusiness> { contractBusinessLineStoredInDb })
                     .ToList();
 
                 logs.AddRange(contractBusinessLinesLogs);
+                logs.AddRange(doctorsLinkedContractLogs);
 
                 _unitOfWork.AuditLogs.AddRange(logs);
 

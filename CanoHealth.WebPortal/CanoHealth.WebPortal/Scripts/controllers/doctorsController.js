@@ -6,13 +6,13 @@
     //Private Methods
     var createDoctorMedicalLicenseViewModel = function (doctor) {
         console.log("Doctor from Medical License ViewModel: ", doctor);
-        
+
         var medicalLicenseViewModel = kendo.observable({
             //MedicalLicense Section
             //if doctor is Active enable New MedicalLicense button
             enableNewMedicalLicenseButton: doctor.Active,
 
-            onAddMedicalLicense: function() {
+            onAddMedicalLicense: function () {
                 var medicalLicenseListViewComponents = $("#medicallicense-listview-" + doctor.DoctorId).data("kendoListView");
                 medicalLicenseListViewComponents.add();
             },
@@ -23,8 +23,8 @@
                     console.log(e.model);
                 }
             },
-            
-            onDownloadMedicalLicenseFile: function(e) {
+
+            onDownloadMedicalLicenseFile: function (e) {
                 if (e.data.uniqueFileName === null) {
                     toastr.error("There is not file to download.");
                     return;
@@ -68,7 +68,7 @@
                 });
             },
 
-            onChangeEffectiveDate: function(e) {
+            onChangeEffectiveDate: function (e) {
                 console.log("cambiando la fecha de effectividad de la licencia: ", e);
             },
 
@@ -102,8 +102,8 @@
                 transport: {
                     read: function (options) {
                         var successCall = function (response) {
-                           //map the response to convert the dates format
-                            response = response.map(function(doctor) {
+                            //map the response to convert the dates format
+                            response = response.map(function (doctor) {
                                 return {
                                     medicalLicenseId: doctor.medicalLicenseId,
                                     doctorId: doctor.doctorId,
@@ -126,12 +126,12 @@
                             });
                             options.success(response);
                         }
-                        var failCall = function(response) {
+                        var failCall = function (response) {
                             options.error(response);
                         }
                         doctorService.getMedicalLicenses(doctor.DoctorId, successCall, failCall);
                     },
-                    create: function(options) {
+                    create: function (options) {
                         if (!formDataSupport()) {
                             medicalLicenseViewModel.get('medicalLicenseDataSource').cancelChanges();
                             return;
@@ -173,7 +173,7 @@
                                     licenseNumber: response.LicenseNumber,
                                     medicalLicenseType: response.MedicalLicenseTypeName,
                                     note: response.Note != null ? response.Note : "None.",
-                                    originalFileName: response.OriginalFileName,                                    
+                                    originalFileName: response.OriginalFileName,
                                     serverLocation: response.ServerLocation,
                                     uniqueFileName: response.UniqueFileName,
                                     uploaDateTime: response.UploaDateTime != null ? moment(response.UploaDateTime).format('L h:mm:ss a') : null,
@@ -193,7 +193,7 @@
                             doctorService.createMedicalLicense(formData, createMedicalLicensesSuccess, createMedicalLicensesFail);
                         }
                     },
-                    update: function(options) {
+                    update: function (options) {
                         if (!formDataSupport()) {
                             medicalLicenseViewModel.get('medicalLicenseDataSource').cancelChanges();
                             return;
@@ -234,9 +234,9 @@
                                     formData.append("ContentType", options.data.contentType);
                                 if (options.data.uniqueFileName)
                                     formData.append("UniqueFileName", options.data.uniqueFileName);
-                                if(options.data.uploadBy)
+                                if (options.data.uploadBy)
                                     formData.append("UploadBy", options.data.uploadBy);
-                                if(options.data.uploaDateTime)
+                                if (options.data.uploaDateTime)
                                     formData.append("UploaDateTime", options.data.uploaDateTime);
                             }
 
@@ -253,7 +253,7 @@
                                     licenseNumber: response.LicenseNumber,
                                     medicalLicenseType: response.MedicalLicenseTypeName,
                                     note: response.Note != null ? response.Note : "None.",
-                                    originalFileName: response.OriginalFileName,                                    
+                                    originalFileName: response.OriginalFileName,
                                     serverLocation: response.ServerLocation,
                                     uniqueFileName: response.UniqueFileName,
                                     uploaDateTime: response.UploaDateTime != null ? moment(response.UploaDateTime).format('L h:mm:ss a') : null,
@@ -274,11 +274,11 @@
                         }
                     },
                     destroy: function (options) {
-                        var inactivateLicenseSuccess = function(response) {
+                        var inactivateLicenseSuccess = function (response) {
                             toastr.success("Medical License successfully released.");
                             options.success(response);
                         };
-                        var inactivateLicenseFail = function(response) {
+                        var inactivateLicenseFail = function (response) {
                             console.log('Release Medical License fails:', response);
                             toastr.error(response.statusText);
                             medicalLicenseViewModel.get('medicalLicenseDataSource').cancelChanges();
@@ -310,7 +310,7 @@
             })
         });
         kendo.bind($("#medicallicense_" + doctor.DoctorId), medicalLicenseViewModel);
-    }
+    };
 
     var createDoctorFormViewModel = function(placeOfServiceId) {
         var doctorFormViewModel = kendo.observable({
