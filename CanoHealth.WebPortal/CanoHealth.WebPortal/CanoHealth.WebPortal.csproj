@@ -439,6 +439,10 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
+    <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
+      <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs" />
     <Compile Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.Designer.cs">
       <DependentUpon>201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs</DependentUpon>
@@ -1582,6 +1586,9 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
+      <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.resx">
       <DependentUpon>201810091208560_OverrideConventionsForTimeZonesOnScheduleTable.cs</DependentUpon>
     </EmbeddedResource>
