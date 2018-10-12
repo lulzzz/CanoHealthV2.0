@@ -1,16 +1,16 @@
-﻿var ContractService = function() {
+﻿var ContractService = function () {
     //private fields
 
     //private methods
-    var getInsuranceWithContracts = function(insuranceName, done, fail) {
+    var getInsuranceWithContracts = function (insuranceName, done, fail) {
         AjaxCallGet("/api/Insurances/", { insuranceName: insuranceName }, done, fail);
     };
 
-    var activateInsurance = function(insurance) {
+    var activateInsurance = function (insurance) {
         AjaxCallPut("/api/Insurances/", JSON.stringify(insurance));
     }
 
-    var createContract = function(contract, done, fail) {
+    var createContract = function (contract, done, fail) {
         $.ajax({
             type: "POST",
             url: domainName + '/Contracts/CreateContract/',
@@ -28,4 +28,4 @@
         activateInsurance: activateInsurance,
         createContract: createContract
     }
-}()
+}();

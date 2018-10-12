@@ -1,4 +1,4 @@
-﻿var IndividualProvidersController = function() {
+﻿var IndividualProvidersController = function () {
     //private properties
     var button,
         individualProviderItemToEdit,
@@ -7,23 +7,23 @@
     //private methods
     var init = function (container) {
         $(container).on("click", ".js-individualprovider-addbtn", displayFormWindow);
-    }
+    };
 
-    var displayFormWindow = function(e) {
+    var displayFormWindow = function (e) {
         button = $(e.target);
 
         var doctorId = button.attr("data-doctor-id");
         var listView = $("#IndividualProvider_" + doctorId).data("kendoListView");
         listView.add();
         e.preventDefault();
-    }
+    };
 
-    var createDoctorIndividualProviderViewModel = function(doctor) {
+    var createDoctorIndividualProviderViewModel = function (doctor) {
         var viewModel = kendo.observable({
             InsuranceId: null,
 
             enableNewIndividualProviderButton: doctor.Active,
-            
+
             insuranceDataSource: new kendo.data.DataSource({
                 schema: {
                     model: {
@@ -35,15 +35,15 @@
                     }
                 },
                 transport: {
-                    read: function(options) {
+                    read: function (options) {
                         $.ajax({
                             url: domainName + "/Insurances/GetAvailableInsurance",
                             dataType: "json",
                             method: 'GET',
                             data: { doctorId: doctor.DoctorId },
-                            success: function(response) {
+                            success: function (response) {
                                 if (individualProviderItemToEdit != null && actionStatus === "Edit") {
-                                    
+
                                     response.push({
                                         InsuranceId: individualProviderItemToEdit.InsuranceId,
                                         Name: individualProviderItemToEdit.InsuranceName
@@ -58,7 +58,7 @@
                                 }
                                 options.success(response);
                             },
-                            error: function(response) {
+                            error: function (response) {
                                 options.error(response);
                             }
                         });
@@ -101,7 +101,7 @@
                             }
                         });
                     },
-                    create: function(options) {
+                    create: function (options) {
                         console.log(options);
                         $.ajax({
                             url: "/api/IndividualProviders/SaveIndividualProvider",
@@ -123,7 +123,7 @@
                                     ProviderNumber: response.providerNumber,
                                     IndividualProviderEffectiveDate: moment(response.individualProviderEffectiveDate).format('L')
                                 };
-                               
+
                                 options.success(response);
                             },
                             error: function (response) {
@@ -143,16 +143,16 @@
                                             }
                                         }
                                         toastr.error(errorMessage);
-                                    break;
+                                        break;
                                     default:
                                         toastr.error("We are sorry, but something went wrong. Please try again.");
-                                    break;
+                                        break;
                                 }
                             }
                         });
                     },
                     update: function (options) {
-                       
+
                         $.ajax({
                             url: "/api/IndividualProviders/SaveIndividualProvider",
                             dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
@@ -166,7 +166,7 @@
                                 IndividualProviderEffectiveDate: moment(options.data.IndividualProviderEffectiveDate).format('L')
                             },
                             success: function (response) {
-                               
+
                                 response = {
                                     DoctorIndividualProviderId: response.doctorIndividualProviderId,
                                     DoctorId: response.doctorId,
@@ -184,22 +184,22 @@
                                 viewModel.get("individualProviderDataSource").cancelChanges();
                                 options.error(response);
                                 switch (response.status) {
-                                case 400: //Bad Request.
-                                    var errorMessage = "";
-                                    var modelstate = response.responseJSON.modelState;
-                                    if (modelstate) {
-                                        debugger;
-                                        for (var prop in modelstate) {
-                                            if (modelstate.hasOwnProperty(prop)) {
-                                                errorMessage = errorMessage + " " + modelstate[prop].toString();
+                                    case 400: //Bad Request.
+                                        var errorMessage = "";
+                                        var modelstate = response.responseJSON.modelState;
+                                        if (modelstate) {
+                                            debugger;
+                                            for (var prop in modelstate) {
+                                                if (modelstate.hasOwnProperty(prop)) {
+                                                    errorMessage = errorMessage + " " + modelstate[prop].toString();
+                                                }
                                             }
                                         }
-                                    }
-                                    toastr.error(errorMessage);
-                                    break;
-                                default:
-                                    toastr.error("We are sorry, but something went wrong. Please try again.");
-                                    break;
+                                        toastr.error(errorMessage);
+                                        break;
+                                    default:
+                                        toastr.error("We are sorry, but something went wrong. Please try again.");
+                                        break;
                                 }
                             }
                         });
@@ -231,12 +231,12 @@
                     actionStatus = "Create";
                 }
             },
-            
-            onAddIndividualProvider: function() {
+
+            onAddIndividualProvider: function () {
                 var listView = $("#IndividualProvider_" + doctor.DoctorId).data("kendoListView");
                 listView.add();
             },
-            
+
         });
         kendo.bind($("#individualprovider_" + doctor.DoctorId), viewModel);
     }
@@ -247,4 +247,4 @@
         createDoctorIndividualProviderViewModel: createDoctorIndividualProviderViewModel,
         individualProviderItemToEdit: individualProviderItemToEdit
     }
-}()
+}();

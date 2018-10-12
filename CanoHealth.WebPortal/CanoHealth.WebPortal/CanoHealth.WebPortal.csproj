@@ -293,6 +293,7 @@
     <Compile Include="Controllers\Api\PersonalFilesController.cs" />
     <Compile Include="Controllers\Api\PersonalFileTypesController.cs" />
     <Compile Include="Controllers\Api\ProviderByLocationsController.cs" />
+    <Compile Include="Controllers\Api\SchedulesController.cs" />
     <Compile Include="Controllers\Api\SearchEngineController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\BillersController.cs" />
@@ -363,6 +364,7 @@
     <Compile Include="Core\Dtos\DoctorLinkedToLineOfBusinessDto.cs" />
     <Compile Include="Core\Dtos\DoctorPersonalFileDto.cs" />
     <Compile Include="Core\Dtos\NotificationDto.cs" />
+    <Compile Include="Core\Dtos\ScheduleDto.cs" />
     <Compile Include="Core\Dtos\SearchResultLocationInfoDto.cs" />
     <Compile Include="Core\Dtos\SearchResultDoctorInfoDto.cs" />
     <Compile Include="Core\Dtos\ClinicLineofBusinessContractDto.cs" />
@@ -1470,6 +1472,7 @@
     <Content Include="Scripts\services\insuranceService.js" />
     <Content Include="Scripts\services\personalFileService.js" />
     <Content Include="Scripts\services\placeOfService.js" />
+    <Content Include="Scripts\services\scheduleService.js" />
     <Content Include="Scripts\services\userService.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />

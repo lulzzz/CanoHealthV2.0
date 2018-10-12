@@ -312,3 +312,10 @@ td.k-state-focused.k-state-selected {
     font-weight: bold;
 
 }
+
+.grey-tooltip {
+    background-color: #fff !important;
+    color: #333 !important;
+    border: 2px solid #ccc !important;
+    text-align: justify !important;
+}

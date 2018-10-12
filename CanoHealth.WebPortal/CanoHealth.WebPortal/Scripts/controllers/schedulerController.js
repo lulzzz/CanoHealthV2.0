@@ -1,10 +1,66 @@
-﻿var SchedulersController = function () {
+﻿var SchedulersController = function(scheduleService) {
 
     //Private fields
     var validationMessageTmpl = kendo.template($("#serverSideErrorHandlerTemp").html());
 
     //Private methods
-    var setSchedulerSettings = function () {
+    var init = function (container) {
+        //set the tooltip component when user focus on schedule. Reference: https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/show-tooltip-with-additional-information-over-events
+        $("#DoctorSchedule").kendoTooltip({
+            filter: ".k-event:not(.k-event-drag-hint) > div, .k-task",
+            position: "right",
+            width: 250,
+            content: kendo.template($('#scheduler-tooltip-template').html()),
+            show: function (e) {
+                e.sender.popup.element.addClass('grey-tooltip');
+            }
+        });
+
+        //handle double click event on schedule
+        $(container).on("dblclick", ".k-event", displayScheduleDetails);
+    };
+
+    var displayScheduleDetails = function (e) {
+        var scheduler = $("#DoctorSchedule").getKendoScheduler();
+        var schedule = scheduler.occurrenceByUid($(this).data("uid"));
+        scheduleService.getSchedule(schedule.ScheduleId, getScheduleSuccess, getScheduleFails);       
+    };
+
+    var getScheduleSuccess = function (response) {
+        console.log("Get Schedule success: ", response);
+        //set the window content 
+        var detailsTemplate = kendo.template($("#schedule-detail-template").html());
+        //get the window instance
+        var wnd = $("#Details").data("kendoWindow");
+        //set windows options
+        wnd.setOptions({ width: "20%" });
+        //pass the schedule to the window content
+        var docs = response.doctors.map(function (doc) {
+            return doc.fullName;
+        });
+        var schedule = {
+            scheduleId: response.scheduleId,
+            title: response.title,
+            start: response.start,
+            end: response.end,
+            placeOfServiceId: response.placeOfServiceId,
+            location: response.location,
+            doctors: docs.join( )
+        };
+        wnd.content(detailsTemplate(schedule));
+        //open the window
+        wnd.center().open();
+    };
+
+    var getScheduleFails = function (response) {
+        console.log("Get Schedule fail: ", response);        
+        if (response.status === 401)//Not found
+            toastr.error(response.statusText);
+        else //Anything else
+            toastr.error('We are sorry, but something went wrong. Please try again.');
+    };  
+
+    var addDropdownToSchedulerToolbar = function () {
         var scheduler = $("#DoctorSchedule").data("kendoScheduler");
 
         var toolbar = $(scheduler.toolbar);
@@ -24,7 +80,7 @@
                 transport: {
                     read: {
                         dataType: "json",
-                        url: "/Doctors/GetActiveDoctorsAsJson",
+                        url: "/Doctors/GetActiveDoctorsAsJson"
                     }
                 }
             },
@@ -102,6 +158,7 @@
         filterLocations: filterLocations,
         filterDoctor: filterDoctor,
         onDataBoundLocation: onDataBoundLocation,
-        setSchedulerSettings: setSchedulerSettings        
+        addDropdownToSchedulerToolbar: addDropdownToSchedulerToolbar,
+        init: init
     };
-}();
+}(ScheduleService);

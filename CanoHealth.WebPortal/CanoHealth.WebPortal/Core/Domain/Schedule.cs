@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CanoHealth.WebPortal.Core.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -61,6 +62,27 @@ namespace CanoHealth.WebPortal.Core.Domain
             RecurrenceException = schedule.RecurrenceException;
             StartTimezone = schedule.StartTimezone;
             EndTimezone = schedule.EndTimezone;
+        }
+
+        public ScheduleDto ConvertToDto()
+        {
+            var schedule = new ScheduleDto
+            {
+                ScheduleId = ScheduleId,
+                Title = Title,
+                Start = Start,
+                End = End,
+                Description = Description,
+                PlaceOfServiceId = PlaceOfServiceId,
+                Location = Location.Name
+            };
+
+            foreach (var doctor in DoctorSchedules)
+            {
+                schedule.Doctors.Add(DoctorDto.Wrap(doctor.Doctor));
+            }
+
+            return schedule;
         }
     }
 }

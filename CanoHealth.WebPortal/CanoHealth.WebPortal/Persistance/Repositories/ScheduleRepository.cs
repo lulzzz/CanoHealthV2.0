@@ -27,6 +27,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             var schedule = EnumarableGetAll(
                 filter: s => s.ScheduleId == scheduleId,
                 includeProperties: new Expression<Func<Schedule, object>>[] {
+                    l => l.Location,
                     s => s.DoctorSchedules.Select(d => d.Doctor)
                 }).FirstOrDefault();
 

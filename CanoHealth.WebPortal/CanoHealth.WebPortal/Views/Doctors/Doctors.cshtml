@@ -304,7 +304,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="pull-right">
+                <div class="pull-right js-doctormedlicenses-editbtns">
                     <a class="k-button k-edit-button" href="\\#" title="Edit"><span class="k-icon k-i-edit"></span></a>
                     @*<a class="k-button k-delete-button" href="\\#" title="Release"><span class="k-icon k-i-close"></span></a>*@
                 </div>
@@ -439,7 +439,7 @@
                     </div>
 
                 </div>
-                <div class="pull-right">
+                <div class="pull-right js-doctorpersonalfiles-editbtns">
                     <a class="k-button k-edit-button" href="\\#" title="Edit"><span class="k-icon k-i-edit"></span></a>
                     @*<a class="k-button k-delete-button" href="\\#" title="Release"><span class="k-icon k-i-close"></span></a>*@
                 </div>
@@ -521,7 +521,7 @@
             <p>#=ProviderNumber#</p>
             <p>#=moment(IndividualProviderEffectiveDate).format('L')#</p>
             <hr />
-            <div class="pull-left">
+            <div class="pull-left js-doctorindividualprovider-editbtns">
                 <a class="k-button k-edit-button"><span class="k-icon k-i-edit"></span></a>
             </div>
         </div>
@@ -585,7 +585,6 @@
     <h2 class="section-title">Line of Business</h2>
 
     <div id="linkedcontractplusdata_#=DoctorId#_#=GroupNumber#">
-
         <div id="contracts_#=GroupNumber#"
              class="css-gray-listview"
              data-role="listview"
@@ -594,9 +593,7 @@
              data-bind="source: linkedContractDetailsDataSource,
              events: { remove: onRemoveLinkedContractItem }">
         </div>
-
     </div>
-
 </script>
 
 <script type="text/x-kendo-template" id="linkedcontractplusdata-detail-template">
@@ -613,8 +610,7 @@
             </dt>
         </dl>
 
-
-        <div class="edit-buttons">
+        <div class="edit-buttons js-doctorlinkedcontracts-editbtns">
             <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
             <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
         </div>
