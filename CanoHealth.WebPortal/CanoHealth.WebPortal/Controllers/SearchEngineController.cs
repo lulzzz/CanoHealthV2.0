@@ -82,7 +82,8 @@ namespace CanoHealth.WebPortal.Controllers
                 .Select(doctor => new
                 {
                     DoctorId = doctor.DoctorId,
-                    FullName = $"{doctor.FirstName} {doctor.LastName}"
+                    FullName = $"{doctor.FirstName} {doctor.LastName}",
+                    NpiNumber = doctor.NpiNumber
                 })
                 .ToList();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
