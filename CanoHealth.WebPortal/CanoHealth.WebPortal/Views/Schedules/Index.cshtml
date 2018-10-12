@@ -18,25 +18,24 @@
 
 <br />
 
-
 <div class="container-fluid">
     @(Html.Kendo().Scheduler<ScheduleViewModel>()
-                            .Name("DoctorSchedule")
-                            .Date(DateTime.Today)
-                            .StartTime(DateTime.Today)
-                            .AllDaySlot(false)
-                            .Toolbar(tool =>
+       .Name("DoctorSchedule")
+       .Date(DateTime.Today)
+       .StartTime(DateTime.Today)
+       .AllDaySlot(false)
+       .Toolbar(tool =>
                             {
                                 tool.Pdf();
                             })
-                            .Pdf(pdf =>
+       .Pdf(pdf =>
                             {
                                 pdf.FileName("Schedule.pdf");
                                 pdf.ProxyURL(Url.Action("ExportSchedule", "Schedulers"));
                             })
-                            .Editable(false)
-
-                            .Views(views =>
+       .Editable(false)
+       .Mobile()
+       .Views(views =>
                             {
                                 views.DayView();
                                 views.WeekView();
@@ -44,12 +43,12 @@
                                 views.AgendaView();
                                 views.TimelineView();
                             })
-                            .Footer(footer =>
+       .Footer(footer =>
                             {
                                 footer.Command("workDay");
                             })
-                            .Timezone("Etc/UTC")
-                            .Resources(resource =>
+       .Timezone("Etc/UTC")
+       .Resources(resource =>
                             {
                                 resource.Add(r => r.LocationId)
                                      .DataValueField("PlaceOfServiceId")
@@ -78,8 +77,8 @@
                                          .ServerFiltering(true);
                                      });
                             })
-                            .DataSource(ds => ds
-                                .Model(model =>
+       .DataSource(ds => ds
+           .Model(model =>
                                 {
                                     model.Id(m => m.ScheduleId);
                                     model.Field(f => f.Title).DefaultValue("No title");
@@ -87,8 +86,8 @@
                                     model.RecurrenceId(f => f.RecurrenceID);
                                     model.Field(f => f.Title).DefaultValue("No title");
                                 })
-                                .Read(read => read.Action("ReadSchedules", "Schedulers").Data("SchedulersController.filterDoctor"))
-                            )
+           .Read(read => read.Action("ReadSchedules", "Schedulers").Data("SchedulersController.filterDoctor"))
+       )
             //.WorkDayEnd()
     )
 </div>
@@ -156,10 +155,6 @@
     <strong>No event data is available</strong>
     #}#
 </script>
-
-<style>
-    
-</style>
 
 @section Scripts{
     <script src="~/Scripts/kendo/2018.1.221/kendo.timezones.min.js"></script>

@@ -386,7 +386,82 @@
 
     var init = function(container) {
         $(container).on("click", ".js-searchengine-button", performSearch);
-        $(container).on("click", ".js-refresh-button", resetSearchParamenters);
+        $(container).on("click", ".js-refresh-button", resetSearchParamenters);             
+    };
+
+    var showDoctorSchedule = function (e) {
+        var doctorId = e;
+
+        var scheduler = $("#js-doctor-calendar-scheduler").kendoScheduler({
+            date: new Date(),
+            views: [
+                { type: "day" },
+                { type: "month", selected: true },
+                { type: "agenda", selectedDateFormat: "{0:ddd, M/dd/yyyy} - {1:ddd, M/dd/yyyy}" }
+            ],
+            timezone: "Etc/UTC",
+            dataSource: {
+                type: 'aspnetmvc-ajax',
+                transport: {
+                    read: {
+                        url: domainName + "/Schedulers/ReadSchedules",
+                        data: { doctorId: doctorId }
+                    }
+                }
+            },
+            schema:{
+                model: {
+                    id: "ScheduleId",
+                    fields: {                       
+                        ScheduleId: { field: "ScheduleId" },
+                        //title: { field: "Title" },
+                        //start: { type: "date", field: "Start" },
+                        //end: { type: "date", from: "End" },
+                        ////startTimezone: { field: "StartTimezone" },
+                        ////endTimezone: { field: "EndTimezone" },
+                        //description: { field: "Description" },
+                        //recurrenceId: { from: "RecurrenceID" },
+                        //recurrenceRule: { from: "RecurrenceRule" },
+                        //recurrenceException: { from: "RecurrenceException" },
+                        //locationId: { field: "LocationId"},
+                        //isAllDay: { type: "boolean", field: "IsAllDay" },
+                        //doctors: { field: "Doctors" },
+                        ////timezone: { field: "Timezone" }
+                    }
+                }
+            },
+            resources: [
+                {
+                    field: "locationId",
+                    dataTextField: "Name",
+                    dataValueField: "PlaceOfServiceId",
+                    title: "Location",
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: domainName + "/PlaceOfService/GetLocations",
+                                dataType: "json"
+                            }                            
+                        }
+                    }
+                },
+                {
+                    field: "doctors",
+                    multiple: true,
+                    title: "Doctors",
+                    dataValueField: "DoctorId",
+                    dataTextField: "FullName",
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: domainName + "/ClinicDoctorTeams/GetDoctorsByLocation", 
+                                dataType: "json"
+                            }
+                        }
+                    }
+                }
+            ]
+        }).data("kendoScheduler");//       
     };
 
     //Reset the search params.
@@ -452,6 +527,7 @@
         onSelectDoctorAutocomplete: onSelectDoctorAutocomplete,
         onCloseDoctorAutocomplete: onCloseDoctorAutocomplete,
         onChangeDoctorAutocomplete: onChangeDoctorAutocomplete,
-        onBoundDoctorToListView: onBoundDoctorToListView
+        onBoundDoctorToListView: onBoundDoctorToListView,
+        showDoctorSchedule:showDoctorSchedule
     };
 }();
