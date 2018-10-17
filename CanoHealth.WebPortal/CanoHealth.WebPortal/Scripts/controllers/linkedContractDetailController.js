@@ -1,5 +1,7 @@
 ﻿var LinkedContractDetailController = function() {
-    var createObservable = function(doctorId, contractGroupNumber, insuranceName) {
+    var createObservable = function (doctorId, contractGroupNumber, insuranceName) {
+        var doctor = DoctorEventHandler.getSelectedDoctor();
+        
         var viewModel = kendo.observable({
             //Doctor info to display
             firstName: null,
@@ -10,6 +12,9 @@
             npiNumber: null,
             caqhNumber: null,
             active: null,
+
+            //If expanded doctor is true display all buttons
+            enableDoctorLinkedContractButtons: doctor.Active,
 
             onRemoveLinkedContractItem: function(e) {
                 e.preventDefault();
@@ -35,6 +40,7 @@
                     window.refresh().close();
                 });
             },
+
             linkedContractDetailsDataSource: new kendo.data.DataSource({
                 schema: {
                   model: {
@@ -58,7 +64,7 @@
                     update: function (options) {
                         
                         var onSuccessUpdate = function (response) {
-                            console.log("update linked contract succed: ", response);
+                            console.log("update linked contract succed: ");
                             options.success(response);
                             toastr.success("Contract was successfully updated.");
                         };
@@ -83,7 +89,7 @@
                             toastr.error(response.statusText);
                             viewModel.get('linkedContractDetailsDataSource').cancelChanges();
                             options.error(response);
-                        }
+                        };
 
                         AjaxCallDelete("/api/linkedcontracts/",
                             JSON.stringify(options.data),

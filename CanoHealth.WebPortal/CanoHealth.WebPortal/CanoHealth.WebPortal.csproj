@@ -1450,6 +1450,7 @@
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\kendoEventHandlers\contractEventHandlers.js" />
     <Content Include="Scripts\kendoEventHandlers\doctorEventsHandler.js" />
+    <Content Include="Scripts\kendoEventHandlers\doctorEventsHandler_old.js" />
     <Content Include="Scripts\kendoEventHandlers\individualProviderEventsHandler.js" />
     <Content Include="Scripts\kendoEventHandlers\insuranceEventsHandler.js" />
     <Content Include="Scripts\kendoEventHandlers\linkedContractEventHandler.js" />
@@ -1576,6 +1577,7 @@
     <Content Include="Scripts\kendo\2018.1.221\kendo.timezones.min.js.map" />
     <Content Include="Views\Schedulers\EditorTemplates\SchedulerForm.cshtml" />
     <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Shared\_LinkedContractGridForBillers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site_originalfromkendotemplate.css" />

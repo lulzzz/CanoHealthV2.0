@@ -18,8 +18,7 @@
             toastr.error("invalid email address. It should be part of canohealth domain.");
             $(".k-grid-update").hide();
         } else {
-            var checkAvailabilitySuccess = function (response) {
-                console.log("user: ", response);
+            var checkAvailabilitySuccess = function (response) {               
                 //Authorization has been denied for this request. Returns 200 with an error message instead a 401 unauthorized
                 if (response && response.message) {
                     toastr.error(response.message);
@@ -64,8 +63,7 @@
                 //role: "password-input",
                 placement: "top"
             });
-        } else {
-            console.log(e.model);
+        } else {           
             e.model.dirty = true;
             $("#js-password").hide();
             $("#js-confirmpassword").hide();

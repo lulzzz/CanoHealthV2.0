@@ -1,7 +1,7 @@
 ﻿var LinkedContractController = function () {
     //private methods.
-    var createLinkedContractViewModel = function(doctorId) {       
-        
+    var createLinkedContractViewModel = function (doctorId) {
+
         var linkedContractViewModel = kendo.observable({
             selectedContract: null,
             selectedBusinessLine: null,
@@ -28,7 +28,7 @@
                         EffectiveDate: this.get('ooEffectiveDate')
                     };
                     var saveOutOfNetworkContractSuccess = function (response) {
-                        console.log("save out of network succeed: ", response);
+                        console.log("save out of network succeed: ");
                         linkedContractViewModel.resetFieldsToDefaultValues();
                         $(".js-individual-provider-notification").data("kendoWindow").close();
                         $(".js-linked-contract-form-window_" + doctorId)
@@ -37,7 +37,7 @@
 
                         linkedContractViewModel.get('contractDataSource').filter({ field: "insuranceId", operator: "neq", value: response.insurnaceId });
                     };
-                    var saveOutOfNetworkContractFails = function(response) {
+                    var saveOutOfNetworkContractFails = function (response) {
                         console.log("save out of network failed: ", response);
                         $(".js-individual-provider-notification").data("kendoWindow").close();
                         $(".js-linked-contract-form-window_" + doctorId)
@@ -57,7 +57,7 @@
                 else
                     return false;
             },
-            checkRequiredFiedsForIndividualProviderSection: function() {
+            checkRequiredFiedsForIndividualProviderSection: function () {
                 var isValid = true,
                     providerN = "",
                     effDate = "";
@@ -82,7 +82,7 @@
                         IndividualProviderEffectiveDate: this.get("individualproviderEffectiveDate")
                     };
                     var saveIndividualProviderSucceed = function (response) {
-                        console.log("save Individual Provider Succeed: ", response);
+                        console.log("save Individual Provider Succeed: ");
                         $(".js-individual-provider-notification_" + doctorId)
                             .data("kendoWindow").close();
                         linkedContractViewModel.set("individualProviderNumber", null);
@@ -100,10 +100,10 @@
                             IndividualProviderEffectiveDate: moment(response.individualProviderEffectiveDate).format('L')
                         }
                         individualProviderListView.dataSource.pushCreate(response);
-                        
+
                         toastr.success("Individual Provider contract was successfully created.");
                     };
-                    var saveIndividualProviderFailed = function(response) {
+                    var saveIndividualProviderFailed = function (response) {
                         console.log("save Individual Provider failed: ", response);
                         $(".js-individual-provider-notification_" + doctorId)
                             .data("kendoWindow").close();
@@ -129,9 +129,9 @@
             displaySelectedContract: function () {
                 var selectedContract = this.get("selectedContract");
                 return JSON.stringify(selectedContract, null, 4);
-            },           
+            },
             onChangeLinkedContracts: function () {
-                console.log("event :: change (" + this.displaySelectedContract() + ")");
+
                 var individualProvider = {
                     doctorId: doctorId,
                     insuranceId: this.get("selectedContract").insuranceId
@@ -145,19 +145,19 @@
                             .kendoWindow({
                                 title: "Confirmation!",
                                 visible: false, //the window will not appear before its .open method is called
-                                width: "400px",                            
+                                width: "400px",
                                 modal: true,
-                                close: function(e) {
+                                close: function (e) {
                                     linkedContractViewModel.resetFieldsToDefaultValues();
                                 }
                             })
                             .data("kendoWindow");
 
-                        
-                        window.center().open();
-                    } 
 
-                }
+                        window.center().open();
+                    }
+
+                };
                 AjaxCallGet("api/IndividualProviders/GetIndividualProviderByDoctorAndInsurance",
                     individualProvider, getIndividualProviderSuccess);
             },
@@ -166,7 +166,7 @@
                     read: {
                         url: "/api/ContractBusinessLines/GetContractBusinessLines",
                         dataType: "json",
-                        method: "GET"                        
+                        method: "GET"
                     }
                 }
             }),
@@ -175,7 +175,7 @@
                 return JSON.stringify(selectedBusinessLine, null, 4);
             },
             onChangeBusinessLines: function () {
-                console.log("event :: change (" + this.displaySelectedBusinessLine() + ")");
+
             },
             checkRequiredFieldsForLinkedContracts: function () {
                 var isValid = true,
@@ -200,17 +200,17 @@
             },
             onLinkDoctorToContract: function () {
                 if (this.checkRequiredFieldsForLinkedContracts()) {
-                    var linkedContractObject = {                        
+                    var linkedContractObject = {
                         ContractLineofBusinessId: this.get('selectedBusinessLine').contractLineofBusinessId,
                         DoctorId: doctorId,
                         Note: this.get('note'),
                         EffectiveDate: moment(this.get('effectiveDate')).format('L'),
                         CorporationName: this.get('selectedContract').corporationName,
                         InsuranceName: this.get('selectedContract').name,
-                        GroupNumber: this.get('selectedContract').groupNumber                         
-                    }
+                        GroupNumber: this.get('selectedContract').groupNumber
+                    };
                     var linkedContractSucceed = function (response) {
-                        console.log("Link doctor to contract succeed: ", response);
+                        console.log("Link doctor to contract succeed: ");
                         var doctorContractGrid = $("#DoctorContract_" + doctorId)
                             .data('kendoGrid');
                         var contract = doctorContractGrid.dataSource.get(response.groupNumber);
@@ -225,7 +225,7 @@
                         }
 
                         var datailedLinkedContract = $("#contracts_" + response.groupNumber).data('kendoListView');
-                        if(datailedLinkedContract)
+                        if (datailedLinkedContract)
                             datailedLinkedContract.dataSource.read();
 
                         linkedContractViewModel.resetFieldsToDefaultValues();
@@ -238,7 +238,7 @@
                                 var errorMessage = "";
                                 var modelstate = response.responseJSON.modelState;
                                 if (modelstate) {
-                                   
+
                                     for (var prop in modelstate) {
                                         if (modelstate.hasOwnProperty(prop)) {
                                             errorMessage = errorMessage + " " + modelstate[prop].toString();
@@ -255,14 +255,14 @@
                         $(".js-linked-contract-form-window_" + doctorId).data('kendoWindow').close();
                     };
                     AjaxCallPost("/api/LinkedContracts", JSON.stringify(linkedContractObject),
-                    linkedContractSucceed, linkedContractFailed);
-                }                
+                        linkedContractSucceed, linkedContractFailed);
+                }
             },
             onCloseLinkedContractFormWindow: function () {
                 $(".js-linked-contract-form-window_" + doctorId).data("kendoWindow").close();
                 this.resetFieldsToDefaultValues();
             },
-            resetFieldsToDefaultValues: function() {
+            resetFieldsToDefaultValues: function () {
                 this.set('selectedContract', null);
                 this.set('selectedBusinessLine', null);
                 this.set('effectiveDate', null);
@@ -277,11 +277,11 @@
                 this.set('individualproviderEffectiveDate', null);
             }
         });
-        kendo.bind($("#js-linked-contract-form-section_" + doctorId), linkedContractViewModel);        
-    }
+        kendo.bind($("#js-linked-contract-form-section_" + doctorId), linkedContractViewModel);
+    };
 
     //access to private members
     return {
         createLinkedContractViewModel: createLinkedContractViewModel
-    }
+    };
 }();

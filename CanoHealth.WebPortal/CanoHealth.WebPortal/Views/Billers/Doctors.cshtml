@@ -57,10 +57,10 @@
 
                         .ClientDetailTemplateId("doctor-detail-template")
 
-                        .Events(ev => ev.DetailExpand("onExpandDoctorRow")
-                            .DataBound("onDataBoundDoctorGrid")
-                            .Cancel("onCancelEditDoctorItem")
-                            .Edit("onSaveDoctorItem"))
+                        .Events(ev => ev.DetailExpand("DoctorEventHandler.onExpandDoctorRow")
+                            .DataBound("DoctorEventHandler.onDataBoundDoctorGrid")
+                            .Cancel("DoctorEventHandler.onCancelEditDoctorItem")
+                            .Edit("DoctorEventHandler.onSaveDoctorItem"))
 
                         .Filterable()
                         .Sortable()
@@ -162,7 +162,7 @@
 
         <!--Doctor's linked contracts-->
         <div class="tab-pane" id="linkedcontract_#=DoctorId#">
-            @Html.Partial("_DisplayLinkedContractGrid")
+            @Html.Partial("_LinkedContractGridForBillers")
         </div>
     </div>
 </script>
@@ -366,32 +366,32 @@
     </div>
     <h2 class="section-title">Providers by Locations</h2>
     @(Html.Kendo().Grid<ProviderByLocationDto>()
-                .Name("Providers_#=doctorCorporationContractLinkId#")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProviderByLocationId).Hidden(true);
-                    columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
-                    columns.Bound(p => p.PlaceOfServiceName).Title("Location");
-                    columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
-                    columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date")
-                        .Format("{0: MM/dd/yyyy}");
-                    columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
+      .Name("Providers_#=doctorCorporationContractLinkId#")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.ProviderByLocationId).Hidden(true);
+          columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
+          columns.Bound(p => p.PlaceOfServiceName).Title("Location");
+          columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
+          columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date")
+              .Format("{0: MM/dd/yyyy}");
+          columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
 
-                })
-                .DataSource(ds => ds
-                    .Ajax()
-                    .ServerOperation(true)
-                    .Model(m =>
-                    {
-                        m.Id(x => x.ProviderByLocationId);
-                        m.Field(x => x.PlaceOfServiceId).Editable(false);
-                        m.Field(x => x.PlaceOfServiceName).Editable(false);
-                        m.Field(x => x.Active).Editable(false);
-                    })
-                    .Events(events => events.Error("locationProvidersErrorHandler"))
-                    .Read(r => r.Action("GetActiveProvidersByLocation", "ProviderByLocations", new { doctorCorporationContractLinkId = "#=doctorCorporationContractLinkId#" }))
-                )
-                .ToClientTemplate())
+      })
+      .DataSource(ds => ds
+          .Ajax()
+          .ServerOperation(true)
+          .Model(m =>
+          {
+              m.Id(x => x.ProviderByLocationId);
+              m.Field(x => x.PlaceOfServiceId).Editable(false);
+              m.Field(x => x.PlaceOfServiceName).Editable(false);
+              m.Field(x => x.Active).Editable(false);
+          })
+          .Events(events => events.Error("DoctorEventHandler.locationProvidersErrorHandler"))
+          .Read(r => r.Action("GetActiveProvidersByLocation", "ProviderByLocations", new { doctorCorporationContractLinkId = "#=doctorCorporationContractLinkId#" }))
+      )
+      .ToClientTemplate())
 
 </script>
 

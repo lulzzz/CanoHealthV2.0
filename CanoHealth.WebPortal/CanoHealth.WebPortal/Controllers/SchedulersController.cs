@@ -62,6 +62,29 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(schedules.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult ReadScheduleJson(Guid? doctorId = null)
+        {
+            var schedules = new List<ScheduleViewModel>();
+
+            if (doctorId == null || doctorId == Guid.Empty)
+            {
+                schedules = _unitOfWork.ScheduleRepository
+                   .GetSchedules()
+                   .Select(ScheduleViewModel.Wrap)
+                   .ToList();
+            }
+            else
+            {
+                schedules = _unitOfWork.DoctorScheduleRepository
+                    .GetSchedulesByDoctorId(doctorId.Value)
+                    .Select(s => s.Schedule)
+                    .Select(ScheduleViewModel.Wrap)
+                    .ToList();
+            }
+            return Json(schedules, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult CreateSchedule([DataSourceRequest] DataSourceRequest request,
             ScheduleViewModel schedule)
         {

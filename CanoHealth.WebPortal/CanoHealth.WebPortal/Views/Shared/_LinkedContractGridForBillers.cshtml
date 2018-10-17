@@ -1,0 +1,38 @@
+﻿@using CanoHealth.WebPortal.Core.Dtos
+@(Html.Kendo().Grid<LinkedContractDto>()
+        .Name("DoctorContract_#=DoctorId#")        
+        .Columns(col =>
+        {
+            col.Bound(c => c.DoctorId).Hidden();
+
+            col.Bound(c => c.CorporationName).Title("CORPORATION");
+
+            col.Bound(c => c.InsuranceName).Title("INSURANCE");
+
+            col.Bound(c => c.GroupNumber).Title("CONTRACT"); //.ClientTemplate("<a>#=GroupNumber#</a>");
+})
+        .Filterable()
+        .Sortable()
+        .Groupable()
+        .Resizable(r => r.Columns(true))
+        .Pageable(pager => pager
+            .Numeric(true)
+            .Info(true)
+            .PreviousNext(true)
+            .Refresh(true)
+            .PageSizes(new object[] { 10, 20, "All" })
+        )
+        .ClientDetailTemplateId("linkedcontract-details-template")
+        .Events(ev => ev.DetailExpand("onExpandContractDataRow"))
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(5)
+            .Model(model =>
+            {
+                model.Id(c => c.GroupNumber);
+                model.Field(c => c.GroupNumber);
+            })
+            .Read(read => read.Action("ReadLinkedContracts", "LinkedContracts", new { doctorId = "#=DoctorId#" }))
+        )
+        .ToClientTemplate())

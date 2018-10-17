@@ -7,8 +7,8 @@
 
     //Private Methods
    
-    var getInsuranceWithContractsSuccess = function(response) {
-        console.log("getInsuranceWithContractsSuccess: ", response);
+    var getInsuranceWithContractsSuccess = function (response) {
+        
         if (response.name != null && response.active === false) {
             var inactiveInsuranceNotification = $(".js-inactiveinsurance-notification").kendoWindow({
                 modal: true,
@@ -22,16 +22,16 @@
                 contractService.activateInsurance(response);
                 inactiveInsuranceNotification.close();
             });
-            $(".js-inactiveinsurance-notification").on("click", ".js-cancel-insurance", function() {
+            $(".js-inactiveinsurance-notification").on("click", ".js-cancel-insurance", function () {
                 inactiveInsuranceNotification.close();
                 $(".js-insurance-name").val("");
             });
         }
-    }
+    };
 
     var getInsuranceWithContractsFail = function (response) {
         console.log("getInsuranceWithContractsFail: ", response);
-    }
+    };
 
     var createContractViewModel = function () {
         var contractViewModel = kendo.observable({
@@ -124,7 +124,7 @@
                     }
 
                     var createContractsuccess = function(response) {
-                        console.log("CreateContract success: ", response);
+                        console.log("CreateContract success");
                         var grid = $("#Contracts").data('kendoGrid'),
                             contractWindow = $(".js-contractform-window").data("kendoWindow");
                         grid.dataSource.pushCreate({
@@ -174,8 +174,7 @@
 
             onEditAddendumItem: function (e) {
                 if (!e.model.isNew()) {
-                    e.model.dirty = true;
-                    console.log(e.model);
+                    e.model.dirty = true;                    
                 }
             },
 
@@ -316,8 +315,7 @@
                                 contentType: false,
                                 processData: false,
                                 data: formData,
-                                success: function (response) {
-                                    console.log(response);
+                                success: function (response) {                                   
                                     response = {
                                         active: true,
                                         contentType: response.ContentType,
@@ -398,8 +396,7 @@
                                 contentType: false,
                                 processData: false,
                                 data: formData,
-                                success: function (response) {
-                                    console.log(response);
+                                success: function (response) {                                    
                                     response = {
                                         active: response.Active,
                                         contentType: response.ContentType,
@@ -499,8 +496,7 @@
             isContractBusinessLineChanging: function() {
                 if (this.get('editBtnVisible') === true && this.get('originalContractBusinessLineItem') &&
                 (this.get('selectedBusinessLine').planTypeId !== this.get('originalContractBusinessLineItem').planTypeId
-                )) {
-                    console.log(this.get('selectedPlaceOfService'), this.get('originalContractBusinessLineItem').clinics);
+                )) {                    
                     return true;
                 } else
                     return false;
@@ -553,16 +549,16 @@
                     };
                     //add a data item to a remote data source
                     var addBusinessLineSuccess = function (response) {
-                        console.log("Add new Line of Business to the contract: ", response);
+                        console.log("Add new Line of Business to the contract: success");
                         contractBusinessLineViewModel.get('contractBusinesslinesDataSource').pushCreate(response);
-                        contractBusinessLineViewModel.get('businessLinesDataSource').pushDestroy({planTypeId: response.planTypeId, name: response.name});
+                        contractBusinessLineViewModel.get('businessLinesDataSource').pushDestroy({ planTypeId: response.planTypeId, name: response.name });
                         contractBusinessLineViewModel.canceladdBusinessLineToContract();
                         toastr.success("Line of Business successfuly added to the Contract.");
-                    }
+                    };
                     var addBusinessLineFails = function (response) {
                         console.log('Post request to ContractBusinessLines fails: ', response);
                         toastr.error("Internal Server Error. Please contact your system administrator.");
-                    }
+                    };
                     AjaxCallPost("/api/ContractBusinessLines", JSON.stringify(contractBusinessLineItem), addBusinessLineSuccess, addBusinessLineFails);
                 }
             },
@@ -635,7 +631,7 @@
                         
                     };
                     var updateContractBusinessLineSucess = function (response) {
-                        console.log("Change line of business of the contract:", response);
+                        console.log("Change line of business of the contract: success");
 
                         var previousLineOfBusiness = contractBusinessLineViewModel.get("originalContractBusinessLineItem").planTypeId;
                         var currentLineOfBusiness = response.planTypeId;
@@ -654,7 +650,7 @@
                         contractBusinessLineViewModel.canceladdBusinessLineToContract();
                         contractBusinessLineViewModel.set('originalContractBusinessLineItem', null);
                         toastr.success("Contract successfuly updated.");
-                    }
+                    };
                     AjaxCallPut("/api/ContractBusinessLines", JSON.stringify(contractBusinessLineItem), updateContractBusinessLineSucess);
                 }
             },
@@ -736,15 +732,13 @@
             }),
 
             //Clinic-Contract-BusinessLine Section
-            deleteClinicContractBusinessLineItem: function(e) {
-                console.log("deleteClinicContractBusinessLineItem: ", e,
-                    $(e.currentTarget).closest("tr"));
+            deleteClinicContractBusinessLineItem: function(e) {               
                 var clinicContractBusinessLineItem = {
                     Id: e.data.id,
                     ContractLineofBusinessId: e.data.contractLineofBusinessId,
                     PlaceOfServiceId: e.data.placeOfServiceId,
                     Name: e.data.name
-                }
+                };
 
                 var releaseClinicContractBusinessLineTemplate = kendo.template($("#release-cliniccontractbusinessLine-template").html());
 

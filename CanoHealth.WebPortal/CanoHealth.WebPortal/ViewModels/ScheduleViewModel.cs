@@ -91,7 +91,8 @@ namespace CanoHealth.WebPortal.ViewModels
                 RecurrenceRule = schedule.RecurrenceRule,
                 RecurrenceException = schedule.RecurrenceException,
                 RecurrenceID = schedule.RecurrenceID,
-                Doctors = schedule.DoctorSchedules.Select(d => d.DoctorId)
+                Doctors = schedule.DoctorSchedules.Select(d => d.DoctorId),
+                Timezone = "Etc/UTC"
             };
         }
 

@@ -27,7 +27,7 @@
     };
 
     var getScheduleSuccess = function (response) {
-        console.log("Get Schedule success: ", response);
+        console.log("Get Schedule success: ");
         //set the window content 
         var detailsTemplate = kendo.template($("#schedule-detail-template").html());
         //get the window instance

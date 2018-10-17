@@ -5,12 +5,10 @@
 
     //Private Methods
     var createDoctorMedicalLicenseViewModel = function (doctor) {
-        console.log("Doctor from Medical License ViewModel: ", doctor);
-
         var medicalLicenseViewModel = kendo.observable({
             //MedicalLicense Section
             //if doctor is Active enable New MedicalLicense button
-            enableNewMedicalLicenseButton: doctor.Active,
+            enableMedicalLicenseButtons: doctor.Active,
 
             onAddMedicalLicense: function () {
                 var medicalLicenseListViewComponents = $("#medicallicense-listview-" + doctor.DoctorId).data("kendoListView");
@@ -19,8 +17,7 @@
 
             onEditMedicalLicenseItem: function (e) {
                 if (!e.model.isNew()) {
-                    e.model.dirty = true;
-                    console.log(e.model);
+                    e.model.dirty = true;                    
                 }
             },
 
@@ -283,7 +280,7 @@
                             toastr.error(response.statusText);
                             medicalLicenseViewModel.get('medicalLicenseDataSource').cancelChanges();
                             options.error(response);
-                        }
+                        };
                         doctorService.inactivateLicense(options.data, inactivateLicenseSuccess, inactivateLicenseFail);
                     }
                 }
@@ -488,7 +485,7 @@
                         placeOfServiceDoctorGrid.dataSource.pushCreate(doctorInfo);
                         var doctorFormWnd = $(".js-doctor-form-window").data('kendoWindow');
                         doctorFormWnd.refresh().close();
-                        console.log("success: ", response);
+                        console.log("success: ");
                     };
                     var assignDoctorToPlaceOfServiceFails = function (response) {
                         switch (response.status) {
@@ -521,13 +518,13 @@
             },
             //When a previous doctor is found scenario
             onSelectDoctorFound: function(e) {
-                console.log("onSelectDoctorFound: ", e);
+                console.log("onSelectDoctorFound: ");
             },
             onUpdateDoctorFoundInfo: function(e) {
-                console.log("onUpdateDoctorFoundInfo: ", e);
+                console.log("onUpdateDoctorFoundInfo: ");
             },
             onCancelOperationWhenDoctorFound: function(e) {
-                console.log('onCancelOperationWhenDoctorFound: ', e);
+                console.log('onCancelOperationWhenDoctorFound: ');
             },
             //Process AJAX requests responses
             getProviderInfoSuccess: function(response) {

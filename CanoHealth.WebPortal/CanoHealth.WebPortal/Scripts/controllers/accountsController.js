@@ -7,7 +7,7 @@
 
     var submitLogginCredentials = function () {
         var getUserSuccess = function (response) {
-            console.log(response);
+           
             //if email is not confirmed means that is the first attempt to login
             if (response && response.active && response.emailConfirmed === false) {
                 

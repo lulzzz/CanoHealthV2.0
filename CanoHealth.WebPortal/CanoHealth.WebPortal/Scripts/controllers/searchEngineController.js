@@ -5,7 +5,7 @@
 
     //private methods
     var getLocationInfoSuccess = function (response) {
-        console.log("location info success: ", response);
+        console.log("location info success: ");
 
         if (response.length === 0) {
             var nodatatemplate = kendo.template($("#no-data-found").html());
@@ -267,7 +267,7 @@
                     locationId: locationDrp.value()
                 };
                 var getDoctorInfoSuccess = function (response) {
-                    console.log("doctor info success: ", response);
+                    console.log("doctor info success: ");
                     if (response.length === 0) {
                         var nodatatemplate = kendo.template($("#no-data-found").html());  
 
@@ -401,12 +401,28 @@
             ],
             timezone: "Etc/UTC",
             dataSource: {
-                type: 'aspnetmvc-ajax',
+                //type: 'aspnetmvc-ajax',
                 transport: {
                     read: {
-                        url: domainName + "/Schedulers/ReadSchedules",
+                        url: domainName + "/Schedulers/ReadScheduleJson",
+                        dataType: "json",
                         data: { doctorId: doctorId }
                     }
+                    //read: function (options) {
+                    //    $.ajax({
+                    //        url: domainName + "/Schedulers/ReadScheduleJson",
+                    //        dataType: "json",
+                    //        data: { doctorId: doctorId },
+                    //        success: function (response) {
+                    //            console.log("success response from read scheduler:", response);
+                    //            options.success(response);
+                    //        },
+                    //        error: function (response) {
+                    //            console.log("fail response from read scheduler:", response);
+                    //            options.error(response);
+                    //        }
+                    //    });                        
+                    //}
                 }
             },
             schema:{
@@ -415,18 +431,18 @@
                     fields: {                       
                         ScheduleId: { field: "ScheduleId" },
                         //title: { field: "Title" },
-                        //start: { type: "date", field: "Start" },
-                        //end: { type: "date", from: "End" },
+                        Start: { type: "date", field: "Start" },
+                        End: { type: "date", field: "End" },
                         ////startTimezone: { field: "StartTimezone" },
                         ////endTimezone: { field: "EndTimezone" },
                         //description: { field: "Description" },
                         //recurrenceId: { from: "RecurrenceID" },
                         //recurrenceRule: { from: "RecurrenceRule" },
                         //recurrenceException: { from: "RecurrenceException" },
-                        //locationId: { field: "LocationId"},
+                        locationId: { field: "LocationId"},
                         //isAllDay: { type: "boolean", field: "IsAllDay" },
-                        //doctors: { field: "Doctors" },
-                        ////timezone: { field: "Timezone" }
+                        doctors: { field: "Doctors" },
+                        timezone: { field: "Timezone" }
                     }
                 }
             },
@@ -461,7 +477,7 @@
                     }
                 }
             ]
-        }).data("kendoScheduler");//       
+        }).data("kendoScheduler");       
     };
 
     //Reset the search params.
@@ -509,7 +525,7 @@
     };
 
     var onBoundDoctorToListView = function (e) {
-        console.log("listview: ", e, e.sender, e.sender.element[0].id);
+        
         var listViewId = e.sender.element[0].id,
             listOfDoctorFound = e.sender.dataSource.data();
         if (e.sender.dataSource.data().length === 0) {

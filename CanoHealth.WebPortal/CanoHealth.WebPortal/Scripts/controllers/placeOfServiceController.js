@@ -85,8 +85,7 @@
 
             onEditLicenseItem: function(e) {
                 if (!e.model.isNew()) {
-                    e.model.dirty = true;
-                    console.log(e.model);
+                    e.model.dirty = true;                    
                 }
             },
 

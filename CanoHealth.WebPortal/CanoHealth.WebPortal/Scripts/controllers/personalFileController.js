@@ -4,7 +4,8 @@
 
     var createDoctorPersonalFileViewModel = function(doctor) {
         var personalFileViewModel = kendo.observable({
-            enableNewPersonalFileButton: doctor.Active,
+            //If doctor is active, show buttons if not hide them
+            enablePersonalFileButtons: doctor.Active,
 
             onAddPersonalFiles: function () {
                 var perosnalFileListViewComponents = $("#personalfiles-listview-" + doctor.DoctorId).data("kendoListView");
@@ -13,8 +14,7 @@
 
             onEditDoctorPersonalFileItem: function (e) {
                 if (!e.model.isNew()) {
-                    e.model.dirty = true;
-                    console.log(e.model);
+                    e.model.dirty = true;                   
                 }
             },
 
@@ -126,7 +126,7 @@
                             }
                             
                             var createPersonalFileSuccess = function (response) {
-                                console.log('Create Personal File succeed:', response);
+                                console.log('Create Personal File succeed:');
                                 toastr.success("File successfully created.");
                                 response = {
                                     doctorFileId: response.DoctorFileId,
@@ -204,7 +204,7 @@
                             }
 
                             var updatePersonalFileSuccess = function (response) {
-                                console.log('Update Personal File succeed:', response);
+                                console.log('Update Personal File succeed:');
                                 toastr.success("File successfully updated.");
                                 //Reset the array of files
                                 PersonalFilesController.doctorPersonalFilesFromKendoUpload = [];

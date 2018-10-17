@@ -22,7 +22,8 @@
         var viewModel = kendo.observable({
             InsuranceId: null,
 
-            enableNewIndividualProviderButton: doctor.Active,
+            //If doctor is active display all buttons
+            enableIndividualProviderButtons: doctor.Active,
 
             insuranceDataSource: new kendo.data.DataSource({
                 schema: {
@@ -52,9 +53,7 @@
                                     var insuranceDrp = $("#" + individualProviderItemToEdit.DoctorIndividualProviderId)
                                         .data("kendoDropDownList");
 
-                                    insuranceDrp.value(individualProviderItemToEdit.InsuranceId);
-
-                                    console.log("drp: ", insuranceDrp, "value: ", insuranceDrp.value());
+                                    insuranceDrp.value(individualProviderItemToEdit.InsuranceId);                                    
                                 }
                                 options.success(response);
                             },
@@ -101,8 +100,7 @@
                             }
                         });
                     },
-                    create: function (options) {
-                        console.log(options);
+                    create: function (options) {                       
                         $.ajax({
                             url: "/api/IndividualProviders/SaveIndividualProvider",
                             method: 'POST',
@@ -114,7 +112,7 @@
                                 IndividualProviderEffectiveDate: moment(options.data.IndividualProviderEffectiveDate).format('L')
                             },
                             success: function (response) {
-                                console.log("save individual provider success: ", response);
+                                console.log("save individual provider success: ");
                                 response = {
                                     DoctorIndividualProviderId: response.doctorIndividualProviderId,
                                     DoctorId: response.doctorId,
