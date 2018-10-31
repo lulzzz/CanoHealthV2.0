@@ -110,7 +110,7 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    ModelState.AddModelError("", "Something failed. Please contact your system administrator");
+                    ModelState.AddModelError("", "Something failed. Please contact your system administrator.");
                 }
             }
             return Json(new[] { insuranceViewModel }.ToDataSourceResult(request, ModelState));

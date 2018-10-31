@@ -116,11 +116,67 @@
         }
     };
 
+    //function invoke when active/inactive insurance succesfully
+    var onSuccessInsurance = function (response) {
+        response = {
+            InsuranceId: response.insuranceId,
+            Code: response.code,
+            Name: response.name,
+            PhoneNumber: response.phoneNumber,
+            Address: response.address,
+            Active: response.active
+        };
+        var insuranceGrid = $("#Insurances").data('kendoGrid');
+        insuranceGrid.dataSource.pushUpdate(response);
+    };
+
+    //function invoke when active/inactive insurance fails
+    var onFailInsurance = function (response) {
+        console.log("Save insurance fails: ", response);
+        toastr.error(response.statusText);
+    };
+
+    var onClickInactivateInsuranceButton = function (e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));        
+
+        var releaseInsuranceTemplate = kendo.template($("#inactive-insurance-confirmation-template").html());
+
+        var window = $(".js-notification-dialog").kendoWindow({
+            title: "Confirmation",
+            modal: true,
+            visible: false, //the window will not appear before its .open method is called
+            width: "400px"
+        }).data("kendoWindow");
+
+        window.content(releaseInsuranceTemplate(dataItem));
+
+        window.center().open();
+
+        $("#js-releaseinsurance-yesButton").click(function () {            
+            AjaxCallDelete("/api/insurances/", JSON.stringify(dataItem), onSuccessInsurance, onFailInsurance);
+            window.close();
+        });
+        $("#js-releaseinsurance-noButton").click(function () {
+            window.close();
+        });
+    };
+
+    var onClickActivateInsuranceButton = function (e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        dataItem.Active = true;
+        
+        AjaxCallPut("/api/insurances/", JSON.stringify(dataItem), onSuccessInsurance, onFailInsurance);
+    };
+
     //access to private members
     return {
         insuranceExpandedRow: insuranceExpandedRow,
         checkIfThereAreBusinessLinesToSelect: checkIfThereAreBusinessLinesToSelect,
         init: init,
-        onAddEditInsurance: onAddEditInsurance
+        onAddEditInsurance: onAddEditInsurance,
+        onClickInactivateInsuranceButton: onClickInactivateInsuranceButton,
+        onClickActivateInsuranceButton: onClickActivateInsuranceButton
     };
 }(InsuranceService);

@@ -72,9 +72,9 @@
                         m.Field(x => x.CorporationId).Editable(false);
                     })
                     .Events(ev => ev.Error("CorporationsController.serverSideErrorHandlers"))
-                    .Read(read => read.Action("ReadCorporations", "Corporation").Data("sendAntiForgery"))
-                    .Create(c => c.Action("SaveCorporation", "Corporation").Data("sendAntiForgery"))
-                    .Update(c => c.Action("SaveCorporation", "Corporation").Data("sendAntiForgery"))
+                    .Read(read => read.Action("ReadCorporations", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
+                    .Create(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
+                    .Update(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
                 ))
 </div>
 
@@ -82,9 +82,9 @@
 
 @section Scripts{
     @Scripts.Render("~/bundles/corporations")
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         function sendAntiForgery() {            
             return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() }
         }
-    </script>
+    </script>*@
 }

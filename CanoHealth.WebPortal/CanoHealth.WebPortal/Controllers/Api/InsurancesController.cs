@@ -67,5 +67,36 @@ namespace CanoHealth.WebPortal.Controllers.Api
             }
             return Ok(insurance);
         }
+
+        [HttpDelete]
+        public IHttpActionResult InactivateInsurance(InsuranceFormDto insurance)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                //Get the insurance and all the active contracts associated to it.
+                var insuranceStoredInDb = _unitOfWork.Insurances.GetWithContracts(insurance.InsuranceId);
+                if (insuranceStoredInDb == null)
+                    return NotFound();
+
+                //Inactivate insurance and all the active contracts associated to it.
+                var logs = insuranceStoredInDb.InactivateInsurance();
+
+                _unitOfWork.AuditLogs.AddRange(logs);
+
+                _unitOfWork.Complete();
+
+                insurance.Active = false;
+
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                return InternalServerError(ex);
+            }
+            return Ok(insurance);
+        }
     }
 }

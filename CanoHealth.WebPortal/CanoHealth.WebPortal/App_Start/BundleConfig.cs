@@ -48,9 +48,8 @@ namespace CanoHealth.WebPortal
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/corporations").Include(
-
+                "~/Scripts/controllers/antiForgeryTokenController.js",
                 "~/Scripts/controllers/corporationsController.js"
-
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/placeofservices").Include(
@@ -61,6 +60,7 @@ namespace CanoHealth.WebPortal
                 "~/Scripts/kendoEventHandlers/placeOfServiceEventHandlers.js"
             ));
 
+            //This is the common one and is included on _LayoutPage1.cshtml
             bundles.Add(new ScriptBundle("~/bundles/razontheme").Include(
                         "~/Scripts/jquery-2.2.4.js", //"~/Scripts/jquery-{version}.js",
                                                      //"~/Scripts/underscore-min.js",
