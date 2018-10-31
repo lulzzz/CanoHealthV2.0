@@ -124,6 +124,11 @@
                     //send the row data object to the template and render it
                     providerLocationWindow.content(kendoTemplate(linkedContractItem)); 
                     providerLocationWindow.center().open();
+
+                    if (doctor.Active)
+                        $(".k-button k-button-icontext k-grid-edit").show();
+                    else
+                        $(".k-button k-button-icontext k-grid-edit").hide();
                 };
 
                 var error = function (response) {

@@ -281,8 +281,17 @@
                             <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
                             <div class="text-icon-content">
                                 <h5 class="no-margin">File</h5>
-                                <div title="#=originalFileName#">
+                                @*<div title="#=originalFileName#">
                                     <p>#:originalFileName#</p>
+                                </div>*@
+                                <div title="#=originalFileName#">
+                                    #if(originalFileName != null && originalFileName.length <= 31){#
+                                    <p>#:originalFileName#</p>
+                                    #}else if(originalFileName != null && originalFileName.length > 31){#
+                                    <p>#:originalFileName.substring(0,27) + '...' + originalFileName.substring(originalFileName.length - 5)#</p>
+                                    #}else{#
+                                    <p>NONE.</p>
+                                    #}#
                                 </div>
                             </div>
                         </div>
@@ -430,8 +439,17 @@
                             <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
                             <div class="text-icon-content">
                                 <h5 class="no-margin">File</h5>
-                                <div title="#=originalFileName#">
+                                @*<div title="#=originalFileName#">
                                     <p>#:originalFileName#</p>
+                                </div>*@
+                                <div title="#=originalFileName#">
+                                    #if(originalFileName != null && originalFileName.length < 25){#
+                                    <p>#:originalFileName#</p>
+                                    #}else if(originalFileName != null && originalFileName.length > 25){#
+                                    <p>#:originalFileName.substring(0,18) + '...' + originalFileName.substring(originalFileName.length - 4)#</p>
+                                    #}else{#
+                                    <p>NONE.</p>
+                                    #}#
                                 </div>
                             </div>
                         </div>
@@ -664,7 +682,6 @@
                                 <li><i class="fa fa-drivers-license"></i> <strong>SSN: </strong> #:socialSecurityNumber#</li>
                                 <li><i class="fa fa-id-card"></i> <strong>NPI: </strong> #:npiNumber#</li>
                                 <li><i class="fa fa-id-card"></i> <strong>CAQH: </strong> #:caqhNumber#</li>
-
                             </ul>
                         </div>
                         <div class="clearfix"></div>
@@ -677,30 +694,28 @@
     @(Html.Kendo().Grid<ProviderByLocationDto>()
        .Name("Providers_#=doctorCorporationContractLinkId#")
        .Columns(columns =>
-                  {
-                      columns.Bound(p => p.ProviderByLocationId).Hidden(true);
-                      columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
-                      columns.Bound(p => p.PlaceOfServiceName).Title("Location");
-                      columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
-                      columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date")
-                          .Format("{0: MM/dd/yyyy}");
-                      columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
+       {
+           columns.Bound(p => p.ProviderByLocationId).Hidden(true);
+           columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
+           columns.Bound(p => p.PlaceOfServiceName).Title("Location");
+           columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
+           columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date").Format("{0: MM/dd/yyyy}");
+           columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
 
-                      columns.Command(cmd =>
-                      {
-                          cmd.Edit();
-                      }).Title("Actions");
-                  })
+           columns.Command(cmd =>
+           {
+               cmd.Edit();
+           }).Title("Actions").HtmlAttributes(new { data_bind = "visible:false" });
+       })
        .DataSource(ds => ds
            .Ajax()
            .ServerOperation(true)
-           .Model(m =>
-                      {
-                          m.Id(x => x.ProviderByLocationId);
-                          m.Field(x => x.PlaceOfServiceId).Editable(false);
-                          m.Field(x => x.PlaceOfServiceName).Editable(false);
-                          m.Field(x => x.Active).Editable(false);
-                      })
+           .Model(m => {
+             m.Id(x => x.ProviderByLocationId);
+             m.Field(x => x.PlaceOfServiceId).Editable(false);
+             m.Field(x => x.PlaceOfServiceName).Editable(false);
+             m.Field(x => x.Active).Editable(false);
+           })
            .Events(events => events.Error("DoctorEventHandler.locationProvidersErrorHandler"))
            .Read(r => r.Action("GetActiveProvidersByLocation", "ProviderByLocations", new { doctorCorporationContractLinkId = "#=doctorCorporationContractLinkId#" }))
            .Update(r => r.Action("UpdateProvider", "ProviderByLocations"))

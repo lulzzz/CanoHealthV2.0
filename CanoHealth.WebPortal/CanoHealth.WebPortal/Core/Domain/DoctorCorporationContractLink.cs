@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CanoHealth.WebPortal.CommonTools.User;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -16,6 +17,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public DateTime? EffectiveDate { get; set; }
 
+        public bool? Active { get; set; }
+
         //Navegation Properties.
         public ContractLineofBusiness ContractLineofBusiness { get; set; }
 
@@ -23,11 +26,13 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public ICollection<ProviderByLocation> ProvidersByLocations { get; set; }
 
+        //Constructor
         public DoctorCorporationContractLink()
         {
             ProvidersByLocations = new Collection<ProviderByLocation>();
         }
 
+        //Behavioral methods
         public IEnumerable<AuditLog> Modify(Guid contractLineofBusinessId,
             Guid doctorId, DateTime? effectiveDate, string note)
         {
@@ -81,5 +86,31 @@ namespace CanoHealth.WebPortal.Core.Domain
             }
             return auditLogs;
         }
+
+        public IEnumerable<AuditLog> InactivateRelationAmongContractLineofBusinessDoctor()
+        {
+            var auditLogs = new List<AuditLog>();
+
+            Active = false;
+            auditLogs.Add(new AuditLog
+            {
+                TableName = "DoctorCorporationContract",
+                ColumnName = "Active",
+                AuditAction = "Update",
+                OldValue = "true",
+                NewValue = "false",
+                ObjectId = DoctorCorporationContractLinkId,
+                UpdatedOn = DateTime.Now,
+                UpdatedBy = new UserService().GetUserName()
+            });
+
+            foreach (var provider in ProvidersByLocations)
+            {
+                var log = provider.Inactivate();
+                auditLogs.Add(log);
+            }
+            return auditLogs;
+        }
+
     }
 }

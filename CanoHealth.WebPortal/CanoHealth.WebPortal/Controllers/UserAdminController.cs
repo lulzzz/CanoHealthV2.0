@@ -72,6 +72,7 @@ namespace IdentitySample.Controllers
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult ReadUsers([DataSourceRequest] DataSourceRequest request)
         {
             var result = UserManager.Users.ToList()
@@ -79,6 +80,7 @@ namespace IdentitySample.Controllers
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateUser([DataSourceRequest] DataSourceRequest request,
             UserFormViewModel userFormViewModel)
         {
@@ -164,6 +166,7 @@ namespace IdentitySample.Controllers
             return Json(new[] { userFormViewModel }.ToDataSourceResult(request, ModelState));
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdateUser([DataSourceRequest] DataSourceRequest request,
             UserFormViewModel userFormViewModel)
         {

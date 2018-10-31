@@ -16,6 +16,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<SearchResultDoctorInfoDto> GetSearchResultsByInsuranceAndLocation(Guid corporationId, Guid insuranceId, Guid locationId)
         {
+            //parametrized queries instead string concatenations protect you against SQL Injection
             var query = "EXEC [dbo].[SearchByCorporationInsuranceLocationSql] @corporationId, @insuranceId, @placeOfServiceId";
             var result = GetWithRawSqlForTypesAreNotEntities(query,
                     new SqlParameter("@corporationId", SqlDbType.UniqueIdentifier) { Value = corporationId },
@@ -31,6 +32,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<SearchResultLocationInfoDto> GetSearchResultsByInsuranceAndDoctor(Guid corporationId, Guid insuranceId, Guid doctorId)
         {
+            //parametrized queries instead string concatenations protect you against SQL Injection
             var query = "EXEC [dbo].[SearchBycorporationInsuranceDoctorSql] @corporationId, @insuranceId, @doctorId";
             var result = GetWithRawSqlForTypesAreNotEntities(query,
                     new SqlParameter("@corporationId", SqlDbType.UniqueIdentifier) { Value = corporationId },

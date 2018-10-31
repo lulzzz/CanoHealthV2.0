@@ -11,7 +11,7 @@ namespace CanoHealth.WebPortal.Migrations
 
         public override void Down()
         {
-            Sql("ALTER TABLE ContractLineofBusinesses DROP CONSTRAINT UK_CorporationId_PlanTypeId");
+            Sql("ALTER TABLE ContractLineofBusinesses DROP CONSTRAINT UK_ContractId_PlanTypeId");
         }
     }
 }

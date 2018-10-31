@@ -11,6 +11,9 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Guid ContractLineofBusinessId { get; set; }
 
+        public bool? Active { get; set; }
+
+        //Navegation Properties
         public PlaceOfService Clinic { get; set; }
 
         public ContractLineofBusiness ContractLineofBusiness { get; set; }

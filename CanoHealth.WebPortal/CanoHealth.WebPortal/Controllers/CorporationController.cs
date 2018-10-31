@@ -29,13 +29,24 @@ namespace CanoHealth.WebPortal.Controllers
             return View("Corporations");
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult ReadCorporations([DataSourceRequest] DataSourceRequest request)
         {
-            var result = _unitOfWork
-                .Corporations
-                .GetAll()
-                .Select(Mapper.Map<Corporation, CorporationViewModel>);
-            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var cookie = Request.Cookies["__RequestVerificationToken"];
+            var token = Request.Form["__RequestVerificationToken"];
+            try
+            {
+                var result = _unitOfWork
+                             .Corporations
+                             .GetAll()
+                             .Select(Mapper.Map<Corporation, CorporationViewModel>);
+                return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            }
+            catch (HttpAntiForgeryException ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                return Redirect("~/Views/Shared/Error.cshtml");
+            }
         }
 
         public ActionResult ReadActiveCorporations([DataSourceRequest] DataSourceRequest request)
@@ -71,8 +82,12 @@ namespace CanoHealth.WebPortal.Controllers
             return PartialView("_Corporations", corporations);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult SaveCorporation([DataSourceRequest] DataSourceRequest request, CorporationFormViewModel corporation)
         {
+            var cookie = Request.Cookies["__RequestVerificationToken"]; //from server
+            var token = Request.Form["__RequestVerificationToken"]; //from client form
+
             if (ModelState.IsValid)
             {
                 try
@@ -81,6 +96,11 @@ namespace CanoHealth.WebPortal.Controllers
                     var convert = Mapper.Map(corporation, new Corporation());
                     _unitOfWork.Corporations.SaveCorporations(new List<Corporation> { convert });
                     _unitOfWork.Complete();
+                }
+                catch (HttpAntiForgeryException ex)
+                {
+                    ErrorSignal.FromCurrentContext().Raise(ex);
+                    return Redirect("~/Views/Shared/Error.cshtml");
                 }
                 catch (Exception ex)
                 {

@@ -441,6 +441,30 @@
     </Compile>
     <Compile Include="Infraestructure\ActiveDirectoryHelper.cs" />
     <Compile Include="Infraestructure\ConfigureSettings.cs" />
+    <Compile Include="Migrations\201810261258508_AddActiveColumnToContractLineofBusinessTable.cs" />
+    <Compile Include="Migrations\201810261258508_AddActiveColumnToContractLineofBusinessTable.Designer.cs">
+      <DependentUpon>201810261258508_AddActiveColumnToContractLineofBusinessTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261302477_AddActiveColumnToClinicLineofBusinessContract.cs" />
+    <Compile Include="Migrations\201810261302477_AddActiveColumnToClinicLineofBusinessContract.Designer.cs">
+      <DependentUpon>201810261302477_AddActiveColumnToClinicLineofBusinessContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261305005_AddActiveColumnToDoctorCorporationContractLink.cs" />
+    <Compile Include="Migrations\201810261305005_AddActiveColumnToDoctorCorporationContractLink.Designer.cs">
+      <DependentUpon>201810261305005_AddActiveColumnToDoctorCorporationContractLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261537493_DropUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.cs" />
+    <Compile Include="Migrations\201810261537493_DropUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.Designer.cs">
+      <DependentUpon>201810261537493_DropUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261732018_DropUniqueConstraintInDoctorCorporationContractLinksTable.cs" />
+    <Compile Include="Migrations\201810261732018_DropUniqueConstraintInDoctorCorporationContractLinksTable.Designer.cs">
+      <DependentUpon>201810261732018_DropUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261737227_DropUniqueConstraintInProvidersByLocationTable.cs" />
+    <Compile Include="Migrations\201810261737227_DropUniqueConstraintInProvidersByLocationTable.Designer.cs">
+      <DependentUpon>201810261737227_DropUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1588,9 +1612,26 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810261258508_AddActiveColumnToContractLineofBusinessTable.resx">
+      <DependentUpon>201810261258508_AddActiveColumnToContractLineofBusinessTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261302477_AddActiveColumnToClinicLineofBusinessContract.resx">
+      <DependentUpon>201810261302477_AddActiveColumnToClinicLineofBusinessContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261305005_AddActiveColumnToDoctorCorporationContractLink.resx">
+      <DependentUpon>201810261305005_AddActiveColumnToDoctorCorporationContractLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261537493_DropUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.resx">
+      <DependentUpon>201810261537493_DropUniqueConstraintContractIdPlanTypeIdInContractLineofBusinessesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261732018_DropUniqueConstraintInDoctorCorporationContractLinksTable.resx">
+      <DependentUpon>201810261732018_DropUniqueConstraintInDoctorCorporationContractLinksTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261737227_DropUniqueConstraintInProvidersByLocationTable.resx">
+      <DependentUpon>201810261737227_DropUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
     </EmbeddedResource>

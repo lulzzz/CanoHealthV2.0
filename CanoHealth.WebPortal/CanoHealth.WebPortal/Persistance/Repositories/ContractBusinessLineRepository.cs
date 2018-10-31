@@ -14,7 +14,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<ContractLineofBusiness> GetContractBusinessLinesWithClinics(string contractId)
         {
-            var iqueryableresult = QueryableGetAll(includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
+            var iqueryableresult = QueryableGetAll(filter: clb => clb.Active.HasValue && clb.Active.Value, includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
                 {
                     clb => clb.ClinicLineofBusiness.Select(pos => pos.Clinic),
                     bl => bl.LineOfBusiness
@@ -30,7 +30,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public IEnumerable<ContractLineofBusiness> GetContractBusinessLines(Guid contractId)
         {
             var businessLinesOfTheContract = QueryableGetAll(
-                filter: x => x.ContractId == contractId,
+                filter: x => x.ContractId == contractId && x.Active.HasValue && x.Active.Value,
                 includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
                 {
                     pt => pt.LineOfBusiness
@@ -38,7 +38,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return businessLinesOfTheContract;
         }
 
-        public ContractLineofBusiness GetContractBusinessLineItemWithClinics(Guid contractLineofBusinessId)
+        public ContractLineofBusiness GetContractLineofBusinessAndLocations(Guid contractLineofBusinessId)
         {
             var contracBusinessLine = QueryableGetAll(includeProperties:
                 new Expression<Func<ContractLineofBusiness, object>>[]
@@ -74,9 +74,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             if (contractLineofBusinessId != null)
                 return SingleOrDefault(x => x.ContractId == contractId &&
                                             x.PlanTypeId == planTypeId &&
-                                            x.ContractLineofBusinessId != contractLineofBusinessId);
+                                            x.ContractLineofBusinessId != contractLineofBusinessId &&
+                                            x.Active.HasValue && x.Active.Value);
             return SingleOrDefault(x => x.ContractId == contractId &&
-                                        x.PlanTypeId == planTypeId);
+                                        x.PlanTypeId == planTypeId &&
+                                        x.Active.HasValue && x.Active.Value);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
     {
         IEnumerable<ContractLineofBusiness> GetContractBusinessLinesWithClinics(string contractId);
 
-        ContractLineofBusiness GetContractBusinessLineItemWithClinics(Guid contractLineofBusinessId);
+        ContractLineofBusiness GetContractLineofBusinessAndLocations(Guid contractLineofBusinessId);
 
         IEnumerable<AuditLog> GetLogsWhileRemoveItems(List<ContractLineofBusiness> contractLineofBusinesses);
 

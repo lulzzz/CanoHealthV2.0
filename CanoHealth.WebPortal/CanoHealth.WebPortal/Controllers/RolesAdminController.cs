@@ -55,6 +55,7 @@ namespace IdentitySample.Controllers
             }
         }
 
+        #region MVC5
         //
         // GET: /Roles/
         public ActionResult IndexOriginal()
@@ -200,6 +201,7 @@ namespace IdentitySample.Controllers
             }
             return View();
         }
+        #endregion
 
         #region Telerik
 
@@ -222,6 +224,7 @@ namespace IdentitySample.Controllers
             return Json(roles.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult ReadAllRoles([DataSourceRequest] DataSourceRequest request)
         {
             var roles = RoleManager.Roles
@@ -235,6 +238,7 @@ namespace IdentitySample.Controllers
             return Json(roles.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateRole([DataSourceRequest] DataSourceRequest request, RoleViewModel roleViewModel)
         {
             if (ModelState.IsValid)
@@ -266,6 +270,7 @@ namespace IdentitySample.Controllers
             return Json(new[] { roleViewModel }.ToDataSourceResult(request, ModelState));
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdateRole([DataSourceRequest] DataSourceRequest request, RoleViewModel roleViewModel)
         {
             if (ModelState.IsValid)

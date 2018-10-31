@@ -16,6 +16,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<LinkedContractDto> GetDoctorLinkedContractInfo(Guid doctorId)
         {
+            //parametrized queries instead string concatenations protect you against SQL Injection
             var query = "EXEC [dbo].[GetDoctorLinkedContractsInfo] @DoctorID";
             var linkedContractViewModels = GetWithRawSqlForTypesAreNotEntities(query,
                     new SqlParameter("@DoctorID", SqlDbType.UniqueIdentifier) { Value = doctorId })
@@ -28,6 +29,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<LinkedContractViewModel> GetLinkedContractByDoctor(Guid doctorId, string insuranceName)
         {
+            //parametrized queries instead string concatenations protect you against SQL Injection
             var query = "EXEC [dbo].[GetDoctorLinkedContractsInfo] @DoctorID";
             var linkedContractViewModels = GetWithRawSqlForTypesAreNotEntities(query,
                     new SqlParameter("@DoctorID", SqlDbType.UniqueIdentifier) { Value = doctorId })

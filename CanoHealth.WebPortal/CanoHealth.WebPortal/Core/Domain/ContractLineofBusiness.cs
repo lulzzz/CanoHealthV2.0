@@ -1,4 +1,5 @@
-﻿using CanoHealth.WebPortal.ViewModels;
+﻿using CanoHealth.WebPortal.CommonTools.User;
+using CanoHealth.WebPortal.ViewModels;
 using Kendo.Mvc.Extensions;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Guid PlanTypeId { get; set; }
 
+        public bool? Active { get; set; }
+
         //Navegation Properties
         public Contract Contract { get; set; }
 
@@ -22,11 +25,13 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public ICollection<ClinicLineofBusinessContract> ClinicLineofBusiness { get; set; }
 
+        //Constructor
         public ContractLineofBusiness()
         {
             ClinicLineofBusiness = new Collection<ClinicLineofBusinessContract>();
         }
 
+        //Behavioral methods
         public ContractBusinessLineModifyViewModel Modify(ContractLineofBusiness contractBusinessLine)
         {
             var auditLogs = new List<AuditLog>();
@@ -110,6 +115,35 @@ namespace CanoHealth.WebPortal.Core.Domain
                 Logs = auditLogs,
                 Cliniccontractlineofbusiness = clinicContractLineofBusinessToDelete
             };
+        }
+
+        public IEnumerable<AuditLog> InactivateRelationAmongContractLineofBusinessLocation()
+        {
+            //Inactivate ClinicLineofBusiness items
+            ClinicLineofBusiness.ToList().ForEach(item => item.Active = false);
+            var logs = ClinicLineofBusiness.Select(item => new AuditLog
+            {
+                TableName = "ClinicLineofBusinessContract",
+                ColumnName = "Active",
+                AuditAction = "Update",
+                OldValue = "true",
+                NewValue = "false",
+                ObjectId = item.Id,
+                UpdatedOn = DateTime.Now,
+                UpdatedBy = new UserService().GetUserName()
+            }).ToList();
+
+            //Inactivate ContractLineofBusiness by itself
+            logs.Add(AuditLog.AddLog(
+                "ContractLineofBusiness",
+                "Active",
+                "true",
+                "false",
+                ContractLineofBusinessId,
+                "Update"));
+            Active = false;
+
+            return logs;
         }
     }
 }

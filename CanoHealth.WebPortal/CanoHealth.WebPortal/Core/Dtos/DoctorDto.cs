@@ -35,7 +35,7 @@ namespace CanoHealth.WebPortal.Core.Dtos
                 FullName = $"{doctor.FirstName} {doctor.LastName}",
                 DateOfBirth = doctor.DateOfBirth,
                 Degree = doctor.Degree,
-                //SocialSecurityNumber = doctor.SocialSecurityNumber,
+                SocialSecurityNumber = doctor.SocialSecurityNumber,
                 NpiNumber = doctor.NpiNumber,
                 CaqhNumber = doctor.CaqhNumber,
                 Active = doctor.Active,

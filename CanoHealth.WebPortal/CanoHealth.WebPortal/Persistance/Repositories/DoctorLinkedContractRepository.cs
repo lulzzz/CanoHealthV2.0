@@ -26,7 +26,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         /*Get the list of all active doctors who are linked to specific contract and line of business*/
         public IEnumerable<DoctorCorporationContractLink> GetDoctorsLinkedToLineOfBusiness(Guid contractLineOfBusinessId)
         {
-            var result = EnumarableGetAll(dccl => dccl.ContractLineofBusinessId == contractLineOfBusinessId,
+            var result = EnumarableGetAll(dccl => dccl.ContractLineofBusinessId == contractLineOfBusinessId &&
+            dccl.Active.HasValue && dccl.Active.Value,
                  includeProperties: new Expression<Func<DoctorCorporationContractLink, object>>[]
                  {
                      d => d.Doctor,

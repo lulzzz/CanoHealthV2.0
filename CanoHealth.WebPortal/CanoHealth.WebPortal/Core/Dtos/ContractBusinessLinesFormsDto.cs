@@ -32,7 +32,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
             {
                 ContractLineofBusinessId = ContractLineofBusinessId,
                 ContractId = ContractId,
-                PlanTypeId = PlanTypeId
+                PlanTypeId = PlanTypeId,
+                Active = true
             };
         }
 
@@ -42,7 +43,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
             {
                 Id = x.Id == Guid.Empty ? Guid.NewGuid() : x.Id,
                 ContractLineofBusinessId = ContractLineofBusinessId,
-                PlaceOfServiceId = x.PlaceOfServiceId
+                PlaceOfServiceId = x.PlaceOfServiceId,
+                Active = true
             }).ToList();
             return result;
         }

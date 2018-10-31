@@ -329,20 +329,47 @@ else
     <script type="text/x-kendo-template" id="notifications-kendo-template">
         <ul class="notifications">
             # for (var i = 0; i < data.length; i++) { #
-                #if(data[i].source === 'DoctorMedicalLicense'){#
-                <li><span class="highlight">#=data[i].licenseType#</span> License for Doctor #=data[i].doctorFullName# will expire #=moment(data[i].expirationDate).format('L')#</li>
-                #}else if(data[i].source === "LocationLicense"){#
-                <li><span class="highlight">#=data[i].licenseType#</span> License for #=data[i].location# Location  will expire #=moment(data[i].expirationDate).format('L')#</li>
-                #}#
-
+            #if(data[i].source === 'DoctorMedicalLicense'){#
+            <li><span class="highlight">#=data[i].licenseType#</span> License for Doctor #=data[i].doctorFullName# will expire #=moment(data[i].expirationDate).format('L')#</li>
+            #}else if(data[i].source === "LocationLicense"){#
+            <li><span class="highlight">#=data[i].licenseType#</span> License for #=data[i].location# Location  will expire #=moment(data[i].expirationDate).format('L')#</li>
+            #}#
             # } #
         </ul>
+        @*<ul class="notifications">
+            # for (var i = 0; i < data.length; i++) { #
+            #if(data[i].source === 'DoctorMedicalLicense' && new Date() >= new Date(data[i].expirationDate)){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for Doctor #=data[i].doctorFullName# is expired since #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}else if(data[i].source === "LocationLicense" && new Date() < new Date(data[i].expirationDate)){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for Doctor #=data[i].doctorFullName# will expire on #=moment(data[i].expirationDate).format('L')#
+                #}#
+            </li>
+            #}else if(data[i].source === "LocationLicense" && new Date() >= new Date(data[i].expirationDate){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for #=data[i].location# Location is expired since #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}#
+            #}else if(data[i].source === "LocationLicense" && new Date() < new Date(data[i].expirationDate){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for #=data[i].location# Location will expire on #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}#
+
+            # } #
+        </ul>*@
     </script>
 
     <script>
         $(document).ready(function() {
             var getNotificationSuccess = function (notifications) {
-                console.log("notifications: ", notifications);
+                //console.log("notifications: ", notifications);
                 //if there is no notifications to show hide the icon
                 if (notifications.length === 0) {
                     $(".notifications").hide();
@@ -364,7 +391,7 @@ else
                         return template(notifications);
                     },
                     placement: "bottom",
-                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="height: 400px; overflow-y: auto;"></div></div>',
                     trigger: "focus"
                 }).on("show.bs.popover", function () {
                     console.log("popover shown");
