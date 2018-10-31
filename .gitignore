@@ -37,3 +37,5 @@ CanoHealth.WebPortal/CanoHealth.WebPortal/AppSettings.config
 *.ide
 *.ide
 *.ide
+*.ide
+CanoHealth.WebPortal/.vs/CanoHealth.WebPortal/v15/Server/sqlite3/db.lock

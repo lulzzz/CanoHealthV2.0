@@ -53,10 +53,13 @@ namespace CanoHealth.WebPortal.Controllers.Api
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+
                 var insuranceStoredInDb = _unitOfWork.Insurances.Get(insurance.InsuranceId);
                 if (insuranceStoredInDb == null)
                     return NotFound();
+
                 var logs = insuranceStoredInDb.ModifyInsurance(Mapper.Map(insurance, new Insurance()));
+
                 _unitOfWork.AuditLogs.AddRange(logs);
                 _unitOfWork.Complete();
             }
@@ -68,6 +71,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
             return Ok(insurance);
         }
 
+        //Inactivate an Insurance means that Cano doesn't have business anymore with that insurance, not the insurance was out of the market
         [HttpDelete]
         public IHttpActionResult InactivateInsurance(InsuranceFormDto insurance)
         {

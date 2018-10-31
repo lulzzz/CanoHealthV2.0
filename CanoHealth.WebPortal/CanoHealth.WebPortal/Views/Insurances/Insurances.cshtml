@@ -55,7 +55,7 @@
                     col.Command(cmd =>
                     {
                         cmd.Edit();
-                        
+
                         cmd.Custom("Inact")
                             .Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
                             .HtmlAttributes(new { @class = "js-inactive" })
@@ -65,6 +65,7 @@
                             .Text("<span class='k-icon k-i-check-outline'></span> Activate")
                             .HtmlAttributes(new { @class = "js-active" })
                             .Click("InsuranceController.onClickActivateInsuranceButton");
+
                     }).Width(150).Title("ACTIONS");
                 })
 

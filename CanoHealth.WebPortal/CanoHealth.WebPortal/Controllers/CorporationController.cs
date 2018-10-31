@@ -9,6 +9,7 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
@@ -36,6 +37,8 @@ namespace CanoHealth.WebPortal.Controllers
             var token = Request.Form["__RequestVerificationToken"];
             try
             {
+                AntiForgery.Validate(cookie.Value, token);
+
                 var result = _unitOfWork
                              .Corporations
                              .GetAll()
