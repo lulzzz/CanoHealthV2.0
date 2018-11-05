@@ -32,7 +32,7 @@ namespace CanoHealth.WebPortal.Controllers
             _logs = logs;
         }
 
-        // GET: Schedulers
+        // GET: Schedulers        
         public ActionResult Index()
         {
             return View("Scheduler");
@@ -85,6 +85,8 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(schedules, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateSchedule([DataSourceRequest] DataSourceRequest request,
             ScheduleViewModel schedule)
         {
@@ -148,6 +150,8 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(new[] { schedule }.ToDataSourceResult(request, ModelState));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateSchedule([DataSourceRequest] DataSourceRequest request,
             ScheduleViewModel schedule)
         {
@@ -213,6 +217,8 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(new[] { schedule }.ToDataSourceResult(request, ModelState));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteSchedule([DataSourceRequest] DataSourceRequest request,
             ScheduleViewModel schedule)
         {
