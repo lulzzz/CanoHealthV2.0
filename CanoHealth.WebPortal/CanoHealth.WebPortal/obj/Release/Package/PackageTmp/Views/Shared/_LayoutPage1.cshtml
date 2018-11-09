@@ -1,0 +1,408 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>@ViewBag.Title - CanoHealth</title>
+
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
+
+    <meta name="description" content="">
+
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+
+    @*@Styles.Render("~/Content/razontheme")
+
+      <link href="~/Content/bootstrap.css" rel="stylesheet" /> Bootstrap seems to be included in vendors.css*@
+
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2018.1.221/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2018.1.221/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/afterBootstrapAndKendoStyles.css" rel="stylesheet" />
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/Content/preload.css" rel="stylesheet" />
+    <link href="~/Content/vendors.css" rel="stylesheet" />
+    <link href="~/Content/syntaxhighlighter/shCore.css" rel="stylesheet" />
+    <link href="~/Content/style-green.css" rel="stylesheet" />
+    <link href="~/Content/width-full.css" rel="stylesheet" />
+    <link href="~/Content/Site_razonartificial_theme.css" rel="stylesheet" />
+    <link href="~/Content/cano-logo.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/razontheme")
+
+   
+
+</head>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<body>
+    <div class="sb-site-container">
+        <div class="boxed">
+
+            <header id="header-full-top" class="hidden-xs header-full">
+                <div class="container">
+                    <div class="logo">
+                        <a href="@Url.Action("Index", "Home")" class="brand">
+                            <img src="~/Content/Images/CanoLogo1.png" alt="HealthFlex">
+                        </a>
+                    </div>
+                    @*<div class="header-full-title">
+                        <h1 class="animated fadeInRight">
+                            <a href="#">artificial <span>reason</span></a>
+                        </h1>
+                        <p class="animated fadeInRight">Clean and elegant theme</p>
+                    </div>*@ <!--Logo section-->
+                    <nav class="top-nav">
+                        <ul class="top-nav-social hidden-sm">
+                            <!--<li><a href="#" class="animated fadeIn animation-delay-6 rss"><i class="fa fa-rss"></i></a></li>-->
+                            <li><a href="#" class="animated fadeIn animation-delay-7 twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/CanoHealth/" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="animated fadeIn animation-delay-9 instagram"><i class="fa fa-instagram"></i></a></li>
+                            <!--<li><a href="#" class="animated fadeIn animation-delay-8 vine"><i class="fa fa-vine"></i></a></li>-->
+                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li>
+                            <!--<li><a href="#" class="animated fadeIn animation-delay-6 flickr"><i class="fa fa-flickr"></i></a></li>-->
+                        </ul> <!--Social Icons-->
+                    </nav> <!--Social Icons Section-->
+                </div> <!-- container -->
+            </header> <!-- header-full -->
+            <nav class="navbar navbar-default navbar-header-full navbar-inverse yamm navbar-static-top" role="navigation" id="header">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="@Url.Action("Index", "Home")">Cano <span>Health</span></a>
+                    </div> <!-- navbar-header -->
+                    <!-- Collect the nav links, forms, and other content for toggling
+                    <div class="pull-right">
+                        <a href="javascript:void(0);" class="sb-icon-navbar sb-toggle-right"><i class="fa fa-bars"></i></a>
+                    </div>-->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("ADMIN"))
+        {
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-user-circle"></i> Admin</a>
+                            <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                                <li><a href="@Url.Action("Index", "UsersAdmin")"><i class="fa fa-users"></i> Users</a></li>
+                                <li><a href="@Url.Action("Index", "RolesAdmin")"><i class="fa fa-key"></i> Roles</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown yamm-fw">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-vcard"></i> Credentialing</a>
+                            <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                                <li>
+                                    <div class="yamm-content">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-megamenu">
+                                                <div class="megamenu-block">
+                                                    <h4 class="megamenu-block-title"><i class="fa fa-id-badge"></i> Credentials</h4>
+                                                    <ul>
+                                                        <li><a href="@Url.Action("Index", "Corporation")"><i class="fa fa-building"></i> Corporations</a></li>
+                                                        <li><a href="@Url.Action("Index", "PlaceOfService")"><i class="fa fa-hospital-o"></i> Locations</a></li>
+                                                        <li><a href="@Url.Action("Index", "Insurances")"><i class="fa fa-info-circle"></i> Insurances</a></li>
+                                                        <li><a href="@Url.Action("Index", "Doctors")"><i class="fa fa-user-md"></i> Doctors</a></li>
+                                                        <li><a href="@Url.Action("Index", "Contracts")"><i class="fa fa-handshake-o"></i> Contracts</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><a href="@Url.Action("Index", "SearchEngine")"><i class="fa fa-search"></i> Search</a></li>
+}
+else if (User.IsInRole("BILLER"))
+{
+                        <li class="dropdown yamm-fw">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-vcard"></i> Credentialing</a>
+                            <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                                <li>
+                                    <div class="yamm-content">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-megamenu">
+                                                <div class="megamenu-block">
+                                                    <h4 class="megamenu-block-title"><i class="fa fa-id-badge"></i> Credentials</h4>
+                                                    <ul>
+                                                        <li><a href="@Url.Action("Corporations", "Billers")"><i class="fa fa-building"></i> Corporations</a></li>
+                                                        <li><a href="@Url.Action("Locations", "Billers")"><i class="fa fa-hospital-o"></i> Locations</a></li>
+                                                        @*<li><a href="@Url.Action("Index", "Billers")"><i class="fa fa-info-circle"></i> Insurances</a></li>*@
+                                                        <li><a href="@Url.Action("Doctors", "Billers")"><i class="fa fa-user-md"></i> Doctors</a></li>
+                                                        <li><a href="@Url.Action("Contracts", "Billers")"><i class="fa fa-handshake-o"></i> Contracts</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Biller</a>
+                            <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                                <li><a href="@Url.Action("Index", "SearchEngine")"><i class="fa fa-search"></i> Search</a></li>
+                            </ul>
+                        </li>
+}
+else
+{
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Call Center</a>
+                            <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                                <li><a href="@Url.Action("Index", "SearchEngine")"><i class="fa fa-search"></i> Search</a></li>
+                            </ul>
+                        </li>
+}
+}
+
+
+                        @*<li class="dropdown">
+        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Pages</a>
+        <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">About us &amp; Team</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_about.html">About us Option 1</a></li>
+                    <li><a href="page_about2.html">About us Option 2</a></li>
+                    <li><a href="page_about3.html">About us &amp; Team</a></li>
+                    <li class="divider"></li>
+                    <li><a href="page_team.html">Our Team Option 1</a></li>
+                    <li><a href="page_team2.html">Our Team Option 2</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Form</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_contact.html">Contact Option 1</a></li>
+                    <li><a href="page_contact2.html">Contact Option 2</a></li>
+                    <li class="divider"></li>
+                    <li><a href="page_login.html">Login Integrated</a></li>
+                    <li><a href="page_login_full.html">Login Full Page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="page_login_register.html">Login and Register</a></li>
+                    <li><a href="page_register.html">Register Option 1</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Profiles</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_profile.html">User Profile Option 1</a></li>
+                    <li><a href="page_profile2.html">User Profile Option 2</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Error</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_404.html">Error 404 Full Page</a></li>
+                    <li><a href="page_404_2.html">Error 404 Integrated</a></li>
+                    <li><a href="page_500.html">Error 500 Full Page</a></li>
+                    <li><a href="page_500_2.html">Error 500 Integrated</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Bussiness &amp; Products</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_testimonial.html">Testimonials</a></li>
+                    <li><a href="page_clients.html">Our Clients</a></li>
+                    <li><a href="page_product.html">Products</a></li>
+                    <li><a href="page_services.html">Services</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Pricing</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_pricing.html">Pricing Box</a></li>
+                    <li><a href="page_pricing-mega.html">Pricing Mega Table</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">FAQ &amp; Support</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_support.html">Support Center</a></li>
+                    <li><a href="page_faq.html">FAQ Option 1</a></li>
+                    <li><a href="page_faq2.html">FAQ Option 2</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Coming Soon</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_coming.html">Coming Soon Option 1</a></li>
+                    <li><a href="page_coming2.html">Coming Soon Option 2</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="has_children">Timeline</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    <li><a href="page_timeline_left.html">Timeline Left</a></li>
+                    <li><a href="page_timeline.html">Timeline Center</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>*@
+
+                        </ul>
+
+                        @Html.Partial("_LoginPartial")
+
+                    </div><!-- navbar-collapse -->
+                </div><!-- container -->
+            </nav>          
+
+            <div>
+                @RenderBody()
+            </div>
+
+           
+            <br /><br />
+            <footer id="footer">
+                <p style="text-align: center; color: #adabab; font-size: 0.7em">
+                    &copy; @DateTime.Now.Year <a href="#">CanoHealth</a>, inc. All rights reserved.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+    <div class="sb-slidebar sb-right sb-style-overlay">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div><!-- /input-group -->
+
+        <h2 class="slidebar-header no-margin-bottom">Navigation</h2>
+        <ul class="slidebar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio_topbar.html">Portfolio</a></li>
+            <li><a href="page_about3.html">About us</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="page_contact.html">Contact</a></li>
+        </ul>
+
+        <h2 class="slidebar-header">Social Media</h2>
+        <div class="slidebar-social-icons">
+            <a href="#" class="social-icon-ar rss"><i class="fa fa-rss"></i></a>
+            <a href="#" class="social-icon-ar facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="social-icon-ar twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="social-icon-ar pinterest"><i class="fa fa-pinterest"></i></a>
+            <a href="#" class="social-icon-ar instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="social-icon-ar wordpress"><i class="fa fa-wordpress"></i></a>
+            <a href="#" class="social-icon-ar linkedin"><i class="fa fa-linkedin"></i></a>
+            <a href="#" class="social-icon-ar flickr"><i class="fa fa-flickr"></i></a>
+            <a href="#" class="social-icon-ar vine"><i class="fa fa-vine"></i></a>
+            <a href="#" class="social-icon-ar dribbble"><i class="fa fa-dribbble"></i></a>
+        </div>
+    </div> <!-- sb-slidebar sb-right -->
+
+    <div id="back-top">
+        <a href="#header"><i class="fa fa-chevron-up"></i></a>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+
+    
+    <script type="text/x-kendo-template" id="notifications-kendo-template">
+        <ul class="notifications">
+            # for (var i = 0; i < data.length; i++) { #
+            #if(data[i].source === 'DoctorMedicalLicense'){#
+            <li><span class="highlight">#=data[i].licenseType#</span> License for Doctor #=data[i].doctorFullName# will expire #=moment(data[i].expirationDate).format('L')#</li>
+            #}else if(data[i].source === "LocationLicense"){#
+            <li><span class="highlight">#=data[i].licenseType#</span> License for #=data[i].location# Location  will expire #=moment(data[i].expirationDate).format('L')#</li>
+            #}#
+            # } #
+        </ul>
+        @*<ul class="notifications">
+            # for (var i = 0; i < data.length; i++) { #
+            #if(data[i].source === 'DoctorMedicalLicense' && new Date() >= new Date(data[i].expirationDate)){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for Doctor #=data[i].doctorFullName# is expired since #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}else if(data[i].source === "LocationLicense" && new Date() < new Date(data[i].expirationDate)){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for Doctor #=data[i].doctorFullName# will expire on #=moment(data[i].expirationDate).format('L')#
+                #}#
+            </li>
+            #}else if(data[i].source === "LocationLicense" && new Date() >= new Date(data[i].expirationDate){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for #=data[i].location# Location is expired since #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}#
+            #}else if(data[i].source === "LocationLicense" && new Date() < new Date(data[i].expirationDate){#
+            <li>
+                <span class="highlight">#=data[i].licenseType#</span>
+                License for #=data[i].location# Location will expire on #=moment(data[i].expirationDate).format('L')#
+            </li>
+            #}#
+
+            # } #
+        </ul>*@
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var getNotificationSuccess = function (notifications) {
+                //console.log("notifications: ", notifications);
+                //if there is no notifications to show hide the icon
+                if (notifications.length === 0) {
+                    $(".notifications").hide();
+                    return; 
+                }                    
+                //else show the icon
+                $(".notifications").show();
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
+
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function() {
+                        
+                        var template = kendo.template($("#notifications-kendo-template").html());
+                        return template(notifications);
+                    },
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="height: 400px; overflow-y: auto;"></div></div>',
+                    trigger: "focus"
+                }).on("show.bs.popover", function () {
+                    console.log("popover shown");
+                });
+            };
+            var getNotificationsFails = function(response) {
+                console.log("Get notification failed: ", response);                
+            };
+
+            AjaxCallGet("/api/notifications/GetNotifications", {}, getNotificationSuccess, getNotificationsFails);            
+        });
+    </script>
+</body>
+</html>

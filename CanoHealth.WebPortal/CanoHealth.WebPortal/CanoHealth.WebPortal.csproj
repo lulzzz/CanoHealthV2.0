@@ -1404,6 +1404,8 @@
     <Content Include="Scripts\controllers\personalFileController.js" />
     <Content Include="Scripts\controllers\placeOfServiceController.js" />
     <None Include="Properties\PublishProfiles\canohealthcr - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\canohealthstaging - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\canohealthstaging - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\CanoLocal.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />

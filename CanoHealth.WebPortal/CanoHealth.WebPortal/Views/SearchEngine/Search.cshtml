@@ -39,6 +39,7 @@
                                   .HtmlAttributes(new { style = "width:100%" })
                                   .Height(290)
                                   .Filter(FilterType.Contains)
+                                  .Events(ev => ev.Change("SearchEngine.onChangeCorporation"))
                                   .DataSource(source =>
                                   {
                                       source.Custom()
@@ -69,6 +70,7 @@
                                   .HtmlAttributes(new { style = "width:100%" })
                                   .Height(290)
                                   .Filter(FilterType.Contains)
+                                  .Events(ev => ev.Change("SearchEngine.onChangeInsurance"))
                                   .DataSource(source =>
                                   {
                                       source.Custom()
@@ -93,6 +95,7 @@
                                       .OptionLabel("Select location...")
                                       .DataTextField("Name")
                                       .DataValueField("PlaceOfServiceId")
+                                      .Events(ev => ev.Change("SearchEngine.onChangeLocation"))
                                       .DataSource(source =>
                                       {
                                           source.Read(read =>

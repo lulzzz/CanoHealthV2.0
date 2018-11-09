@@ -479,18 +479,32 @@
 
     //Reset the search params.
     var resetSearchParamenters = function () {
+        //get every component for the search panel
         var corporationDrp = $("#corporations").data("kendoDropDownList"),
             insuranceDrp = $("#insurances").data("kendoDropDownList"),
             locationDrp = $("#locations").data("kendoDropDownList"),
             doctorAuto = $("#doctors").data("kendoAutoComplete");
 
+        //reset the values of each of them
         corporationDrp.value('');
         insuranceDrp.value('');
         locationDrp.value('');
         doctorAuto.value('');
         doctor = null;
+
+        //clean the search result area
         $("#js-grid-result").html('');
         $("#js-grid-result").hide();
+    };
+
+    //clean the search result area
+    var cleanResultArea = function () {
+        //check it the search result area is displayed
+        var grid = $("#js-grid-result").data('kendoGrid');
+        if (grid) {
+            $("#js-grid-result").html('');
+            $("#js-grid-result").hide();
+        }
     };
 
     var filterCorporations = function() {
@@ -499,6 +513,7 @@
         };
     };
 
+    //Doctor Autocomplete component event handlers
     var onOpenDoctorAutocomplete = function(e) {
         isTheDoctorSelected = false;
     };
@@ -521,6 +536,8 @@
     var onChangeDoctorAutocomplete = function(e) {
         if(e.sender.value().trim().length === 0)
             doctor = null;
+
+        cleanResultArea();
     };
 
     var onBoundDoctorToListView = function (e) {
@@ -532,6 +549,21 @@
             var noDoctorFoundTemplate = kendo.template($("#no-doctor-found").html());
             $("#" + listViewId).append(noDoctorFoundTemplate);
         }
+    };
+
+    //Corporation DropDownList component event handler
+    var onChangeCorporation = function () {
+        cleanResultArea();
+    };
+
+    //Insurance DropDownList component events handler
+    var onChangeInsurance = function () {
+        cleanResultArea();
+    };
+
+    //Location DropDownList component events handler
+    var onChangeLocation = function () {
+        cleanResultArea();
     };
 
     var onErrorHandlerSearchDoctor = function (e) {             
@@ -548,6 +580,9 @@
         onChangeDoctorAutocomplete: onChangeDoctorAutocomplete,
         onBoundDoctorToListView: onBoundDoctorToListView,
         showDoctorSchedule: showDoctorSchedule,
-        onErrorHandlerSearchDoctor: onErrorHandlerSearchDoctor
+        onErrorHandlerSearchDoctor: onErrorHandlerSearchDoctor,
+        onChangeCorporation: onChangeCorporation,
+        onChangeInsurance: onChangeInsurance,
+        onChangeLocation: onChangeLocation
     };
 }();

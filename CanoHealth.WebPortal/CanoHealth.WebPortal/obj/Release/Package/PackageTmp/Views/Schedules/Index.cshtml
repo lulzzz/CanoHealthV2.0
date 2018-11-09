@@ -1,0 +1,187 @@
+﻿@using CanoHealth.WebPortal.ViewModels;
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Doctor's Schedule</h1>
+        <ol class="breadcrumb pull-right">
+            <li><a href="/">Home</a></li>
+            <li class="active">Scheduler</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+    @(Html.Kendo().Scheduler<ScheduleViewModel>()
+       .Name("DoctorSchedule")
+       .Date(DateTime.Today)
+       .StartTime(DateTime.Today)
+       .AllDaySlot(false)
+       .Toolbar(tool =>
+                            {
+                                tool.Pdf();
+                            })
+       .Pdf(pdf =>
+                            {
+                                pdf.FileName("Schedule.pdf");
+                                pdf.ProxyURL(Url.Action("ExportSchedule", "Schedulers"));
+                            })
+       .Editable(false)
+       .Mobile()
+       .Views(views =>
+                            {
+                                views.DayView();
+                                views.WeekView();
+                                views.MonthView(monthView => monthView.Selected(true));
+                                views.AgendaView();
+                                views.TimelineView();
+                            })
+       .Footer(footer =>
+                            {
+                                footer.Command("workDay");
+                            })
+       .Timezone("Etc/UTC")
+       .Resources(resource =>
+                            {
+                                resource.Add(r => r.LocationId)
+                                     .DataValueField("PlaceOfServiceId")
+                                     .DataTextField("Name")
+                                     .Multiple(false)
+                                     .Title("Location")
+                                     .Name("Location")
+                                     .DataSource(dsl => dsl
+                                         .ServerFiltering(false)
+                                         .Read(read => read.Action("GetLocations", "PlaceOfService"))
+                                     );
+                                resource.Add(r => r.Doctors)
+                                     .Name("Doctors")
+                                     .Title("Doctors")
+                                     .DataValueField("DoctorId")
+                                     .DataTextField("FullName")
+                                     .Multiple(true)
+                                     .ValuePrimitive(true)
+                                     .DataSource(source =>
+                                     {
+                                         source.Read(read =>
+                                         {
+                                             read.Action("GetDoctorsByLocation", "ClinicDoctorTeams")
+                                                 .Data("SchedulersController.filterLocations");
+                                         })
+                                         .ServerFiltering(true);
+                                     });
+                            })
+       .DataSource(ds => ds
+           .Model(model =>
+                                {
+                                    model.Id(m => m.ScheduleId);
+                                    model.Field(f => f.Title).DefaultValue("No title");
+                                    model.Field(m => m.IsAllDay).DefaultValue(true);
+                                    model.RecurrenceId(f => f.RecurrenceID);
+                                    model.Field(f => f.Title).DefaultValue("No title");
+                                })
+           .Read(read => read.Action("ReadSchedules", "Schedulers").Data("SchedulersController.filterDoctor"))
+       )
+            //.WorkDayEnd()
+    )
+</div>
+
+@Html.Partial("_PartialServerSideErrorHandlerTemplate")
+
+@(Html.Kendo().Window().Name("Details")
+       .Title("Schedule")
+       .Visible(false)
+       .Modal(true)
+       .Draggable(true)
+       .Resizable()
+)
+
+<script id="schedule-detail-template" type="text/x-kendo-template">
+    <div class="fluid-container">
+        <p class="alert alert-border alert-success bold">
+            #=title#
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <label class="control-label bold" for="start">Start:</label> #=moment(start).format('L')# <!--h:mm a-->
+            </li>
+            <li>
+                <label class="control-label bold" for="end">End: </label>&nbsp;&nbsp;&nbsp;  #=moment(end).format('L')#
+            </li>
+        </ul>
+        <ul class="list-unstyled">
+            <li>
+                <label class="control-label bold" for="location">Location: </label> #=location#
+            </li>
+        </ul>
+
+        <ul class="list-unstyled">
+            <li>
+                <label class="control-label bold" for="doctors">Doctors: </label> #=doctors#
+            </li>
+        </ul>
+    </div> 
+</script>
+
+<script id="scheduler-tooltip-template" type="text/x-kendo-template">
+    #var element = target.is(".k-task") ? target : target.parent();#
+    #var uid = element.attr("data-uid");#
+    #var scheduler = target.closest("[data-role=scheduler]").data("kendoScheduler");#
+    #var model = scheduler.occurrenceByUid(uid);#
+
+    #if(model) {#
+    <p class="alert alert-border alert-success bold">
+        #=model.title#
+    </p>
+    <ul class="list-unstyled">
+        <li>
+            <label class="control-label bold" for="start">Start:</label> #=kendo.format('{0:d}',model.start)#
+        </li>
+        <li>
+            <label class="control-label bold" for="end">End: </label>&nbsp;&nbsp;&nbsp;  #=kendo.format('{0:d}',model.end)#
+        </li>
+        <li>
+            <label class="control-label bold" for="description">Description:</label> #if(model.description == null){# None. #}else{# #=model.description# #}#
+        </li>
+    </ul>
+
+    #} else {#
+    <strong>No event data is available</strong>
+    #}#
+</script>
+
+@section Scripts{
+    <script src="~/Scripts/kendo/2018.1.221/kendo.timezones.min.js"></script>
+    <script src="~/Scripts/services/scheduleService.js"></script>
+    <script src="~/Scripts/controllers/schedulerController.js"></script>
+    <script>
+        $(document).ready(function () {
+            SchedulersController.addDropdownToSchedulerToolbar();
+            SchedulersController.init($("#DoctorSchedule"));
+
+            
+
+            //Display the schedule details when user double click
+            //$("#DoctorSchedule").on("dblclick", ".k-event", function (e) {
+            //    var scheduler = $("#DoctorSchedule").getKendoScheduler();
+            //    var schedule = scheduler.occurrenceByUid($(this).data("uid"));
+
+            //    var detailsTemplate = kendo.template($("#schedule-detail-template").html());
+            //    var wnd = $("#Details").data("kendoWindow");
+
+            //    wnd.content(detailsTemplate(schedule));
+            //    wnd.setOptions({
+            //        width: "20%"
+            //    });
+            //    wnd.center().open();
+            //});           
+        });
+
+    </script>
+}

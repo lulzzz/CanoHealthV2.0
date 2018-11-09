@@ -1,0 +1,734 @@
+﻿@using CanoHealth.WebPortal.Core.Dtos
+@using CanoHealth.WebPortal.ViewModels
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Doctors";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<link href="~/Content/linkedcontract-listview.css" rel="stylesheet" />
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Doctors</h1>
+
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Doctors</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+    @(Html.Kendo().Grid<DoctorFormViewModel>()
+            .Name("Doctors")
+            .ToolBar(tool =>
+            {
+                tool.Create().Text("NEW");
+                tool.Excel().Text("EXCEL");
+            })
+            .Excel(ex =>
+            {
+                ex.AllPages(true);
+                ex.FileName("Doctors");
+            })
+            .Columns(col =>
+            {
+                col.Bound(d => d.DoctorId).Hidden(true);
+
+                col.Bound(d => d.Degree).Title("DEGREE").Width(150);
+
+                col.Bound(d => d.FirstName).Title("FIRST NAME").Width(200);
+
+                col.Bound(d => d.LastName).Title("LAST NAME").Width(200);
+
+                col.Bound(d => d.DateOfBirth).Title("DOB").Format("{0: MM/dd/yyyy}").Width(100);
+
+                col.Bound(d => d.SocialSecurityNumber).Title("SSN").Width(150);
+
+                col.Bound(d => d.NpiNumber).Title("NPI").Width(150);
+
+                col.Bound(d => d.CaqhNumber).Title("CAQH").Width(150);
+
+                col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(100);
+
+                col.Command(cmd =>
+                {
+                    cmd.Edit();
+
+                    cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
+                        .HtmlAttributes(new { @class = "js-inactive-doctor" })
+                        .Click("DoctorEventHandler.onClickInactivateDoctorButton");
+
+                    cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
+                        .HtmlAttributes(new { @class = "js-active-doctor" })
+                        .Click("DoctorEventHandler.onClickActivateDoctorButton");
+
+                //cmd.Custom("release").Text("<i class='fa fa-times'></i> Release").Click("DoctorEventHandler.inactivateDoctor");
+                }).Width(250);
+            })
+
+            .Editable(ed =>
+            {
+                ed.Mode(GridEditMode.PopUp);
+                ed.TemplateName("DoctorForm");
+                ed.Window(builder => builder
+                    .Modal(true)
+                    .Title("DOCTOR")
+                    .Width(600));
+            })
+
+            .ClientDetailTemplateId("doctor-detail-template")
+
+            .Events(ev => ev.DetailExpand("DoctorEventHandler.onExpandDoctorRow")
+                .DataBound("DoctorEventHandler.onDataBoundDoctorGrid")
+                .Cancel("DoctorEventHandler.onCancelEditDoctorItem")
+                .Edit("DoctorEventHandler.onSaveDoctorItem"))
+
+            .Filterable()
+            .Sortable()
+            .Groupable()
+            .Resizable(r => r.Columns(true))
+            .Pageable(pager => pager
+
+                .Numeric(true)
+                .Info(true)
+                .PreviousNext(true)
+                .Refresh(true)
+                .PageSizes(new object[] { 25, 50, 100, "All" })
+            )
+            .Scrollable(s => s.Height("auto"))
+
+            .DataSource(ds => ds
+                .Ajax()
+                .ServerOperation(true)
+                .PageSize(25)
+                .Model(model =>
+                {
+                    model.Id(d => d.DoctorId);
+                    model.Field(d => d.DoctorId).Editable(false);
+                    model.Field(d => d.Active).Editable(false);
+                })
+                .Events(ev =>
+                {
+                    ev.Error("DoctorEventHandler.doctorserverSideErrorHandlers");
+                })
+                .Read(read => read.Action("ReadDoctors", "Doctors"))
+                .Create(create => create.Action("CreateDoctor", "Doctors"))
+                .Update(update => update.Action("UpdateDoctor", "Doctors"))
+                .Destroy(destroy => destroy.Action("InactivateDoctor", "Doctors"))
+     ))
+</div>
+
+<div class="js-release-doctor-wnd"></div>
+<div class="js-notification-dialog"></div>
+<div class="js-providerlocation-dialog"></div>
+
+<script type="text/kendo-template" id="serverside-errorhandler-Template">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage" role="alert">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="release-doctor-template">
+    <p>Are you sure you want to release <strong>#=FirstName# #=LastName#</strong> from your list of doctors?</p>
+    <hr />
+    <button class="btn btn-ar btn-primary" id="js-releasedoctor-yesButton"><i class="fa fa-check"></i> Yes</button>
+    <button class="btn btn-ar btn-default" id="js-releasedoctor-noButton"><i class="fa fa-ban"></i> No</button>
+</script>
+
+<script type="text/x-kendo-template" id="doctor-detail-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-ar">
+        <li class="active"><a href="\\#medicallicense_#=DoctorId#" data-toggle="tab"><i class="fa fa-medkit"></i> Medical Licenses</a></li>
+        <li><a href="\\#personalprofile_#=DoctorId#" data-toggle="tab"><i class="fa fa-address-card"></i> Personal Files</a></li>
+        <li><a href="\\#placeofservice_#=DoctorId#" data-toggle="tab"><i class="fa fa-hospital-o"></i> Locations</a></li>
+        <li><a href="\\#individualprovider_#=DoctorId#" data-toggle="tab"><i class="fa fa-id-card"></i> Individual Providers</a></li>
+        <li><a href="\\#linkedcontract_#=DoctorId#" data-toggle="tab"><i class="fa fa-link"></i> Linked Contracts</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="medicallicense_#=DoctorId#">
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="enabled: enableMedicalLicenseButtons, events: { click: onAddMedicalLicense }">
+                <i class="fa fa-upload"></i> NEW
+            </a>
+            <br /><br />
+
+            <div id="medicallicense-listview-#=DoctorId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-edit-template="edit-medicallicense-template"
+                 data-template="detail-medicallicense-template"
+                 data-bind="source: medicalLicenseDataSource, events: { edit: onEditMedicalLicenseItem, remove: onRemoveMedicalLicenseItem }">
+
+            </div> <!--Medical License List View-->
+
+        </div>
+        <div class="tab-pane" id="personalprofile_#=DoctorId#">
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="enabled: enablePersonalFileButtons, events: { click: onAddPersonalFiles }">
+                <i class="fa fa-upload"></i> NEW
+            </a>
+            <br /><br />
+            <div id="personalfiles-listview-#=DoctorId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-edit-template="edit-personalfiles-template"
+                 data-template="detail-personalfiles-template"
+                 data-bind="source: personalFilesDataSource, events: { edit: onEditDoctorPersonalFileItem }">
+            </div> <!--Personal Files List View-->
+        </div>
+        <div class="tab-pane" id="placeofservice_#=DoctorId#">
+
+            @(Html.Kendo().ListView<CanoHealth.WebPortal.Core.Dtos.PlaceOfServiceDto>()
+                        .Name("Location_#=DoctorId#")
+                        .TagName("div")
+                        .ClientTemplateId("location-detail-template")
+                        .DataSource(dataSource =>
+                        {
+                            dataSource.Read(read => read.Action("GetDoctorsLocations", "ClinicDoctorTeams", new { doctorId = "#=DoctorId#" }));
+                        })
+                        .HtmlAttributes(new { @class = "css-gray-listview" })
+                        .ToClientTemplate()
+            )
+
+            @*<div id="Location_#=DoctorId#"
+                     class="css-gray-listview"
+                     data-role="listview"
+                     data-template="location-detail-template"
+                     data-bind="source: individualProviderDataSource, events: { edit: onEditIndividualProviderItem }">
+                    >
+
+                </div>*@
+        </div>
+        <div id="individualprovider_#=DoctorId#" class="tab-pane">
+
+            <a class="btn btn-ar btn-primary js-individualprovider-addbtn"
+               data-doctor-id="#=DoctorId#"
+               data-bind="enabled: enableIndividualProviderButtons, events: { click: onAddIndividualProvider }"
+               style="margin-left: 16px;">
+                <i class="fa fa-plus-circle"></i> NEW
+            </a>
+
+            <br /><br />
+
+            <div id="IndividualProvider_#=DoctorId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-edit-template="individualprovider-edit-template"
+                 data-template="individualprovider-detail-template"
+                 data-bind="source: individualProviderDataSource, events: { edit: onEditIndividualProviderItem }">
+                <!---->
+            </div>
+
+        </div>
+        <div class="tab-pane" id="linkedcontract_#=DoctorId#">
+            @Html.Partial("_LinkedContractGrid")
+        </div>
+    </div>
+</script>
+
+<!--Medical License Section-->
+<script type="text/x-kendo-template" id="detail-medicallicense-template">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-info-circle"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Type</h5>
+                                <p>#:medicalLicenseType#</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-hashtag"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Number</h5>
+                                <p>#:licenseNumber#</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-check-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Effective Date</h5>
+                                <p> #:effectiveDate#  </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important; ">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-times-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Expire Date</h5>
+                                <p> #:expireDate#  </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important; cursor: pointer;" data-bind="events: {click: onDownloadMedicalLicenseFile}">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">File</h5>
+                                @*<div title="#=originalFileName#">
+                                    <p>#:originalFileName#</p>
+                                </div>*@
+                                <div title="#=originalFileName#">
+                                    #if(originalFileName != null && originalFileName.length <= 31){#
+                                    <p>#:originalFileName#</p>
+                                    #}else if(originalFileName != null && originalFileName.length > 31){#
+                                    <p>#:originalFileName.substring(0,27) + '...' + originalFileName.substring(originalFileName.length - 5)#</p>
+                                    #}else{#
+                                    <p>NONE.</p>
+                                    #}#
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-pencil-square-o"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Note</h5>
+                                <div style="height: 50px !important; overflow-y: auto; ">
+                                    #if(note != null){#
+                                    <p>#:note#</p>
+                                    #}else{#
+                                    <p>NONE</p>
+                                    #}#
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right js-doctormedlicenses-editbtns" data-bind="visible: enableMedicalLicenseButtons">
+                    <a class="k-button k-edit-button" href="\\#" title="Edit"><span class="k-icon k-i-edit"></span></a>
+                    @*<a class="k-button k-delete-button" href="\\#" title="Release"><span class="k-icon k-i-close"></span></a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="edit-medicallicense-template">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase"> license:</label>
+                            <input name="type" data-role="autocomplete"
+                                   data-placeholder="License Type ..."
+                                   data-value-primitive="true"
+                                   data-text-field="classification"
+                                   data-bind="value: medicalLicenseType, source: medicalLicenseTypeDataSource"
+                                   style="width: 100% !important;"
+                                   required data-required-msg="This field is required.">
+                            <span class="k-invalid-msg" data-for="type"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">number: <sup class="text-danger">*</sup></label>
+                            <input type="text"
+                                   name="Number"
+                                   class="k-textbox"
+                                   required data-required-msg="This field is required."
+                                   style="width: 100%;"
+                                   data-bind="value: licenseNumber" />
+                            <span class="k-invalid-msg" data-for="Number"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
+                            <!--, events: { change: onChangeEffectiveDate }-->
+                            <input name="effective"
+                                   data-role="datepicker"
+                                   data-bind="value: effectiveDate"
+                                   required data-required-msg="This field is required."
+                                   style="width: 100%" />
+                            <span class="k-invalid-msg" data-for="effective"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase">expire date: <sup class="text-danger">*</sup></label>
+                            <!--, events: { change: onChangeExpireDate }-->
+                            <input name="expire"
+                                   data-role="datepicker"
+                                   data-bind="value: expireDate"
+                                   style="width: 100%"
+                                   required data-required-msg="This field is required." />
+                            <span class="k-invalid-msg" data-for="expire"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">FILE: </label>
+                            @(Html.Kendo().Upload()
+                                        .Name("UniqueFileName_#=doctorId#")
+                                        .Multiple(false)
+                                        .HtmlAttributes(new { style = "width:100%" })
+                                        .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
+                                        .Events(ev => ev.Select("DoctorEventHandler.onSelectMedicalLicenseFile").Remove("DoctorEventHandler.onRemoveMedicalLicenseFile"))
+                                        .ToClientTemplate())
+                            <div class="demo-hint">
+                                Maximum allowed file size is <strong>50MB</strong>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="control-label text-uppercase">Notes: </label>
+                        <textarea rows="3" style="border-radius: 3px !important; width: 100%;" data-bind="value: note"></textarea>
+                    </div>
+
+                </div>
+                <div class="pull-right">
+                    <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                    <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-medicallicense-template">
+    <p>Are you sure you want to delete the <strong>#=originalFileName# </strong> File?  </p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-releaseMedicalLicense-yesButton"><i class="fa fa-check"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-releaseMedicalLicense-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>
+</script>
+
+<!--Personal Files Section-->
+<script type="text/x-kendo-template" id="detail-personalfiles-template">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important;">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-info-circle"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">Type</h5>
+                                <p>#:doctorFileTypeName#</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="text-icon" style="margin-bottom: 10px !important; cursor: pointer;" data-bind="events: {click: onDownloadDoctorPersonalFile}">
+                            <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
+                            <div class="text-icon-content">
+                                <h5 class="no-margin">File</h5>
+                                @*<div title="#=originalFileName#">
+                                    <p>#:originalFileName#</p>
+                                </div>*@
+                                <div title="#=originalFileName#">
+                                    #if(originalFileName != null && originalFileName.length < 25){#
+                                    <p>#:originalFileName#</p>
+                                    #}else if(originalFileName != null && originalFileName.length > 25){#
+                                    <p>#:originalFileName.substring(0,18) + '...' + originalFileName.substring(originalFileName.length - 4)#</p>
+                                    #}else{#
+                                    <p>NONE.</p>
+                                    #}#
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pull-right js-doctorpersonalfiles-editbtns" data-bind="visible: enablePersonalFileButtons">
+                    <a class="k-button k-edit-button" href="\\#" title="Edit"><span class="k-icon k-i-edit"></span></a>
+                    @*<a class="k-button k-delete-button" href="\\#" title="Release"><span class="k-icon k-i-close"></span></a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="edit-personalfiles-template">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label text-uppercase"> file classification:</label>
+                            <input name="type" data-role="autocomplete"
+                                   data-placeholder="File Type. Ex: SSN ..."
+                                   data-value-primitive="true"
+                                   data-text-field="doctorFileTypeName"
+                                   data-bind="value: doctorFileTypeName, source: doctorFileTypeDataSource"
+                                   style="width: 100% !important;"
+                                   required data-required-msg="This field is required.">
+                            <span class="k-invalid-msg" data-for="type"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">FILE: </label>
+                            @(Html.Kendo().Upload()
+                                           .Name("PersonalFile_#=doctorId#")
+                                           .Multiple(false)
+                                           .HtmlAttributes(new { style = "width:100%" })
+                                           .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
+                                           .Events(ev => ev.Select("PersonalFilesController.onSelectDoctorPersonalFile").Remove("PersonalFilesController.onRemoveDoctorPersonalFile"))
+                                           .ToClientTemplate())
+                            <div class="demo-hint">
+                                Maximum allowed file size is <strong>50MB</strong>.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pull-right">
+                    <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                    <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--Doctor Locations Section-->
+<script type="text/x-kendo-template" id="location-detail-template">
+    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-3">
+        <section>
+            <div class="panel panel-primary" style="height: 177px !important;">
+                <div class="panel-heading"><i class="fa fa-hospital-o"></i> #=Name#</div>
+                <ul>
+                    <br />
+                    <li><strong>ADDRESS: </strong> #=Address#</li>
+                    <br />
+                    <li><strong>PHONE: </strong> #=PhoneNumber#</li>
+                    <br />
+                    <li> <strong>FAX: </strong> #=FaxNumber#</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</script>
+
+<!--Doctor Individual Provider Section-->
+<script type="text/x-kendo-template" id="individualprovider-detail-template">
+    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-3">
+        <div class="content-box box-default">
+            <span class="icon-ar icon-ar-lg icon-ar-inverse icon-ar-square"><i class="fa fa-info"></i></span>
+            <h5 class="content-box-title">#=InsuranceName#</h5>
+            <p>#=ProviderNumber#</p>
+            <p>#=moment(IndividualProviderEffectiveDate).format('L')#</p>
+            <hr />
+            <div class="pull-left js-doctorindividualprovider-editbtns" data-bind="visible: enableIndividualProviderButtons">
+                <a class="k-button k-edit-button"><span class="k-icon k-i-edit"></span></a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="individualprovider-edit-template">
+    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label text-uppercase">insurance <sup class="text-danger">*</sup></label>
+                    <input id="#=DoctorIndividualProviderId#"
+                           data-role="dropdownlist"
+                           data-auto-bind="true"
+                           data-value-primitive="true"
+                           data-text-field="Name"
+                           required="required"
+                           validationMessage="Insurance field is required."
+                           data-value-field="InsuranceId"
+                           data-bind="value: InsuranceId, source: insuranceDataSource"
+                           style="width: 100%;" />
+                    <span data-for="InsuranceId" class="k-invalid-msg"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label text-uppercase">provider number <sup class="text-danger">*</sup></label>
+                    <input type="text"
+                           class="k-textbox"
+                           name="ProviderNumber"
+                           id="ProviderNumber"
+                           required="required"
+                           validationMessage="Provider Number field is required."
+                           data-bind="value: ProviderNumber"
+                           style="width: 100%;" />
+                    <span data-for="ProviderNumber" class="k-invalid-msg"></span>
+                </div>
+
+                <div class="form-grou">
+                    <label class="control-label text-uppercase">effective date <sup class="text-danger">*</sup></label>
+                    <input id="IndividualProviderEffectiveDate"
+                           name="IndividualProviderEffectiveDate"
+                           data-role="datepicker"
+                           data-bind="value: IndividualProviderEffectiveDate"
+                           style="width: 100%">
+                    <span data-for="IndividualProviderEffectiveDate" class="k-invalid-msg"></span>
+                </div>
+
+                <hr />
+                <div class="pull-left">
+                    <a class="k-button k-update-button"><span class="k-icon k-i-check"></span></a>
+                    <a class="k-button k-cancel-button"><span class="k-icon k-i-cancel"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--Doctor Linked Contract Section-->
+<script type="text/x-kendo-template" id="linkedcontract-details-template">
+    <h2 class="section-title">Line of Business</h2>
+
+    <div id="linkedcontractplusdata_#=DoctorId#_#=GroupNumber#">
+        <div id="contracts_#=GroupNumber#"
+             class="css-gray-listview"
+             data-role="listview"
+             data-edit-template="linkedcontractplusdata-edit-template"
+             data-template="linkedcontractplusdata-detail-template"
+             data-bind="source: linkedContractDetailsDataSource,
+             events: { remove: onRemoveLinkedContractItem }">
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="linkedcontractplusdata-detail-template">
+    <div class="product-view k-widget">
+        <dl>
+            <dt>Line of Business</dt>
+            <dd>#:businessLine#</dd>
+            <dt>Effective Date</dt>
+            <dd>#:moment(effectiveDate).format('L')#</dd>
+            <dt>Comment</dt>
+            #if(note){#
+                <dd>#:note#</dd>
+            #}else{#
+                <dd>None.</dd>
+            #}#
+            @*<dd>#:note#</dd>*@
+            <dt>
+                <a id="accordion_#=doctorCorporationContractLinkId#" data-bind="events: { click: onClickLocationHyperlink }">Locations <i class="fa fa-plus-circle"></i></a>
+            </dt>
+        </dl>
+
+        <div class="edit-buttons js-doctorlinkedcontracts-editbtns" data-bind="visible: enableDoctorLinkedContractButtons">
+            <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+            <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+        </div>
+    </div>
+</script>
+<script type="text/x-kendo-template" id="linkedcontractplusdata-edit-template">
+    <div class="product-view k-widget">
+        <dl>
+            <dt>Line of Business</dt>
+            <dd>#:businessLine#</dd>
+
+            <dt>Effective Date</dt>
+            <dd>
+                <input data-role="datepicker" data-bind="value: effectiveDate" name="effectiveDate" required="required" min="1" validationMessage="required" style="width: 100%;">
+                <span data-for="effectiveDate" class="k-invalid-msg"></span>
+            </dd>
+            <dt>Comment</dt>
+            <dd>
+                <input type="text" class="k-textbox" data-bind="value:note" name="note" required="required" validationMessage="required" style="width: 100%;" />
+                <span data-for="note" class="k-invalid-msg"></span>
+            </dd>
+
+        </dl>
+        <div class="edit-buttons">
+            <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+            <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+        </div>
+    </div>
+</script>
+<script type="text/x-kendo-template" id="linkedcontractplusdata-release-template">
+    <p>Are you sure you want to release this contract?</p>
+    <hr />
+    <button class="btn btn-ar btn-primary" id="js-releaselinkedcontract-yesButton"><i class="fa fa-check"></i> Yes</button>
+    <button class="btn btn-ar btn-default" id="js-releaselinkedcontract-noButton"><i class="fa fa-ban"></i> No</button>
+</script>
+
+<script type="text/x-kendo-template" id="providerbylocations-detail-template">
+    <div class="row">
+        <div class="col-md-offset-6 col-md-5">
+            <section>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="section-title no-margin-top">
+                            #:firstName# #:lastName#
+                            <small class="pull-right">#:degree#</small>
+                            <div class="clearfix"></div>
+                        </h3>
+                        <div class="clearfix"></div>
+                        <div class="pricing-box-content">
+                            <ul>
+                                <li><i class="fa fa-calendar"></i> <strong>DOB: </strong> #:dateOfBirth#</li>
+                                <li><i class="fa fa-drivers-license"></i> <strong>SSN: </strong> #:socialSecurityNumber#</li>
+                                <li><i class="fa fa-id-card"></i> <strong>NPI: </strong> #:npiNumber#</li>
+                                <li><i class="fa fa-id-card"></i> <strong>CAQH: </strong> #:caqhNumber#</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <h2 class="section-title">Providers by Locations</h2>
+    @(Html.Kendo().Grid<ProviderByLocationDto>()
+       .Name("Providers_#=doctorCorporationContractLinkId#")
+       .Columns(columns =>
+       {
+           columns.Bound(p => p.ProviderByLocationId).Hidden(true);
+           columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
+           columns.Bound(p => p.PlaceOfServiceName).Title("Location");
+           columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
+           columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date").Format("{0: MM/dd/yyyy}");
+           columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
+
+           columns.Command(cmd =>
+           {
+               cmd.Edit();
+           }).Title("Actions").HtmlAttributes(new { data_bind = "visible:false" });
+       })
+       .DataSource(ds => ds
+           .Ajax()
+           .ServerOperation(true)
+           .Model(m => {
+             m.Id(x => x.ProviderByLocationId);
+             m.Field(x => x.PlaceOfServiceId).Editable(false);
+             m.Field(x => x.PlaceOfServiceName).Editable(false);
+             m.Field(x => x.Active).Editable(false);
+           })
+           .Events(events => events.Error("DoctorEventHandler.locationProvidersErrorHandler"))
+           .Read(r => r.Action("GetActiveProvidersByLocation", "ProviderByLocations", new { doctorCorporationContractLinkId = "#=doctorCorporationContractLinkId#" }))
+           .Update(r => r.Action("UpdateProvider", "ProviderByLocations"))
+       )
+       .ToClientTemplate())
+
+</script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/doctors")
+}

@@ -36,4 +36,7 @@ V07/13/2018 10:37
 	Moving from .NET Framework v4.5 to v4.5.2
 	Installing SendGrid package
 
+V11/09/2018 15:09
+This version was deployed on staging environment
+
 

@@ -1,4 +1,5 @@
 ﻿using CanoHealth.WebPortal.Core;
+using CanoHealth.WebPortal.Core.Dtos;
 using CanoHealth.WebPortal.ViewModels;
 using Elmah;
 using Kendo.Mvc.Extensions;
@@ -89,26 +90,26 @@ namespace CanoHealth.WebPortal.Controllers
 
         public ActionResult GetActiveDoctors([DataSourceRequest] DataSourceRequest request)
         {
+            var doctors = new List<DoctorDto>();
             try
             {
-
+                doctors = _unitOfWork
+                         .Doctors
+                         .GetAllActiveDoctors()
+                         .Select(doctor => new DoctorDto
+                         {
+                             DoctorId = doctor.DoctorId,
+                             FullName = $"{doctor.FirstName} {doctor.LastName}",
+                             NpiNumber = doctor.NpiNumber
+                         })
+                         .ToList();
             }
             catch (Exception ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
                 ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
-            }
-            var result = _unitOfWork
-                .Doctors
-                .GetAllActiveDoctors()
-                .Select(doctor => new
-                {
-                    DoctorId = doctor.DoctorId,
-                    FullName = $"{doctor.FirstName} {doctor.LastName}",
-                    NpiNumber = doctor.NpiNumber
-                })
-                .ToList();
-            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            }            
+            return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }
