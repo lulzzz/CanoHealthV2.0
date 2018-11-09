@@ -29,7 +29,7 @@ namespace CanoHealth.WebPortal.Controllers
         public ActionResult GetDoctorByLocationAndLineOfBusiness(
             [DataSourceRequest] DataSourceRequest request,
             Guid locationId, Guid contractLineofBusinessId, Guid? insuranceId = null)
-        {
+        {           
             var doctors = new List<SearchDoctorResultViewModel>();
             try
             {

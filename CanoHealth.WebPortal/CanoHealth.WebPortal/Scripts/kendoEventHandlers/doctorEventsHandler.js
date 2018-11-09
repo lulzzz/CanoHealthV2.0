@@ -29,7 +29,7 @@
                 }
             });
         }
-    }
+    };
 
     var getSelectedDoctor = function () {
         return doctor;

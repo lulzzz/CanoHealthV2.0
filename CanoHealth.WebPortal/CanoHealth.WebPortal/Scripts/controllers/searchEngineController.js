@@ -1,7 +1,6 @@
 ﻿var SearchEngine = function() {
     //private fields
-    var doctor,
-        isTheDoctorSelected;
+    var doctor,isTheDoctorSelected;
 
     //private methods
     var getLocationInfoSuccess = function (response) {
@@ -242,26 +241,24 @@
                 };
                
                 AjaxCallGet("/api/searchengine/GetResultByCorporationAndInsurance", paramsToServer, getLineOfBusinessInfoSuccess, getServerInfoFails);
-            }
-                
+            }                
 
             //When Corporation -> Insurance -> Location -> Doctor are set
             if (locationDrp.value() && doctorAuto.value()) {
                 console.log("When Corporation -> Insurance -> Location -> Doctor are set");
-                var paramsToServer = {
+                var paramsToServerii = {
                     corporationId: corporationDrp.value(),
                     insuranceId: insuranceDrp.value(),
                     locationId: locationDrp.value(),
                     doctorId: doctor.DoctorId
                 };
-                AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocationAndDoctorSql", paramsToServer, getLocationInfoSuccess, getServerInfoFails);
-            }
-               
+                AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocationAndDoctorSql", paramsToServerii, getLocationInfoSuccess, getServerInfoFails);
+            }               
 
             //When Corporation -> Insurance -> Location are set
             if (locationDrp.value() && !doctorAuto.value()) {
                 console.log("When Corporation -> Insurance -> Location are set");
-                var paramsToServer = {
+                var paramsToServeriii = {
                     corporationId: corporationDrp.value(),
                     insuranceId: insuranceDrp.value(),
                     locationId: locationDrp.value()
@@ -367,19 +364,19 @@
                     }                    
                 }
                
-                AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocation", paramsToServer, getDoctorInfoSuccess, getServerInfoFails);
+                AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocation", paramsToServeriii, getDoctorInfoSuccess, getServerInfoFails);
             }                
 
             //When Corporation -> Insurance -> Doctor are set
             if (!locationDrp.value() && doctorAuto.value()) {
                 console.log("When Corporation -> Insurance -> Doctor are set");
-                var paramsToServer = {
+                var paramsToServeriv = {
                     corporationId: corporationDrp.value(),
                     insuranceId: insuranceDrp.value(),
                     doctorId: doctor.DoctorId
                 };
                
-                AjaxCallGet("/api/searchengine/GetSearchByInsuranceDoctor", paramsToServer, getLocationInfoSuccess, getServerInfoFails);
+                AjaxCallGet("/api/searchengine/GetSearchByInsuranceDoctor", paramsToServeriv, getLocationInfoSuccess, getServerInfoFails);
             }                
         }
     };
@@ -490,8 +487,10 @@
         corporationDrp.value('');
         insuranceDrp.value('');
         locationDrp.value('');
-        doctorAuto.doctorAuto.value('');
+        doctorAuto.value('');
         doctor = null;
+        $("#js-grid-result").html('');
+        $("#js-grid-result").hide();
     };
 
     var filterCorporations = function() {
@@ -535,9 +534,9 @@
         }
     };
 
-    var onErrorHandlerSearchDoctor = function () {
-        alert("an error happened trying to get the doctor info.");
-    };
+    var onErrorHandlerSearchDoctor = function (e) {             
+        toastr.error("We are sorry, but something went wrong. Please try again!");
+    }; 
 
     //access to private members
     return {
