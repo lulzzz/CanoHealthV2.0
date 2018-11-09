@@ -89,7 +89,7 @@
                         linkedContractViewModel.set("individualproviderEffectiveDate", null);
 
                         //List view from Individual Provider tab
-                        var individualProviderListView = $('IndividualProvider_' + doctorId).
+                        var individualProviderListView = $('#IndividualProvider_' + doctorId).
                             data('kendoListView');
                         response = {
                             DoctorIndividualProviderId: response.doctorIndividualProviderId,

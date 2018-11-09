@@ -259,7 +259,8 @@
                                   locationId = "#=PlaceOfServiceId#",
                                   contractLineofBusinessId = "#=ContractLineofBusinessId#",
                                   insuranceId = "#=InsuranceId#"
-                              }));
+                              }))
+                              .Events(ev => ev.Error("SearchEngine.onErrorHandlerSearchDoctor"));
                       })
                       .Events(ev => ev.DataBound("SearchEngine.onBoundDoctorToListView"))
                       .HtmlAttributes(new { @class = "css-listview", style = "background-color: inherit;" })

@@ -535,6 +535,10 @@
         }
     };
 
+    var onErrorHandlerSearchDoctor = function () {
+        alert("an error ocurr trying to get the doctor info.");
+    };
+
     //access to private members
     return {
         init: init,
@@ -544,6 +548,7 @@
         onCloseDoctorAutocomplete: onCloseDoctorAutocomplete,
         onChangeDoctorAutocomplete: onChangeDoctorAutocomplete,
         onBoundDoctorToListView: onBoundDoctorToListView,
-        showDoctorSchedule:showDoctorSchedule
+        showDoctorSchedule: showDoctorSchedule,
+        onErrorHandlerSearchDoctor: onErrorHandlerSearchDoctor
     };
 }();

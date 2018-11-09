@@ -1,8 +1,10 @@
 ﻿using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.ViewModels;
+using Elmah;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -28,54 +30,74 @@ namespace CanoHealth.WebPortal.Controllers
             [DataSourceRequest] DataSourceRequest request,
             Guid locationId, Guid contractLineofBusinessId, Guid? insuranceId = null)
         {
-            //Get the current list of doctors who work in this location
-            var activeDoctorByLocation = _unitOfWork.ClinicDoctor
-                                        .GetListOfDoctorsThatWorkInThisPlaceOfServiceToday(locationId)
-                                        .ToList();
-
-            var doctorCorporationContractLink = _unitOfWork.DoctorLinkedContracts
-                                     .GetDoctorsLinkedToLineOfBusiness(contractLineofBusinessId)
-                                     .ToList();
-
-            //Get list of doctors who are linked to this contract
-            var activeLinkedDoctors = doctorCorporationContractLink
-                                     .Select(d => d.Doctor)
-                                     .Where(d => d.Active)
-                                     .ToList();
-
-            //Get the list of doctors who work in this location but also are linked to this contract
-            var doctors = activeDoctorByLocation.Intersect(activeLinkedDoctors)
-                                     .Select(SearchDoctorResultViewModel.Wrap)
-                                     .ToList();
-            foreach (var doctor in doctors)
+            var doctors = new List<SearchDoctorResultViewModel>();
+            try
             {
-                if (insuranceId != null)
+                //Get the current list of doctors who work in this location
+                var activeDoctorByLocation = _unitOfWork.ClinicDoctor
+                                            .GetListOfDoctorsThatWorkInThisPlaceOfServiceToday(locationId)
+                                            .ToList();
+
+                //get the list of doctors that are already linked to this contract.
+                var doctorCorporationContractLink = _unitOfWork.DoctorLinkedContracts
+                                    .GetDoctorsLinkedToLineOfBusiness(contractLineofBusinessId)
+                                    .ToList();
+
+                //get the active doctors
+                var activeLinkedDoctors = doctorCorporationContractLink
+                                    .Select(d => d.Doctor)
+                                    .Where(d => d.Active)
+                                    .ToList();
+
+                //Get the list of doctors who work in this location but also are linked to this contract
+                doctors = activeDoctorByLocation.Intersect(activeLinkedDoctors)
+                                         .Select(SearchDoctorResultViewModel.Wrap)
+                                         .ToList();
+
+                foreach (var doctor in doctors)
                 {
-                    //Get the provider number of the doctor for the Insurance: insuranceId
-                    var individualProvider = _unitOfWork
-                        .IndividualProviderRepository
-                        .ExistIndividualProvider(doctor.DoctorId, insuranceId.Value);
-                    if (individualProvider != null)
-                        doctor.IndividualProviderNumber = individualProvider.ProviderNumber;
+                    if (insuranceId != null)
+                    {
+                        //Get the provider number of the doctor for the Insurance: insuranceId
+                        var individualProvider = _unitOfWork
+                            .IndividualProviderRepository
+                            .ExistIndividualProvider(doctor.DoctorId, insuranceId.Value);
+                        if (individualProvider != null)
+                            doctor.IndividualProviderNumber = individualProvider.ProviderNumber;
+                        else
+                            doctor.IndividualProviderNumber = "NONE.";
+                    }
+
+                    var individualProviderByLocation = doctorCorporationContractLink
+                        .First(d => d.DoctorId == doctor.DoctorId)
+                        .ProvidersByLocations
+                        .FirstOrDefault(loc => loc.PlaceOfServiceId == locationId);
+
+                    if (individualProviderByLocation != null)
+                        doctor.IndividualProviderByLocation = individualProviderByLocation.LocacionProviderNumber ?? "N/A";
                     else
-                        doctor.IndividualProviderNumber = "NONE.";
+                        doctor.IndividualProviderByLocation = "N/A";
                 }
-
-                var individualProviderByLocation = doctorCorporationContractLink
-                    .First(d => d.DoctorId == doctor.DoctorId)
-                    .ProvidersByLocations
-                    .FirstOrDefault(loc => loc.PlaceOfServiceId == locationId);
-
-                if (individualProviderByLocation != null)
-                    doctor.IndividualProviderByLocation = individualProviderByLocation.LocacionProviderNumber ?? "N/A";
-                else
-                    doctor.IndividualProviderByLocation = "N/A";
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
             }
             return Json(doctors.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetActiveDoctors([DataSourceRequest] DataSourceRequest request)
         {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
+            }
             var result = _unitOfWork
                 .Doctors
                 .GetAllActiveDoctors()
