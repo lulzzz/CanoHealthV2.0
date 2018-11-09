@@ -536,7 +536,7 @@
     };
 
     var onErrorHandlerSearchDoctor = function () {
-        alert("an error ocurr trying to get the doctor info.");
+        alert("an error happened trying to get the doctor info.");
     };
 
     //access to private members
