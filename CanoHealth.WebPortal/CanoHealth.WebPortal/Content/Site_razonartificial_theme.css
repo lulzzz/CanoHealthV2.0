@@ -183,12 +183,12 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
 .k-pager-wrap .k-link:hover {
     color: #21ab91;
 }
-.k-link:link, .k-link:visited, .k-nav-current.k-state-hover .k-link {
+.k-link:link, .k-link:visited,.k-nav-current.k-state-hover .k-link {
     color: #21ab91;
 }
 
 /*set the selected page number color to green (grid pager)*/
- .k-state-selected, .k-state-selected:link, .k-state-selected:visited {
+.k-state-selected, .k-state-selected:link, .k-state-selected:visited {
     color: #fff !important;
     background-color: #21ab91 !important;
     border-color: #21ab91 !important;
@@ -199,9 +199,9 @@ nor its data area apply fixed heights, so that they are able to shrink and expan
  }
 
  .k-draghandle.k-state-selected:hover, .k-ghost-splitbar-horizontal, .k-ghost-splitbar-vertical, .k-list>.k-state-highlight, .k-list>.k-state-selected, .k-marquee-color, .k-panel>.k-state-selected, .k-scheduler .k-scheduler-toolbar .k-state-selected, .k-scheduler .k-today.k-state-selected, .k-state-selected, .k-state-selected:link, .k-state-selected:visited {
-    color: #fff;
-    background-color: #21ab91;
-    border-color: #21ab91;
+    color: #fff !important;
+    background-color: #21ab91 !important;
+    border-color: #21ab91 !important;
 }
 
  .k-multiselect .k-button { /*overriding the style of the multiselect options button*/

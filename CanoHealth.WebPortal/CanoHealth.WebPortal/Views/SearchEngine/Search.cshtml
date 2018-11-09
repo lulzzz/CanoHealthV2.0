@@ -176,7 +176,12 @@
                 <tr>
                     <td>#=lineOfBusiness[i].lineOfBusinessName#</td>
                     <td>#=moment(lineOfBusiness[i].effectiveDate).format('L')#</td>
-                    <td> #=lineOfBusiness[i].note#</td>
+                    #if(lineOfBusiness[i].note){#
+                        <td> #=lineOfBusiness[i].note#</td>
+                    #}else{#
+                        <td>None.</td>
+                    #}#
+                    @*<td> #=lineOfBusiness[i].note#</td>*@
                     #if(lineOfBusiness[i].providerNumberByLocation){#
                     <td>#=lineOfBusiness[i].providerNumberByLocation#</td>
                     #}else{#

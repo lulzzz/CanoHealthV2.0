@@ -621,7 +621,12 @@
             <dt>Effective Date</dt>
             <dd>#:moment(effectiveDate).format('L')#</dd>
             <dt>Comment</dt>
-            <dd>#:note#</dd>
+            #if(note){#
+                <dd>#:note#</dd>
+            #}else{#
+                <dd>None.</dd>
+            #}#
+            @*<dd>#:note#</dd>*@
             <dt>
                 <a id="accordion_#=doctorCorporationContractLinkId#" data-bind="events: { click: onClickLocationHyperlink }">Locations <i class="fa fa-plus-circle"></i></a>
             </dt>
