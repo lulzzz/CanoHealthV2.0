@@ -48,8 +48,8 @@
     <div class="js-linked-contract-form-window_#=DoctorId# hidden-window">
 
         <div class="form-group">
-            <label for="contracts" class="control-label text-uppercase">Contracts <sup class="text-danger">*</sup></label>
-            <input id="contracts"
+            <label for="contracts_#=DoctorId#" class="control-label text-uppercase">Contracts <sup class="text-danger">*</sup></label>
+            <input id="contracts_#=DoctorId#"
                    data-role="dropdownlist"
                    data-auto-bind="false"
                    data-value-primitive="false"
@@ -65,12 +65,12 @@
         </div>
 
         <div class="form-group">
-            <label for="businesslines" class="control-label text-uppercase">business lines <sup class="text-danger">*</sup></label>
-            <input id="businesslines"
+            <label for="businesslines_#=DoctorId#" class="control-label text-uppercase">business lines <sup class="text-danger">*</sup></label>
+            <input id="businesslines_#=DoctorId#"
                    data-role="dropdownlist"
                    data-auto-bind="false"
                    data-value-primitive="false"
-                   data-cascade-from="contracts"
+                   data-cascade-from="contracts_#=DoctorId#"
                    data-text-field="name"
                    data-value-field="planTypeId"
                    data-bind="value: selectedBusinessLine,
@@ -82,16 +82,16 @@
         </div>
 
         <div class="form-group">
-            <label for="effectiveDate" class="control-label text-uppercase">Effective Date <sup class="text-danger">*</sup></label>
-            <input id="effectiveDate"
+            <label for="effectiveDate_#=DoctorId#" class="control-label text-uppercase">Effective Date <sup class="text-danger">*</sup></label>
+            <input id="effectiveDate_#=DoctorId#"
                    data-role="datepicker"
                    data-bind="value: effectiveDate"
                    style="width: 100%">
         </div>
 
         <div class="form-group">
-            <label for="note" class="control-label text-uppercase">note</label>
-            <textarea id="note"
+            <label for="note_#=DoctorId#" class="control-label text-uppercase">note</label>
+            <textarea id="note_#=DoctorId#"
                       class="form-control"
                       rows="5"
                       cols="50"
@@ -106,19 +106,23 @@
 
     </div>    
 
+    <!--when doctor does not have an individual provider for the selected insurance the system launch this windows to create an individual provider
+        or out of network.
+    -->
     <div class="js-individual-provider-notification_#=DoctorId# hidden-window">
         <p>
             This doctor does not have an individual provider with <strong data-bind="text: selectedContract.name"></strong> insurance in our system.
         </p>
         <p>Do you want to create an Out of Network contract?</p>
 
-        <label><input type="radio" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="true" />Out of Network</label>
-        <label><input type="radio" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="false" />Individual Provider</label>
+        <label><input type="radio" id="ExtraOO_#=DoctorId#" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="true" />Out of Network</label>
+        <label><input type="radio" id="ExtraIP_#=DoctorId#" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="false" />Individual Provider</label>
         <br/><br/>
         <div class="js-oo-section" data-bind="visible: isOOVisible">
             <div class="form-group">
                 <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
-                <input data-role="datepicker"
+                <input id="ooEffectiveDate_#=DoctorId#"
+                       data-role="datepicker"
                        data-bind="value: ooEffectiveDate"
                        style="width: 100%">
             </div>
@@ -132,7 +136,8 @@
         <div class="js-ip-section" data-bind="visible: isIPVisible">
             <div class="form-group">
                 <label class="control-label text-uppercase">Provider Number: <sup class="text-danger">*</sup></label>
-                <input type="text"
+                <input id="individualProviderNumber_#=DoctorId#"
+                       type="text"
                        class="k-textbox"
                        name="providernumber"
                        data-bind="value: individualProviderNumber"
@@ -140,7 +145,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
-                <input data-role="datepicker"
+                <input id="individualproviderEffectiveDate_#=DoctorId#"
+                       data-role="datepicker"
                        data-bind="value: individualproviderEffectiveDate"
                        style="width: 100%">
             </div>

@@ -6,7 +6,7 @@
             selectedContract: null,
             selectedBusinessLine: null,
             effectiveDate: null,
-            note: null,
+            note: null,           
 
             //Out of Network contracts section
             outofnetwork: null,
@@ -98,7 +98,7 @@
                             InsuranceName: response.insuranceName,
                             ProviderNumber: response.providerNumber,
                             IndividualProviderEffectiveDate: moment(response.individualProviderEffectiveDate).format('L')
-                        }
+                        };
                         individualProviderListView.dataSource.pushCreate(response);
 
                         toastr.success("Individual Provider contract was successfully created.");
@@ -131,7 +131,6 @@
                 return JSON.stringify(selectedContract, null, 4);
             },
             onChangeLinkedContracts: function () {
-
                 var individualProvider = {
                     doctorId: doctorId,
                     insuranceId: this.get("selectedContract").insuranceId
@@ -152,8 +151,6 @@
                                 }
                             })
                             .data("kendoWindow");
-
-
                         window.center().open();
                     }
 
@@ -164,7 +161,7 @@
             businessLineDataSource: new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "/api/ContractBusinessLines/GetContractBusinessLines",
+                        url: "/api/ContractBusinessLines/GetContractBusinessLines",                        
                         dataType: "json",
                         method: "GET"
                     }
@@ -184,15 +181,15 @@
                     date = "";
                 if (!this.get('selectedContract')) {
                     isValid = false;
-                    contract = "<li>The Contract field is required.</li>"
+                    contract = "<li>The Contract field is required.</li>";
                 }
                 if (!this.get('selectedBusinessLine')) {
                     isValid = false;
-                    businessline = '<li>The Business Line field is required.</li>'
+                    businessline = '<li>The Business Line field is required.</li>';
                 }
                 if (!this.get('effectiveDate')) {
                     isValid = false;
-                    date = "<li>The Effective Date field is required.</li>"
+                    date = "<li>The Effective Date field is required.</li>";
                 }
                 if (!isValid)
                     toastr.error(`<ul>${contract}${businessline}${date}</ul>`);
@@ -209,6 +206,9 @@
                         InsuranceName: this.get('selectedContract').name,
                         GroupNumber: this.get('selectedContract').groupNumber
                     };
+
+                    console.log("selectedContract: ", this.get('selectedContract'));
+
                     var linkedContractSucceed = function (response) {
                         console.log("Link doctor to contract succeed: ");
                         var doctorContractGrid = $("#DoctorContract_" + doctorId)
@@ -254,8 +254,7 @@
                         linkedContractViewModel.resetFieldsToDefaultValues();
                         $(".js-linked-contract-form-window_" + doctorId).data('kendoWindow').close();
                     };
-                    AjaxCallPost("/api/LinkedContracts", JSON.stringify(linkedContractObject),
-                        linkedContractSucceed, linkedContractFailed);
+                    AjaxCallPost("/api/LinkedContracts", JSON.stringify(linkedContractObject),linkedContractSucceed, linkedContractFailed);
                 }
             },
             onCloseLinkedContractFormWindow: function () {

@@ -30,8 +30,7 @@ namespace CanoHealth.WebPortal.Core.Dtos
         {
             return new DoctorCorporationContractLink
             {
-                DoctorCorporationContractLinkId = DoctorCorporationContractLinkId == Guid.Empty ?
-                    Guid.NewGuid() : DoctorCorporationContractLinkId,
+                DoctorCorporationContractLinkId = DoctorCorporationContractLinkId == Guid.Empty ? Guid.NewGuid() : DoctorCorporationContractLinkId,
                 DoctorId = DoctorId,
                 ContractLineofBusinessId = ContractLineofBusinessId,
                 EffectiveDate = EffectiveDate,

@@ -1,4 +1,4 @@
-﻿function onEnableLinkedContractFormWindow(doctorId) {  
+﻿function onEnableLinkedContractFormWindow(doctorId) {     
     LinkedContractController.createLinkedContractViewModel(doctorId);
     var linkedContractFormWindow = $(".js-linked-contract-form-window_" + doctorId)
         .kendoWindow({
