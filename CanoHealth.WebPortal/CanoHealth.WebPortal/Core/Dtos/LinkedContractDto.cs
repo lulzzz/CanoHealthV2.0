@@ -14,6 +14,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
 
         public string InsuranceName { get; set; }
 
+        public Guid ContractId { get; set; }
+
         public string GroupNumber { get; set; }
 
         public List<ContractBusinessLineDto> LineofBusiness { get; set; }

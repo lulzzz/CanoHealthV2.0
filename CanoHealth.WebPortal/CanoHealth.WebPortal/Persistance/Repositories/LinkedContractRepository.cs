@@ -40,16 +40,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         private IEnumerable<LinkedContractDto> ConvertToLinkedContractDto(List<LinkedContractViewModel> linkedContractViewModels)
         {
             var result = new List<LinkedContractDto>();
-            //The groupNumber is a unique field in Contract Entity
-            var groupNumbers = linkedContractViewModels.Select(x => x.GroupNumber)
+            //The ContractId is a unique field in Contract Entity
+            var contractIds = linkedContractViewModels.Select(x => x.ContractId)
                 .Distinct()
                 .ToList();
             //For each groupNumber(Contract) get the Line of Business linked to the doctor
             // and the contract details.
-            foreach (var groupNumber in groupNumbers)
+            foreach (var contract in contractIds)
             {
                 var contractBusinessLineDto = linkedContractViewModels
-                    .Where(g => g.GroupNumber == groupNumber)
+                    .Where(g => g.ContractId == contract)
                     .Select(y => new ContractBusinessLineDto
                     {
                         ContractLineofBusinessId = y.ContractLineofBusinessId,
@@ -59,17 +59,19 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                     .ToList();
 
                 var firstContract = linkedContractViewModels
-                    .FirstOrDefault(g => g.GroupNumber == groupNumber);
+                    .FirstOrDefault(g => g.ContractId == contract);
 
                 if (firstContract != null)
                 {
                     var linkedContractDto = new LinkedContractDto
                     {
                         DoctorId = firstContract.DoctorId,
-                        GroupNumber = groupNumber,
+                        ContractId = contract,
+                        GroupNumber = firstContract.GroupNumber,
                         CorporationName = firstContract.CorporationName,
                         InsuranceName = firstContract.InsuranceName,
-                        LineofBusiness = contractBusinessLineDto
+                        LineofBusiness = contractBusinessLineDto,
+                        DoctorCorporationContractLinkId = firstContract.DoctorCorporationContractLinkId
                     };
                     result.Add(linkedContractDto);
                 }

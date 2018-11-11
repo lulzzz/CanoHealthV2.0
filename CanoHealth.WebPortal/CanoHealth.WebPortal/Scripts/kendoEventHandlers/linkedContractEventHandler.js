@@ -13,6 +13,6 @@ function onExpandContractDataRow(e) {
     var contract = e.sender.dataItem(e.masterRow);
     console.log("contract: ", contract);
 
-    LinkedContractDetailController.createObservable(contract.DoctorId, contract.GroupNumber, contract.InsuranceName);
+    LinkedContractDetailController.createObservable(contract.DoctorId, contract.ContractId, contract.InsuranceName);
 
 }

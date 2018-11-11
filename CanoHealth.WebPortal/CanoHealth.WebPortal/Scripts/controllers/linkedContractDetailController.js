@@ -1,5 +1,5 @@
 ﻿var LinkedContractDetailController = function() {
-    var createObservable = function (doctorId, contractGroupNumber, insuranceName) {
+    var createObservable = function (doctorId, contractId, insuranceName) {
         var doctor = DoctorEventHandler.getSelectedDoctor();
         
         var viewModel = kendo.observable({
@@ -145,7 +145,7 @@
                 }, success, error);
             }
         });
-        kendo.bind($("#linkedcontractplusdata_" + doctorId + "_" + contractGroupNumber), viewModel);
+        kendo.bind($("#linkedcontractplusdata_" + doctorId + "_" + contractId), viewModel);
     };
 
     return {

@@ -17,6 +17,7 @@ namespace CanoHealth.WebPortal.ViewModels
 
         public string CorporationName { get; set; } //Corporation
         public string InsuranceName { get; set; } //Insurance
+        public Guid ContractId { get; set; } //Contract at corporation level
         public string GroupNumber { get; set; } //Contract at corporation level
 
         public Guid PlanTypeId { get; set; } //Line of Business
