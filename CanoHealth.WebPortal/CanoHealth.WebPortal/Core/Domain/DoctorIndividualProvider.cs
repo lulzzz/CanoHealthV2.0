@@ -72,10 +72,11 @@ namespace CanoHealth.WebPortal.Core.Domain
             return auditLogs;
         }
 
-        public void InactivateDoctorInsuranceRelationship()
+        public AuditLog InactivateDoctorInsuranceRelationship()
         {
             Active = false;
             var log = AuditLog.AddLog("DoctorIndividualProviders", "Active", "true", "false", DoctorIndividualProviderId, "Update");
+            return log;
         }
     }
 }

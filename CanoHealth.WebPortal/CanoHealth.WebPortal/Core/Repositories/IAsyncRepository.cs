@@ -11,5 +11,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         Task<List<TEntity>> ListAllAsync();
 
         Task<List<TEntity>> ListAsync(ISpecification<TEntity> spec);
+
+        Task<TEntity> SingleOrDefaultAsync(ISpecification<TEntity> spec);
     }
 }

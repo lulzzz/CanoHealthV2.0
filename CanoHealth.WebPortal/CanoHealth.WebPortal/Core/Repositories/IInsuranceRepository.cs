@@ -17,7 +17,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
 
         #region Async
 
-        Task<Insurance> GetWithContractsAsync(Guid insuranceId)
+        Task<Insurance> GetWithContractsAsync(Guid insuranceId);
 
         #endregion
 

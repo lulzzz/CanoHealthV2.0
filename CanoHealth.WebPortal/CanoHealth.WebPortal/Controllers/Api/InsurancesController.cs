@@ -98,16 +98,20 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 }
 
                 //Inactivate insurance and all the active contracts associated to it.
-                var logs = insuranceStoredInDb.InactivateInsurance();
+                var logs = insuranceStoredInDb.InactivateInsurance().ToList();
+
+                //PENDING: for each inactivated contract inactivate active addendums
 
                 //Inactivate all active Insurance Line of Business relationships
                 var insuranceLineOfBusiness = _unitOfWork.InsuranceBusinessLineRepository.GetBusinessLines(insurance.InsuranceId).ToList();
-                insuranceLineOfBusiness.ForEach(item => item.InactivateInsuranceLineofBusinessRelation());
+                var insurancelineofbusinessLogs = insuranceLineOfBusiness.Select(item => item.InactivateInsuranceLineofBusinessRelation()).ToList();
+                logs.AddRange(insurancelineofbusinessLogs);
 
                 //Inactivate all Doctor Insurances relationships(DoctorIndividualProviders)
                 var individualProviders = _unitOfWork.IndividualProviderRepository.
                     GetIndividualProvidersByInsurance(insurance.InsuranceId).ToList();
-                individualProviders.ForEach(dip => dip.InactivateDoctorInsuranceRelationship());
+                var insurancedoctorLogs = individualProviders.ConvertAll(dip => dip.InactivateDoctorInsuranceRelationship());
+                logs.AddRange(insurancedoctorLogs);
 
                 //Inactivate all active Corporation -> Insurance -> Line of business relationships (ContractLineofBusiness)
                 var contractLineofBusiness = new List<ContractLineofBusiness>();
@@ -124,7 +128,6 @@ namespace CanoHealth.WebPortal.Controllers.Api
                         doctorcorporationContractLinks.ForEach(x => x.InactivateRelationAmongContractLineofBusinessDoctor());
                     }
                 }
-
 
                 _unitOfWork.AuditLogs.AddRange(logs);
 

@@ -17,10 +17,11 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public PlanType BusinessLine { get; set; }
 
-        public void InactivateInsuranceLineofBusinessRelation()
+        public AuditLog InactivateInsuranceLineofBusinessRelation()
         {
             Active = false;
             var log = AuditLog.AddLog("InsuranceBusinessLines", "Active", "true", "false", InsuranceBusinessLineId, "Update");
+            return log;
         }
     }
 }

@@ -397,6 +397,7 @@
     <Compile Include="Core\Dtos\ProviderByLocationDto.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IAddendumRepository.cs" />
+    <Compile Include="Core\Repositories\IAsyncRepository.cs" />
     <Compile Include="Core\Repositories\IAuditLogReporitory.cs" />
     <Compile Include="Core\Repositories\IClinicDoctorRepository.cs" />
     <Compile Include="Core\Repositories\IContractBusinessLineClinicRepository.cs" />
@@ -427,6 +428,9 @@
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\IUserCorporationAccessRepository.cs" />
     <Compile Include="Core\Repositories\IUserRepository.cs" />
+    <Compile Include="Core\Specifications\BaseSpecification.cs" />
+    <Compile Include="Core\Specifications\Insurances\InsuranceContractSpecification.cs" />
+    <Compile Include="Core\Specifications\ISpecification.cs" />
     <Compile Include="CustomDataAnnotations\DateGreaterThan.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -480,6 +484,10 @@
     <Compile Include="Migrations\201811130335168_DropUniqueConstraintInInsuranceBusinessLine.cs" />
     <Compile Include="Migrations\201811130335168_DropUniqueConstraintInInsuranceBusinessLine.Designer.cs">
       <DependentUpon>201811130335168_DropUniqueConstraintInInsuranceBusinessLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811131433163_CreateStoredProcedureGetContractAddendumByInsurance.cs" />
+    <Compile Include="Migrations\201811131433163_CreateStoredProcedureGetContractAddendumByInsurance.Designer.cs">
+      <DependentUpon>201811131433163_CreateStoredProcedureGetContractAddendumByInsurance.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
@@ -1662,6 +1670,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811130335168_DropUniqueConstraintInInsuranceBusinessLine.resx">
       <DependentUpon>201811130335168_DropUniqueConstraintInInsuranceBusinessLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131433163_CreateStoredProcedureGetContractAddendumByInsurance.resx">
+      <DependentUpon>201811131433163_CreateStoredProcedureGetContractAddendumByInsurance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
