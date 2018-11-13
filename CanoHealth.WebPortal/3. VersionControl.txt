@@ -42,4 +42,7 @@ This version was deployed on staging environment
 V11/12/2018
 8:00 - 11:00 Arreglando el inactivar insurance en cascada
 
+V11/13/2018
+6:30 - 7:30 am anadiendo async behavior en inactivar insurance en cascada
+
 
