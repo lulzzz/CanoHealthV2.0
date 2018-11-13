@@ -52,14 +52,12 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            //return Context.Set<TEntity>().Where(predicate);
             return _entities.Where(predicate);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return _entities.SingleOrDefault(predicate);
-            //return Context.Set<TEntity>().SingleOrDefault(predicate);
         }
 
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
@@ -75,13 +73,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public void Add(TEntity entity)
         {
             _entities.Add(entity);
-            //Context.Set<TEntity>().Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _entities.AddRange(entities);
-            //Context.Set<TEntity>().AddRange(entities);
         }
 
         public void UpdateByGeneric(TEntity entityToUpdate)
@@ -93,13 +89,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public void Remove(TEntity entity)
         {
             _entities.Remove(entity);
-            //Context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _entities.RemoveRange(entities);
-            //Context.Set<TEntity>().RemoveRange(entities);
         }
 
         public IEnumerable<TEntity> EnumarableGetAll(Expression<Func<TEntity, bool>> filter = null,
@@ -196,6 +190,29 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
             return await secondaryResult.ToListAsync();
         }
+
+        public async Task<TEntity> SingleOrDefaultAsync(ISpecification<TEntity> spec)
+        {
+            IQueryable<TEntity> query = _entities;
+
+            // fetch a Queryable that includes all expression-based includes
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(query.AsQueryable(),
+                    (current, include) => current.Include(include));
+
+            // modify the IQueryable to include any string-based include statements
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+
+            if (spec.OrderBy != null)
+            {
+                secondaryResult = spec.OrderBy(secondaryResult);
+            }
+
+            return await secondaryResult.SingleOrDefaultAsync(spec.Filter);
+        }
+
         #endregion
     }
 }

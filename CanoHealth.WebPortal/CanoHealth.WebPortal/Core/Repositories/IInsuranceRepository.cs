@@ -1,6 +1,7 @@
 using CanoHealth.WebPortal.Core.Domain;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CanoHealth.WebPortal.Core.Repositories
 {
@@ -13,5 +14,12 @@ namespace CanoHealth.WebPortal.Core.Repositories
         Insurance GetOtherInsuranceWithSameName(string insuranceName, Guid insuranceId);
         IEnumerable<AuditLog> SaveItems(IEnumerable<Insurance> insurances);
         Insurance GetInsuranceById(Guid insuranceId);
+
+        #region Async
+
+        Task<Insurance> GetWithContractsAsync(Guid insuranceId)
+
+        #endregion
+
     }
 }

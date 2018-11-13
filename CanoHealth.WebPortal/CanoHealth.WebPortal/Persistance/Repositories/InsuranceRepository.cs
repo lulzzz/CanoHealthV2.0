@@ -1,11 +1,13 @@
 using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Repositories;
+using CanoHealth.WebPortal.Core.Specifications.Insurances;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CanoHealth.WebPortal.Persistance.Repositories
 {
@@ -15,7 +17,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<Insurance> GetActiveInsurances()
         {
-            return EnumarableGetAll(i => i.Active && i.Active).ToList();
+            return EnumarableGetAll(i => i.Active).ToList();
         }
 
         public IEnumerable<Insurance> GetInsurancesByNames(IEnumerable<string> names)
@@ -29,7 +31,9 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
                 }
                 else
+                {
                     insurances.Add(insurance);
+                }
             }
 
             return insurances;
@@ -48,7 +52,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public Insurance GetWithContracts(Guid insurancesId)
         {
-            return EnumarableGetAll(includeProperties: new Expression<Func<Insurance, object>>[] { c => c.Contracts })
+            return EnumarableGetAll(filter: i => i.Active, includeProperties: new Expression<Func<Insurance, object>>[] { c => c.Contracts })
                 .SingleOrDefault(i => i.InsuranceId == insurancesId);
         }
 
@@ -93,6 +97,12 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 }
             }
             return auditLogs;
+        }
+
+        public async Task<Insurance> GetWithContractsAsync(Guid insuranceId)
+        {
+            var specification = new InsuranceContractSpecification(insuranceId);
+            return await SingleOrDefaultAsync(specification);
         }
     }
 }
