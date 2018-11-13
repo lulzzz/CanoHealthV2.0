@@ -9,7 +9,6 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
@@ -30,14 +29,12 @@ namespace CanoHealth.WebPortal.Controllers
             return View("Corporations");
         }
 
-        [ValidateAntiForgeryToken]
+
         public ActionResult ReadCorporations([DataSourceRequest] DataSourceRequest request)
         {
-            var cookie = Request.Cookies["__RequestVerificationToken"];
-            var token = Request.Form["__RequestVerificationToken"];
             try
             {
-                AntiForgery.Validate(cookie.Value, token);
+                //AntiForgery.Validate(cookie.Value, token);
 
                 var result = _unitOfWork
                              .Corporations
@@ -68,7 +65,10 @@ namespace CanoHealth.WebPortal.Controllers
                 .Select(Mapper.Map<Corporation, CorporationDto>)
                 .ToList();
             if (!String.IsNullOrEmpty(text))
+            {
                 result = result.Where(c => c.CorporationName.ToLower().Contains(text.ToLower())).ToList();
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

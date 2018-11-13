@@ -465,6 +465,14 @@
     <Compile Include="Migrations\201810261737227_DropUniqueConstraintInProvidersByLocationTable.Designer.cs">
       <DependentUpon>201810261737227_DropUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811130146203_AddActiveColumnToLineOfBusiness.cs" />
+    <Compile Include="Migrations\201811130146203_AddActiveColumnToLineOfBusiness.Designer.cs">
+      <DependentUpon>201811130146203_AddActiveColumnToLineOfBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.cs" />
+    <Compile Include="Migrations\201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.Designer.cs">
+      <DependentUpon>201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1634,6 +1642,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810261737227_DropUniqueConstraintInProvidersByLocationTable.resx">
       <DependentUpon>201810261737227_DropUniqueConstraintInProvidersByLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811130146203_AddActiveColumnToLineOfBusiness.resx">
+      <DependentUpon>201811130146203_AddActiveColumnToLineOfBusiness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.resx">
+      <DependentUpon>201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

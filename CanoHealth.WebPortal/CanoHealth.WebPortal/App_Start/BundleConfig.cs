@@ -23,6 +23,7 @@ namespace CanoHealth.WebPortal
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/contracts").Include(
+                        "~/Scripts/controllers/antiForgeryTokenController.js",
                         "~/Scripts/services/contractService.js",
                         "~/Scripts/controllers/contractsController.js",
                         "~/Scripts/kendoEventHandlers/contractEventHandlers.js"

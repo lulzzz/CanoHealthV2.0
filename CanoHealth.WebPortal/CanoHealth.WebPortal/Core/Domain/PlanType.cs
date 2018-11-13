@@ -16,6 +16,8 @@ namespace CanoHealth.WebPortal.Core.Domain
         [StringLength(100)]
         public string Name { get; set; }
 
+        public bool? Active { get; set; }
+
         //Navegation Properties
         public ICollection<ContractLineofBusiness> LineofBusinesses { get; set; }
 

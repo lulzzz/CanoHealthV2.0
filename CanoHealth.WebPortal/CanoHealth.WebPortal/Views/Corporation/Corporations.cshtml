@@ -72,7 +72,7 @@
                         m.Field(x => x.CorporationId).Editable(false);
                     })
                     .Events(ev => ev.Error("CorporationsController.serverSideErrorHandlers"))
-                    .Read(read => read.Action("ReadCorporations", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
+                    .Read(read => read.Action("ReadCorporations", "Corporation"))
                     .Create(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
                     .Update(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
                 ))

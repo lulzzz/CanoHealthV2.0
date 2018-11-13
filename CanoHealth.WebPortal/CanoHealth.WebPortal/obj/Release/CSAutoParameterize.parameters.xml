@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=canohealthsqlsrv.database.windows.net;Initial Catalog=canohealthdb;User ID=suarezhar;Password=/*harnier123" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\suarezhar\\Documents\\GitHub\\CanoHealthV2\.0\\CanoHealth\.WebPortal\\CanoHealth\.WebPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
-  </parameter>
-  <parameter name="ElmahSqlErrorLog-Web.config Connection String" description="ElmahSqlErrorLog Connection String used in web.config by the application to access the database." defaultValue="data source=canohealthsqlsrv.database.windows.net;initial catalog=canohealthdb;user id=suarezhar;password=/*harnier123;MultipleActiveResultSets=true" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\suarezhar\\Documents\\GitHub\\CanoHealthV2\.0\\CanoHealth\.WebPortal\\CanoHealth\.WebPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ElmahSqlErrorLog']/@connectionString" />
-  </parameter>
-</parameters>

@@ -10,6 +10,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Guid PlanTypeId { get; set; }
 
+        public bool? Active { get; set; }
+
         //Navegation Properties
         public Insurance Insurance { get; set; }
 
