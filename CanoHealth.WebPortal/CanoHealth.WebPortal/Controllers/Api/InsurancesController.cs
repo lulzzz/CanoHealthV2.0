@@ -4,6 +4,7 @@ using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Dtos;
 using Elmah;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -89,7 +90,6 @@ namespace CanoHealth.WebPortal.Controllers.Api
                     return BadRequest(ModelState);
                 }
 
-
                 //Get the insurance and all the active contracts associated to it.
                 var insuranceStoredInDb = _unitOfWork.Insurances.GetWithContracts(insurance.InsuranceId);
                 if (insuranceStoredInDb == null)
@@ -105,6 +105,26 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 insuranceLineOfBusiness.ForEach(item => item.InactivateInsuranceLineofBusinessRelation());
 
                 //Inactivate all Doctor Insurances relationships(DoctorIndividualProviders)
+                var individualProviders = _unitOfWork.IndividualProviderRepository.
+                    GetIndividualProvidersByInsurance(insurance.InsuranceId).ToList();
+                individualProviders.ForEach(dip => dip.InactivateDoctorInsuranceRelationship());
+
+                //Inactivate all active Corporation -> Insurance -> Line of business relationships (ContractLineofBusiness)
+                var contractLineofBusiness = new List<ContractLineofBusiness>();
+                foreach (var contract in insuranceStoredInDb.Contracts)
+                {
+                    contractLineofBusiness = _unitOfWork.ContracBusinessLineRepository
+                        .GetContractBusinessLinesWithClinics(contract.ContractId.ToString())
+                        .ToList();
+
+                    foreach (var contractlineofbusiness in contractLineofBusiness)
+                    {
+                        contractlineofbusiness.InactivateRelationAmongContractLineofBusinessLocation();
+                        var doctorcorporationContractLinks = _unitOfWork.DoctorLinkedContracts.GetDoctorsLinkedToLineOfBusiness(contractlineofbusiness.ContractLineofBusinessId).ToList();
+                        doctorcorporationContractLinks.ForEach(x => x.InactivateRelationAmongContractLineofBusinessDoctor());
+                    }
+                }
+
 
                 _unitOfWork.AuditLogs.AddRange(logs);
 

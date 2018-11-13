@@ -53,25 +53,45 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                             "Update"));
                         itemStoredInDb.PlanTypeId = item.PlanTypeId;
                     }
+                    if (itemStoredInDb.Active != item.Active)
+                    {
+                        auditLogs.Add(AuditLog.AddLog("InsuranceBusinessLines",
+                            "Active",
+                            itemStoredInDb.Active.ToString(),
+                            item.Active.ToString(),
+                            item.InsuranceBusinessLineId,
+                            "Update"));
+                        itemStoredInDb.Active = item.Active;
+                    }
                 }
                 else
                 {
-                    Add(item);
-                    auditLogs.AddRange(new List<AuditLog>
+                    if (!Any(x => x.InsuranceId == item.InsuranceId && x.PlanTypeId == item.PlanTypeId && x.Active == item.Active))
                     {
-                        AuditLog.AddLog("InsuranceBusinessLines",
-                            "PlanTypeId",
-                            null,
-                            item.PlanTypeId.ToString(),
-                            item.InsuranceBusinessLineId,
-                            "Insert"),
-                        AuditLog.AddLog("InsuranceBusinessLines",
-                            "InsuranceId",
-                            null,
-                            item.InsuranceId.ToString(),
-                            item.InsuranceBusinessLineId,
-                            "Insert")
-                    });
+                        Add(item);
+                        auditLogs.AddRange(new List<AuditLog>
+                        {
+                            AuditLog.AddLog("InsuranceBusinessLines",
+                                "PlanTypeId",
+                                null,
+                                item.PlanTypeId.ToString(),
+                                item.InsuranceBusinessLineId,
+                                "Insert"),
+                            AuditLog.AddLog("InsuranceBusinessLines",
+                                "InsuranceId",
+                                null,
+                                item.InsuranceId.ToString(),
+                                item.InsuranceBusinessLineId,
+                                "Insert"),
+                            AuditLog.AddLog("InsuranceBusinessLines",
+                                "Active",
+                                null,
+                                "true",
+                                item.InsuranceBusinessLineId,
+                                "Insert")
+                        });
+                    }
+
                 }
             }
 

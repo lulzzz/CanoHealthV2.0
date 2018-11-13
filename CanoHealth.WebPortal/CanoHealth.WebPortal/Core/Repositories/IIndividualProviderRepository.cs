@@ -7,6 +7,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
     public interface IIndividualProviderRepository : IRepository<DoctorIndividualProvider>
     {
         IEnumerable<DoctorIndividualProvider> GetIndividualProviders(Guid? doctorId);
+        IEnumerable<DoctorIndividualProvider> GetIndividualProvidersByInsurance(Guid insuranceId);
         IEnumerable<AuditLog> SaveIndividualProviders(List<DoctorIndividualProvider> doctorIndividualProviders);
         DoctorIndividualProvider GetIndividualProviderByProviderNumber(Guid doctorIndividualProviderId, string individualProviderProviderNumber);
         DoctorIndividualProvider GetIndividualProviderByDoctorAndInsurance(DoctorIndividualProvider doctorIndividualProvider);

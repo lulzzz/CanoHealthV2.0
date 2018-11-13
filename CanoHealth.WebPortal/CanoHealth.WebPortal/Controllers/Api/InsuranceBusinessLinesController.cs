@@ -50,7 +50,9 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var insuranceBusinessLines = insuranceBusinessLineViewModels.ConvertToInsuranceBusinessLineEntity()
                     .ToList();

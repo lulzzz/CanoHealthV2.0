@@ -15,7 +15,8 @@ namespace CanoHealth.WebPortal.CommonTools.ExtensionMethods
             {
                 InsuranceBusinessLineId = x.InsuranceBusinessLineId == Guid.Empty ? Guid.NewGuid() : x.InsuranceBusinessLineId,
                 InsuranceId = x.InsuranceId,
-                PlanTypeId = x.PlanTypeId
+                PlanTypeId = x.PlanTypeId,
+                Active = x.Active == null ? true : x.Active
             }).ToList();
         }
     }

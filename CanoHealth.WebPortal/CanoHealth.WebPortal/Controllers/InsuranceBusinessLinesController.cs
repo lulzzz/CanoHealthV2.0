@@ -72,7 +72,8 @@ namespace CanoHealth.WebPortal.Controllers
                 InsuranceId = x.InsuranceId,
                 PlanTypeId = x.PlanTypeId,
                 Code = x.BusinessLine.Code,
-                Name = x.BusinessLine.Name
+                Name = x.BusinessLine.Name,
+                Active = x.Active
             };
         }
     }

@@ -15,11 +15,24 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<DoctorIndividualProvider> GetIndividualProviders(Guid? doctorId)
         {
-            var individualProviders = EnumarableGetAll(includeProperties: new Expression<Func<DoctorIndividualProvider, object>>[]
+            var individualProviders = EnumarableGetAll(filter: dip => dip.Active.HasValue && dip.Active.Value,
+                includeProperties: new Expression<Func<DoctorIndividualProvider, object>>[]
                 {d => d.Doctor, i => i.Insurance});
 
             if (doctorId != null)
+            {
                 individualProviders = individualProviders.Where(ip => ip.DoctorId == doctorId);
+            }
+
+            return individualProviders;
+        }
+
+        public IEnumerable<DoctorIndividualProvider> GetIndividualProvidersByInsurance(Guid insuranceId)
+        {
+            var individualProviders = EnumarableGetAll(filter: dip => dip.InsuranceId == insuranceId &&
+                dip.Active.HasValue && dip.Active.Value,
+                includeProperties: new Expression<Func<DoctorIndividualProvider, object>>[]
+                {d => d.Doctor, i => i.Insurance});
 
             return individualProviders;
         }
