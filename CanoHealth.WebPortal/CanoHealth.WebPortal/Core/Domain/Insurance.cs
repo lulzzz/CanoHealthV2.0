@@ -87,7 +87,7 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Contract GetContract(Guid corporationId)
         {
-            return Contracts.SingleOrDefault(x => x.CorporationId == corporationId && x.InsuranceId == InsuranceId);
+            return Contracts.SingleOrDefault(x => x.CorporationId == corporationId && x.InsuranceId == InsuranceId && x.Active);
         }
 
         #endregion
