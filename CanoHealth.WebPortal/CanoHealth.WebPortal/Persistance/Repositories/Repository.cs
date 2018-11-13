@@ -1,13 +1,15 @@
 ﻿using CanoHealth.WebPortal.Core.Repositories;
+using CanoHealth.WebPortal.Core.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CanoHealth.WebPortal.Persistance.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity>, IAsyncRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
 
@@ -26,6 +28,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 return Context.Set<TEntity>();
             }
         }
+
+        #region Sync
 
         public TEntity Get(int id)
         {
@@ -153,5 +157,45 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         {
             return _entities.SqlQuery(query, parameters).ToList();
         }
+
+        #endregion
+
+        #region Async
+
+        public virtual async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _entities.FindAsync(id);
+        }
+
+        public async Task<List<TEntity>> ListAllAsync()
+        {
+            return await _entities.ToListAsync();
+        }
+
+        public async Task<List<TEntity>> ListAsync(ISpecification<TEntity> spec)
+        {
+            IQueryable<TEntity> query = _entities;
+
+            // fetch a Queryable that includes all expression-based includes
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(query.AsQueryable(),
+                    (current, include) => current.Include(include));
+
+            // modify the IQueryable to include any string-based include statements
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+
+            // return the result of the query using the specification's criteria expression
+            secondaryResult = secondaryResult.Where(spec.Filter);
+
+            if (spec.OrderBy != null)
+            {
+                secondaryResult = spec.OrderBy(secondaryResult);
+            }
+
+            return await secondaryResult.ToListAsync();
+        }
+        #endregion
     }
 }
