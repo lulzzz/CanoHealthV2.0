@@ -44,7 +44,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
 
                 if (addendumStoredInDb == null)
                     return NotFound();
-                var auditLog = addendumStoredInDb.InactiveLicense();
+                var auditLog = addendumStoredInDb.InactiveContractAddendum();
 
                 _unitOfWork.AuditLogs.Add(auditLog);
 

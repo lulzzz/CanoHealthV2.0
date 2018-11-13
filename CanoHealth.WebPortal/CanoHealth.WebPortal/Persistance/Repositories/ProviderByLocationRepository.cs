@@ -3,7 +3,9 @@ using CanoHealth.WebPortal.Core.Repositories;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace CanoHealth.WebPortal.Persistance.Repositories
@@ -11,6 +13,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
     public class ProviderByLocationRepository : Repository<ProviderByLocation>, IProviderByLocationRepository
     {
         public ProviderByLocationRepository(ApplicationDbContext context) : base(context) { }
+
+        public IEnumerable<ProviderByLocation> ProviderByLocations(Guid insuranceId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetDoctorProviderByLocation] @InsuranceId";
+            var result = GetWithRawSql(query,                   
+                    new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId }                    
+                ).ToList();
+            return result;
+        }
 
         public IEnumerable<ProviderByLocation> GetActiveProvidersByLocation(
             Guid doctorCorporationContractLinkId)

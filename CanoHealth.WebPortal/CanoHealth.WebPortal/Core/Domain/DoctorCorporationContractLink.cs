@@ -112,5 +112,12 @@ namespace CanoHealth.WebPortal.Core.Domain
             return auditLogs;
         }
 
+        public AuditLog InactiveDoctorCorporationContractLinkRecord()
+        {
+            Active = false;
+            var log = AuditLog.AddLog("DoctorCorporationContractLink", "Active", "true", "false", DoctorCorporationContractLinkId, "Update");
+            return log;
+        }
+
     }
 }

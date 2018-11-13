@@ -1,4 +1,5 @@
 using CanoHealth.WebPortal.Core.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace CanoHealth.WebPortal.Core.Repositories
@@ -8,5 +9,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         IEnumerable<AuditLog> SaveAddendums(IEnumerable<ContractAddendum> addendums);
 
         IEnumerable<ContractAddendum> GetActiveAddendums(string contractId = null);
+
+        IEnumerable<ContractAddendum> GetContractAddendumsByInsurance(Guid insuranceId);
     }
 }

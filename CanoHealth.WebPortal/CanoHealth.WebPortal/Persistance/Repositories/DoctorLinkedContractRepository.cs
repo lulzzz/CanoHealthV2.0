@@ -3,7 +3,9 @@ using CanoHealth.WebPortal.Core.Repositories;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -53,6 +55,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                     .Where(l => l.PlaceOfServiceId == placeOfServiceId));
             }
             return providersByLocation;
+        }
+
+        public IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinks(Guid insuranceId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetDoctorCorporationContractLinksByInsurance] @InsuranceId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId }
+                ).ToList();
+            return result;
         }
 
         private IEnumerable<AuditLog> SaveItems(IEnumerable<DoctorCorporationContractLink> contracts,
@@ -118,8 +130,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 c.DoctorCorporationContractLinkId == item.DoctorCorporationContractLinkId));
         }
 
-        public IEnumerable<AuditLog> RemoveLinkedContracts(
-        List<DoctorCorporationContractLink> doctorCorporationContractLinks)
+        public IEnumerable<AuditLog> RemoveLinkedContracts(List<DoctorCorporationContractLink> doctorCorporationContractLinks)
         {
             var auditLogs = new List<AuditLog>();
             foreach (var linkedContract in doctorCorporationContractLinks)

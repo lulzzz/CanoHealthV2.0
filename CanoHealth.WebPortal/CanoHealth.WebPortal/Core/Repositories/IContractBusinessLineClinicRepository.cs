@@ -8,5 +8,6 @@ namespace CanoHealth.WebPortal.Core.Repositories
     {
         IEnumerable<AuditLog> GetLogsWhileRemoveItems(IEnumerable<ClinicLineofBusinessContract> clinicLineofBusiness);
         IEnumerable<PlaceOfService> GetLocationsByBusinessLines(Guid contractLineofBusinessId);
+        IEnumerable<ClinicLineofBusinessContract> GetContractLineofBusinessLocations(Guid insuranceId);
     }
 }

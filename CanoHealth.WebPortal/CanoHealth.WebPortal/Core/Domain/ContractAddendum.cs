@@ -99,7 +99,7 @@ namespace CanoHealth.WebPortal.Core.Domain
             return auditLogs;
         }
 
-        public AuditLog InactiveLicense()
+        public AuditLog InactiveContractAddendum()
         {
             var auditlog = AuditLog.AddLog("ContractAddendums", "Active", Active.ToString(), false.ToString(), ContractAddendumId, "Update");
             Active = false;

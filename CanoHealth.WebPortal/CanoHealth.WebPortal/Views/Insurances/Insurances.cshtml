@@ -129,15 +129,15 @@
     <br />
     <br />
     @(Html.Kendo().ListView<InsuranceBusinessLineViewModel>()
-                .Name("IsuranceBusinesLine_#=InsuranceId#")
-                .TagName("div")
-                .HtmlAttributes(new { style = "border: 0 !important;" })
-                .ClientTemplateId("businessline-detail-template")
-                .DataSource(dataSource =>
-                {
-                    dataSource.Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }));
-                })
-                .ToClientTemplate())
+       .Name("IsuranceBusinesLine_#=InsuranceId#")
+       .TagName("div")
+       .HtmlAttributes(new { style = "border: 0 !important;" })
+       .ClientTemplateId("businessline-detail-template")
+       .DataSource(dataSource =>
+       {
+           dataSource.Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }));
+       })
+       .ToClientTemplate())
 </script>
 
 <script type="text/x-kendo-template" id="businessline-detail-template">

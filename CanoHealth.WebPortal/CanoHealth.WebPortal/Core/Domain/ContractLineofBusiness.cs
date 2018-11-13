@@ -145,5 +145,12 @@ namespace CanoHealth.WebPortal.Core.Domain
 
             return logs;
         }
+
+        public AuditLog InactivateContractLineofBusinessRecord()
+        {
+            Active = false;
+            var log = AuditLog.AddLog("ContractLineofBusiness", "Active", "true", "false", ContractLineofBusinessId, "Update");
+            return log;
+        }
     }
 }

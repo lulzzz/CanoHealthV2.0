@@ -3,6 +3,8 @@ using CanoHealth.WebPortal.Core.Repositories;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -46,6 +48,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 .Select(x => x.Clinic)
                 .Where(l => l.Active).ToList();
 
+            return result;
+        }
+
+        public IEnumerable<ClinicLineofBusinessContract> GetContractLineofBusinessLocations(Guid insuranceId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetContractLineofBusinessLocationByInsurance] @InsuranceId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId }
+                ).ToList();
             return result;
         }
     }

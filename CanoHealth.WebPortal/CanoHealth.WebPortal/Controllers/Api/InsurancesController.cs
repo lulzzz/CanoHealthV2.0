@@ -85,22 +85,44 @@ namespace CanoHealth.WebPortal.Controllers.Api
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
+                if (!ModelState.IsValid)               
                     return BadRequest(ModelState);
-                }
 
                 //Get the insurance and all the active contracts associated to it.
                 var insuranceStoredInDb = _unitOfWork.Insurances.GetWithContracts(insurance.InsuranceId);
                 if (insuranceStoredInDb == null)
-                {
                     return NotFound();
-                }
+
+                var logs = new List<AuditLog>();
+
+                //get active provider by locations associated to insurance
+                var activeProvidersByLocation = _unitOfWork.ProviderByLocationRepository.ProviderByLocations(insurance.InsuranceId).ToList();
+                var inactivateProviderLogs = activeProvidersByLocation.ConvertAll(x => x.Inactivate()).ToList();
+                logs.AddRange(inactivateProviderLogs);
+
+                //get active doctor corporation contract links to insurance
+                var activedoctorLinkedContracts = _unitOfWork.DoctorLinkedContracts.DoctorCorporationContractLinks(insurance.InsuranceId).ToList();
+                var inactivatedoccontractsLogs = activedoctorLinkedContracts.ConvertAll(x => x.InactiveDoctorCorporationContractLinkRecord()).ToList();
+                logs.AddRange(inactivatedoccontractsLogs);
+
+                //get active Contract->Line of Business->Location associtated to insurance
+                var activeContractLineofBusinessLocations = _unitOfWork.ContracBusinessLineClinicRepository.GetContractLineofBusinessLocations(insurance.InsuranceId).ToList();
+                var inactivateLogs = activeContractLineofBusinessLocations.ConvertAll(x => x.InactivateClinicLineofBusinessContract()).ToList();
+                logs.AddRange(inactivateLogs);
+
+                //get active contract's line of business associated to insurance
+                var activecontracLineofbusiness = _unitOfWork.ContracBusinessLineRepository.ContractLineofBusinesses(insurance.InsuranceId).ToList();
+                var inactivatelineofbusinessLogs = activecontracLineofbusiness.ConvertAll(x => x.InactivateContractLineofBusinessRecord()).ToList();
+                logs.AddRange(inactivatelineofbusinessLogs);
+
+                //get active contract's addendums associated to insurance
+                var activecontractAddendums = _unitOfWork.Addendums.GetContractAddendumsByInsurance(insurance.InsuranceId).ToList();
+                var inactivateaddendumsLogs = activecontractAddendums.ConvertAll(x => x.InactiveContractAddendum()).ToList();
+                logs.AddRange(inactivateaddendumsLogs);
 
                 //Inactivate insurance and all the active contracts associated to it.
-                var logs = insuranceStoredInDb.InactivateInsurance().ToList();
-
-                //PENDING: for each inactivated contract inactivate active addendums
+                var inactivatecontractLogs = insuranceStoredInDb.InactivateInsurance().ToList();
+                logs.AddRange(inactivatecontractLogs);
 
                 //Inactivate all active Insurance Line of Business relationships
                 var insuranceLineOfBusiness = _unitOfWork.InsuranceBusinessLineRepository.GetBusinessLines(insurance.InsuranceId).ToList();
@@ -113,28 +135,11 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 var insurancedoctorLogs = individualProviders.ConvertAll(dip => dip.InactivateDoctorInsuranceRelationship());
                 logs.AddRange(insurancedoctorLogs);
 
-                //Inactivate all active Corporation -> Insurance -> Line of business relationships (ContractLineofBusiness)
-                var contractLineofBusiness = new List<ContractLineofBusiness>();
-                foreach (var contract in insuranceStoredInDb.Contracts)
-                {
-                    contractLineofBusiness = _unitOfWork.ContracBusinessLineRepository
-                        .GetContractBusinessLinesWithClinics(contract.ContractId.ToString())
-                        .ToList();
-
-                    foreach (var contractlineofbusiness in contractLineofBusiness)
-                    {
-                        contractlineofbusiness.InactivateRelationAmongContractLineofBusinessLocation();
-                        var doctorcorporationContractLinks = _unitOfWork.DoctorLinkedContracts.GetDoctorsLinkedToLineOfBusiness(contractlineofbusiness.ContractLineofBusinessId).ToList();
-                        doctorcorporationContractLinks.ForEach(x => x.InactivateRelationAmongContractLineofBusinessDoctor());
-                    }
-                }
-
                 _unitOfWork.AuditLogs.AddRange(logs);
 
                 _unitOfWork.Complete();
 
                 insurance.Active = false;
-
             }
             catch (Exception ex)
             {
@@ -143,5 +148,69 @@ namespace CanoHealth.WebPortal.Controllers.Api
             }
             return Ok(insurance);
         }
+
+        //[HttpDelete]
+        //public IHttpActionResult InactivateInsurance_old(InsuranceFormDto insurance)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest(ModelState);
+        //        }
+
+        //        //Get the insurance and all the active contracts associated to it.
+        //        var insuranceStoredInDb = _unitOfWork.Insurances.GetWithContracts(insurance.InsuranceId);
+        //        if (insuranceStoredInDb == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        //Inactivate insurance and all the active contracts associated to it.
+        //        var logs = insuranceStoredInDb.InactivateInsurance().ToList();
+
+        //        //PENDING: for each inactivated contract inactivate active addendums
+
+        //        //Inactivate all active Insurance Line of Business relationships
+        //        var insuranceLineOfBusiness = _unitOfWork.InsuranceBusinessLineRepository.GetBusinessLines(insurance.InsuranceId).ToList();
+        //        var insurancelineofbusinessLogs = insuranceLineOfBusiness.Select(item => item.InactivateInsuranceLineofBusinessRelation()).ToList();
+        //        logs.AddRange(insurancelineofbusinessLogs);
+
+        //        //Inactivate all Doctor Insurances relationships(DoctorIndividualProviders)
+        //        var individualProviders = _unitOfWork.IndividualProviderRepository.
+        //            GetIndividualProvidersByInsurance(insurance.InsuranceId).ToList();
+        //        var insurancedoctorLogs = individualProviders.ConvertAll(dip => dip.InactivateDoctorInsuranceRelationship());
+        //        logs.AddRange(insurancedoctorLogs);
+
+        //        //Inactivate all active Corporation -> Insurance -> Line of business relationships (ContractLineofBusiness)
+        //        var contractLineofBusiness = new List<ContractLineofBusiness>();
+        //        foreach (var contract in insuranceStoredInDb.Contracts)
+        //        {
+        //            contractLineofBusiness = _unitOfWork.ContracBusinessLineRepository
+        //                .GetContractBusinessLinesWithClinics(contract.ContractId.ToString())
+        //                .ToList();
+
+        //            foreach (var contractlineofbusiness in contractLineofBusiness)
+        //            {
+        //                contractlineofbusiness.InactivateRelationAmongContractLineofBusinessLocation();
+        //                var doctorcorporationContractLinks = _unitOfWork.DoctorLinkedContracts.GetDoctorsLinkedToLineOfBusiness(contractlineofbusiness.ContractLineofBusinessId).ToList();
+        //                doctorcorporationContractLinks.ForEach(x => x.InactivateRelationAmongContractLineofBusinessDoctor());
+        //            }
+        //        }
+
+        //        _unitOfWork.AuditLogs.AddRange(logs);
+
+        //        _unitOfWork.Complete();
+
+        //        insurance.Active = false;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ErrorSignal.FromCurrentContext().Raise(ex);
+        //        return InternalServerError(ex);
+        //    }
+        //    return Ok(insurance);
+        //}
     }
 }

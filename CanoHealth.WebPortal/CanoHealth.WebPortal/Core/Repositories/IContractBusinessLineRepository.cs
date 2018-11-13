@@ -15,5 +15,9 @@ namespace CanoHealth.WebPortal.Core.Repositories
         ContractLineofBusiness ExistItem(Guid contractId, Guid planTypeId, Guid? contractLineofBusinessId = null);
 
         IEnumerable<ContractLineofBusiness> GetContractBusinessLines(Guid contractId);
+
+        IEnumerable<ContractLineofBusiness> ContractLineofBusinesses(Guid insuranceId);
+
+        IEnumerable<ContractLineofBusiness> ContractLineofBusinesses(Guid insuranceId, Guid planTypeId);
     }
 }

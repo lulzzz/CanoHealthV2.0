@@ -3,7 +3,9 @@ using CanoHealth.WebPortal.Core.Repositories;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 
@@ -24,6 +26,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             }
 
             return iqueryableresult.ToList();
+        }
+
+        public IEnumerable<ContractAddendum> GetContractAddendumsByInsurance(Guid insuranceId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetContractAddendumByInsurance] @InsuranceId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId }
+                ).ToList();
+            return result;
         }
 
         public IEnumerable<AuditLog> SaveAddendums(IEnumerable<ContractAddendum> addendums)
