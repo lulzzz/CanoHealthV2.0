@@ -505,6 +505,10 @@
     <Compile Include="Migrations\201811131458012_CreateStoredProcedureGetDoctorProviderByLocation.Designer.cs">
       <DependentUpon>201811131458012_CreateStoredProcedureGetDoctorProviderByLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811131957153_CreateStoredProcedureGetContractLineofBusinessByInsuranceAndLineofBusiness.cs" />
+    <Compile Include="Migrations\201811131957153_CreateStoredProcedureGetContractLineofBusinessByInsuranceAndLineofBusiness.Designer.cs">
+      <DependentUpon>201811131957153_CreateStoredProcedureGetContractLineofBusinessByInsuranceAndLineofBusiness.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1701,6 +1705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811131458012_CreateStoredProcedureGetDoctorProviderByLocation.resx">
       <DependentUpon>201811131458012_CreateStoredProcedureGetDoctorProviderByLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131957153_CreateStoredProcedureGetContractLineofBusinessByInsuranceAndLineofBusiness.resx">
+      <DependentUpon>201811131957153_CreateStoredProcedureGetContractLineofBusinessByInsuranceAndLineofBusiness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
