@@ -39,4 +39,7 @@ V07/13/2018 10:37
 V11/09/2018 15:09
 This version was deployed on staging environment
 
+V11/12/2018
+8:00 - 11:00 Arreglando el inactivar insurance en cascada
+
 
