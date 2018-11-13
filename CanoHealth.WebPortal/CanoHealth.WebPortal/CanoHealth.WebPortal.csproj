@@ -473,6 +473,10 @@
     <Compile Include="Migrations\201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.Designer.cs">
       <DependentUpon>201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811130236273_AddActiveColumnToDoctorIndividualProvidersTable.cs" />
+    <Compile Include="Migrations\201811130236273_AddActiveColumnToDoctorIndividualProvidersTable.Designer.cs">
+      <DependentUpon>201811130236273_AddActiveColumnToDoctorIndividualProvidersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1648,6 +1652,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.resx">
       <DependentUpon>201811130156312_AddActiveColumnToInsuranceLineofBusinessTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811130236273_AddActiveColumnToDoctorIndividualProvidersTable.resx">
+      <DependentUpon>201811130236273_AddActiveColumnToDoctorIndividualProvidersTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

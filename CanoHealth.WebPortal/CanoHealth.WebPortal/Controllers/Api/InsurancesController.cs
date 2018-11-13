@@ -42,7 +42,10 @@ namespace CanoHealth.WebPortal.Controllers.Api
         {
             var insurance = _unitOfWork.Insurances.GetByName(insuranceName);
             if (insurance != null)
+            {
                 return Ok(InsuranceWithContractsDto.Wrap(insurance));
+            }
+
             return Ok(new InsuranceWithContractsDto());
         }
 
@@ -52,11 +55,15 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var insuranceStoredInDb = _unitOfWork.Insurances.Get(insurance.InsuranceId);
                 if (insuranceStoredInDb == null)
+                {
                     return NotFound();
+                }
 
                 var logs = insuranceStoredInDb.ModifyInsurance(Mapper.Map(insurance, new Insurance()));
 
@@ -78,15 +85,26 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
+
 
                 //Get the insurance and all the active contracts associated to it.
                 var insuranceStoredInDb = _unitOfWork.Insurances.GetWithContracts(insurance.InsuranceId);
                 if (insuranceStoredInDb == null)
+                {
                     return NotFound();
+                }
 
                 //Inactivate insurance and all the active contracts associated to it.
                 var logs = insuranceStoredInDb.InactivateInsurance();
+
+                //Inactivate all active Insurance Line of Business relationships
+                var insuranceLineOfBusiness = _unitOfWork.InsuranceBusinessLineRepository.GetBusinessLines(insurance.InsuranceId).ToList();
+                insuranceLineOfBusiness.ForEach(item => item.InactivateInsuranceLineofBusinessRelation());
+
+                //Inactivate all Doctor Insurances relationships(DoctorIndividualProviders)
 
                 _unitOfWork.AuditLogs.AddRange(logs);
 

@@ -14,7 +14,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<InsuranceBusinessLine> GetBusinessLines(Guid insuranceId)
         {
-            return EnumarableGetAll(ibl => ibl.InsuranceId == insuranceId, includeProperties: bl => bl.BusinessLine);
+            return EnumarableGetAll(ibl => ibl.InsuranceId == insuranceId && ibl.Active.HasValue && ibl.Active.Value
+            , includeProperties: bl => bl.BusinessLine);
         }
 
         public IEnumerable<AuditLog> Save(IEnumerable<InsuranceBusinessLine> insuranceBusinessLines)

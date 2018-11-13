@@ -18,6 +18,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public DateTime IndividualProviderEffectiveDate { get; set; }
 
+        public bool? Active { get; set; }
+
         //Navegation Properties
         public Doctor Doctor { get; set; }
 
@@ -68,6 +70,12 @@ namespace CanoHealth.WebPortal.Core.Domain
             }
 
             return auditLogs;
+        }
+
+        public void InactivateDoctorInsuranceRelationship()
+        {
+            Active = false;
+            var log = AuditLog.AddLog("DoctorIndividualProviders", "Active", "true", "false", DoctorIndividualProviderId, "Update");
         }
     }
 }
