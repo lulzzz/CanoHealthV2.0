@@ -15,8 +15,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
     {
         public ContractBusinessLineClinicRepository(ApplicationDbContext context) : base(context) { }
 
-        public IEnumerable<AuditLog> GetLogsWhileRemoveItems(
-            IEnumerable<ClinicLineofBusinessContract> clinicLineofBusiness)
+        public IEnumerable<AuditLog> GetLogsWhileRemoveItems(IEnumerable<ClinicLineofBusinessContract> clinicLineofBusiness)
         {
             var auditLogs = new List<AuditLog>();
             var collection = clinicLineofBusiness.Select(x => new List<AuditLog>
@@ -37,8 +36,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return auditLogs;
         }
 
-        public IEnumerable<PlaceOfService> GetLocationsByBusinessLines(
-            Guid contractLineofBusinessId)
+        public IEnumerable<PlaceOfService> GetLocationsByBusinessLines(Guid contractLineofBusinessId)
         {
             var result = EnumarableGetAll(x => x.ContractLineofBusinessId == contractLineofBusinessId,
                 includeProperties: new Expression<Func<ClinicLineofBusinessContract, object>>[]
@@ -58,6 +56,13 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             var result = GetWithRawSql(query,
                     new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId }
                 ).ToList();
+            return result;
+        }
+
+        public IEnumerable<ClinicLineofBusinessContract> ContractLineofBusinessLocations(Guid contractLineofBusinessId)
+        {
+            var result = EnumarableGetAll(filter: x => x.ContractLineofBusinessId == contractLineofBusinessId &&
+            x.Active.HasValue && x.Active.Value).ToList();
             return result;
         }
     }

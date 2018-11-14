@@ -67,6 +67,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return result;
         }
 
+
         private IEnumerable<AuditLog> SaveItems(IEnumerable<DoctorCorporationContractLink> contracts,
             Func<DbSet<DoctorCorporationContractLink>, DoctorCorporationContractLink, bool> existLinkedContract)
         {
