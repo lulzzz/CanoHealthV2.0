@@ -39,7 +39,6 @@
                 {
                     col.Bound(p => p.InsuranceId).Hidden(true);
 
-
                     col.Bound(p => p.Name).Title("NAME").Width(110);
 
                     //col.Bound(p => p.Code).Title("CODE").Width(110);
@@ -47,7 +46,6 @@
                     col.Bound(p => p.Address).Title("ADDRESS").Width(200);
 
                     col.Bound(p => p.PhoneNumber).Title("PHONE NUMBER").Width(110);
-
 
                     col.Bound(p => p.Active).ClientTemplate("#=Active ? 'YES' : 'NO'#")
                         .Title("ACTIVE").Width(70);
@@ -136,6 +134,7 @@
        .DataSource(dataSource =>
        {
            dataSource.Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }));
+           dataSource.Destroy(destroy => destroy.Action("InactivateInsuranceLineofBusinessRelation", "InsuranceBusinessLines"));
        })
        .ToClientTemplate())
 </script>
@@ -145,7 +144,11 @@
         <div class="content-box box-default insurance-businessline">
             <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
             <h5 class="content-box-title">#:Code#</h5>
-        </div>
+            <hr />
+            <div class="">
+                <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+            </div>
+        </div>       
     </div>
 </script>
 

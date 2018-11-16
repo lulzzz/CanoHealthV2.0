@@ -782,5 +782,5 @@
         createAddendumViewModel: createAddendumViewModel,
         addendumFilesFromKendoUpload: addendumFilesFromKendoUpload,
         createContractBusinessLineViewModel: createContractBusinessLineViewModel
-    }
+    };
 }(ContractService);

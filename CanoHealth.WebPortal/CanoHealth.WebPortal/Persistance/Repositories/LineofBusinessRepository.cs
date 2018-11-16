@@ -12,7 +12,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<PlanType> GetBusinessLines()
         {
-            return QueryableGetAll(orderBy: types => types.OrderBy(x => x.Name)).ToList();
+            return QueryableGetAll(filter: x => x.Active.HasValue && x.Active.Value,
+                orderBy: types => types.OrderBy(x => x.Name)).ToList();
         }
     }
 }

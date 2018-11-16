@@ -6,7 +6,7 @@
     //private methods
     var init = function (container) {
         $(container).on("click", ".js-insurancebusinessline-addbtn", displayFormWindow);
-    }
+    };
 
     var displayFormWindow = function (e) {
         button = $(e.target);

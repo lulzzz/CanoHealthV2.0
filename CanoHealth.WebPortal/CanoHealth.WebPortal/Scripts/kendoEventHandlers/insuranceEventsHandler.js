@@ -27,23 +27,39 @@ function showMessage(container, name, errors, grid) {
 }
 
 function onDataBoundInsuranceGrid(e) {
-    var grid = $("#Insurances").data("kendoGrid");
-    var gridData = grid.dataSource.view();
-
-    for (var i = 0; i < gridData.length; i++) {
-        var currentUid = gridData[i].uid;
-        var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
-        var activateButton = $(currenRow).find(".js-active");
-        var inactivateButton = $(currenRow).find(".js-inactive");
-        activateButton.width(inactivateButton.width());
-        if (gridData[i].Active === true) {
-            activateButton.hide();
-            inactivateButton.show();
-        } else {
+    //from https://docs.telerik.com/kendo-ui/knowledge-base/grid-hide-expand-icon-based-on-field-value
+    var items = e.sender.items();
+    items.each(function () {
+        var row = $(this);
+        var dataItem = e.sender.dataItem(row);
+        var activateButton = row.find(".js-active");
+        var inactivateButton = row.find(".js-inactive");
+        if (!dataItem.Active) {
+            row.find(".k-hierarchy-cell").html("");
             activateButton.show();
             inactivateButton.hide();
+        } else {
+            activateButton.hide();
+            inactivateButton.show();
         }
-    }
+    });
+    //old implementation
+    //var grid = $("#Insurances").data("kendoGrid");
+    //var gridData = grid.dataSource.view();
+    //for (var i = 0; i < gridData.length; i++) {
+    //    var currentUid = gridData[i].uid;
+    //    var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+    //    var activateButton = $(currenRow).find(".js-active");
+    //    var inactivateButton = $(currenRow).find(".js-inactive");
+    //    activateButton.width(inactivateButton.width());
+    //    if (gridData[i].Active === true) {
+    //        activateButton.hide();
+    //        inactivateButton.show();
+    //    } else {
+    //        activateButton.show();
+    //        inactivateButton.hide();
+    //    }
+    //}
 }
 
 function onExpandInsuranceDetails(e) {

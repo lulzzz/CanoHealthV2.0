@@ -67,7 +67,7 @@ namespace CanoHealth.WebPortal.Controllers
             catch (Exception ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Something failed. Please contact your system administrator.");
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "We are sorry, but something went wrong. Please try again!.");
             }
             return Json(addendum);
         }

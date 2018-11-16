@@ -64,6 +64,23 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(insuranceBusinessLineViewModels.ToDataSourceResult(request, ModelState));
         }
 
+        public ActionResult InactivateInsuranceLineofBusinessRelation([DataSourceRequest] DataSourceRequest request, InsuranceBusinessLineViewModel viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                ModelState.AddModelError("","We are sorry, but something went wrong. Please try again!");
+            }
+            return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));
+        }
+
         private Func<InsuranceBusinessLine, InsuranceBusinessLineViewModel> MapToViewModel()
         {
             return x => new InsuranceBusinessLineViewModel
