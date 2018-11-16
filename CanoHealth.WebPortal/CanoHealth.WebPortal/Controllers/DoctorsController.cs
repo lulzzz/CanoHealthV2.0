@@ -160,7 +160,7 @@ namespace CanoHealth.WebPortal.Controllers
                 if (ModelState.IsValid)
                 {
                     var doctorStoredInDb = _unitOfWork.Doctors.Get(doctor.DoctorId.Value);
-                    if (doctorStoredInDb == null)
+                    if (doctorStoredInDb == null || (doctorStoredInDb != null && !doctor.Active))
                     {
                         ModelState.AddModelError("", "This doctor is not in our system. Please try again.");
                         return Json(new[] { doctor }.ToDataSourceResult(request, ModelState));

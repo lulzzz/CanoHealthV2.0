@@ -57,7 +57,7 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception e)
                 {
                     ErrorSignal.FromCurrentContext().Raise(e);
-                    ModelState.AddModelError("", @"We are sorry, but something went wrong. Please try again.");
+                    ModelState.AddModelError("", @"We are sorry, but something went wrong. Please try again!");
                 }
             }
 
@@ -70,6 +70,16 @@ namespace CanoHealth.WebPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //get the record from DB
+                    var insuranceLineofbusinessStoredIndb = _unitOfWork.InsuranceBusinessLineRepository
+                        .Get(viewModel.InsuranceBusinessLineId);
+                    //check if the record exist and it is active
+                    if(insuranceLineofbusinessStoredIndb == null || !insuranceLineofbusinessStoredIndb.Active.HasValue || 
+                        (insuranceLineofbusinessStoredIndb.Active.HasValue && !insuranceLineofbusinessStoredIndb.Active.Value))
+                    {
+                        ModelState.AddModelError("", "This record is not in our system. Please try again!");
+                        return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));                        
+                    }
 
                 }
             }
