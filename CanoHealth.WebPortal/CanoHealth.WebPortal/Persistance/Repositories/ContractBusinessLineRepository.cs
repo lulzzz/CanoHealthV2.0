@@ -61,6 +61,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return result;
         }
 
+        public IEnumerable<ContractLineofBusiness> ContractLineofBusinessesByContract(Guid contractId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetContractLineofBusinessByContract] @ContractId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@ContractId", SqlDbType.UniqueIdentifier) { Value = contractId }
+                ).ToList();
+            return result;
+        }
+
         public ContractLineofBusiness GetContractLineofBusinessAndLocations(Guid contractLineofBusinessId)
         {
             var contracBusinessLine = QueryableGetAll(includeProperties:

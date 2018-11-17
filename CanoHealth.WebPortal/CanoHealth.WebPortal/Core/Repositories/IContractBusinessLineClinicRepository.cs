@@ -10,6 +10,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         IEnumerable<PlaceOfService> GetLocationsByBusinessLines(Guid contractLineofBusinessId);
         IEnumerable<ClinicLineofBusinessContract> GetContractLineofBusinessLocations(Guid insuranceId);
         IEnumerable<ClinicLineofBusinessContract> GetContractLineofBusinessLocations(Guid insuranceId, Guid lineofBusinessId);
+        IEnumerable<ClinicLineofBusinessContract> GetContractLineofBusinessLocationsByContract(Guid contractId);
         IEnumerable<ClinicLineofBusinessContract> ContractLineofBusinessLocations(Guid contractLineofBusinessId);
     }
 }

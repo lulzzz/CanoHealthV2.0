@@ -36,6 +36,16 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         }
 
+        public IEnumerable<ProviderByLocation> ProviderByLocationsAndContract(Guid contractId)
+        {
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetDoctorProviderByLocationAndContract] @ContractId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@ContractId", SqlDbType.UniqueIdentifier) { Value = contractId }
+                ).ToList();
+            return result;
+        }
+
         public IEnumerable<ProviderByLocation> GetActiveProvidersByLocation(
             Guid doctorCorporationContractLinkId)
         {

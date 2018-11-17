@@ -525,6 +525,22 @@
     <Compile Include="Migrations\201811172151286_CreateStoredProcedureGetContractAddendumByContract.Designer.cs">
       <DependentUpon>201811172151286_CreateStoredProcedureGetContractAddendumByContract.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811172159564_CreateStoredProcedureGetContractLineofBusinessByContract.cs" />
+    <Compile Include="Migrations\201811172159564_CreateStoredProcedureGetContractLineofBusinessByContract.Designer.cs">
+      <DependentUpon>201811172159564_CreateStoredProcedureGetContractLineofBusinessByContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811172208050_CreateStoredProcedureGetContractLocationsByContract.cs" />
+    <Compile Include="Migrations\201811172208050_CreateStoredProcedureGetContractLocationsByContract.Designer.cs">
+      <DependentUpon>201811172208050_CreateStoredProcedureGetContractLocationsByContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811172213500_CreateStoredProcedureGetDoctorCorporationContractLinksByContract.cs" />
+    <Compile Include="Migrations\201811172213500_CreateStoredProcedureGetDoctorCorporationContractLinksByContract.Designer.cs">
+      <DependentUpon>201811172213500_CreateStoredProcedureGetDoctorCorporationContractLinksByContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.cs" />
+    <Compile Include="Migrations\201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.Designer.cs">
+      <DependentUpon>201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1736,6 +1752,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811172151286_CreateStoredProcedureGetContractAddendumByContract.resx">
       <DependentUpon>201811172151286_CreateStoredProcedureGetContractAddendumByContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811172159564_CreateStoredProcedureGetContractLineofBusinessByContract.resx">
+      <DependentUpon>201811172159564_CreateStoredProcedureGetContractLineofBusinessByContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811172208050_CreateStoredProcedureGetContractLocationsByContract.resx">
+      <DependentUpon>201811172208050_CreateStoredProcedureGetContractLocationsByContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811172213500_CreateStoredProcedureGetDoctorCorporationContractLinksByContract.resx">
+      <DependentUpon>201811172213500_CreateStoredProcedureGetDoctorCorporationContractLinksByContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.resx">
+      <DependentUpon>201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

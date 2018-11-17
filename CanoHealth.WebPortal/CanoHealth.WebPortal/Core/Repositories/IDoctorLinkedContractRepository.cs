@@ -22,6 +22,8 @@ namespace CanoHealth.WebPortal.Core.Repositories
 
         IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinks(Guid insuranceId);
 
+        IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinksByContract(Guid contractId);
+
         IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinksByLineofbusiness(Guid insuranceId, Guid lineofBusinessId);
     }
 }

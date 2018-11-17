@@ -1,7 +1,9 @@
 ﻿using CanoHealth.WebPortal.Core;
+using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Dtos;
 using Elmah;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -22,18 +24,54 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
-                //Como no voy a inactivar los addendums del contrato ni las lineas de negocio del mismo uso el metodo Get,
-                //en caso contrario tendria que usar un metodo que me permita obtener el contrato con los addendums y las lineas de negocio incluidas
                 var contractStoredInDb = _unitOfWork.Contracts.Get(contract.ContractId);
 
                 if (contractStoredInDb == null)
+                {
                     return NotFound();
+                }
+                var auditLogs = new List<AuditLog>();
+
+                //get active doctor provider by location and contract(DoctorProviderByLocation)
+                var providerByLocations = _unitOfWork.ProviderByLocationRepository
+                    .ProviderByLocationsAndContract(contract.ContractId)
+                    .ToList();
+                var providerByLocationLogs = providerByLocations.ConvertAll(x => x.Inactivate()).ToList();
+                auditLogs.AddRange(providerByLocationLogs);
+
+                //get active doctor corporation contract links by contract([dbo].[DoctorCorporationContractLinks])
+                var docLinkedContracts = _unitOfWork.DoctorLinkedContracts
+                    .DoctorCorporationContractLinksByContract(contract.ContractId)
+                    .ToList();
+                var docLinkedContractLogs = docLinkedContracts.ConvertAll(x => x.InactiveDoctorCorporationContractLinkRecord()).ToList();
+                auditLogs.AddRange(docLinkedContractLogs);
+
+                //get active contract -> line of business -> locations(ClinicLineofBusinessContracts)
+                var locLinkedContracts = _unitOfWork.ContracBusinessLineClinicRepository
+                    .GetContractLineofBusinessLocationsByContract(contract.ContractId)
+                    .ToList();
+                var locLinkedContractsLogs = locLinkedContracts.ConvertAll(x => x.InactivateClinicLineofBusinessContract()).ToList();
+                auditLogs.AddRange(locLinkedContractsLogs);
+
+                //get active contract line of business by contractid
+                var contractLineofBusiness = _unitOfWork.ContracBusinessLineRepository
+                    .ContractLineofBusinessesByContract(contract.ContractId).ToList();
+                var contractLineofBusinessLogs = contractLineofBusiness.ConvertAll(x => x.InactivateContractLineofBusinessRecord()).ToList();
+                auditLogs.AddRange(contractLineofBusinessLogs);
+
+                //get active contract addendums by contractid
+                var addendums = _unitOfWork.Addendums.GetContractAddendumsByContract(contract.ContractId).ToList();
+                var addendumsLogs = addendums.ConvertAll(x => x.InactiveContractAddendum()).ToList();
+                auditLogs.AddRange(addendumsLogs);
 
                 var log = contractStoredInDb.InactivateContract();
+                auditLogs.Add(log);
 
-                _unitOfWork.AuditLogs.Add(log);
+                _unitOfWork.AuditLogs.AddRange(auditLogs);
 
                 _unitOfWork.Complete();
 
@@ -53,12 +91,16 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var contractStoredInDb = _unitOfWork.Contracts.Get(contract.ContractId);
 
                 if (contractStoredInDb == null)
+                {
                     return NotFound();
+                }
 
                 var updateLogs = contractStoredInDb.ModifyContract(contract.Convert());
 
@@ -80,6 +122,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
             /*Dame de los contratos que estan activos solamente aquellos que ya tienen lineas de negocios asignadas al mismo*/
             var activeContracts = _unitOfWork.Contracts
                 .GetActiveContractsWithInsuranceCorporationBusinessLines()
+                .Where(x => x.Corporation.Active && x.Insurance.Active)
                 .Select(ContractExtDto.Wrap)
                 .ToList();
 

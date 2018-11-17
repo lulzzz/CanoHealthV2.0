@@ -11,5 +11,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         IEnumerable<ContractAddendum> GetActiveAddendums(string contractId = null);
 
         IEnumerable<ContractAddendum> GetContractAddendumsByInsurance(Guid insuranceId);
+
+        IEnumerable<ContractAddendum> GetContractAddendumsByContract(Guid contractId);
     }
 }
