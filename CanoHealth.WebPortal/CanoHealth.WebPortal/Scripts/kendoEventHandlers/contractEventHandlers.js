@@ -93,10 +93,10 @@ function onClickInactivateContractButton(e) {
             var contractGrid = $("#Contracts").data('kendoGrid');
             contractGrid.dataSource.pushUpdate(response);
         };
-        var onFailIncativeContract = function(response) {
+        var onFailIncativeContract = function (response) {
             console.log("Inactivate contract call fails: ", response);
             toastr.error(response.statusText);
-        }
+        };
         AjaxCallDelete("/api/contracts/", JSON.stringify(dataItem), onSuccessInactiveContract, onFailIncativeContract);
         window.close();
     });

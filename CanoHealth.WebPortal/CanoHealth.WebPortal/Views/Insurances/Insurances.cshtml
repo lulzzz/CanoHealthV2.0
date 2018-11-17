@@ -131,11 +131,12 @@
        .TagName("div")
        .HtmlAttributes(new { style = "border: 0 !important;" })
        .ClientTemplateId("businessline-detail-template")
-       .DataSource(dataSource =>
-       {
-           dataSource.Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }));
-           dataSource.Destroy(destroy => destroy.Action("InactivateInsuranceLineofBusinessRelation", "InsuranceBusinessLines"));
-       })
+       .DataSource(dataSource => dataSource
+           .Model(model => model.Id(x => x.InsuranceBusinessLineId))
+           .Read(read => read.Action("GetBusinessLineByInsurance", "InsuranceBusinessLines", new { insuranceId = "#=InsuranceId#" }))
+           .Destroy(destroy => destroy.Action("InactivateInsuranceLineofBusinessRelation", "InsuranceBusinessLines"))          
+       )
+       .Events(ev => ev.Remove("onRemoveInsuranceLineofBusinessRecord"))
        .ToClientTemplate())
 </script>
 
@@ -144,8 +145,8 @@
         <div class="content-box box-default insurance-businessline">
             <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
             <h5 class="content-box-title">#:Code#</h5>
-            <hr />
-            <div class="">
+            
+            <div class="pull-left">
                 <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
             </div>
         </div>       
@@ -173,6 +174,15 @@
         <button class="btn btn-ar btn-primary" id="js-releaseinsurance-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
         <button class="btn btn-ar btn-default" id="js-releaseinsurance-noButton"><i class="fa fa-ban"></i> No</button>
     </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-lineofbusiness-confirmation-template">
+    <p>Are you sure you want to inactive the Line of Business: <strong>#=Name#</strong>?</p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-releaseinsurancelineofbusiness-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-releaseinsurancelineofbusiness-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>                      
 </script>
 
 @section Scripts{

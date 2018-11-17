@@ -7,13 +7,13 @@ namespace CanoHealth.WebPortal.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateStoredProcedureGetLocDocProviderByInsuranceAndLineofbusiness : IMigrationMetadata
+    public sealed partial class CreateStoredProcedureGetDoctorProviderByLocationAndLineofbusiness : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateStoredProcedureGetLocDocProviderByInsuranceAndLineofbusiness));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateStoredProcedureGetDoctorProviderByLocationAndLineofbusiness));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811152355203_CreateStoredProcedureGetLocDocProviderByInsuranceAndLineofbusiness"; }
+            get { return "201811172053396_CreateStoredProcedureGetDoctorProviderByLocationAndLineofbusiness"; }
         }
         
         string IMigrationMetadata.Source

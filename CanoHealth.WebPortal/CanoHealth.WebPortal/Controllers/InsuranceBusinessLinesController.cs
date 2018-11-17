@@ -74,19 +74,59 @@ namespace CanoHealth.WebPortal.Controllers
                     var insuranceLineofbusinessStoredIndb = _unitOfWork.InsuranceBusinessLineRepository
                         .Get(viewModel.InsuranceBusinessLineId);
                     //check if the record exist and it is active
-                    if(insuranceLineofbusinessStoredIndb == null || !insuranceLineofbusinessStoredIndb.Active.HasValue || 
+                    if (insuranceLineofbusinessStoredIndb == null || !insuranceLineofbusinessStoredIndb.Active.HasValue ||
                         (insuranceLineofbusinessStoredIndb.Active.HasValue && !insuranceLineofbusinessStoredIndb.Active.Value))
                     {
                         ModelState.AddModelError("", "This record is not in our system. Please try again!");
-                        return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));                        
+                        return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));
                     }
+                    var auditLogs = new List<AuditLog>();
 
+                    //get the active doctor's providerbylocation items associated to this insurancelineofbusiness record and inactivate them
+                    var providerbyLocation = _unitOfWork.ProviderByLocationRepository
+                        .ProviderByLocationsAndLineofbusiness(viewModel.InsuranceId, viewModel.PlanTypeId)
+                        .ToList();
+                    var inactivateProviderLogs = providerbyLocation.ConvertAll(p => p.Inactivate()).ToList();
+                    auditLogs.AddRange(inactivateProviderLogs);
+
+                    //get the active doctorcorporationcontractlink items associated to this insurancelineofbusiness record and inactivate them
+                    var docLinkedContracts = _unitOfWork.DoctorLinkedContracts
+                        .DoctorCorporationContractLinksByLineofbusiness(viewModel.InsuranceId, viewModel.PlanTypeId)
+                        .ToList();
+                    var inactivateLinkedContractsLogs = docLinkedContracts
+                        .ConvertAll(x => x.InactiveDoctorCorporationContractLinkRecord())
+                        .ToList();
+                    auditLogs.AddRange(inactivateLinkedContractsLogs);
+
+                    //get the active cliniclineofbusinesscontracts items associated to this insurancelineofbusiness record and inactivate them
+                    var contractLineofbusinessLocations = _unitOfWork.ContracBusinessLineClinicRepository
+                        .GetContractLineofBusinessLocations(viewModel.InsuranceId, viewModel.PlanTypeId)
+                        .ToList();
+                    var locLinkedContractLogs = contractLineofbusinessLocations.ConvertAll(x => x.InactivateClinicLineofBusinessContract()).ToList();
+                    auditLogs.AddRange(locLinkedContractLogs);
+
+                    //get the active contractlineofbusiness items associated to this insurancelineofbusiness record and inactivate them
+                    var contractLineofbusiness = _unitOfWork.ContracBusinessLineRepository
+                        .ContractLineofBusinesses(viewModel.InsuranceId, viewModel.PlanTypeId)
+                        .ToList();
+                    var contractLineofbusinesslogs = contractLineofbusiness.ConvertAll(x => x.InactivateContractLineofBusinessRecord()).ToList();
+                    auditLogs.AddRange(contractLineofbusinesslogs);
+
+                    //inactivate the insurancelineofbusiness record
+                    var insuranceLineodbusinessLog = insuranceLineofbusinessStoredIndb.InactivateInsuranceLineofBusinessRelation();
+                    auditLogs.Add(insuranceLineodbusinessLog);
+
+                    //Store the logs
+                    _unitOfWork.AuditLogs.AddRange(auditLogs);
+
+                    //commit the changes to database
+                    _unitOfWork.Complete();
                 }
             }
             catch (Exception ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
-                ModelState.AddModelError("","We are sorry, but something went wrong. Please try again!");
+                ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
             }
             return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));
         }

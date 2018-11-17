@@ -21,5 +21,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         IEnumerable<AuditLog> RemoveLinkedContracts(List<DoctorCorporationContractLink> doctorCorporationContractLinks);
 
         IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinks(Guid insuranceId);
+
+        IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinksByLineofbusiness(Guid insuranceId, Guid lineofBusinessId);
     }
 }

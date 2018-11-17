@@ -52,7 +52,13 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<ContractLineofBusiness> ContractLineofBusinesses(Guid insuranceId, Guid planTypeId)
         {
-            throw new NotImplementedException();
+            //parametrized queries instead string concatenations protect you against SQL Injection
+            var query = "EXEC [dbo].[GetContractLineofBusinessByInsuranceAndLineofBusiness] @InsuranceId,@PlanTypeId";
+            var result = GetWithRawSql(query,
+                    new SqlParameter("@InsuranceId", SqlDbType.UniqueIdentifier) { Value = insuranceId },
+                    new SqlParameter("@PlanTypeId", SqlDbType.UniqueIdentifier) { Value = planTypeId }
+                ).ToList();
+            return result;
         }
 
         public ContractLineofBusiness GetContractLineofBusinessAndLocations(Guid contractLineofBusinessId)
@@ -89,10 +95,13 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public ContractLineofBusiness ExistItem(Guid contractId, Guid planTypeId, Guid? contractLineofBusinessId = null)
         {
             if (contractLineofBusinessId != null)
+            {
                 return SingleOrDefault(x => x.ContractId == contractId &&
                                             x.PlanTypeId == planTypeId &&
                                             x.ContractLineofBusinessId != contractLineofBusinessId &&
                                             x.Active.HasValue && x.Active.Value);
+            }
+
             return SingleOrDefault(x => x.ContractId == contractId &&
                                         x.PlanTypeId == planTypeId &&
                                         x.Active.HasValue && x.Active.Value);

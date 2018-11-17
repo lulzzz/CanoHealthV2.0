@@ -76,6 +76,34 @@ function onExpandInsuranceDetails(e) {
     InsuranceController.checkIfThereAreBusinessLinesToSelect(insurance);
 }
 
+function onRemoveInsuranceLineofBusinessRecord(e) {
+    e.preventDefault();
+
+    var releaseTemplate = kendo.template($("#inactive-lineofbusiness-confirmation-template").html());
+
+    var window = $(".js-notification-dialog").kendoWindow({
+        title: "Confirmation",
+        modal: true,
+        visible: false, //the window will not appear before its .open method is called
+        width: "400px"
+    }).data("kendoWindow");
+
+    window.content(releaseTemplate(e.model)); //send the row data object to the template and render it
+    window.center().open();
+
+    debugger;
+    var listview = $("#IsuranceBusinesLine_" + e.model.InsuranceId).data("kendoListView");
+
+    $("#js-releaseinsurancelineofbusiness-yesButton").click(function () {
+        listview.dataSource.remove(e.model); //prepare a "destroy" request
+        listview.dataSource.sync(); //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+        window.refresh().close();
+    });
+    $("#js-releaseinsurancelineofbusiness-noButton").click(function () {
+        window.refresh().close();
+    });
+};
+
 $(document).ready(function () {
     InsuranceController.init(".container-fluid");
 });
