@@ -99,9 +99,14 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 auditLogs.AddRange(individualProvidersLogs);
 
                 //get active doctor's providers by locations(ProviderByLocations)
-                //var providerByLocations = _unitOfWork.ProviderByLocationRepository.
+                var providerByLocations = _unitOfWork.ProviderByLocationRepository.ProviderByLocationsAndDoctor(doctor.DoctorId).ToList();
+                var providerByLocationLogs = providerByLocations.ConvertAll(x => x.Inactivate()).ToList();
+                auditLogs.AddRange(providerByLocationLogs);
 
-                //get active doctor's contracts(DoctorCorporationContractLinks)               
+                //get active doctor's contracts(DoctorCorporationContractLinks) 
+                var docLinkedContract = _unitOfWork.DoctorLinkedContracts.DoctorCorporationContractLinksByDoctor(doctor.DoctorId).ToList();
+                var docLinkedContractLogs = docLinkedContract.ConvertAll(x => x.InactiveDoctorCorporationContractLinkRecord()).ToList();
+                auditLogs.AddRange(docLinkedContractLogs);
 
                 //Inactivate the doctor
                 var inactiveDocLog = doctor.Inactivate();

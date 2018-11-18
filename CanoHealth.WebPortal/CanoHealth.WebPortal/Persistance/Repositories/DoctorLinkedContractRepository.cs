@@ -67,6 +67,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return result;
         }
 
+        public IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinksByDoctor(Guid doctorId)
+        {
+            return EnumarableGetAll(filter: x => x.DoctorId == doctorId && x.Active.HasValue && x.Active.Value).ToList();
+        }
+
         public IEnumerable<DoctorCorporationContractLink> DoctorCorporationContractLinksByContract(Guid contractId)
         {
             //parametrized queries instead string concatenations protect you against SQL Injection

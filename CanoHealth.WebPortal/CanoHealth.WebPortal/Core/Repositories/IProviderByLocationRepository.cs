@@ -12,6 +12,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
             Guid doctorCorporationContractLinkId);
         IEnumerable<ProviderByLocation> ProviderByLocations(Guid insuranceId);
         IEnumerable<ProviderByLocation> ProviderByLocationsAndContract(Guid contractId);
+        IEnumerable<ProviderByLocation> ProviderByLocationsAndDoctor(Guid doctorId);
         IEnumerable<ProviderByLocation> ProviderByLocationsAndLineofbusiness(Guid insuranceId, Guid lineofBusinessId);
         IEnumerable<AuditLog> InactivateProviders(IEnumerable<ProviderByLocation> locationProviders);
         IEnumerable<AuditLog> ActivateProviders(IEnumerable<ProviderByLocation> locationProviders);
