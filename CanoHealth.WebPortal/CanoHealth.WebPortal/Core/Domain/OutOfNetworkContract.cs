@@ -42,5 +42,12 @@ namespace CanoHealth.WebPortal.Core.Domain
             }
             return auditLogs;
         }
+
+        public AuditLog InactiveOutofNetworkContract()
+        {
+            var log = AuditLog.AddLog("OutOfNetworkContracts", "Active", "true", "false", OutOfNetworkContractId, "Update");
+            Active = false;
+            return log;
+        }
     }
 }

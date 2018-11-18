@@ -549,6 +549,10 @@
     <Compile Include="Migrations\201811180020442_AddActiveColumnToDoctorScheduleTable.Designer.cs">
       <DependentUpon>201811180020442_AddActiveColumnToDoctorScheduleTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.cs" />
+    <Compile Include="Migrations\201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.Designer.cs">
+      <DependentUpon>201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1778,6 +1782,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811180020442_AddActiveColumnToDoctorScheduleTable.resx">
       <DependentUpon>201811180020442_AddActiveColumnToDoctorScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.resx">
+      <DependentUpon>201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

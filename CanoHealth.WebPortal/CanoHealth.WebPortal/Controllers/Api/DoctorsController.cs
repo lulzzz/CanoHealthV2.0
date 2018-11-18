@@ -70,7 +70,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
 
                 var auditLogs = new List<AuditLog>();
 
-                //Get all asociations between this doctor and the clinics where he works.
+                //Get all asociations between this doctor and the clinics where he works.(DoctorClinics)
                 var clinicWhereDoctorWorks = _unitOfWork.ClinicDoctor
                     .EnumarableGetAll(dc => dc.DoctorId == doctorDto.DoctorId).ToList();
 
@@ -78,23 +78,36 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 var doctorLocationLogs = clinicWhereDoctorWorks.ConvertAll(dc => dc.ReleaseDoctorFromClinic()).ToList();
                 auditLogs.AddRange(doctorLocationLogs);
 
-                //get active doctor's files
+                //get active doctor's files(DoctorFiles)
                 var docFiles = _unitOfWork.PersonalFileRepository.GetActivePersonalFiles(doctor.DoctorId).ToList();
                 var docFilesLogs = docFiles.ConvertAll(x => x.Inactivate()).ToList();
                 auditLogs.AddRange(docFilesLogs);
 
-                //get active doctor's schedules
+                //get active doctor's schedules(DoctorSchedules)
+                var docSchedules = _unitOfWork.DoctorScheduleRepository.GetSchedulesByDoctorId(doctor.DoctorId).ToList();
+                var docSchedulesLogs = docSchedules.ConvertAll(x => x.InactivateDoctorSchedule()).ToList();
+                auditLogs.AddRange(docSchedulesLogs);
 
-                //get active doctor's out of network contracts
+                //get active doctor's out of network contracts(OutOfNetworkContracts)
+                var ooContracts = _unitOfWork.OutofNetworkContractRepository.GetActiveOutOfNetworkContractsByDoctor(doctor.DoctorId).ToList();
+                var oocontractLogs = ooContracts.ConvertAll(x => x.InactiveOutofNetworkContract()).ToList();
+                auditLogs.AddRange(oocontractLogs);
 
-                //get active doctor's indivudual providers
+                //get active doctor's indivudual providers(DoctorIndividualProviders)
+                var individualProviders = _unitOfWork.IndividualProviderRepository.GetIndividualProviders(doctor.DoctorId).ToList();
+                var individualProvidersLogs = individualProviders.ConvertAll(x => x.InactivateDoctorInsuranceRelationship()).ToList();
+                auditLogs.AddRange(individualProvidersLogs);
 
-                //get active doctor's providers by locations
+                //get active doctor's providers by locations(ProviderByLocations)
+                //var providerByLocations = _unitOfWork.ProviderByLocationRepository.
 
-                //get active doctor's contracts               
+                //get active doctor's contracts(DoctorCorporationContractLinks)               
 
                 //Inactivate the doctor
-                doctor.Inactivate();
+                var inactiveDocLog = doctor.Inactivate();
+                auditLogs.Add(inactiveDocLog);
+
+                _unitOfWork.AuditLogs.AddRange(auditLogs);
 
                 _unitOfWork.Complete();
                 doctorDto.Active = false;

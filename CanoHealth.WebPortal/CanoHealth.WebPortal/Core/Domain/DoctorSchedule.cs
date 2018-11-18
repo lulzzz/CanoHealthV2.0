@@ -16,5 +16,12 @@ namespace CanoHealth.WebPortal.Core.Domain
         public Schedule Schedule { get; set; }
 
         public Doctor Doctor { get; set; }
+
+        public AuditLog InactivateDoctorSchedule()
+        {
+            var log = AuditLog.AddLog("DoctorSchedules", "Acive", "true", "false", DoctorScheduleId, "Update");
+            Active = false;
+            return log;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<OutOfNetworkContract> GetActiveOutOfNetworkContractsByDoctor(Guid doctorId)
         {
-            return EnumarableGetAll(oo => oo.DoctorId == doctorId && oo.ExpirationDate == null).ToList();
+            return EnumarableGetAll(oo => oo.DoctorId == doctorId && oo.ExpirationDate == null && oo.Active.HasValue && oo.Active.Value).ToList();
         }
 
         public IEnumerable<AuditLog> SaveContracts(IEnumerable<OutOfNetworkContract> contracts)

@@ -22,6 +22,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 var nextday = schedule.Start.AddDays(1);
                 doctorschedulesfound = EnumarableGetAll(
                                 filter: ds => ds.ScheduleId != schedule.ScheduleId &&
+                                ds.Active &&
                                 ds.Schedule.Start >= schedule.Start &&
                                 ds.Schedule.Start < nextday &&
                                 schedule.Doctors.Contains(ds.DoctorId),
@@ -35,6 +36,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             {
                 doctorschedulesfound = EnumarableGetAll(
                                filter: ds => ds.ScheduleId != schedule.ScheduleId &&
+                               ds.Active &&
                                ds.Schedule.Start <= schedule.Start &&
                                ds.Schedule.End > schedule.Start &&
                                schedule.Doctors.Contains(ds.DoctorId),
@@ -51,7 +53,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public IEnumerable<DoctorSchedule> GetSchedulesByDoctorId(Guid doctorId)
         {
             var doctorschedulesfound = EnumarableGetAll(
-                                filter: ds => ds.DoctorId == doctorId,
+                                filter: ds => ds.DoctorId == doctorId && ds.Active,
                                 includeProperties: new Expression<Func<DoctorSchedule, object>>[]
                                 {
                                     s => s.Schedule,
