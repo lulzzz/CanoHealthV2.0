@@ -15,6 +15,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public DateTime? ExpirationDate { get; set; }
 
+        public bool? Active { get; set; }
+
         public List<AuditLog> Modify(OutOfNetworkContract contract)
         {
             var auditLogs = new List<AuditLog>();

@@ -541,6 +541,14 @@
     <Compile Include="Migrations\201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.Designer.cs">
       <DependentUpon>201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811180017537_AddActiveColumnToOutOfNetworkContractTable.cs" />
+    <Compile Include="Migrations\201811180017537_AddActiveColumnToOutOfNetworkContractTable.Designer.cs">
+      <DependentUpon>201811180017537_AddActiveColumnToOutOfNetworkContractTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180020442_AddActiveColumnToDoctorScheduleTable.cs" />
+    <Compile Include="Migrations\201811180020442_AddActiveColumnToDoctorScheduleTable.Designer.cs">
+      <DependentUpon>201811180020442_AddActiveColumnToDoctorScheduleTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1764,6 +1772,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.resx">
       <DependentUpon>201811172218543_CreateStoredProcedureGetDoctorProviderByLocationAndContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180017537_AddActiveColumnToOutOfNetworkContractTable.resx">
+      <DependentUpon>201811180017537_AddActiveColumnToOutOfNetworkContractTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180020442_AddActiveColumnToDoctorScheduleTable.resx">
+      <DependentUpon>201811180020442_AddActiveColumnToDoctorScheduleTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

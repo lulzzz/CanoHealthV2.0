@@ -10,6 +10,8 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Guid DoctorId { get; set; }
 
+        public bool Active { get; set; }
+
         //navegation properties
         public Schedule Schedule { get; set; }
 
