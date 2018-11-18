@@ -47,4 +47,7 @@ V11/13/2018
 8:00 - 10:00 am anadiendo sp to handle the inactive insurance feature
 1:00 - 3:00 pm trabajando en el escenario cuando un seguro elimina una de sus lineas de negocio
 
+V11/17/2018
+15:00 - 20:00 am inactive insurance and inactive doctor 
+
 
