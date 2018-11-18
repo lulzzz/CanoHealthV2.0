@@ -34,20 +34,19 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var personalFileStoreInDb = _unitOfWork.PersonalFileRepository
                     .Get(personalFileDto.DoctorFileId);
 
                 if (personalFileStoreInDb == null)
+                {
                     return NotFound();
+                }
 
-                personalFileStoreInDb.Inactivate();
-
-                var inactivateLog = AuditLog.AddLog("DoctorFiles",
-                    "Active", true.ToString(),
-                    false.ToString(),
-                    personalFileStoreInDb.DoctorFileId, "Delete");
+                var inactivateLog = personalFileStoreInDb.Inactivate();
 
                 _unitOfWork.AuditLogs.Add(inactivateLog);
 

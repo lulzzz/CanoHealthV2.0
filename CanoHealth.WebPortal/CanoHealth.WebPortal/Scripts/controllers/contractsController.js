@@ -544,7 +544,7 @@
                             return {
                                 PlaceOfServiceId: pos.placeOfServiceId,
                                 Name: pos.name
-                            }
+                            };
                         })
                     };
                     //add a data item to a remote data source
@@ -574,7 +574,7 @@
                             contractLineofBusinessId: clinic.contractLineofBusinessId,
                             placeOfServiceId: clinic.placeOfServiceId,
                             name: clinic.name
-                        }
+                        };
                     })
                 };
                 return contractBusinessLineItem;
@@ -590,7 +590,7 @@
                     return {
                         placeOfServiceId: clinic.placeOfServiceId,
                         name: clinic.name
-                    }
+                    };
                 });
                 //this.get('placeOfServiceDataSource').pushCreate(contractBusinessLineItem.clinics);
                 this.get('businessLinesDataSource').pushCreate(businessLineItem);
@@ -674,10 +674,10 @@
                         //Release the ContractBusinessLine item from the DataSource
                         contractBusinessLineViewModel.get('contractBusinesslinesDataSource').pushDestroy(response);
                         //Put the Line of business item available to use for new ContractBusinessLine
-                        contractBusinessLineViewModel.get('businessLinesDataSource').pushCreate({planTypeId: response.planTypeId, name: response.name});
+                        contractBusinessLineViewModel.get('businessLinesDataSource').pushCreate({ planTypeId: response.planTypeId, name: response.name });
                         toastr.success("Line of Business succesfully released.");
                         window.close();
-                    }
+                    };
                     AjaxCallDelete("/api/ContractBusinessLines", JSON.stringify(contractBusinessLineItem), releaseContractBusinessLineSuccess);
                 });
                 $("#js-releasebusinessline-noButton").click(function () {

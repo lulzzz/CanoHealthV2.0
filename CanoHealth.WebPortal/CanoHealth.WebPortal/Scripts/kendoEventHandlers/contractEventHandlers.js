@@ -32,23 +32,41 @@ function onExpandContractRow(e) {
 }
 
 function onDataBoundContractGrid(e) {
-    var grid = $("#Contracts").data("kendoGrid");
-    var gridData = grid.dataSource.view();
-
-    for (var i = 0; i < gridData.length; i++) {
-        var currentUid = gridData[i].uid;
-        var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
-        var activateButton = $(currenRow).find(".js-active");
-        var inactivateButton = $(currenRow).find(".js-inactive");
-        activateButton.width(inactivateButton.width());
-        if (gridData[i].Active === true) {
-            activateButton.hide();
-            inactivateButton.show();
-        } else {
+    //from https://docs.telerik.com/kendo-ui/knowledge-base/grid-hide-expand-icon-based-on-field-value
+    var items = e.sender.items();
+    items.each(function () {
+        var row = $(this);
+        var dataItem = e.sender.dataItem(row);
+        var activateButton = row.find(".js-active");
+        var inactivateButton = row.find(".js-inactive");
+        if (!dataItem.Active) {
+            row.find(".k-hierarchy-cell").html("");
             activateButton.show();
             inactivateButton.hide();
+        } else {
+            activateButton.hide();
+            inactivateButton.show();
         }
-    }
+    });
+
+    //old implementation
+    //var grid = $("#Contracts").data("kendoGrid");
+    //var gridData = grid.dataSource.view();
+
+    //for (var i = 0; i < gridData.length; i++) {
+    //    var currentUid = gridData[i].uid;
+    //    var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+    //    var activateButton = $(currenRow).find(".js-active");
+    //    var inactivateButton = $(currenRow).find(".js-inactive");
+    //    activateButton.width(inactivateButton.width());
+    //    if (gridData[i].Active === true) {
+    //        activateButton.hide();
+    //        inactivateButton.show();
+    //    } else {
+    //        activateButton.show();
+    //        inactivateButton.hide();
+    //    }
+    //}
 }
 
 function onCancelEditContractItem(e) {
@@ -81,23 +99,31 @@ function onClickInactivateContractButton(e) {
     window.center().open();
 
     $("#js-releasecontract-yesButton").click(function () {
-        var onSuccessInactiveContract = function (response) {
-            response = {
-                Active: response.active,
-                ContractId: response.contractId,
-                CorporationId: response.corporationId,
-                GroupNumber: response.groupNumber,
-                InsuranceId: response.insuranceId
-            };
+        var contract = dataItem;
+        contract.Active = false;
+
+        var contractGrid = $("#Contracts").data('kendoGrid');
+        contractGrid.dataSource.pushUpdate(contract);
+
+        //var onSuccessInactiveContract = function (response) {
+        //    response = {
+        //        Active: response.active,
+        //        ContractId: response.contractId,
+        //        CorporationId: response.corporationId,
+        //        GroupNumber: response.groupNumber,
+        //        InsuranceId: response.insuranceId
+        //    };
             
-            var contractGrid = $("#Contracts").data('kendoGrid');
-            contractGrid.dataSource.pushUpdate(response);
-        };
+        //    var contractGrid = $("#Contracts").data('kendoGrid');
+        //    contractGrid.dataSource.pushUpdate(response);
+        //};
         var onFailIncativeContract = function (response) {
             console.log("Inactivate contract call fails: ", response);
             toastr.error(response.statusText);
+            contract.Active = true;
+            contractGrid.dataSource.pushUpdate(contract);
         };
-        AjaxCallDelete("/api/contracts/", JSON.stringify(dataItem), onSuccessInactiveContract, onFailIncativeContract);
+        AjaxCallDelete("/api/contracts/", JSON.stringify(dataItem), undefined, onFailIncativeContract);
         window.close();
     });
     $("#js-releasecontract-noButton").click(function () {

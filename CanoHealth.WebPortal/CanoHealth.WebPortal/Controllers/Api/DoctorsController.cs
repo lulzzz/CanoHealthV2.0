@@ -38,7 +38,10 @@ namespace CanoHealth.WebPortal.Controllers.Api
             {
                 var doctorStoredInDb = _unitOfWork.Doctors.Get(doctorId);
                 if (doctorStoredInDb == null)
+                {
                     return NotFound();
+                }
+
                 return Ok(DoctorDto.Wrap(doctorStoredInDb));
             }
             catch (Exception ex)
@@ -54,21 +57,41 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var doctor = _unitOfWork.Doctors.Get(doctorDto.DoctorId);
 
                 if (doctor == null)
+                {
                     return NotFound();
+                }
+
+                var auditLogs = new List<AuditLog>();
 
                 //Get all asociations between this doctor and the clinics where he works.
                 var clinicWhereDoctorWorks = _unitOfWork.ClinicDoctor
                     .EnumarableGetAll(dc => dc.DoctorId == doctorDto.DoctorId).ToList();
 
                 //Inactivate all those associations
-                clinicWhereDoctorWorks.ForEach(dc => dc.ReleaseDoctorFromClinic());
+                var doctorLocationLogs = clinicWhereDoctorWorks.ConvertAll(dc => dc.ReleaseDoctorFromClinic()).ToList();
+                auditLogs.AddRange(doctorLocationLogs);
 
-                //Get all doctor contracts and inactivate them.
+                //get active doctor's files
+                var docFiles = _unitOfWork.PersonalFileRepository.GetActivePersonalFiles(doctor.DoctorId).ToList();
+                var docFilesLogs = docFiles.ConvertAll(x => x.Inactivate()).ToList();
+                auditLogs.AddRange(docFilesLogs);
+
+                //get active doctor's schedules
+
+                //get active doctor's out of network contracts
+
+                //get active doctor's indivudual providers
+
+                //get active doctor's providers by locations
+
+                //get active doctor's contracts               
 
                 //Inactivate the doctor
                 doctor.Inactivate();
@@ -90,11 +113,15 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 if (!ModelState.IsValid)
+                {
                     return BadRequest(ModelState);
+                }
 
                 var doctor = _unitOfWork.Doctors.Get(doctorDto.DoctorId);
                 if (doctor == null)
+                {
                     return NotFound();
+                }
 
                 var logs = _unitOfWork.Doctors.SaveDoctors(new List<Doctor> { Mapper.Map(doctorDto, new Doctor()) });
                 _unitOfWork.AuditLogs.AddRange(logs);

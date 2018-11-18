@@ -42,9 +42,11 @@ namespace CanoHealth.WebPortal.Core.Domain
 
         public Doctor Doctor { get; set; }
 
-        public void Inactivate()
+        public AuditLog Inactivate()
         {
+            var log = AuditLog.AddLog("DoctorFiles", "Active", "true", "false", DoctorFileId, "Delete");
             Active = false;
+            return log;
         }
 
         public IEnumerable<AuditLog> Modify(DoctorFile file)
