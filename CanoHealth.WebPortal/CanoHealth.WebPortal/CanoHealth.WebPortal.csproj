@@ -429,6 +429,7 @@
     <Compile Include="Core\Repositories\IUserCorporationAccessRepository.cs" />
     <Compile Include="Core\Repositories\IUserRepository.cs" />
     <Compile Include="Core\Specifications\BaseSpecification.cs" />
+    <Compile Include="Core\Specifications\Insurances\DoctorLocationSpecification.cs" />
     <Compile Include="Core\Specifications\Insurances\InsuranceContractSpecification.cs" />
     <Compile Include="Core\Specifications\ISpecification.cs" />
     <Compile Include="CustomDataAnnotations\DateGreaterThan.cs" />

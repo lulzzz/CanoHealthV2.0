@@ -75,7 +75,7 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    ModelState.AddModelError("", "Something failed. Please contact your system administrator.");
+                    ModelState.AddModelError("", "We are sorry, but somethign went wrong. Please try again!");
                 }
             }
             return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
@@ -110,7 +110,7 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    ModelState.AddModelError("", "Something failed. Please contact your system administrator.");
+                    ModelState.AddModelError("", "We are sorry, but somethign went wrong. Please try again!");
                 }
             }
             return Json(new[] { insuranceViewModel }.ToDataSourceResult(request, ModelState));

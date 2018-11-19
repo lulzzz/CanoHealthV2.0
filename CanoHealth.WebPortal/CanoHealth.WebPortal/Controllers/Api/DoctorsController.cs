@@ -6,6 +6,7 @@ using Elmah;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CanoHealth.WebPortal.Controllers.Api
@@ -52,7 +53,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult InactivateDoctor(DoctorDto doctorDto)
+        public async Task<IHttpActionResult> InactivateDoctor(DoctorDto doctorDto)
         {
             try
             {
@@ -61,9 +62,9 @@ namespace CanoHealth.WebPortal.Controllers.Api
                     return BadRequest(ModelState);
                 }
 
-                var doctor = _unitOfWork.Doctors.Get(doctorDto.DoctorId);
+                var doctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(doctorDto.DoctorId);
 
-                if (doctor == null)
+                if (doctor == null || !doctor.Active)
                 {
                     return NotFound();
                 }
@@ -71,17 +72,21 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 var auditLogs = new List<AuditLog>();
 
                 //Get all asociations between this doctor and the clinics where he works.(DoctorClinics)
-                var clinicWhereDoctorWorks = _unitOfWork.ClinicDoctor
-                    .EnumarableGetAll(dc => dc.DoctorId == doctorDto.DoctorId).ToList();
+                var clinicWhereDoctorWorks = await _unitOfWork.ClinicDoctor.GetDoctorLocationsAsync(doctor.DoctorId);
 
                 //Inactivate all those associations
-                var doctorLocationLogs = clinicWhereDoctorWorks.ConvertAll(dc => dc.ReleaseDoctorFromClinic()).ToList();
+                var doctorLocationLogs = clinicWhereDoctorWorks.Select(dc => dc.ReleaseDoctorFromClinic()).ToList();
                 auditLogs.AddRange(doctorLocationLogs);
 
                 //get active doctor's files(DoctorFiles)
                 var docFiles = _unitOfWork.PersonalFileRepository.GetActivePersonalFiles(doctor.DoctorId).ToList();
                 var docFilesLogs = docFiles.ConvertAll(x => x.Inactivate()).ToList();
                 auditLogs.AddRange(docFilesLogs);
+
+                //get active doctor's medical licences
+                var docMedicalLicenses = _unitOfWork.MedicalLicenses.GetActiveMedicalLicenses(doctor.DoctorId).ToList();
+                var docMedicalLicensesLog = docMedicalLicenses.ConvertAll(x => x.Inactivate()).ToList();
+                auditLogs.AddRange(docMedicalLicensesLog);
 
                 //get active doctor's schedules(DoctorSchedules)
                 var docSchedules = _unitOfWork.DoctorScheduleRepository.GetSchedulesByDoctorId(doctor.DoctorId).ToList();

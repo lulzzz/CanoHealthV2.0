@@ -1,11 +1,13 @@
 using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Repositories;
+using CanoHealth.WebPortal.Core.Specifications.Insurances;
 using IdentitySample.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CanoHealth.WebPortal.Persistance.Repositories
 {
@@ -80,6 +82,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 }
             }
             return auditLogs;
+        }
+
+        public async Task<IEnumerable<DoctorClinic>> GetDoctorLocationsAsync(Guid doctorId)
+        {
+            return await ListAsync(new DoctorLocationSpecification(doctorId));
         }
     }
 }

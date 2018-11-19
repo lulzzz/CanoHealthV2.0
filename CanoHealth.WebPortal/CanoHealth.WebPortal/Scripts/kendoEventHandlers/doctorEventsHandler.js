@@ -94,23 +94,41 @@
     };
 
     var onDataBoundDoctorGrid = function (e) {
-        var grid = $("#Doctors").data("kendoGrid");
-        var gridData = grid.dataSource.view();
-
-        for (var i = 0; i < gridData.length; i++) {
-            var currentUid = gridData[i].uid;
-            var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
-            var activateButton = $(currenRow).find(".js-active-doctor");
-            var inactivateButton = $(currenRow).find(".js-inactive-doctor");
-            activateButton.width(inactivateButton.width());
-            if (gridData[i].Active === true) {
-                activateButton.hide();
-                inactivateButton.show();
-            } else {
+        //from https://docs.telerik.com/kendo-ui/knowledge-base/grid-hide-expand-icon-based-on-field-value
+        var items = e.sender.items();
+        items.each(function () {
+            var row = $(this);
+            var dataItem = e.sender.dataItem(row);
+            var activateButton = row.find(".js-active-doctor");
+            var inactivateButton = row.find(".js-inactive-doctor");
+            if (!dataItem.Active) {
+                row.find(".k-hierarchy-cell").html("");
                 activateButton.show();
                 inactivateButton.hide();
+            } else {
+                activateButton.hide();
+                inactivateButton.show();
             }
-        }
+        });
+
+        //old implementatio
+        //var grid = $("#Doctors").data("kendoGrid");
+        //var gridData = grid.dataSource.view();
+
+        //for (var i = 0; i < gridData.length; i++) {
+        //    var currentUid = gridData[i].uid;
+        //    var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+        //    var activateButton = $(currenRow).find(".js-active-doctor");
+        //    var inactivateButton = $(currenRow).find(".js-inactive-doctor");
+        //    activateButton.width(inactivateButton.width());
+        //    if (gridData[i].Active === true) {
+        //        activateButton.hide();
+        //        inactivateButton.show();
+        //    } else {
+        //        activateButton.show();
+        //        inactivateButton.hide();
+        //    }
+        //}
     };
 
     var onCancelEditDoctorItem = function (e) {
@@ -143,28 +161,35 @@
         window.center().open();
 
         $("#js-releasedoctor-yesButton").click(function () {
-            var onSuccessInactiveDoctor = function (response) {
-                response = {
-                    DoctorId: response.doctorId,
-                    FirstName: response.firstName,
-                    LastName: response.lastName,
-                    DateOfBirth: moment(response.dateOfBirth).format('L'),
-                    Degree: response.degree,
-                    SocialSecurityNumber: response.socialSecurityNumber,
-                    NpiNumber: response.npiNumber,
-                    CaqhNumber: response.caqhNumber,
-                    Active: response.active
-                };
+            var doctor = dataItem;
+            doctor.Active = false;
+            var doctorsGrid = $("#Doctors").data('kendoGrid');
+            doctorsGrid.dataSource.pushUpdate(doctor);
 
-                var doctorsGrid = $("#Doctors").data('kendoGrid');
-                doctorsGrid.dataSource.pushUpdate(response);
-            };
+            //var onSuccessInactiveDoctor = function (response) {
+            //    response = {
+            //        DoctorId: response.doctorId,
+            //        FirstName: response.firstName,
+            //        LastName: response.lastName,
+            //        DateOfBirth: moment(response.dateOfBirth).format('L'),
+            //        Degree: response.degree,
+            //        SocialSecurityNumber: response.socialSecurityNumber,
+            //        NpiNumber: response.npiNumber,
+            //        CaqhNumber: response.caqhNumber,
+            //        Active: response.active
+            //    };
+
+            //    var doctorsGrid = $("#Doctors").data('kendoGrid');
+            //    doctorsGrid.dataSource.pushUpdate(response);
+            //};
             var onFailIncativeDoctor = function (response) {
                 console.log("Inactivate doctor call fails: ", response);
                 toastr.error(response.statusText);
-            }
+                doctor.Active = true;
+                doctorsGrid.dataSource.pushUpdate(doctor);
+            };
 
-            AjaxCallDelete("/api/doctors/", JSON.stringify(dataItem), onSuccessInactiveDoctor, onFailIncativeDoctor);
+            AjaxCallDelete("/api/doctors/", JSON.stringify(dataItem), undefined, onFailIncativeDoctor);
             window.close();
         });
         $("#js-releasedoctor-noButton").click(function () {

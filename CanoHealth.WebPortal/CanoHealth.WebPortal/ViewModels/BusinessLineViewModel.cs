@@ -11,13 +11,16 @@ namespace CanoHealth.WebPortal.ViewModels
 
         public string Name { get; set; }
 
+        public bool Active { get; set; }
+
         public static BusinessLineViewModel Wrap(PlanType businessLine)
         {
             return new BusinessLineViewModel
             {
                 PlanTypeId = businessLine.PlanTypeId,
                 Name = businessLine.Name,
-                Code = businessLine.Code
+                Code = businessLine.Code,
+                Active = businessLine.Active.HasValue ? businessLine.Active.Value : false
             };
         }
     }

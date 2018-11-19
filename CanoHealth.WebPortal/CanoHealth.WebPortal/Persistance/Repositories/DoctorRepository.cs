@@ -5,12 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CanoHealth.WebPortal.Persistance.Repositories
 {
     public class DoctorRepository : Repository<Doctor>, IDoctorRepository
     {
         public DoctorRepository(ApplicationDbContext context) : base(context) { }
+
+        public async Task<Doctor> GetDoctorByIdAsync(Guid doctorId)
+        {
+            return await GetByIdAsync(doctorId);
+        }
 
         public IEnumerable<Doctor> GetAllDoctorsInTheSystem()
         {

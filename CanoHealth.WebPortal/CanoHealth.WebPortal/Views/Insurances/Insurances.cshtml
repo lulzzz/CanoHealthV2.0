@@ -109,6 +109,7 @@
                         model.Id(pk => pk.InsuranceId);
                         model.Field(p => p.InsuranceId).Editable(false);
                         model.Field(p => p.Active).Editable(false);
+                        model.Field(p => p.Active).DefaultValue(true);
                     })
                     .Events(ev => ev.Error("serverSideErrorHandlers"))
                     .Read(r => r.Action("ReadInsurances", "Insurances"))
@@ -183,6 +184,17 @@
         <button class="btn btn-ar btn-primary" id="js-releaseinsurancelineofbusiness-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
         <button class="btn btn-ar btn-default" id="js-releaseinsurancelineofbusiness-noButton"><i class="fa fa-ban"></i> No</button>
     </div>                      
+</script>
+
+<!--No data item template for Line of business multiselect component when create new insurance-->
+<script type="text/x-kendo-template" id="no-dataitem-lineofbusiness-template">
+    # var value = instance.input.val(); #
+    # var id = instance.element[0].id; #
+    <div>
+        No data found. Do you want to add new item - '#: value #' ?
+    </div>
+    <br />
+    <button class="btn btn-ar btn-default" onclick="addNew('#: id #', '#: value #')" ontouchend="addNew('#: id #', '#: value #')">Add new item</button>
 </script>
 
 @section Scripts{

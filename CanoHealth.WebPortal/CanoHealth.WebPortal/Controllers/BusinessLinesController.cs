@@ -4,6 +4,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
@@ -49,7 +50,7 @@ namespace CanoHealth.WebPortal.Controllers
                                                         .GetBusinessLines(insuranceId.Value)
                                                         .Select(bl => bl.BusinessLine)
                                                         .Where(bl => bl.Active.HasValue && bl.Active.Value)
-                                                        .ToList(); 
+                                                        .ToList();
                 //get the business lines that are not already associated to specific insurance
                 businessLines = businessLines.Except(insuranceBusinessLines).ToList();
             }
@@ -57,6 +58,11 @@ namespace CanoHealth.WebPortal.Controllers
             var result = businessLines.Select(BusinessLineViewModel.Wrap).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> CreateLineofBusiness([DataSourceRequest] DataSourceRequest request, BusinessLineViewModel viewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

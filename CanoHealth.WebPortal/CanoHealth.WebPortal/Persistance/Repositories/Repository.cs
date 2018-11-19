@@ -156,7 +156,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         #region Async
 
-        public virtual async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(Guid id)
         {
             return await _entities.FindAsync(id);
         }

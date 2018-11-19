@@ -13,6 +13,7 @@ namespace CanoHealth.WebPortal.Core.Repositories
         IEnumerable<TEntity> EnumarableGetAll(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             params Expression<Func<TEntity, object>>[] includeProperties);
+
         IQueryable<TEntity> QueryableGetAll(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             params Expression<Func<TEntity, object>>[] includeProperties);
