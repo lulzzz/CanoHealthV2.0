@@ -28,6 +28,7 @@ function showMessage(container, name, errors, grid) {
 
 function onDataBoundInsuranceGrid(e) {
     //from https://docs.telerik.com/kendo-ui/knowledge-base/grid-hide-expand-icon-based-on-field-value
+   
     var items = e.sender.items();
     items.each(function () {
         var row = $(this);
@@ -90,8 +91,7 @@ function onRemoveInsuranceLineofBusinessRecord(e) {
 
     window.content(releaseTemplate(e.model)); //send the row data object to the template and render it
     window.center().open();
-
-    debugger;
+    
     var listview = $("#IsuranceBusinesLine_" + e.model.InsuranceId).data("kendoListView");
 
     $("#js-releaseinsurancelineofbusiness-yesButton").click(function () {
@@ -103,6 +103,24 @@ function onRemoveInsuranceLineofBusinessRecord(e) {
         window.refresh().close();
     });
 };
+
+function addNew(widgetId, value) {
+    var widget = $("#" + widgetId).getKendoMultiSelect();
+
+    var newLineofBusiness = {
+        Name: value,
+        Code: value,
+        Active: true
+    };
+    var createLineofBusinessSuccess = function (response) {
+        newLineofBusiness.PlanTypeId = response.planTypeId;
+        widget.dataSource.pushCreate(newLineofBusiness);
+
+        widget.value(widget.value().concat(response.planTypeId));
+        widget.trigger("change");
+    };
+    AjaxCallPost("/api/BusinessLines/", JSON.stringify(newLineofBusiness), createLineofBusinessSuccess);
+}
 
 $(document).ready(function () {
     InsuranceController.init(".container-fluid");

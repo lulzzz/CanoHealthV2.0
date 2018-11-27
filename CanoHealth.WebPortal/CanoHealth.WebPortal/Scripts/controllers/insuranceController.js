@@ -95,6 +95,17 @@
         insuranceService.availableBusinessLinesForTheInsurance(insurance.InsuranceId, success, fail);
     };
 
+    //https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/show-command-buttons-conditionally
+    var showInactiveButton = function (dataItem) {
+        // show the Inactive button for the item with Active=true
+        return dataItem.Active;
+    };
+
+    var showActiveButton = function (dataItem) {
+        // show the Active button for the item with Active=true
+        return !dataItem.Active;
+    };
+
     var onAddEditInsurance = function (e) {
         var currentUid = e.model.uid;
         var grid = e.sender;
@@ -105,7 +116,12 @@
         if (e.model.isNew()) {
             activateButton.hide();
             inactivateButton.show();
+            //muestra el multiselect cuando se crea un insurance
+            $(".js-lineofbusiness-multiselect").show();
         } else {
+            //oculta el multiselect cuando se edite un record de insurance
+            $(".js-lineofbusiness-multiselect").hide();
+
             if (e.model.Active === true) {
                 activateButton.hide();
                 inactivateButton.show();
@@ -114,7 +130,7 @@
                 inactivateButton.hide();
             }
         }
-    };
+    };   
 
     //function invoke when active/inactive insurance succesfully
     var onSuccessInsurance = function (response) {
@@ -175,8 +191,10 @@
         insuranceExpandedRow: insuranceExpandedRow,
         checkIfThereAreBusinessLinesToSelect: checkIfThereAreBusinessLinesToSelect,
         init: init,
-        onAddEditInsurance: onAddEditInsurance,
+        onAddEditInsurance: onAddEditInsurance,        
         onClickInactivateInsuranceButton: onClickInactivateInsuranceButton,
-        onClickActivateInsuranceButton: onClickActivateInsuranceButton
+        onClickActivateInsuranceButton: onClickActivateInsuranceButton,
+        showInactiveButton: showInactiveButton,
+        showActiveButton: showActiveButton
     };
 }(InsuranceService);

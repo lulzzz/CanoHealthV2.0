@@ -57,11 +57,13 @@
                         cmd.Custom("Inact")
                             .Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
                             .HtmlAttributes(new { @class = "js-inactive" })
+                            //.Visible("InsuranceController.showInactiveButton")
                             .Click("InsuranceController.onClickInactivateInsuranceButton");
 
                         cmd.Custom("Act")
                             .Text("<span class='k-icon k-i-check-outline'></span> Activate")
                             .HtmlAttributes(new { @class = "js-active" })
+                            //.Visible("InsuranceController.showActiveButton")
                             .Click("InsuranceController.onClickActivateInsuranceButton");
 
                     }).Width(150).Title("ACTIONS");
@@ -98,7 +100,8 @@
 
                 .Events(ev => ev.DataBound("onDataBoundInsuranceGrid")
                     .DetailExpand("onExpandInsuranceDetails")
-                    .Edit("InsuranceController.onAddEditInsurance"))
+                    .Edit("InsuranceController.onAddEditInsurance")                    
+                )
 
                 .DataSource(ds => ds
                     .Ajax()
@@ -130,7 +133,7 @@
     @(Html.Kendo().ListView<InsuranceBusinessLineViewModel>()
        .Name("IsuranceBusinesLine_#=InsuranceId#")
        .TagName("div")
-       .HtmlAttributes(new { style = "border: 0 !important;" })
+       .HtmlAttributes(new { style = "border: 0 !important; " })
        .ClientTemplateId("businessline-detail-template")
        .DataSource(dataSource => dataSource
            .Model(model => model.Id(x => x.InsuranceBusinessLineId))
@@ -143,10 +146,10 @@
 
 <script type="text/x-kendo-template" id="businessline-detail-template">
     <div class="col-xs-4 col-sm-4 col-md-3">
-        <div class="content-box box-default insurance-businessline">
+        <div class="content-box box-default">
             <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
             <h5 class="content-box-title">#:Code#</h5>
-            
+            <hr />
             <div class="pull-left">
                 <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
             </div>
@@ -200,61 +203,3 @@
 @section Scripts{
     @Scripts.Render("~/bundles/insurances")
 }
-
-<script type="text/javascript">
-    function addNew(widgetId, value) {
-        var widget = $("#" + widgetId).getKendoMultiSelect();
-        var dataSource = widget.dataSource;
-        //var dataSource = new kendo.data.DataSource({           
-        //    transport: {
-        //        read: {
-        //            url: domainName + "/BusinessLines/GetBusinessLines",
-        //            dataType: "json"
-        //        },
-        //        create: {
-        //            url: domainName + "/BusinessLines/CreateLineofBusiness",
-        //            dataType: "json"
-        //        },
-        //        parameterMap: function (options, operation) {
-        //            if (operation !== "read" && options.models) {
-        //                return { models: kendo.stringify(options.models) };
-        //            }
-        //        }
-        //    },
-        //    schema: {
-        //        model: {
-        //            id: "PlanTypeId",
-        //            fields: {
-        //                PlanTypeId: { editable: false, nullable: true },
-        //                Name: {
-        //                    type: "string",
-        //                    validation: { required: true }
-        //                },
-        //                Active: {
-        //                    type: "boolean",
-        //                    defaultValue: true,
-        //                    validation: { required: true }
-        //                }
-        //            }
-        //        }
-        //    }
-        //});
-        
-
-        if (confirm("Are you sure?")) {
-            var newLineofBusiness = {
-                Name: value,
-                Code: value,
-                Active: true
-            };
-            var createLineofBusinessSuccess = function (response) {                
-                newLineofBusiness.PlanTypeId = response.planTypeId;
-                widget.dataSource.pushCreate(newLineofBusiness);
-                
-                widget.value(widget.value().concat(response.planTypeId));
-                widget.trigger("change");
-            };
-            AjaxCallPost("/api/BusinessLines/", JSON.stringify(newLineofBusiness), createLineofBusinessSuccess);            
-        }
-    } 
-</script>
