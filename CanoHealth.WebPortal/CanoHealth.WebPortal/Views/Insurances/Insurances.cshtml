@@ -204,54 +204,57 @@
 <script type="text/javascript">
     function addNew(widgetId, value) {
         var widget = $("#" + widgetId).getKendoMultiSelect();
-        //var dataSource = widget.dataSource;
-        var dataSource = new kendo.data.DataSource({
-            batch: true,
-            transport: {
-                read: {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "json"
-                },
-                create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "json"
-                },
-                parameterMap: function (options, operation) {
-                    if (operation !== "read" && options.models) {
-                        return { models: kendo.stringify(options.models) };
-                    }
-                }
-            },
-            schema: {
-                model: {
-                    id: "PlanTypeId",
-                    fields: {
-                        PlanTypeId: { editable: false, nullable: true },
-                        Name: { type: "string" }
-                    }
-                }
-            }
-        });
+        var dataSource = widget.dataSource;
+        //var dataSource = new kendo.data.DataSource({           
+        //    transport: {
+        //        read: {
+        //            url: domainName + "/BusinessLines/GetBusinessLines",
+        //            dataType: "json"
+        //        },
+        //        create: {
+        //            url: domainName + "/BusinessLines/CreateLineofBusiness",
+        //            dataType: "json"
+        //        },
+        //        parameterMap: function (options, operation) {
+        //            if (operation !== "read" && options.models) {
+        //                return { models: kendo.stringify(options.models) };
+        //            }
+        //        }
+        //    },
+        //    schema: {
+        //        model: {
+        //            id: "PlanTypeId",
+        //            fields: {
+        //                PlanTypeId: { editable: false, nullable: true },
+        //                Name: {
+        //                    type: "string",
+        //                    validation: { required: true }
+        //                },
+        //                Active: {
+        //                    type: "boolean",
+        //                    defaultValue: true,
+        //                    validation: { required: true }
+        //                }
+        //            }
+        //        }
+        //    }
+        //});
+        
 
         if (confirm("Are you sure?")) {
-            dataSource.add({
-                PlanTypeId: 0,
-                Name: value
-            });
-
-            dataSource.one("requestEnd", function (args) {
-                if (args.type !== "create") {
-                    return;
-                }
-
-                var newValue = args.response[0].PlanTypeId;
-
-                dataSource.one("sync", function () {
-                    widget.value(widget.value().concat([newValue]));
-                });
-            });
-
-            dataSource.sync();
+            var newLineofBusiness = {
+                Name: value,
+                Code: value,
+                Active: true
+            };
+            var createLineofBusinessSuccess = function (response) {                
+                newLineofBusiness.PlanTypeId = response.planTypeId;
+                widget.dataSource.pushCreate(newLineofBusiness);
+                
+                widget.value(widget.value().concat(response.planTypeId));
+                widget.trigger("change");
+            };
+            AjaxCallPost("/api/BusinessLines/", JSON.stringify(newLineofBusiness), createLineofBusinessSuccess);            
         }
     } 
 </script>

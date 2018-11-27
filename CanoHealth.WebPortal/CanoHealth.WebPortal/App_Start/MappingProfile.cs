@@ -26,6 +26,8 @@ namespace CanoHealth.WebPortal.App_Start
             Mapper.CreateMap<InsuranceFormViewModel, Insurance>();
 
             Mapper.CreateMap<PlanType, LineofBusinessDto>();
+            Mapper.CreateMap<PlanType, BusinessLineViewModel>();
+            Mapper.CreateMap<BusinessLineViewModel,PlanType>();
 
             Mapper.CreateMap<ContractAddendum, ContractAddendumDto>();
             Mapper.CreateMap<ContractAddendumFormViewModel, ContractAddendum>();

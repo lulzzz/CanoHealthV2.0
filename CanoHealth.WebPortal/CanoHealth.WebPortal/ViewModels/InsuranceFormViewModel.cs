@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CanoHealth.WebPortal.ViewModels
@@ -22,5 +23,14 @@ namespace CanoHealth.WebPortal.ViewModels
         public string Address { get; set; }
 
         public bool Active { get; set; }
+
+        [Required]
+        [Display(Name = "Line of Business")]
+        public List<BusinessLineViewModel> LineofBusiness { get; set; }
+
+        public InsuranceFormViewModel()
+        {
+            LineofBusiness = new List<BusinessLineViewModel>();
+        }
     }
 }

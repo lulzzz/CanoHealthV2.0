@@ -2,6 +2,7 @@
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
 using CanoHealth.WebPortal.Core.Dtos;
+using CanoHealth.WebPortal.ViewModels;
 using Elmah;
 using System;
 using System.Linq;
@@ -52,6 +53,47 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 ErrorSignal.FromCurrentContext().Raise(ex);
                 return InternalServerError(ex);
             }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateLineofBusiness(BusinessLineViewModel viewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var lineofBusinessStoredInDb = _unitOfWork.LineOfBusinesses.FirstOrDefault(lb => lb.Name.Equals(viewModel.Name, StringComparison.InvariantCultureIgnoreCase) &&
+                         lb.Active.HasValue && lb.Active.Value);
+                if (lineofBusinessStoredInDb != null)
+                {
+                    ModelState.AddModelError("Name", "Duplicate Line of Business. Please try again!");
+                    return BadRequest(ModelState);
+                }
+
+                lineofBusinessStoredInDb = _unitOfWork.LineOfBusinesses.FirstOrDefault(lb => !String.IsNullOrEmpty(lb.Code) &&
+                                lb.Code.Equals(viewModel.Code, StringComparison.InvariantCultureIgnoreCase) &&
+                                lb.Active.HasValue && lb.Active.Value);
+                if (lineofBusinessStoredInDb != null)
+                {
+                    ModelState.AddModelError("Code", "Duplicate Line of Business. Please try again!");
+                    return BadRequest(ModelState);
+                }
+
+                viewModel.PlanTypeId = Guid.NewGuid();
+                viewModel.Active = true;
+                var lineofBusinessToCreate = Mapper.Map(viewModel, new PlanType());
+                _unitOfWork.LineOfBusinesses.Add(lineofBusinessToCreate);
+                _unitOfWork.Complete();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                return InternalServerError(ex);
+            }
+
+            return Ok(viewModel);
         }
     }
 }

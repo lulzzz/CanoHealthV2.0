@@ -65,17 +65,41 @@ namespace CanoHealth.WebPortal.Controllers
                         ModelState.AddModelError("Name", "Duplicate Data. Please try again!");
                         return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
                     }
+
+                    existInsurance = _unitOfWork.Insurances.FirstOrDefault(ins => !String.IsNullOrEmpty(ins.Code) &&
+                                    ins.Code.Equals(insuranceViewModel.Code, StringComparison.InvariantCultureIgnoreCase) &&
+                                    ins.Active);
+                    if (existInsurance != null)
+                    {
+                        ModelState.AddModelError("Code", "Duplicate Data. Please try again!");
+                        return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
+                    }
+
                     insuranceViewModel.InsuranceId = Guid.NewGuid();
                     insuranceViewModel.Active = true;
                     var insurance = Mapper.Map(insuranceViewModel, new Insurance());
-                    var auditlogs = _unitOfWork.Insurances.SaveItems(new List<Insurance> { insurance });
+
+                    var lineofBusiness = insuranceViewModel.LineofBusiness.Select(item => new InsuranceBusinessLine
+                    {
+                        InsuranceBusinessLineId = Guid.NewGuid(),
+                        InsuranceId = insurance.InsuranceId,
+                        PlanTypeId = item.PlanTypeId,
+                        Active = true
+                    }).ToList();
+
+                    var logs = _unitOfWork.InsuranceBusinessLineRepository.Save(lineofBusiness).ToList();
+
+                    var auditlogs = _unitOfWork.Insurances.SaveItems(new List<Insurance> { insurance }).ToList();
+
+                    auditlogs.AddRange(logs);
+
                     _unitOfWork.AuditLogs.AddRange(auditlogs);
                     _unitOfWork.Complete();
                 }
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    ModelState.AddModelError("", "We are sorry, but somethign went wrong. Please try again!");
+                    ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
                 }
             }
             return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
@@ -110,7 +134,7 @@ namespace CanoHealth.WebPortal.Controllers
                 catch (Exception ex)
                 {
                     ErrorSignal.FromCurrentContext().Raise(ex);
-                    ModelState.AddModelError("", "We are sorry, but somethign went wrong. Please try again!");
+                    ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
                 }
             }
             return Json(new[] { insuranceViewModel }.ToDataSourceResult(request, ModelState));

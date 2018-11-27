@@ -41,7 +41,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public Insurance GetByName(string name)
         {
-            return EnumarableGetAll(includeProperties: new Expression<Func<Insurance, object>>[] { c => c.Contracts })
+            return EnumarableGetAll(filter: i => i.Active, includeProperties: new Expression<Func<Insurance, object>>[] { c => c.Contracts })
                 .SingleOrDefault(i => i.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
         }
 
@@ -52,7 +52,7 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public Insurance GetWithContracts(Guid insurancesId)
         {
-            return EnumarableGetAll(filter: i => i.Active, 
+            return EnumarableGetAll(filter: i => i.Active,
                                     includeProperties: new Expression<Func<Insurance, object>>[] { c => c.Contracts })
                 .SingleOrDefault(i => i.InsuranceId == insurancesId);
         }
