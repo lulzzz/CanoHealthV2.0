@@ -159,11 +159,16 @@
 
 <div class="js-insurancebusinessline-formwnd hidden-window">
     <label class="control-label text-uppercase">Line of Business</label>
-    <select data-role="multiselect"
+    <select id="js-insurancebusinessline-multiselect"
+            data-role="multiselect"
+            data-no-data-template="no-dataitem-lineofbusiness-template"
             data-value-primitive="false"
             data-text-field="Code"
-            data-value-field="PlanTypeId"
-            data-bind="value: selectedBusinessLines, source: businessLinesDataSource"></select>
+            data-value-field="PlanTypeId"           
+            data-bind="value: selectedBusinessLines, 
+                       source: businessLinesDataSource"
+    >
+    </select>
     <br />
     <div class="pull-left">
         <a class="btn btn-ar btn-primary" data-bind="events:{ click: onAddBusinessLinesToInsurance }"><i class="fa fa-check-circle"></i> Submit</a>
@@ -197,7 +202,7 @@
         No data found. Do you want to add new item - '#: value #' ?
     </div>
     <br />
-    <button class="btn btn-ar btn-default" onclick="addNew('#: id #', '#: value #')" ontouchend="addNew('#: id #', '#: value #')">Add new item</button>
+    <button class="btn btn-ar btn-default" onclick="addNewLineofBusiness('#: id #', '#: value #')" ontouchend="addNewLineofBusiness('#: id #', '#: value #')">Add new line of business</button>
 </script>
 
 @section Scripts{

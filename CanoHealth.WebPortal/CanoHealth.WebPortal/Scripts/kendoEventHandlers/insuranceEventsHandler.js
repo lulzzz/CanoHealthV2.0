@@ -104,7 +104,7 @@ function onRemoveInsuranceLineofBusinessRecord(e) {
     });
 };
 
-function addNew(widgetId, value) {
+function addNewLineofBusiness(widgetId, value) {
     var widget = $("#" + widgetId).getKendoMultiSelect();
 
     var newLineofBusiness = {
