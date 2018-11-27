@@ -50,4 +50,7 @@ V11/13/2018
 V11/17/2018
 15:00 - 20:00 am inactive insurance and inactive doctor 
 
+V11/26/2018
+20:00 - 22:00 ya se pueden annadir lineas de negocio a traves del multiselect
+
 
