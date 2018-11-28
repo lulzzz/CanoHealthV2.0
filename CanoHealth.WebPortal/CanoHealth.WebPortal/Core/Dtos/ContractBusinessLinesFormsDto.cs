@@ -18,6 +18,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
 
         public string Name { get; set; }
 
+        public string Code { get; set; }
+
         [Required]
         public IEnumerable<ClinicLineofBusinessContractDto> Clinics { get; set; }
 

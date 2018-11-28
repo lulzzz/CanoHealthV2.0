@@ -12,9 +12,7 @@
 <header class="main-header main-header-inverse">
     <div class="container">
         <h1 class="page-title">Contracts</h1>
-
         <ol class="breadcrumb pull-right">
-
             <li><a href="@Url.Action("Index", "Home")">Home</a></li>
             <li class="active">Contracts</li>
         </ol>
@@ -28,84 +26,85 @@
 <div class="container-fluid">
    
     @(Html.Kendo().Grid<ContractFormViewModel>()
-                  .Name("Contracts")
+    .Name("Contracts")
 
-                  .ToolBar(tool =>
-                  {
-                      tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW").Url("javascript: onEnableContractFormWindow()");
-                      tool.Excel().Text("EXCEL");
-                  })
-                  .Excel(ex =>
-                  {
-                      ex.FileName("Contracts");
-                      ex.AllPages(true);
-                  })
+    .ToolBar(tool =>
+    {
+        tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW").Url("javascript: onEnableContractFormWindow()");
+        tool.Excel().Text("EXCEL");
+    })
+    .Excel(ex =>
+    {
+        ex.FileName("Contracts");
+        ex.AllPages(true);
+    })
 
-                  .Columns(col =>
-                  {
-                      col.Bound(c => c.ContractId).Hidden(true);
-                      col.Bound(c => c.InsuranceId).Hidden(true);
+    .Columns(col =>
+    {
+        col.Bound(c => c.ContractId).Hidden(true);
+        col.Bound(c => c.InsuranceId).Hidden(true);
 
-                      col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
-                          .Title("CORPORATION").Width(200);
+        col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+            .Title("CORPORATION").Width(200);
 
-                      col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
+        col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
 
-                      col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
+        col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
 
-                      col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
+        col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
 
-                      col.Command(cmd =>
-                      {
-                          cmd.Edit();
-                          cmd.Custom("Inact").Text("Inactivate")
-                             .HtmlAttributes(new { @class = "js-inactive" })
-                             .Click("onClickInactivateContractButton")
-                             .IconClass("k-icon k-i-close-outline")
-                             .Visible("showInactiveButton");
+        col.Command(cmd =>
+        {
+            cmd.Edit();
+            cmd.Custom("Inact").Text("Inactivate")
+               .HtmlAttributes(new { @class = "js-inactive" })
+               .Click("onClickInactivateContractButton")
+               .IconClass("k-icon k-i-close-outline")
+               .Visible("showInactiveButton");
 
-                          cmd.Custom("Act").Text("Activate")
-                            .HtmlAttributes(new { @class = "js-active" })
-                            .Click("onClickActivateContractButton")
-                            .IconClass("k-icon k-i-check-outline")
-                            .Visible("showActiveButton");
-                      }).Width(200).Title("ACTIONS");
+            cmd.Custom("Act").Text("Activate")
+              .HtmlAttributes(new { @class = "js-active" })
+              .Click("onClickActivateContractButton")
+              .IconClass("k-icon k-i-check-outline")
+              .Visible("showActiveButton");
+        }).Width(200).Title("ACTIONS");
 
-                  })
+    })
 
-                  .ClientDetailTemplateId("contract-detail-template")
+    .ClientDetailTemplateId("contract-detail-template")
 
-                  .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
+    .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
 
-                  .Filterable()
-                  .Sortable()
-                  .Groupable()
-                  .Resizable(r => r.Columns(true))
-                  .Scrollable(s => s.Height("auto"))
-                  .Pageable(ps =>
-                  {
-                      ps.Refresh(true);
-                      ps.PreviousNext(true);
-                      ps.PageSizes(new object[] { 25, 50, 100, "All" });
-                  })
+    .Filterable()
+    .Sortable()
+    .Groupable()
+    .Resizable(r => r.Columns(true))
+    .Scrollable(s => s.Height("auto"))
+    .Pageable(ps =>
+    {
+        ps.Refresh(true);
+        ps.PreviousNext(true);
+        ps.PageSizes(new object[] { 25, 50, 100, "All" });
+    })
 
-                  .DataSource(ds => ds
-                      .Ajax()
-                      .ServerOperation(true)
-                      .PageSize(25)
-                      .Model(model =>
-                      {
-                          model.Id(c => c.ContractId);
-                          model.Field(c => c.ContractId).Editable(false);
-                          model.Field(c => c.Active).Editable(false);
-                      })
-                      .Read(read => read.Action("ReadContracts", "Contracts"))
-                      .Update(update => update.Action("UpdateContracts", "Contracts"))
-                  ))
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(25)
+        .Model(model =>
+        {
+            model.Id(c => c.ContractId);
+            model.Field(c => c.ContractId).Editable(false);
+            model.Field(c => c.Active).Editable(false);
+        })
+        .Read(read => read.Action("ReadContracts", "Contracts"))
+        .Update(update => update.Action("UpdateContracts", "Contracts"))
+    ))
 </div>
 
 <div class="js-notification-dialog"></div>
 
+<!--Form content for create a new contract-->
 <div class="js-contractform-window" style="display: none;">
     <div class="form-group">
         <label class="control-label text-uppercase">corporation <sup class="text-danger">*</sup></label>
@@ -129,7 +128,7 @@
                data-value-primitive="true"
                data-text-field="Name"
                data-bind="value: InsuranceName,
-                              source: insuranceDataSource
+                          source: insuranceDataSource
                ,events: { change: onChangeInsuranceName }"
                style="width: 100%;" />
 
@@ -207,14 +206,17 @@
             </a><!--Add Business Lines button-->
 
             <br /><br />
-
+            
+            <!--Display all the line of business asociated to the contract-->
             <div id="businesslines-listview-#=ContractId#"
                  class="css-gray-listview"
                  data-role="listview"
                  data-template="detail-businesslines-template"
-                 data-bind="source: contractBusinesslinesDataSource, events: { remove: onRemoveContractBusinesslineItem }">
+                 data-bind="source: contractBusinesslinesDataSource, 
+                            events: { remove: onRemoveContractBusinesslineItem }">
             </div><!--Business Lines List View-->
 
+            <!--form to asociate a new line of business to the contract-->
             <div class="js-businesslineform-window-#=ContractId#" style="display: none;">
                 <div class="form-group">
                     <label class="control-label">Line of Business <sup class="text-danger">*</sup></label>
@@ -401,9 +403,13 @@
 <script type="text/x-kendo-template" id="clinic-row-template">
     <tr>
         <td data-bind="text: name"></td>
-
-
-        <td><button class="button button-normal button-plain button-borderless" data-bind="enabled: enableBusinessLineButtons, click: deleteClinicContractBusinessLineItem"><i class="fa fa-trash-o"></i></button></td>
+        <td>
+            <button class="button button-normal button-plain button-borderless" 
+                    data-bind="enabled: enableBusinessLineButtons, 
+                               click: deleteClinicContractBusinessLineItem">
+                <i class="fa fa-trash-o"></i>
+            </button>
+        </td>
     </tr>
 </script>
 

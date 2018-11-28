@@ -80,19 +80,25 @@ namespace CanoHealth.WebPortal.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Wrong Data.");
+                    return Json(new[] { placeOfService }.ToDataSourceResult(request, ModelState));
+
                 var placeOfServiceStoredInDb = _unitOfWork.PlaceOfServices.Get(placeOfService.PlaceOfServiceId.Value);
 
                 if (placeOfServiceStoredInDb == null)
-                    return HttpNotFound("This Location is no longer in our system. Please try again.");
+                {
+                    ModelState.AddModelError("", "Location not found. Please try again!");
+                    return Json(new[] { placeOfService }.ToDataSourceResult(request, ModelState));
+                }                   
 
                 var duplicatePlaceOfService =
                     _unitOfWork.PlaceOfServices.FindOtherPlaceOfServiceWithSameName(placeOfService.Name,
                         placeOfService.PlaceOfServiceId.Value);
 
                 if (duplicatePlaceOfService != null)
-                    return new HttpStatusCodeResult(HttpStatusCode.Created,
-                        "There is another Location with the same name. Please avoid duplicated data.");
+                {
+                    ModelState.AddModelError("", "Duplicate Location. Please try again!");
+                    return Json(new[] { placeOfService }.ToDataSourceResult(request, ModelState));
+                }                  
 
                 var auditLogs = placeOfServiceStoredInDb.Modify(placeOfService.CorporationId, placeOfService.Name,
                     placeOfService.Address,
@@ -105,7 +111,7 @@ namespace CanoHealth.WebPortal.Controllers
             catch (Exception ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, String.Format("An exception has occurred: {0}", ex));
+                ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");              
             }
             return Json(new[] { placeOfService }.ToDataSourceResult(request, ModelState));
         }

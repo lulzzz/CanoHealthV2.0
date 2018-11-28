@@ -47,7 +47,7 @@
                 },
                 transport: {
                     read: {
-                        url: domainName + "/Corporation/ReadCorporations"
+                        url: domainName + "/Corporation/ReadActiveCorporations"
                     }
                 }
             }),
@@ -450,7 +450,7 @@
         kendo.bind($(".js-addendum-" + contractId), addendumViewModel);
     };
 
-    var createContractBusinessLineViewModel = function(contractId, corporationId, isContractActive, insuranceId) {
+    var createContractBusinessLineViewModel = function (contractId, corporationId, isContractActive, insuranceId) {
         var contractBusinessLineViewModel = kendo.observable({
             enableBusinessLineButtons: isContractActive,
             //Business Lines Section
@@ -458,7 +458,11 @@
             businessLinesDataSource: new kendo.data.DataSource({
                 schema: {
                     model: {
-                        id: "planTypeId"
+                        id: "planTypeId",
+                        fields: {
+                            code: "code",
+                            name: "name"
+                        }                        
                     }
                 },
                 transport: {
@@ -475,7 +479,7 @@
                     }
                 }
             }),
-            
+
             //Place of Service Section
             selectedPlaceOfService: null,
             placeOfServiceDataSource: new kendo.data.DataSource({
@@ -488,15 +492,15 @@
                     }
                 }
             }),
-            
+
             //Contract-BusinessLine Section
             addBtnVisible: null,
             editBtnVisible: null,
             originalContractBusinessLineItem: null,
-            isContractBusinessLineChanging: function() {
+            isContractBusinessLineChanging: function () {
                 if (this.get('editBtnVisible') === true && this.get('originalContractBusinessLineItem') &&
-                (this.get('selectedBusinessLine').planTypeId !== this.get('originalContractBusinessLineItem').planTypeId
-                )) {                    
+                    (this.get('selectedBusinessLine').planTypeId !== this.get('originalContractBusinessLineItem').planTypeId
+                    )) {
                     return true;
                 } else
                     return false;
@@ -516,7 +520,7 @@
 
                 if (!this.get('selectedBusinessLine')) {
                     valid = false;
-                    selectedBusinessLineMessage = "<li>The Line of Business field is required.</li>" ;
+                    selectedBusinessLineMessage = "<li>The Line of Business field is required.</li>";
                 }
 
                 if (!this.get('selectedPlaceOfService') || (this.get('selectedPlaceOfService') != null && this.get('selectedPlaceOfService').length === 0)) {
@@ -540,6 +544,7 @@
                         ContractId: contractId,
                         PlanTypeId: this.get('selectedBusinessLine').planTypeId,
                         Name: this.get('selectedBusinessLine').name,
+                        Code: this.get('selectedBusinessLine').code,
                         Clinics: this.get('selectedPlaceOfService').map(function (pos) {
                             return {
                                 PlaceOfServiceId: pos.placeOfServiceId,
@@ -562,12 +567,13 @@
                     AjaxCallPost("/api/ContractBusinessLines", JSON.stringify(contractBusinessLineItem), addBusinessLineSuccess, addBusinessLineFails);
                 }
             },
-            convertToContractBusinessLineObject: function(data) {
+            convertToContractBusinessLineObject: function (data) {
                 var contractBusinessLineItem = {
                     contractLineofBusinessId: data.contractLineofBusinessId,
                     contractId: data.contractId,
                     planTypeId: data.planTypeId,
                     name: data.name,
+                    code: data.code,
                     clinics: data.clinics.map(function (clinic) {
                         return {
                             id: clinic.id,
@@ -580,13 +586,13 @@
                 return contractBusinessLineItem;
             },
             onEditContractBusinessLineItem: function (e) {
-                
                 var contractBusinessLineItem = this.convertToContractBusinessLineObject(e.data);
                 var businessLineItem = {
                     planTypeId: e.data.planTypeId,
-                    name: e.data.name
+                    name: e.data.name,
+                    code: e.data.code
                 };
-                var placeOfServiceItems = e.data.clinics.map(function(clinic) {
+                var placeOfServiceItems = e.data.clinics.map(function (clinic) {
                     return {
                         placeOfServiceId: clinic.placeOfServiceId,
                         name: clinic.name
@@ -604,12 +610,12 @@
             },
             editContractBusinessLineItem: function () {
                 if (this.isValidBusinessContractModel()) {
-                    
+
                     var originalContractBusinessLineItem = this.get("originalContractBusinessLineItem"),
                         currentBusinessLineItem = this.get('selectedBusinessLine'),
                         currentPlaceOfServiceItems = this.get('selectedPlaceOfService'),
                         currentClinicContractBusinessLinesItems = currentPlaceOfServiceItems.map(function (pos) {
-                            
+
                             var searchItem = originalContractBusinessLineItem.clinics.find(function (item) {
                                 return item.placeOfServiceId === pos.placeOfServiceId;
                             });
@@ -620,15 +626,15 @@
                                 ContractLineofBusinessId: originalContractBusinessLineItem.contractLineofBusinessId
                             };
                         });
-                    
-                   
+
+
                     var contractBusinessLineItem = {
                         ContractLineofBusinessId: originalContractBusinessLineItem.contractLineofBusinessId,
                         ContractId: contractId,
                         PlanTypeId: currentBusinessLineItem.planTypeId,
                         Name: currentBusinessLineItem.name,
                         Clinics: currentClinicContractBusinessLinesItems
-                        
+
                     };
                     var updateContractBusinessLineSucess = function (response) {
                         console.log("Change line of business of the contract: success");
@@ -654,7 +660,7 @@
                     AjaxCallPut("/api/ContractBusinessLines", JSON.stringify(contractBusinessLineItem), updateContractBusinessLineSucess);
                 }
             },
-            onReleaseContractBusinessLineItem: function(e) {
+            onReleaseContractBusinessLineItem: function (e) {
                 var contractBusinessLineItem = this.convertToContractBusinessLineObject(e.data);
 
                 var releaseContractBusinessLineTemplate = kendo.template($("#release-businessLine-template").html());
@@ -674,7 +680,7 @@
                         //Release the ContractBusinessLine item from the DataSource
                         contractBusinessLineViewModel.get('contractBusinesslinesDataSource').pushDestroy(response);
                         //Put the Line of business item available to use for new ContractBusinessLine
-                        contractBusinessLineViewModel.get('businessLinesDataSource').pushCreate({ planTypeId: response.planTypeId, name: response.name });
+                        contractBusinessLineViewModel.get('businessLinesDataSource').pushCreate({ planTypeId: response.planTypeId, name: response.name, code: response.code });
                         toastr.success("Line of Business succesfully released.");
                         window.close();
                     };
@@ -711,19 +717,19 @@
                             name: "name",
                             clinics: "clinics"
                         }
-                  }  
+                    }
                 },
                 transport: {
-                    read: function(options) {
+                    read: function (options) {
                         $.ajax({
                             method: "GET",
                             url: "/api/ContractBusinessLines",
-                            data: {contractId: contractId},
+                            data: { contractId: contractId },
                             dataType: "json",
-                            success: function(response) {
+                            success: function (response) {
                                 options.success(response);
                             },
-                            error: function(response) {
+                            error: function (response) {
                                 options.error(response);
                             }
                         });
@@ -732,7 +738,7 @@
             }),
 
             //Clinic-Contract-BusinessLine Section
-            deleteClinicContractBusinessLineItem: function(e) {               
+            deleteClinicContractBusinessLineItem: function (e) {
                 var clinicContractBusinessLineItem = {
                     Id: e.data.id,
                     ContractLineofBusinessId: e.data.contractLineofBusinessId,
@@ -757,21 +763,18 @@
                         $(e.currentTarget).closest("tr").remove();
                         window.close();
                         toastr.success("The Location was successfully released.");
-                        /*Si no descomento esta linea el location desaparece,
-                         * sin embargo si doy click en el edit este location
-                         * sigue apareciendo seleccionada en el multiselect
-                         */
-                        //contractBusinessLineViewModel.contractBusinesslinesDataSource.read();
-                    }
+                        //refresh the location datasource for the form interface
+                        contractBusinessLineViewModel.contractBusinesslinesDataSource.read();
+                    };
                     AjaxCallDelete("/api/ClinicContractBusinessLines", JSON.stringify(clinicContractBusinessLineItem), suceessrelease);
                 });
-                $("#js-cliniccontractbusinessLine-noButton").click(function() {
+                $("#js-cliniccontractbusinessLine-noButton").click(function () {
                     window.close();
                 });
             }
         });
         kendo.bind($(".js-businesslines-" + contractId), contractBusinessLineViewModel);
-    }
+    };
 
     //Access to private members
     return {

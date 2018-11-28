@@ -1,6 +1,7 @@
 ﻿using CanoHealth.WebPortal.CommonTools.ModelState;
 using CanoHealth.WebPortal.Core;
 using CanoHealth.WebPortal.Core.Domain;
+using CanoHealth.WebPortal.Infraestructure;
 using CanoHealth.WebPortal.Services.Files;
 using CanoHealth.WebPortal.ViewModels;
 using Elmah;
@@ -20,13 +21,13 @@ namespace CanoHealth.WebPortal.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _file;
-        private readonly IConvertModelState _erroMessage;
+        private readonly IConvertModelState _errorMessage;
 
-        public ContractsController(IUnitOfWork unitOfWork, IFileService file, IConvertModelState erroMessage)
+        public ContractsController(IUnitOfWork unitOfWork, IFileService file, IConvertModelState errorMessage)
         {
             _unitOfWork = unitOfWork;
             _file = file;
-            _erroMessage = erroMessage;
+            _errorMessage = errorMessage;
         }
 
         public ActionResult Index()
@@ -49,7 +50,7 @@ namespace CanoHealth.WebPortal.Controllers
             {
                 var auditLogs = new List<AuditLog>();
                 if (!ModelState.IsValid)
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, _erroMessage.GetErrorsFromModelState(ModelState));
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, _errorMessage.GetErrorsFromModelState(ModelState));
 
                 var contractByGroup = _unitOfWork.Contracts.GetContractByGroupNumber(contract.GroupNumber);
                 if (contractByGroup != null)
@@ -88,7 +89,7 @@ namespace CanoHealth.WebPortal.Controllers
                             OriginalName = contractAddendum.OriginalFileName
                         }
                     };
-                    _file.AddFiles(HttpContext.Request.Files, contractAddendum.ServerLocation, originalUniqueNameViewModels);
+                    _file.SaveFileAzureStorageAccount(HttpContext.Request.Files, originalUniqueNameViewModels, ConfigureSettings.GetAddendumsContainer);
                 }
                 _unitOfWork.AuditLogs.AddRange(auditLogs);
                 _unitOfWork.Complete();

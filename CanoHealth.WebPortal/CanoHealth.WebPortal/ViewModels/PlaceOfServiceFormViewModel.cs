@@ -7,6 +7,7 @@ namespace CanoHealth.WebPortal.ViewModels
     {
         public Guid? PlaceOfServiceId { get; set; }
 
+        [Display(Name ="Corporation")]
         public Guid CorporationId { get; set; }
 
         [Required]
@@ -19,11 +20,13 @@ namespace CanoHealth.WebPortal.ViewModels
         [Phone]
         [DataType(DataType.PhoneNumber)]
         [StringLength(20)]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
         [Phone]
         [DataType(DataType.PhoneNumber)]
         [StringLength(20)]
+        [Display(Name = "Fax Number")]
         public string FaxNumber { get; set; }
 
         public bool Active { get; set; }

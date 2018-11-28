@@ -16,7 +16,8 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
 
         public IEnumerable<ContractLineofBusiness> GetContractBusinessLinesWithClinics(string contractId)
         {
-            var iqueryableresult = QueryableGetAll(filter: clb => clb.Active.HasValue && clb.Active.Value, includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
+            var iqueryableresult = QueryableGetAll(filter: clb => clb.Active.HasValue && clb.Active.Value, 
+                includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
                 {
                     clb => clb.ClinicLineofBusiness.Select(pos => pos.Clinic),
                     bl => bl.LineOfBusiness
