@@ -56,7 +56,7 @@ namespace CanoHealth.WebPortal.Controllers
                         .Get(providerByLocationDto.ProviderByLocationId);
                     if (providerStoredInDb == null)
                     {
-                        ModelState.AddModelError("", "This item was not found in our system, please try again");
+                        ModelState.AddModelError("", "This item was not found in our system, please try again.");
                         return Json(new[] { providerByLocationDto }.ToDataSourceResult(request, ModelState));
                     }
 

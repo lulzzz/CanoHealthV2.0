@@ -1,7 +1,7 @@
 ﻿var validationMessageTmpl = kendo.template($("#serverSideErrorHandlerTemp").html());
 
-function serverSideErrorHandlers(args) {
-    if (args.errors) {
+function insuranceserverSideErrorHandlers(args) {  
+    if (args.errors) {        
         var grid = $("#Insurances").data("kendoGrid");
         grid.one("dataBinding", function (e) {
             e.preventDefault();   // cancel grid rebind if error occurs 

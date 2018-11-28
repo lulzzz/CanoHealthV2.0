@@ -277,8 +277,8 @@ td.k-state-focused.k-state-selected {
 
 /*********COMMON STYLES**********/
 .insurance-businessline {
-    height: 130px;
-    max-height: 140px;
+    height: 200px;
+    max-height: 205px;
 }
 
 .demo-hint {

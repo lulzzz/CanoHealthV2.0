@@ -148,10 +148,21 @@ var generateGuid = function () {
     var id = '', i, random;
     for (i = 0; i < 32; i++) {
         random = Math.random() * 16 | 0;
-        if (i == 8 || i == 12 || i == 16 || i == 20) {
+        if (i === 8 || i === 12 || i === 16 || i === 20) {
             id += '-';
         }
-        id += (i == 12 ? 4 : i == 16 ? random & 3 | 8 : random).toString(16);
+        id += (i === 12 ? 4 : i === 16 ? random & 3 | 8 : random).toString(16);
     }
     return id;
 }
+
+//https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/show-command-buttons-conditionally
+var showInactiveButton = function (dataItem) {
+    // show the Inactive button for the item with Active=true
+    return dataItem.Active;
+};
+
+var showActiveButton = function (dataItem) {
+    // show the Active button for the item with Active=true
+    return !dataItem.Active;
+};

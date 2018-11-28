@@ -63,7 +63,7 @@ namespace CanoHealth.WebPortal.Controllers
                     if (existInsurance != null)
                     {
                         ModelState.AddModelError("Name", "Duplicate Data. Please try again!");
-                        return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
+                        return Json(new[] { insuranceViewModel }.ToDataSourceResult(request, ModelState));
                     }
 
                     existInsurance = _unitOfWork.Insurances.FirstOrDefault(ins => !String.IsNullOrEmpty(ins.Code) &&
@@ -72,7 +72,7 @@ namespace CanoHealth.WebPortal.Controllers
                     if (existInsurance != null)
                     {
                         ModelState.AddModelError("Code", "Duplicate Data. Please try again!");
-                        return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
+                        return Json(new[] { insuranceViewModel }.ToDataSourceResult(request, ModelState));
                     }
 
                     insuranceViewModel.InsuranceId = Guid.NewGuid();
@@ -102,7 +102,7 @@ namespace CanoHealth.WebPortal.Controllers
                     ModelState.AddModelError("", "We are sorry, but something went wrong. Please try again!");
                 }
             }
-            return Json(new[] { insuranceViewModel }.ToDataSourceResult(request));
+            return Json(new[] { insuranceViewModel }.ToDataSourceResult(request,ModelState));
         }
 
         public ActionResult UpdateInsurance([DataSourceRequest] DataSourceRequest request,

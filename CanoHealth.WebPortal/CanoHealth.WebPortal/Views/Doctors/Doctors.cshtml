@@ -61,13 +61,17 @@
                 {
                     cmd.Edit();
 
-                    cmd.Custom("Inact").Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
+                    cmd.Custom("Inact").Text("Inactivate")
                         .HtmlAttributes(new { @class = "js-inactive-doctor" })
-                        .Click("DoctorEventHandler.onClickInactivateDoctorButton");
+                        .Click("DoctorEventHandler.onClickInactivateDoctorButton")
+                        .IconClass("k-icon k-i-close-outline")
+                        .Visible("showInactiveButton");
 
-                    cmd.Custom("Act").Text("<span class='k-icon k-i-check-outline'></span> Activate")
+                    cmd.Custom("Act").Text("Activate")
                         .HtmlAttributes(new { @class = "js-active-doctor" })
-                        .Click("DoctorEventHandler.onClickActivateDoctorButton");
+                        .Click("DoctorEventHandler.onClickActivateDoctorButton")
+                        .IconClass("k-icon k-i-check-outline")
+                        .Visible("showActiveButton");
 
                 //cmd.Custom("release").Text("<i class='fa fa-times'></i> Release").Click("DoctorEventHandler.inactivateDoctor");
                 }).Width(250);

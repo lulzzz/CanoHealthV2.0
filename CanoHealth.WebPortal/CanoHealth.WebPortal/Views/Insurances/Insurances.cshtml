@@ -54,17 +54,21 @@
                     {
                         cmd.Edit();
 
+                        
+
                         cmd.Custom("Inact")
-                            .Text("<span class='k-icon k-i-close-outline'></span> Inactivate")
+                            .Text("Inactive")
                             .HtmlAttributes(new { @class = "js-inactive" })
-                            //.Visible("InsuranceController.showInactiveButton")
-                            .Click("InsuranceController.onClickInactivateInsuranceButton");
+                            .Visible("InsuranceController.showInactiveButton")
+                            .Click("InsuranceController.onClickInactivateInsuranceButton")
+                            .IconClass("k-icon k-i-close-outline");
 
                         cmd.Custom("Act")
-                            .Text("<span class='k-icon k-i-check-outline'></span> Activate")
+                            .Text("Activate") 
                             .HtmlAttributes(new { @class = "js-active" })
-                            //.Visible("InsuranceController.showActiveButton")
-                            .Click("InsuranceController.onClickActivateInsuranceButton");
+                            .Visible("InsuranceController.showActiveButton")
+                            .Click("InsuranceController.onClickActivateInsuranceButton")
+                            .IconClass("k-icon k-i-check-outline");
 
                     }).Width(150).Title("ACTIONS");
                 })
@@ -114,7 +118,7 @@
                         model.Field(p => p.Active).Editable(false);
                         model.Field(p => p.Active).DefaultValue(true);
                     })
-                    .Events(ev => ev.Error("serverSideErrorHandlers"))
+                    .Events(ev => ev.Error("insuranceserverSideErrorHandlers"))
                     .Read(r => r.Action("ReadInsurances", "Insurances"))
                     .Create(c => c.Action("CreateInsurance", "Insurances"))
                     .Update(u => u.Action("UpdateInsurance", "Insurances"))
@@ -146,7 +150,7 @@
 
 <script type="text/x-kendo-template" id="businessline-detail-template">
     <div class="col-xs-4 col-sm-4 col-md-3">
-        <div class="content-box box-default">
+        <div class="content-box box-default insurance-businessline">
             <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
             <h5 class="content-box-title">#:Code#</h5>
             <hr />
@@ -204,6 +208,8 @@
     <br />
     <button class="btn btn-ar btn-default" onclick="addNewLineofBusiness('#: id #', '#: value #')" ontouchend="addNewLineofBusiness('#: id #', '#: value #')">Add new line of business</button>
 </script>
+
+
 
 @section Scripts{
     @Scripts.Render("~/bundles/insurances")
