@@ -53,4 +53,8 @@ V11/17/2018
 V11/26/2018
 20:00 - 22:00 ya se pueden annadir lineas de negocio a traves del multiselect
 
+V11/27/2018
+14:00 - 17:00 lineas de negocio
+19:00 - 22:00 mostrar dinamicamente los botones activate, inactivate dependiendo del valor de Active
+
 
