@@ -133,7 +133,7 @@
                                         var errorMessage = "";
                                         var modelstate = response.responseJSON.modelState;
                                         if (modelstate) {
-                                            debugger;
+                                            
                                             for (var prop in modelstate) {
                                                 if (modelstate.hasOwnProperty(prop)) {
                                                     errorMessage = errorMessage + " " + modelstate[prop].toString();

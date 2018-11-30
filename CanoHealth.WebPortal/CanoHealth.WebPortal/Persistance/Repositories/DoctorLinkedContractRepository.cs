@@ -22,7 +22,9 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         {
             return FirstOrDefault(x => x.DoctorId == doctorId &&
                                   x.ContractLineofBusinessId == contractLineofBusinessId &&
-                                  x.DoctorCorporationContractLinkId != doctorCorporationContractLinkId);
+                                  x.DoctorCorporationContractLinkId != doctorCorporationContractLinkId &&
+                                  x.Active.HasValue &&
+                                  x.Active.Value);
         }
 
         /*Get the list of all active doctors who are linked to specific contract and line of business*/

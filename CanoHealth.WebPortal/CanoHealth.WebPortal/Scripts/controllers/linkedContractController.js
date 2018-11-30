@@ -204,7 +204,8 @@
                         EffectiveDate: moment(this.get('effectiveDate')).format('L'),
                         CorporationName: this.get('selectedContract').corporationName,
                         InsuranceName: this.get('selectedContract').name,
-                        GroupNumber: this.get('selectedContract').groupNumber
+                        GroupNumber: this.get('selectedContract').groupNumber,
+                        ContractId: this.get('selectedContract').contractId
                     };
 
                     console.log("selectedContract: ", this.get('selectedContract'));
@@ -220,11 +221,12 @@
                                 DoctorId: doctorId,
                                 CorporationName: response.corporationName,
                                 InsuranceName: response.insuranceName,
-                                GroupNumber: response.groupNumber
+                                GroupNumber: response.groupNumber,
+                                ContractId: response.contractId
                             });
                         }
 
-                        var datailedLinkedContract = $("#contracts_" + response.groupNumber).data('kendoListView');
+                        var datailedLinkedContract = $("#contracts_" + response.contractId).data('kendoListView');
                         if (datailedLinkedContract)
                             datailedLinkedContract.dataSource.read();
 

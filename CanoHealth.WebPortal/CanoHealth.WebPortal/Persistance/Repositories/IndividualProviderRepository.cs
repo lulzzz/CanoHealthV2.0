@@ -30,9 +30,11 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public IEnumerable<DoctorIndividualProvider> GetIndividualProvidersByInsurance(Guid insuranceId)
         {
             var individualProviders = EnumarableGetAll(filter: dip => dip.InsuranceId == insuranceId &&
-                dip.Active.HasValue && dip.Active.Value,
+                                                               dip.Active.HasValue && dip.Active.Value,
                 includeProperties: new Expression<Func<DoctorIndividualProvider, object>>[]
-                {d => d.Doctor, i => i.Insurance});
+                {
+                    d => d.Doctor, i => i.Insurance
+                });
 
             return individualProviders;
         }
@@ -40,14 +42,17 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public DoctorIndividualProvider ExistIndividualProvider(Guid doctorId, Guid insuranceId)
         {
             return SingleOrDefault(ip => ip.DoctorId == doctorId &&
-                                         ip.InsuranceId == insuranceId);
+                                         ip.InsuranceId == insuranceId &&
+                                         ip.Active.HasValue &&
+                                         ip.Active.Value);
         }
 
         public DoctorIndividualProvider GetIndividualProviderByProviderNumber(Guid doctorIndividualProviderId, string individualProviderProviderNumber)
         {
             return SingleOrDefault(ip => ip.DoctorIndividualProviderId != doctorIndividualProviderId &&
-                ip.ProviderNumber.Equals(individualProviderProviderNumber,
-                    StringComparison.InvariantCultureIgnoreCase));
+                                   ip.ProviderNumber.Equals(individualProviderProviderNumber,StringComparison.InvariantCultureIgnoreCase) &&
+                                   ip.Active.HasValue &&
+                                   ip.Active.Value);
         }
 
         public DoctorIndividualProvider GetIndividualProviderByDoctorAndInsurance(DoctorIndividualProvider doctorIndividualProvider)
@@ -55,7 +60,9 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
             return SingleOrDefault(ip =>
                 ip.DoctorIndividualProviderId != doctorIndividualProvider.DoctorIndividualProviderId &&
                 ip.DoctorId == doctorIndividualProvider.DoctorId &&
-                ip.InsuranceId == doctorIndividualProvider.InsuranceId);
+                ip.InsuranceId == doctorIndividualProvider.InsuranceId &&
+                ip.Active.HasValue &&
+                ip.Active.Value);
         }
 
         public IEnumerable<AuditLog> SaveIndividualProviders(List<DoctorIndividualProvider> doctorIndividualProviders)

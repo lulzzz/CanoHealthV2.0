@@ -55,7 +55,6 @@ namespace CanoHealth.WebPortal.Controllers
                     {
                         ModelState.AddModelError("", @"Duplicate individual Provider. Please try again!");
                         return Json(new[] { individualProvider }.ToDataSourceResult(request, ModelState));
-
                     }
 
                     var logs = _unitOfWork.IndividualProviderRepository

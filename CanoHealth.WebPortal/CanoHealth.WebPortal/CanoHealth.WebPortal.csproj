@@ -554,6 +554,26 @@
     <Compile Include="Migrations\201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.Designer.cs">
       <DependentUpon>201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811290208597_DropUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.cs" />
+    <Compile Include="Migrations\201811290208597_DropUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.Designer.cs">
+      <DependentUpon>201811290208597_DropUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811290213096_DropUniqueConstraintDoctorIdMedicalLicenseTypeIdInMedicalLicensesTable.cs" />
+    <Compile Include="Migrations\201811290213096_DropUniqueConstraintDoctorIdMedicalLicenseTypeIdInMedicalLicensesTable.Designer.cs">
+      <DependentUpon>201811290213096_DropUniqueConstraintDoctorIdMedicalLicenseTypeIdInMedicalLicensesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811290217073_DropUniqueConstraintLicenseNumberInMedicalLicensesTable.cs" />
+    <Compile Include="Migrations\201811290217073_DropUniqueConstraintLicenseNumberInMedicalLicensesTable.Designer.cs">
+      <DependentUpon>201811290217073_DropUniqueConstraintLicenseNumberInMedicalLicensesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811290238256_DropUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.cs" />
+    <Compile Include="Migrations\201811290238256_DropUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.Designer.cs">
+      <DependentUpon>201811290238256_DropUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.cs" />
+    <Compile Include="Migrations\201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.Designer.cs">
+      <DependentUpon>201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1786,6 +1806,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.resx">
       <DependentUpon>201811181333335_CreateStoredProcedureGetDoctorProviderByLocationAndDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811290208597_DropUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.resx">
+      <DependentUpon>201811290208597_DropUniqueConstraintDoctorIdAndDoctorFileTypeIdInDoctorFileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811290213096_DropUniqueConstraintDoctorIdMedicalLicenseTypeIdInMedicalLicensesTable.resx">
+      <DependentUpon>201811290213096_DropUniqueConstraintDoctorIdMedicalLicenseTypeIdInMedicalLicensesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811290217073_DropUniqueConstraintLicenseNumberInMedicalLicensesTable.resx">
+      <DependentUpon>201811290217073_DropUniqueConstraintLicenseNumberInMedicalLicensesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811290238256_DropUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.resx">
+      <DependentUpon>201811290238256_DropUniqueConstraintDoctorIdInsuranceIdDoctorIndividualProviderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.resx">
+      <DependentUpon>201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

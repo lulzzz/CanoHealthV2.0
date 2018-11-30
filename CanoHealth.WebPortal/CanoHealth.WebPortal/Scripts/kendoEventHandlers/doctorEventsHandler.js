@@ -238,7 +238,7 @@
             var value = this.value();
             console.log(value); //value is the selected date in the maskedtextbox
             if (value.indexOf(this.options.promptChar) !== -1) {
-                toastr.error("SSN is incomplete.");
+                toastr.error("Invalid SSN.");
                 //means the ssn is incomplete hide the edit button
                 $(".k-grid-update").hide();
             } else {
@@ -252,7 +252,7 @@
             var value = this.value();
             console.log(value); //value is the selected date in the maskedtextbox
             if (value.indexOf(this.options.promptChar) !== -1) {
-                toastr.error("NPI is incomplete.");
+                toastr.error("Invalid NPI.");
                 //means the npi is incomplete hide the edit button
                 $(".k-grid-update").hide();
             } else {

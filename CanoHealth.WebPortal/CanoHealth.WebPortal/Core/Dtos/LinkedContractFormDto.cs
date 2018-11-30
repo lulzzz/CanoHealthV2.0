@@ -26,6 +26,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
         [Required]
         public string GroupNumber { get; set; }
 
+        public Guid ContractId { get; set; }
+
         public DoctorCorporationContractLink Convert()
         {
             return new DoctorCorporationContractLink
@@ -34,7 +36,8 @@ namespace CanoHealth.WebPortal.Core.Dtos
                 DoctorId = DoctorId,
                 ContractLineofBusinessId = ContractLineofBusinessId,
                 EffectiveDate = EffectiveDate,
-                Note = Note
+                Note = Note,
+                Active = true
             };
         }
     }

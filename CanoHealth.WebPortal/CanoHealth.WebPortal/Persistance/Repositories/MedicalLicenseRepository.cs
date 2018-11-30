@@ -25,17 +25,27 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         public MedicalLicense GetLicenseByNumber(string licenseNumber, Guid? medicalLicenseId = null)
         {
             if (medicalLicenseId != null)
-                return SingleOrDefault(ml => ml.LicenseNumber.Equals(licenseNumber, StringComparison.InvariantCultureIgnoreCase) && ml.MedicalLicenseId != medicalLicenseId);
-            return SingleOrDefault(ml => ml.LicenseNumber.Equals(licenseNumber, StringComparison.InvariantCultureIgnoreCase));
+                return SingleOrDefault(ml => ml.LicenseNumber.Equals(licenseNumber, StringComparison.InvariantCultureIgnoreCase) && 
+                                       ml.MedicalLicenseId != medicalLicenseId &&
+                                       ml.Active.HasValue &&
+                                       ml.Active.Value);
+            return SingleOrDefault(ml => ml.LicenseNumber.Equals(licenseNumber, StringComparison.InvariantCultureIgnoreCase) &&
+                                         ml.Active.HasValue &&
+                                         ml.Active.Value);
         }
 
-        public MedicalLicense GetLicenseByDoctorAndType(Guid doctorId,
-            Guid medicalLicenseTypeId,
-            Guid? medicalLicenseId = null)
+        public MedicalLicense GetLicenseByDoctorAndType(Guid doctorId,Guid medicalLicenseTypeId,Guid? medicalLicenseId = null)
         {
             if (medicalLicenseId != null)
-                return SingleOrDefault(ml => ml.DoctorId == doctorId && ml.MedicalLicenseTypeId == medicalLicenseTypeId && ml.MedicalLicenseId != medicalLicenseId);
-            return SingleOrDefault(ml => ml.DoctorId == doctorId && ml.MedicalLicenseTypeId == medicalLicenseTypeId);
+                return SingleOrDefault(ml => ml.DoctorId == doctorId && 
+                                       ml.MedicalLicenseTypeId == medicalLicenseTypeId && 
+                                       ml.MedicalLicenseId != medicalLicenseId &&
+                                       ml.Active.HasValue &&
+                                       ml.Active.Value);
+            return SingleOrDefault(ml => ml.DoctorId == doctorId && 
+                                   ml.MedicalLicenseTypeId == medicalLicenseTypeId &&
+                                   ml.Active.HasValue &&
+                                   ml.Active.Value);
         }
 
         public IEnumerable<AuditLog> SaveMedicalLicenses(IEnumerable<MedicalLicense> licenseToStore)

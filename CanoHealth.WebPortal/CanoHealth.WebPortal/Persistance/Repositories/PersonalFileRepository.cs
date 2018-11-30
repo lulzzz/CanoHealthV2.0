@@ -29,9 +29,12 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
         {
             if (doctorFileId != null)
                 return SingleOrDefault(df => df.DoctorId == doctorId &&
-                             df.DoctorFileTypeId == doctorFileTypeId &&
-                             df.DoctorFileId != doctorFileId);
-            return SingleOrDefault(df => df.DoctorId == doctorId && df.DoctorFileTypeId == doctorFileTypeId);
+                                       df.DoctorFileTypeId == doctorFileTypeId &&
+                                       df.DoctorFileId != doctorFileId &&
+                                       df.Active);
+            return SingleOrDefault(df => df.DoctorId == doctorId && 
+                                   df.DoctorFileTypeId == doctorFileTypeId &&
+                                   df.Active);
         }
 
         public IEnumerable<AuditLog> SavePersonalFiles(IEnumerable<DoctorFile> doctorFiles)

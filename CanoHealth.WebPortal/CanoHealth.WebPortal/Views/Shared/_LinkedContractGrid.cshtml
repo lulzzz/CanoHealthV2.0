@@ -11,6 +11,8 @@
     {
         col.Bound(c => c.DoctorId).Hidden();
 
+        col.Bound(c => c.ContractId).Hidden();
+
         col.Bound(c => c.CorporationName).Title("CORPORATION");
 
         col.Bound(c => c.InsuranceName).Title("INSURANCE");
@@ -59,8 +61,8 @@
                    data-template="contract-autocomplete-template"
                    @*data-value-template="contract-selectedvalue-template"*@
                    data-bind="value: selectedContract,
-                            source: contractDataSource,
-                            events: { change: onChangeLinkedContracts }"
+                              source: contractDataSource,
+                              events: { change: onChangeLinkedContracts }"
                    style="width: 100%;" />
         </div>
 
@@ -74,9 +76,9 @@
                    data-text-field="name"
                    data-value-field="planTypeId"
                    data-bind="value: selectedBusinessLine,
-                            source: businessLineDataSource,
-                            events: { change: onChangeBusinessLines }
-                            "
+                              source: businessLineDataSource,
+                              events: { change: onChangeBusinessLines }
+                             "
                    style="width: 100%;" />
             @**@
         </div>
@@ -163,9 +165,10 @@
 
 <script type="text/x-kendo-template" id="contract-autocomplete-template">
 
-    <span class="k-state-default col-md-6">Contract: #:data.groupNumber# </span>
-    <span class="k-state-default col-md-6">Insurance: #:data.name# </span>
-
+    <span class="k-state-default">
+        <strong>Contract:</strong> #:data.groupNumber#,
+        <strong>Insurance:</strong> #:data.name#
+    </span>   
 </script>
 
 <script type="text/x-kendo-template" id="contract-selectedvalue-template">

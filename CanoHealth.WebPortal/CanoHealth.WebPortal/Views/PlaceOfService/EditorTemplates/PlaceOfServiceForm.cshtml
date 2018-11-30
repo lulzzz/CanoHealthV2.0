@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="from-group">
-        <label class="control-label text-uppercase">Corporation</label>
+        <label class="control-label text-uppercase">Corporation <span class="text-danger">*</span></label>
         @(Html.Kendo().DropDownListFor(x => x.CorporationId)
             .DataValueField("CorporationId")
             .DataTextField("CorporationName")
@@ -13,7 +13,7 @@
     </div>
     
     <div class="form-group">
-        <label class="control-label text-uppercase">Name</label>
+        <label class="control-label text-uppercase">Name <span class="text-danger">*</span></label>
        <input class="k-textbox" id="Name" name="Name"
                data-val="true"
                data-val-length="The field Name must be a string with a maximum length of 100."

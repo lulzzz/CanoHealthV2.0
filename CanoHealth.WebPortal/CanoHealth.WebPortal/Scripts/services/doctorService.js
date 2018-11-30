@@ -2,10 +2,10 @@
     //Private fields
 
     //Private methods
-    var getMedicalLicenses = function(doctorId, successCall, errorCall) {
+    var getMedicalLicenses = function (doctorId, successCall, errorCall) {
         AjaxCallGet("/api/medicallicenses/", { doctorId: doctorId }, successCall, errorCall);
-    }
-    var createMedicalLicense = function(formData, successCall, failCall) {
+    };
+    var createMedicalLicense = function (formData, successCall, failCall) {
         $.ajax({
             type: "POST",
             url: domainName + '/MedicalLicenses/CreateMedicalLicense/',
@@ -15,7 +15,7 @@
             success: successCall,
             error: failCall
         });
-    }
+    };
 
     var updateMedicalLicense = function(formData, success, fail) {
         $.ajax({
@@ -29,9 +29,9 @@
         });
     };
 
-    var inactivateLicense = function(medicalLicense, inactivateLicenseSuccess, inactivateLicenseFail) {
+    var inactivateLicense = function (medicalLicense, inactivateLicenseSuccess, inactivateLicenseFail) {
         AjaxCallDelete("/api/medicallicenses", JSON.stringify(medicalLicense), inactivateLicenseSuccess, inactivateLicenseFail);
-    }
+    };
 
     var getProviderInfo = function(url, success, fail) {
         $.ajax({

@@ -90,6 +90,7 @@ namespace CanoHealth.WebPortal.Core.Dtos
                 ContractId = contractLineofBusiness.ContractId,
                 PlanTypeId = contractLineofBusiness.PlanTypeId,
                 Name = contractLineofBusiness.LineOfBusiness.Name,
+                Code = contractLineofBusiness.LineOfBusiness.Code,
                 ContractLineofBusinessId = contractLineofBusiness.ContractLineofBusinessId,
                 Clinics = contractLineofBusiness.ClinicLineofBusiness.Select(c => new ClinicLineofBusinessContractDto
                 {

@@ -40,7 +40,8 @@ namespace CanoHealth.WebPortal.ViewModels
                 InsuranceId = InsuranceId,
                 DoctorId = DoctorId,
                 ProviderNumber = ProviderNumber,
-                IndividualProviderEffectiveDate = IndividualProviderEffectiveDate
+                IndividualProviderEffectiveDate = IndividualProviderEffectiveDate,
+                Active = true
             };
         }
     }

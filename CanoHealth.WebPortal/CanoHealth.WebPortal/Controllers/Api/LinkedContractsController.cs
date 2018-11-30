@@ -80,6 +80,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
 
                 _unitOfWork.AuditLogs.AddRange(linkedContractLogs);
                 _unitOfWork.Complete();
+                linkedContractDto.DoctorCorporationContractLinkId = linkedContract.DoctorCorporationContractLinkId;
             }
             catch (Exception e)
             {

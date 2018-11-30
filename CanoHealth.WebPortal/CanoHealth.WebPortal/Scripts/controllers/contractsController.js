@@ -661,8 +661,7 @@
                 }
             },
             onReleaseContractBusinessLineItem: function (e) {
-                var contractBusinessLineItem = this.convertToContractBusinessLineObject(e.data);
-
+                var contractBusinessLineItem = this.convertToContractBusinessLineObject(e.data);               
                 var releaseContractBusinessLineTemplate = kendo.template($("#release-businessLine-template").html());
 
                 var window = $(".js-notification-dialog").kendoWindow({
@@ -715,6 +714,7 @@
                             },
                             planTypeId: "planTypeId",
                             name: "name",
+                            code: "code",
                             clinics: "clinics"
                         }
                     }

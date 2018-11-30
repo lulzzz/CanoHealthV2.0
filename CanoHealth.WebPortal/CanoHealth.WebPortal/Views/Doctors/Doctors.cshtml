@@ -12,7 +12,6 @@
 <header class="main-header main-header-inverse">
     <div class="container">
         <h1 class="page-title">Doctors</h1>
-
         <ol class="breadcrumb pull-right">
             <li><a href="@Url.Action("Index", "Home")">Home</a></li>
             <li class="active">Doctors</li>
@@ -606,13 +605,13 @@
     <h2 class="section-title">Line of Business</h2>
 
     <div id="linkedcontractplusdata_#=DoctorId#_#=ContractId#">
-        <div id="contracts_#=GroupNumber#"
+        <div id="contracts_#=ContractId#"
              class="css-gray-listview"
              data-role="listview"
              data-edit-template="linkedcontractplusdata-edit-template"
              data-template="linkedcontractplusdata-detail-template"
              data-bind="source: linkedContractDetailsDataSource,
-             events: { remove: onRemoveLinkedContractItem }">
+                        events: { remove: onRemoveLinkedContractItem }">
         </div>
     </div>
 </script>
