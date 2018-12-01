@@ -32,6 +32,16 @@ namespace CanoHealth.WebPortal.Controllers
             return Json(insurances.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public ActionResult ReadActiveInsurances([DataSourceRequest] DataSourceRequest request)
+        {
+            var activeInsurances = _unitOfWork.Insurances
+                .GetActiveInsurances()
+                .Select(Mapper.Map<Insurance, InsuranceFormViewModel>)
+                .ToList();
+            return Json(activeInsurances.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetAvailableInsurance(Guid? doctorId)
         {
             //get all insurances

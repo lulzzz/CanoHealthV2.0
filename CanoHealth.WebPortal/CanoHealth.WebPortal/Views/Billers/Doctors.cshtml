@@ -373,9 +373,12 @@
           columns.Bound(p => p.PlaceOfServiceId).Hidden(true);
           columns.Bound(p => p.PlaceOfServiceName).Title("Location");
           columns.Bound(p => p.LocacionProviderNumber).Title("Provider Number?");
-          columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date")
-              .Format("{0: MM/dd/yyyy}");
+          columns.Bound(p => p.ProviderEffectiveDate).Title("Effective Date").Format("{0: MM/dd/yyyy}");
           columns.Bound(p => p.Active).ClientTemplate("\\#=Active ? 'YES': 'NO'\\#");
+          columns.Command(cmd =>
+          {
+              cmd.Edit();
+          }).Title("Actions");
 
       })
       .DataSource(ds => ds
@@ -390,6 +393,7 @@
           })
           .Events(events => events.Error("DoctorEventHandler.locationProvidersErrorHandler"))
           .Read(r => r.Action("GetActiveProvidersByLocation", "ProviderByLocations", new { doctorCorporationContractLinkId = "#=doctorCorporationContractLinkId#" }))
+          .Update(r => r.Action("UpdateProvider", "ProviderByLocations"))
       )
       .ToClientTemplate())
 

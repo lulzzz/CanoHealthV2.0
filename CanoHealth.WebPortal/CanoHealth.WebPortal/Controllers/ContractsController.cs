@@ -32,7 +32,9 @@ namespace CanoHealth.WebPortal.Controllers
 
         public ActionResult Index()
         {
-            ViewData["Corporations"] = _unitOfWork.Corporations.GetActiveCorporations()
+            /*Here I want to display active and inactive corporation, 
+             once a corporation is inactive we want to display the inactive contracts related to that corporation*/
+            ViewData["Corporations"] = _unitOfWork.Corporations.GetAll()
                 .Select(x => new { x.CorporationId, x.CorporationName });
             return View("Contracts");
         }

@@ -574,6 +574,10 @@
     <Compile Include="Migrations\201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.Designer.cs">
       <DependentUpon>201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812010147589_CreateStoredProcedureGetSearchResultByCorporationAndInsurance.cs" />
+    <Compile Include="Migrations\201812010147589_CreateStoredProcedureGetSearchResultByCorporationAndInsurance.Designer.cs">
+      <DependentUpon>201812010147589_CreateStoredProcedureGetSearchResultByCorporationAndInsurance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs" />
     <Compile Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.Designer.cs">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>
@@ -1821,6 +1825,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.resx">
       <DependentUpon>201811290241557_DropUniqueConstraintProviderNumberDoctorIndividualProviderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812010147589_CreateStoredProcedureGetSearchResultByCorporationAndInsurance.resx">
+      <DependentUpon>201812010147589_CreateStoredProcedureGetSearchResultByCorporationAndInsurance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistance\Migrations\201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.resx">
       <DependentUpon>201810101607367_DropUniqueConstraintDoctorPlaceOfServiceInDoctorClinicsTable.cs</DependentUpon>

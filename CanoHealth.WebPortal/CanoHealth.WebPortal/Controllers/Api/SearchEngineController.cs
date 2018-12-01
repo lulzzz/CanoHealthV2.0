@@ -1,8 +1,6 @@
 ﻿using CanoHealth.WebPortal.Core;
-using CanoHealth.WebPortal.Core.Dtos;
 using Elmah;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -39,14 +37,16 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 if (contract == null)
                     return Content(HttpStatusCode.NotFound, "Contract not found.");
 
-                var result = contract.ContractBusinessLines.Select(x => new
-                {
-                    insuranceId,
-                    contract.GroupNumber,
-                    x.ContractLineofBusinessId,
-                    x.LineOfBusiness.Code,
-                    x.LineOfBusiness.Name
-                });
+                var result = contract.ContractBusinessLines
+                    .Where(clb => clb.Active.HasValue && clb.Active.Value)
+                    .Select(x => new
+                    {
+                        insuranceId,
+                        contract.GroupNumber,
+                        x.ContractLineofBusinessId,
+                        x.LineOfBusiness.Code,
+                        x.LineOfBusiness.Name
+                    });
 
                 return Ok(result);
             }
