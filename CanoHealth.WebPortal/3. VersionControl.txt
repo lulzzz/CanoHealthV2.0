@@ -57,4 +57,7 @@ V11/27/2018
 14:00 - 17:00 lineas de negocio
 19:00 - 22:00 mostrar dinamicamente los botones activate, inactivate dependiendo del valor de Active
 
+V12/01/2018
+07:00 - 09:00 Testing app 
+16:00 - 16:30 Deploying the app in production Testing production
 
