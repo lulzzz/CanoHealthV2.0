@@ -29,8 +29,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
             try
             {
                 var result = _unitOfWork.ContracBusinessLineRepository
-                    .GetContractBusinessLinesWithClinics(contractId)
-                    .Where(item => item.LineOfBusiness.Active.HasValue && item.LineOfBusiness.Active.Value)
+                    .GetContractBusinessLinesWithClinics(contractId)                    
                     .Select(ContractBusinessLinesFormsDto.WrapContractBusinessLines);
                 return Ok(result);
             }

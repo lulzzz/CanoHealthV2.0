@@ -131,7 +131,11 @@
 
 <script type="text/x-kendo-template" id="insurance-detail-template">
     <h2 class="section-title">Line of Business</h2>
-    <a data-insurance-id="#=InsuranceId#" class="btn btn-ar btn-primary js-insurancebusinessline-addbtn" style="margin-left: 16px;"><i class="fa fa-plus-circle"></i> NEW</a>
+    <a data-insurance-id="#=InsuranceId#" 
+       class="btn btn-ar btn-primary js-insurancebusinessline-addbtn" 
+       style="margin-left: 16px;">
+        <i class="fa fa-plus-circle"></i> NEW
+    </a>
     <br />
     <br />
     @(Html.Kendo().ListView<InsuranceBusinessLineViewModel>()

@@ -27,7 +27,17 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 var guidcontractId = Guid.Parse(contractId);
                 iqueryableresult = iqueryableresult.Where(x => x.ContractId == guidcontractId);
             }
-            return iqueryableresult.ToList();
+            //get just the contract-lineofbusiness items where the line of business are active
+            iqueryableresult = iqueryableresult.Where(x => x.LineOfBusiness.Active.HasValue && x.Active.Value);
+
+            var result = iqueryableresult.ToList();
+
+            foreach (var item in result)
+            {
+                item.ClinicLineofBusiness = item.ClinicLineofBusiness.Where(clb => clb.Active.HasValue && clb.Active.Value).ToList();
+            }            
+
+            return result;
         }
 
         public IEnumerable<ContractLineofBusiness> GetContractBusinessLines(Guid contractId)
@@ -37,7 +47,9 @@ namespace CanoHealth.WebPortal.Persistance.Repositories
                 includeProperties: new Expression<Func<ContractLineofBusiness, object>>[]
                 {
                     pt => pt.LineOfBusiness
-                }).ToList();
+                })
+                .Where(item => item.LineOfBusiness.Active.HasValue && item.LineOfBusiness.Active.Value)
+                .ToList();
             return businessLinesOfTheContract;
         }
 
