@@ -43,12 +43,12 @@ namespace CanoHealth.WebPortal.Controllers.Api
                 .Get(contractLineofBusinessId);
             if (contractLineOfBusinessItem == null)
                 return Content(HttpStatusCode.NotFound,
-                   "There is not corporation contract in the system with this line of business.");
+                   "There is not corporation's contract in the system with this line of business.");
 
             var linkedContract = _unitOfWork.DoctorLinkedContracts
                 .Get(doctorCorporationContractLinkId);
             if (linkedContract == null)
-                return Content(HttpStatusCode.NotFound, "There is not doctor linked to this corporation contract.");
+                return Content(HttpStatusCode.NotFound, "There is not doctor linked to this corporation's contract.");
 
             /*Get locations related to a business line of specific contract*/
             var businessLineLocations = _unitOfWork.ContracBusinessLineClinicRepository
@@ -66,7 +66,7 @@ namespace CanoHealth.WebPortal.Controllers.Api
              the actual location providers stored in db*/
             if (doctorLocations.Any())
             {
-                /*Get the intersection between doctor and business line locations*/
+                /*Get the intersection between doctor's locations and business line's locations*/
                 var intersection = businessLineLocations
                         .Intersect(doctorLocations)
                         .Select(l => l.PlaceOfServiceId)

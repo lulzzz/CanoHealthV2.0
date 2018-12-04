@@ -266,7 +266,7 @@
                 var getDoctorInfoSuccess = function (response) {
                     console.log("doctor info success: ");
                     if (response.length === 0) {
-                        var nodatatemplate = kendo.template($("#no-data-found").html());  
+                        var nodatatemplate = kendo.template($("#no-data-found").html());
 
                         //Show the notification section
                         $("#js-notification-window").show();
@@ -279,7 +279,7 @@
                         return;
                     }
 
-                    
+
                     //Show the searh result section
                     $("#js-grid-result").show();
 
@@ -293,7 +293,7 @@
                     var grid = $("#js-grid-result").data('kendoGrid');
 
                     //If the grid does not exist we have to create it
-                    if (!grid) {                       
+                    if (!grid) {
                         $("#js-grid-result").kendoGrid({
                             dataSource: {
                                 data: response,
@@ -361,8 +361,8 @@
                             detailTemplate: kendo.template($("#lineofbusiness-detail-template").html()),
                         });
                         grid.setDataSource(newDataSource);
-                    }                    
-                }
+                    }
+                };
                
                 AjaxCallGet("/api/searchengine/GetSearchResultByInsuranceLocation", paramsToServeriii, getDoctorInfoSuccess, getServerInfoFails);
             }                
