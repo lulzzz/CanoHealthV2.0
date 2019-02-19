@@ -7,12 +7,11 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN,CREDENTIALING")]
     public class PlaceOfServiceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -61,3 +61,5 @@ V12/01/2018
 07:00 - 09:00 Testing app 
 16:00 - 16:30 Deploying the app in production Testing production
 
+V02/19/2018
+06:43 App deployed in production, fixing menues and permissions for Credentialing people

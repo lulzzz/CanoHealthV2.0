@@ -1,0 +1,113 @@
+﻿@using CanoHealth.WebPortal.ViewModels.Admin
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Users</h1>
+
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Users</li>
+        </ol>
+    </div>
+</header>
+
+<div id="js-user-container" class="container-fluid">
+    @Html.AntiForgeryToken()
+    @(Html.Kendo().Grid<UserFormViewModel>()
+                        .Name("Users")
+                        .ToolBar(tool =>
+                        {
+                            tool.Create().Text("NEW");
+                            tool.Excel().Text("EXCEL");
+                        })
+                        .Excel(ex =>
+                        {
+                            ex.AllPages(true);
+                            ex.FileName("Users");
+                        })
+                        .Columns(col =>
+                        {
+                            col.Bound(u => u.Id).Hidden();
+                            col.Bound(u => u.Password).Hidden();
+                            col.Bound(u => u.ConfirmPassword).Hidden();
+
+                            col.Bound(u => u.FirstName).Title("FIRST NAME").Width(110);
+
+                            col.Bound(u => u.LastName).Title("LAST NAME").Width(110);
+
+                            col.Bound(u => u.Email).Title("EMAIL").Width(110);
+
+                            col.Bound(u => u.Active).Title("ACTIVE")
+                                .ClientTemplate("#=Active ? 'YES': 'NO'#").Width(110);
+
+                            col.Command(cmd =>
+                            {
+                                cmd.Edit();
+                            }).Title("ACTIONS").Width(110);
+                        })
+                        .Editable(ed =>
+                        {
+                            ed.Mode(GridEditMode.PopUp);
+                            ed.TemplateName("UserForm");
+                            ed.Window(wnd =>
+                            {
+                                wnd.Title("");
+                    //wnd.Width(600);
+                    wnd.Resizable(w => w.MaxWidth(600).MinWidth(400));
+                                wnd.Draggable();
+                                wnd.Events(ev => ev.Open("UsersController.onOpenUserFormWindow"));
+                            });
+                        })
+                        .Filterable()
+                        .Sortable()
+                        .Groupable()
+                        .Resizable(r => r.Columns(true))
+                        .Pageable(pager => pager
+                        .Numeric(true)
+                        .Info(true)
+                        .PreviousNext(true)
+                        .Refresh(true)
+                        .PageSizes(new object[] { 25, 50, 100, "All" })
+                        )
+                        .Scrollable(s => s.Height("auto"))
+                        .Events(ev => ev.Edit("UsersController.onEditUserItem"))
+                        .DataSource(ds => ds
+                            .Ajax()
+                            .ServerOperation(true)
+                            .PageSize(20)
+                            .Model(model =>
+                            {
+                                model.Id(u => u.Id);
+                                model.Field(u => u.Id).Editable(false);
+                            })
+                            .Events(ev =>
+                            {
+                                ev.Error("UsersController.userserverSideErrorHandlers");
+                            })
+                            .Read(r => r.Action("ReadUsers", "UsersAdmin").Data("AntiForgeryTokenController.sendAntiForgery"))
+                            .Create(c => c.Action("CreateUser", "UsersAdmin").Data("AntiForgeryTokenController.sendAntiForgery"))
+                            .Update(u => u.Action("UpdateUser", "UsersAdmin").Data("AntiForgeryTokenController.sendAntiForgery"))
+                        ))
+</div>
+
+<script type="text/kendo-template" id="serverside-errorhandler-Template">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage" role="alert">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+@section Scripts{
+    <script src="~/Scripts/controllers/antiForgeryTokenController.js"></script>
+    <script src="~/Scripts/services/userService.js"></script>
+    <script src="~/Scripts/controllers/usersController.js"></script>
+    @*<script type="text/javascript">
+            function sendAntiForgery() {
+                return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() }
+            }
+        </script>*@
+}

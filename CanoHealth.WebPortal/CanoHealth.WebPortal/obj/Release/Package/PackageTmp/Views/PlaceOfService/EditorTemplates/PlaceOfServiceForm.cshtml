@@ -1,0 +1,55 @@
+﻿@using System.Collections
+@model CanoHealth.WebPortal.ViewModels.PlaceOfServiceFormViewModel
+
+
+<div class="container-fluid">
+    <div class="from-group">
+        <label class="control-label text-uppercase">Corporation <span class="text-danger">*</span></label>
+        @(Html.Kendo().DropDownListFor(x => x.CorporationId)
+            .DataValueField("CorporationId")
+            .DataTextField("CorporationName")
+            .BindTo((IEnumerable)ViewData["Corporations"])
+            .HtmlAttributes(new {style= "width: 100%;"}))
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label text-uppercase">Name <span class="text-danger">*</span></label>
+       <input class="k-textbox" id="Name" name="Name"
+               data-val="true"
+               data-val-length="The field Name must be a string with a maximum length of 100."
+               data-val-length-max="100"
+               data-val-required="The Name field is required." style="width: 100%;">
+       
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">Address</label>
+        <input type="text" class="k-textbox" name="Address" style="width: 100%;" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">Phone number</label>
+        <input type="text" data-role="maskedtextbox" name="PhoneNumber" id="PhoneNumber"
+               data-val-length="The Phone number must be a string with a maximum length of 20."
+               data-val-length-max="20"
+               data-val-phone="The Phone number field is not a valid phone number."
+               data-mask="(999) 000-0000"
+               style="width: 100%;">
+       
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">fax number</label>
+        <input type="text" data-role="maskedtextbox" name="FaxNumber" id="FaxNumber"
+               data-val-length="The Fax number must be a string with a maximum length of 20."
+               data-val-length-max="20"
+               data-val-phone="The Fax number field is not a valid phone number."
+               data-mask="(999) 000-0000"
+               style="width: 100%;"/>
+    </div>
+
+    <div class="form-group">
+        <input class="k-checkbox" data-val="true" id="Active" name="Active" type="checkbox" value="true" data-bind="checked:Active">
+        <label class="k-checkbox-label text-uppercase" for="Active">active</label>
+    </div>
+</div>

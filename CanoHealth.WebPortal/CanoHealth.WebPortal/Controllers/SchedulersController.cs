@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace CanoHealth.WebPortal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN,SCHEDULER")]
     public class SchedulersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

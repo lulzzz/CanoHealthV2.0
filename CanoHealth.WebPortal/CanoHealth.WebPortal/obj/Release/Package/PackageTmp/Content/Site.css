@@ -1,0 +1,174 @@
+﻿body {
+    padding-top: 93px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/************OVERRIDING THE NAVBAR***************/
+ .navbar-inverse {
+    height: 50px;
+}
+
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/************OVERRIDING BOOTSTRAP THE CONTAINER WIDTH***************/
+.container {
+    width: 100%;
+}
+
+.navbar-inverse {
+    background-color: #ff4342;
+    border-color: #ff4342;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-right {
+    float: right !important;
+    margin-right: 40px;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+   background-color: rgba(205, 40, 39, 0.55); /*background-color user dropdown*/
+}
+
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 77px;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+body {
+    font-size: 15px;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 15px;
+    padding: 20px 15px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.form-control:focus {
+    border-color: #2196F3;
+    -webkit-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn {
+    padding: 7px 20px;
+    font-size: 16px;
+}
+
+.dropdown-menu {
+    -webkit-box-shadow: none; 
+     box-shadow: none; 
+}
+
+
+/*--------- OVERRIDING KENDO STYLES RESPONSIVE GRID-----------*/
+
+/*To remove the vertical scrollbar, use CSS, as shown below. When using this approach, make sure that neither the Grid,
+nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.*/
+.k-grid .k-grid-header {
+    padding: 0 !important;
+}
+
+.k-grid .k-grid-content {
+    overflow-y: visible;
+}
+
+.column-headers {
+    font-weight: bold;
+}
+
+/*-------------Editor Templates Pages-----------------*/
+ .k-edit-form-container {
+        width: 100% !important;
+}
+
+ .css-listview {
+    border-color: white !important;
+    height: 400px; 
+    overflow: auto;
+ }
+
+.k-autocomplete.k-state-focused, .k-dropdown-wrap.k-state-focused, .k-multiselect.k-header.k-state-focused, .k-numeric-wrap.k-state-focused, .k-picker-wrap.k-state-focused, .k-textbox:focus {
+   
+    border-color: #2196f3 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.k-grid-header th.k-with-icon .k-link {
+    font-weight: 700 !important;
+}
+
+.k-grid-header th.k-header>.k-link {
+    font-weight: 700;
+}
+
+ /*---------OVERRIDING RAZONARTIFICIAL THEME---------*/
+ 

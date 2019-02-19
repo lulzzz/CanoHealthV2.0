@@ -1,0 +1,40 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Locked Out";
+    Layout = null;
+}
+
+@*<hgroup>
+            <h1 class="text-error">Locked out.</h1>
+            <h2 class="text-error">This account has been locked out, please try again later.</h2>
+    </hgroup>*@
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+<link href="~/Content/preload.css" rel="stylesheet">
+<link href="~/Content/vendors.css" rel="stylesheet">
+<link href="~/Content/syntaxhighlighter/shCore.css" rel="stylesheet">
+<link href="~/Content/style-green.css" rel="stylesheet" title="default">
+<link href="~/Content/width-full.css" rel="stylesheet" title="default">
+<link href="~/Content/cano-logo.css" rel="stylesheet" />
+
+@Scripts.Render("~/bundles/razontheme")
+
+<div class="paper-back">
+    <div class="absolute-center">
+        <div class="text-center">
+            <div class="logo">
+                <a href="/" class="brand">
+                    <img src="/Content/Images/CanoLogo1.png" alt="HealthFlex">
+                </a>
+            </div>
+           
+            <div class="transparent-div animated fadeInUp animation-delay-8">
+                <h1 class="animated fadeInDown animation-delay-10">Locked out</h1>
+                <div id="getting-started" class="animated fadeInLeft animation-delay-7">
+                </div>
+                <p>This account has been locked out. <br> Please contact your system administrator.</p>
+                <a href="/Home/Index" class="btn btn-ar btn-primary btn-lg">Go Home</a>
+            </div>
+        </div>
+    </div>
+</div>

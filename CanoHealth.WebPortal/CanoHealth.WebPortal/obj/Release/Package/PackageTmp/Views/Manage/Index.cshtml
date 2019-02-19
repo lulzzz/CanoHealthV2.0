@@ -1,0 +1,110 @@
+﻿@*@model IdentitySample.Models.IndexViewModel*@
+@using Microsoft.AspNet.Identity
+@model CanoHealth.WebPortal.ViewModels.Manage.IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title"></h1>
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home", new {area = ""})"> <i class="fa fa-home"></i> HOME</a></li>
+            <li class="active">Account Details</li>
+        </ol>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+            <h2 class="section-title no-margin-top">@ViewBag.Title</h2>
+            @if (!String.IsNullOrEmpty(ViewBag.StatusMessage))
+            {
+                string aux = ViewBag.StatusMessage;
+                if (aux.Contains("error"))
+                {
+                    <div class="alert alert-border alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong><i class="fa fa-times-circle-o"></i> Error!</strong> @ViewBag.StatusMessage
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-border alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong><i class="fa fa-check"></i> Success!</strong> @ViewBag.StatusMessage
+                    </div>
+                }
+            }
+            <section class="css-section">
+                <div class="border-box" style="background-color: white;">
+                    <div class="js-usernamepassword-details">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>USERNAME</h6>
+                                <p class="lead lead-sm">@User.Identity.GetUserName()</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>PASSWORD</h6>
+                                <p style="font-size: 20px; line-height: 27px; margin-bottom: 27px;">
+                                    <strong>********</strong>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="javascript:void(0);" id="js-btn-changeusernamepassword" class="btn-social lg twitter pull-right"><i class="fa fa-lock"></i> Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js-changeusernamepassword-form" hidden>
+                        @Html.Partial("_ManageProfileChangePassword", new CanoHealth.WebPortal.ViewModels.Manage.ChangePasswordViewModel())
+                    </div>
+                    <hr class="color" />
+                    <div class="RememberBrowser">
+                        <div class="row">
+                            <h6 style="margin-left:13px;">REMEMBER BROWSER</h6>
+                            @if (Model.BrowserRemembered)
+                            {
+                                <div class="col-md-8">
+                                    <p class="lead lead-sm">Remembered</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <form method="post" action="/Manage/ForgetBrowser">
+                                        <p>
+                                            <input type="submit" value="Forget Browser" class="btn-social lg twitter" />
+                                        </p>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-8">
+                                    <p class="lead lead-sm">Not Remembered</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <form method="post" action="/Manage/RememberBrowser">
+                                        <p>
+                                            <input type="submit" value="Remember Browser" class="btn-social lg twitter" />
+                                        </p>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/controllers/manageController.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            ManageController.init(".container-fluid");            
+        });
+    </script>
+}

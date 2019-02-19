@@ -2,7 +2,7 @@
 
 namespace CanoHealth.WebPortal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "DOCTOR")]
     public class SchedulesController : Controller
     {
         // GET: Schedules

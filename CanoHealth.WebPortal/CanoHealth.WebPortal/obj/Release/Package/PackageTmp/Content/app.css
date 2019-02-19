@@ -1,0 +1,20 @@
+﻿/*---------RESPONSIVE GRID-----------*/
+
+/*To remove the vertical scrollbar, use CSS, as shown below. When using this approach, make sure that neither the Grid,
+nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.*/
+.k-grid .k-grid-header {
+    padding: 0 !important;
+}
+
+.k-grid .k-grid-content {
+    overflow-y: visible;
+}
+
+.column-headers {
+    font-weight: bold;
+}
+
+/*-------------Editor Templates Pages-----------------*/
+ .k-edit-form-container {
+        width: 100% !important;
+    }

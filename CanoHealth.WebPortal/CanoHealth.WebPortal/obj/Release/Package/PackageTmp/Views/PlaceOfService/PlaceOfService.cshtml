@@ -1,0 +1,210 @@
+﻿@using System.Collections
+@using CanoHealth.WebPortal.ViewModels
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Locations";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Locations</h1>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Home</a></li>
+            <li class="active">Locations</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+
+    @(Html.Kendo().Grid<PlaceOfServiceFormViewModel>()
+       .Name("PlaceOfService")
+       .ToolBar(toolbar =>
+                          {
+                              toolbar.Create().Text("NEW");
+                              toolbar.Excel().Text("EXCEL");
+                          })
+       .Excel(ex =>
+                          {
+                              ex.AllPages(true);
+                              ex.FileName("Locations");
+                              ex.Filterable(true);
+                          })
+       .Columns(col =>
+                          {
+                              col.Bound(p => p.CorporationId).Hidden(true);
+
+                              col.ForeignKey(p => p.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+                                  .Title("CORPORATION").Width(110);
+
+                              col.Bound(p => p.Name).Title("NAME").Width(110);
+
+                              col.Bound(p => p.Address).Title("ADDRESS").Width(200);
+
+                              col.Bound(p => p.PhoneNumber).Title("PHONE NUMBER").Width(110);
+
+                              col.Bound(p => p.FaxNumber).Title("FAX NUMBER").Width(110);
+
+                              col.Bound(p => p.Active).ClientTemplate("#=Active ? 'YES' : 'NO'#").Title("ACTIVE").Width(90);
+
+                              col.Command(cmd =>
+                              {
+                                  cmd.Edit();
+                              }).Width(100).Title("ACTIONS");
+                          })
+       .ClientDetailTemplateId("placeOfService-detail-template")
+       .Events(ev => ev.DetailExpand("onExpandPlaceOfServiceRow"))
+       .Editable(editable =>
+       {
+           editable.Mode(GridEditMode.PopUp);
+           editable.TemplateName("PlaceOfServiceForm");
+           editable.Window(wnd =>
+                              {
+                                  wnd.Title("LOCATIONS");
+                                  //wnd.Width(500);
+                                  wnd.Draggable();
+                                  wnd.Resizable();
+                                  wnd.Actions(ac => ac.Minimize().Maximize().Close());
+                              });
+       })
+       .Pageable(ps => ps.Refresh(true)
+           .PreviousNext(true).PageSizes(new object[] { 25, 50, 100, "All" }))
+       .Sortable()
+       .Groupable()
+       .Filterable()
+       .Resizable(r => r.Columns(true))
+       .Scrollable(s => s.Height("auto"))
+
+       .DataSource(ds => ds
+           .Ajax()
+           .PageSize(25)
+           .ServerOperation(false)
+           .Model(model =>
+           {
+               model.Id(pk => pk.PlaceOfServiceId);
+               model.Field(p => p.PlaceOfServiceId).Editable(false);
+               model.Field(p => p.Active).DefaultValue(true);
+           })
+           .Events(ev => ev.Error("serverSideErrorHandlers"))
+           .Read(r => r.Action("ReadPlaceOfServices", "PlaceOfService"))
+           .Create(c => c.Action("AddPlaceOfService", "PlaceOfService"))
+           .Update(u => u.Action("UpdatePlaceOfService", "PlaceOfService"))
+       ))
+</div>
+
+<div class="js-notification-dialog"></div>
+
+@Html.Partial("_PosLicenses")
+
+<div class="js-doctor-form-window hidden-window">
+    @Html.Partial("_DoctorsForm")
+</div>
+
+<script type="text/kendo-template" id="serverSideErrorHandlerTemp">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage" role="alert">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="placeOfService-detail-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-ar">
+        <li class="active"><a href="\\#license_#=PlaceOfServiceId#" data-toggle="tab"><i class="fa fa-file"></i>  LICENSES</a></li>
+        <li><a href="\\#doctor_#=PlaceOfServiceId#" data-toggle="tab"><i class="fa fa-user-md"></i>  DOCTORS</a></li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="license_#=PlaceOfServiceId#">
+            <div class="js-license-#=PlaceOfServiceId#">
+                <a class="btn btn-ar btn-primary btn-new-listview" data-bind="events: { click: onAddLicense }"><i class="fa fa-plus-circle"></i> NEW</a>
+                <br /><br />
+                <div class="css-gray-listview js-#=PlaceOfServiceId#" data-role="listview"
+                     data-edit-template="edit-license-template"
+                     data-template="detail-license-template"
+                     data-bind="source: licensesDataSource, events: { edit: onEditLicenseItem, remove: onRemovePosLicense }">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="doctor_#=PlaceOfServiceId#">
+            @(Html.Kendo().Grid<DoctorFormViewModel>()
+               .Name("Doctors_#=PlaceOfServiceId#")
+               .ToolBar(tool =>
+               {
+                   tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW")
+                       .HtmlAttributes(new { @class = "btn btn-ar btn-primary" })
+                       .Url("javascript: onAddDoctorToPlaceOfService('#=PlaceOfServiceId#')");
+               })
+               .Columns(col =>
+               {
+                   col.Bound(d => d.FirstName).Title("FIRST NAME");
+                   col.Bound(d => d.LastName).Title("LAST NAME");
+                   col.Bound(d => d.DateOfBirth).Title("D.O.B").Format("{0: MM/dd/yyyy}");
+                   col.Bound(d => d.NpiNumber).Title("NPI");
+
+                   col.Command(cmd =>
+                                      {
+                                          cmd.Custom("releases").Text("Release").IconClass("fa fa-times").Click("onunAssignDoctorToPlaceOfService");
+                                      });
+               })
+               .Pageable(ps => ps.Refresh(true)
+                   .PreviousNext(true).PageSizes(new object[] { 20, 50 }))
+               .Sortable()
+               .Groupable()
+               .Filterable()
+               .Resizable(r => r.Columns(true))
+               .Scrollable(s => s.Height("auto"))
+
+               .DataSource(ds => ds
+                   .Ajax()
+                   .ServerOperation(false)
+                   .PageSize(10)
+                   .Model(model =>
+                                      {
+                                          model.Id(d => d.DoctorId);
+                                      })
+                   .Read(read => read.Action("GetDoctors", "ClinicDoctorTeams", new { placeOfServiceId = "#=PlaceOfServiceId#" }))
+
+               ).ToClientTemplate())
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-license-template">
+    <p>Are you sure you want to delete the <strong>#=licenseName# #=licenseNumber#</strong> License?</p>
+    <hr />
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary" id="js-releaseLicense-yesButton"><i class="fa fa-check"></i> Yes</a>
+        <a class="btn btn-ar btn-default" id="js-releaseLicense-noButton"><i class="fa fa-ban"></i> No</a>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-doctor-template">
+    <p><strong>#=firstName# #=lastName#</strong> is inactive. Do you want to activate him?</p>
+    <hr />
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary" id="js-activatedoctor-yesButton"><i class="fa fa-check"></i> Yes</a>
+        <a class="btn btn-ar btn-default" id="js-activatedoctor-noButton"><i class="fa fa-ban"></i> No</a>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="unassign-doctor-from-placeofservice-template">
+    <p>Are you sure you want to release doctor <strong>#=FirstName# #=LastName#</strong> from this Location?</p>
+    <hr />
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary" id="js-unassigndoctor-yesButton"><i class="fa fa-check"></i> Yes</a>
+        <a class="btn btn-ar btn-default" id="js-unassigndoctor-noButton"><i class="fa fa-ban"></i> No</a>
+    </div>
+</script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/placeofservices")
+}

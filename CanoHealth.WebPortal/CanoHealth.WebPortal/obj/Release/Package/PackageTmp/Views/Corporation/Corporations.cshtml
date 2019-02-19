@@ -1,0 +1,90 @@
+﻿@using CanoHealth.WebPortal.ViewModels
+
+@{
+    ViewBag.Title = "Corporations";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Corporations</h1>
+
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Corporations</li>
+        </ol>
+    </div>
+</header>
+
+<div class="container-fluid">
+    @Html.AntiForgeryToken()
+    @(Html.Kendo().Grid<CorporationViewModel>()
+                .Name("Corporations")
+
+                .ToolBar(tool =>
+                {
+                    tool.Create().Text("NEW");
+                    tool.Excel().Text("EXCEL");
+                })
+                .Excel(ex =>
+                {
+                    ex.AllPages(true);
+                    ex.FileName("Corporations");
+                })
+
+                .Columns(column =>
+                {
+                    column.Bound(c => c.CorporationId).Hidden(true);
+
+                    column.Bound(c => c.CorporationName).Title("CORPORATION").HeaderHtmlAttributes(new { @class = "column-headers" }).Width(110);
+
+                    column.Bound(c => c.Npi).Title("NPI").HeaderHtmlAttributes(new { @class = "column-headers" }).Width(110);
+
+                    column.Bound(c => c.TaxId).Title("TAXID").HeaderHtmlAttributes(new { @class = "column-headers" }).Width(110);
+
+                    column.Bound(c => c.Address).Title("ADDRESS").HeaderHtmlAttributes(new { @class = "column-headers" }).Width(110);
+
+                    column.Bound(c => c.PhoneNumber).Title("PHONE NUMBER").HeaderHtmlAttributes(new { @class = "column-headers" }).Width(110);
+
+                    column.Bound(c => c.Active).Title("ACTIVE")
+                        .HeaderHtmlAttributes(new { @class = "column-headers" })
+                        .ClientTemplate("#=Active ? 'YES' : 'NO'#").Width(110);
+
+                    column.Command(cmd =>
+                    {
+                        cmd.Edit();
+                    }).Title("ACTIONS").Width(110);
+                })
+
+                .Pageable(ps => ps.Refresh(true)
+                    .PreviousNext(true).PageSizes(new object[] { 25, 50, 100, "All" }))
+                .Sortable()
+                .Groupable()
+                .Filterable()
+                .Resizable(r => r.Columns(true))
+                .Scrollable(s => s.Height("auto"))
+
+                .DataSource(ds => ds
+                    .Ajax()
+                    .PageSize(10)
+                    .Model(m =>
+                    {
+                        m.Id(x => x.CorporationId);
+                        m.Field(x => x.CorporationId).Editable(false);
+                    })
+                    .Events(ev => ev.Error("CorporationsController.serverSideErrorHandlers"))
+                    .Read(read => read.Action("ReadCorporations", "Corporation"))
+                    .Create(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
+                    .Update(c => c.Action("SaveCorporation", "Corporation").Data("AntiForgeryTokenController.sendAntiForgery"))
+                ))
+</div>
+
+@Html.Partial("_PartialServerSideErrorHandlerTemplate")
+
+@section Scripts{
+    @Scripts.Render("~/bundles/corporations")
+    @*<script type="text/javascript">
+        function sendAntiForgery() {            
+            return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() }
+        }
+    </script>*@
+}

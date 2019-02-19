@@ -1,0 +1,436 @@
+﻿
+@using Kendo.Mvc.UI
+@using System.Collections
+@using CanoHealth.WebPortal.ViewModels
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Contracts";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Contracts</h1>
+        <ol class="breadcrumb pull-right">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Contracts</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+   
+    @(Html.Kendo().Grid<ContractFormViewModel>()
+    .Name("Contracts")
+
+    .ToolBar(tool =>
+    {
+        tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW").Url("javascript: onEnableContractFormWindow()");
+        tool.Excel().Text("EXCEL");
+    })
+    .Excel(ex =>
+    {
+        ex.FileName("Contracts");
+        ex.AllPages(true);
+    })
+
+    .Columns(col =>
+    {
+        col.Bound(c => c.ContractId).Hidden(true);
+        col.Bound(c => c.InsuranceId).Hidden(true);
+
+        col.ForeignKey(c => c.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+            .Title("CORPORATION").Width(200);
+
+        col.Bound(c => c.InsuranceName).Title("INSURANCE").Width(200);
+
+        col.Bound(c => c.GroupNumber).Title("GROUP NUMBER").Width(200);
+
+        col.Bound(c => c.Active).ClientTemplate("#=Active ? 'YES': 'NO'#").Title("ACTIVE").Width(200);
+
+        col.Command(cmd =>
+        {
+            cmd.Edit();
+            cmd.Custom("Inact").Text("Inactivate")
+               .HtmlAttributes(new { @class = "js-inactive" })
+               .Click("onClickInactivateContractButton")
+               .IconClass("k-icon k-i-close-outline")
+               .Visible("showInactiveButton");
+
+            cmd.Custom("Act").Text("Activate")
+              .HtmlAttributes(new { @class = "js-active" })
+              .Click("onClickActivateContractButton")
+              .IconClass("k-icon k-i-check-outline")
+              .Visible("showActiveButton");
+        }).Width(200).Title("ACTIONS");
+
+    })
+
+    .ClientDetailTemplateId("contract-detail-template")
+
+    .Events(ev => ev.DetailExpand("onExpandContractRow").DataBound("onDataBoundContractGrid").Cancel("onCancelEditContractItem"))
+
+    .Filterable()
+    .Sortable()
+    .Groupable()
+    .Resizable(r => r.Columns(true))
+    .Scrollable(s => s.Height("auto"))
+    .Pageable(ps =>
+    {
+        ps.Refresh(true);
+        ps.PreviousNext(true);
+        ps.PageSizes(new object[] { 25, 50, 100, "All" });
+    })
+
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(25)
+        .Model(model =>
+        {
+            model.Id(c => c.ContractId);
+            model.Field(c => c.ContractId).Editable(false);
+            model.Field(c => c.Active).Editable(false);
+        })
+        .Read(read => read.Action("ReadContracts", "Contracts"))
+        .Update(update => update.Action("UpdateContracts", "Contracts"))
+    ))
+</div>
+
+<div class="js-notification-dialog"></div>
+
+<!--Form content for create a new contract-->
+<div class="js-contractform-window" style="display: none;">
+    <div class="form-group">
+        <label class="control-label text-uppercase">corporation <sup class="text-danger">*</sup></label>
+        <input data-role="dropdownlist"
+               data-auto-bind="false"
+               data-value-primitive="true"
+               data-filter="contains"
+               data-minlength="3"
+               data-text-field="CorporationName"
+               data-value-field="CorporationId"
+               data-bind="value: CorporationId, source: corporationsDataSource"
+               style="width: 100%;" />
+    </div>
+    <div class="form-group">
+        <label class="control-label text-uppercase">insurance <sup class="text-danger">*</sup></label>
+        <input name="InsuranceName"
+               class="js-insurance-name"
+               data-role="autocomplete"
+               data-filter="contains"
+               data-auto-bind="false"
+               data-value-primitive="true"
+               data-text-field="Name"
+               data-bind="value: InsuranceName,
+                          source: insuranceDataSource
+               ,events: { change: onChangeInsuranceName }"
+               style="width: 100%;" />
+
+        @*<input type="text"
+            name="InsuranceName"
+            class="k-textbox js-insurance-name"
+            required data-required-msg="This field is required."
+            data-bind="value: InsuranceName, events: { change: onChangeInsuranceName }"
+            style="width: 100%; border-radius: 3px !important;" />*@
+        <span class="k-invalid-msg" data-for="InsuranceName"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label text-uppercase">group number <sup class="text-danger">*</sup></label>
+        <input type="text"
+               name="GroupNumber"
+               class="k-textbox"
+               required data-required-msg="This field is required."
+               style="width: 100%; border-radius: 3px !important;" data-bind="value: GroupNumber" />
+        <span class="k-invalid-msg" data-for="GroupNumber"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label text-uppercase">contract</label>
+        @(Html.Kendo().Upload()
+                      .Name("Addendum")
+                      .Multiple(false)
+                      .HtmlAttributes(new { style = "width:100%" })
+                      .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" })
+                          .MaxFileSize(50000000)))
+    </div>
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary" data-bind="events: { click: onSaveContract }"><i class="fa fa-check-circle"></i> Save</a>
+        <a class="btn btn-ar btn-default" data-bind="events: { click: onCancelContractOperation }"><i class="fa fa-ban"></i> Cancel</a>
+    </div>
+</div>
+
+<div class="js-inactiveinsurance-notification" style="display: none;">
+    <p>This insurance is incative</p>
+    <p>Do you want to activate it?</p>
+    <hr />
+    <div class="pull-left">
+        <a class="btn btn-ar btn-primary js-activate-insurance"><i class="fa fa-check-circle"></i> Yes</a>
+        <a class="btn btn-ar btn-default js-cancel-insurance"><i class="fa fa-ban"></i> No</a>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="contract-detail-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-ar">
+        <li class="active"><a href="\\#addendums-files-#=ContractId#" data-toggle="tab"><i class="fa fa-file"></i> ADDENDUMS</a></li>
+        <li><a href="\\#line-of-business-#=ContractId#" data-toggle="tab"><i class="fa fa-folder-open"></i> LINE OF BUSINESS</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active js-addendum-#=ContractId#" id="addendums-files-#=ContractId#">
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="visible: enableButtons, enabled: enableButtons, events: { click: onAddAddendum }">
+                <i class="fa fa-upload"></i> UPLOAD
+            </a> <!--Add Addendum button-->
+
+            <br /><br />
+
+            <div id="addendum-listview-#=ContractId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-edit-template="edit-addendum-template"
+                 data-template="detail-addendum-template"
+                 data-bind="source: addendumDataSource, events: { edit: onEditAddendumItem, remove: onRemoveAddendumItem }">
+            </div> <!--Addendum List view-->
+        </div> <!--Addendums tab-->
+
+        <div class="tab-pane js-businesslines-#=ContractId#" id="line-of-business-#=ContractId#">
+
+            <a class="btn btn-ar btn-primary btn-new-listview" data-bind="visible: enableBusinessLineButtons, events: { click: onAddBusinessLineToContract }">
+                <i class="fa fa-plus-circle"></i> NEW
+            </a><!--Add Business Lines button-->
+
+            <br /><br />
+            
+            <!--Display all the line of business asociated to the contract-->
+            <div id="businesslines-listview-#=ContractId#"
+                 class="css-gray-listview"
+                 data-role="listview"
+                 data-template="detail-businesslines-template"
+                 data-bind="source: contractBusinesslinesDataSource, 
+                            events: { remove: onRemoveContractBusinesslineItem }">
+            </div><!--Business Lines List View-->
+
+            <!--form to asociate a new line of business to the contract-->
+            <div class="js-businesslineform-window-#=ContractId#" style="display: none;">
+                <div class="form-group">
+                    <label class="control-label">Line of Business <sup class="text-danger">*</sup></label>
+                    <input data-role="dropdownlist"
+                           data-auto-bind="true"
+                           data-value-primitive="false"
+                           data-template="lineofbusiness-code-name-template"
+                           data-text-field="name"
+                           data-value-field="planTypeId"
+                           data-bind="value: selectedBusinessLine, source: businessLinesDataSource"
+                           style="width: 100%;" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Locations <sup class="text-danger">*</sup></label>
+                    <select data-role="multiselect"
+                            data-placeholder=""
+                            data-value-primitive="false"
+                            data-text-field="name"
+                            data-value-field="placeOfServiceId"
+                            data-bind="value: selectedPlaceOfService, source: placeOfServiceDataSource"></select>
+                </div>
+
+                <div class="pull-left">
+                    <a class="btn btn-ar btn-primary" data-bind="visible: addBtnVisible, events: { click: addBusinessLineToContract }"><i class="fa fa-check-circle"></i>  Save</a>
+                    <a class="btn btn-ar btn-primary" data-bind="visible: editBtnVisible, events: { click: editContractBusinessLineItem }"><i class="fa fa-check-circle"></i>  Save</a>
+                    <a class="btn btn-ar btn-default" data-bind="events: { click: canceladdBusinessLineToContract }"><i class="fa fa-ban"></i> Cancel</a>
+                </div>
+            </div>
+
+        </div><!--Business lines tab-->
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-contract-template">
+    <p>Are you sure you want to inactivate the contract with <strong>#=InsuranceName#</strong>?</p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-releasecontract-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-releasecontract-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="detail-addendum-template">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="text-icon" style="margin-bottom: 10px !important; cursor: pointer;" data-bind="events: {click: onDownloadContractAddendum}">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-download"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">File</h5>
+                        <div title="#=originalFileName#">
+                            #if(originalFileName != null && originalFileName.length < 20){#
+                            <p>#:originalFileName#</p>
+                            #}else if(originalFileName != null && originalFileName.length > 20){#
+                            <p>#:originalFileName.substring(0,12) + '...' + originalFileName.substring(originalFileName.length - 5)#</p>
+                            #}else{#
+                            <p>NONE</p>
+                            #}#
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-calendar-check-o"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Upload By</h5>
+                        <p> #:uploadBy#  </p>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-hashtag"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Upload Date Time</h5>
+                        <p>#:uploadDateTime#</p>
+                    </div>
+                </div>
+
+                <div class="text-icon" style="margin-bottom: 10px !important;">
+                    <span class="icon-ar icon-ar-round icon-ar-inverse"><i class="fa fa-pencil-square-o"></i></span>
+                    <div class="text-icon-content">
+                        <h5 class="no-margin">Note</h5>
+                        <div title="#=description#">
+                            #if(description != null && description.length < 35){#
+                            <p>#:description#</p>
+                            #}else if(description != null && description.length > 35){#
+                            <p>#:description.substring(0,32) + ' ...' #</p>
+                            #}else{#
+                            <p>NONE</p>
+                            #}#
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pull-right">
+                    <a class="k-button k-edit-button" title="Edit" data-bind="visible: enableButtons, enabled: enableButtons"><span class="k-icon k-i-edit"></span></a>
+                    <a class="k-button k-delete-button" title="Release" data-bind="visible: enableButtons, enabled: enableButtons"><span class="k-icon k-i-close"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="edit-addendum-template">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label">FILE: </label>
+                    @(Html.Kendo().Upload()
+                                  .Name("UniqueFileName_#=contractId#")
+                                  .Multiple(false)
+                                  .HtmlAttributes(new { style = "width:100%" })
+                                  .Validation(validation => validation.AllowedExtensions(new string[] { ".gif", ".jpg", ".jpeg", ".png", ".img", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".rtf" }).MaxFileSize(50000000))
+                                  .Events(ev => ev.Select("onSelectContractAddendumFile").Remove("onRemoveContractAddendumFile"))
+                                  .ToClientTemplate())
+                </div>
+                <div class="form-group">
+                    <label class="control-label text-uppercase">Notes: </label>
+                    <textarea rows="3" style="border-radius: 3px !important; width: 100%;" data-bind="value: description"></textarea>
+                </div>
+                <div class="pull-right">
+                    <a class="k-button k-update-button"><span class="k-icon k-i-check"></span></a>
+                    <a class="k-button k-cancel-button"><span class="k-icon k-i-cancel"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="inactive-addendum-template">
+    <p>Are you sure you want to delete the <strong>#=originalFileName# </strong> File?  </p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-releaseAddendum-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-releaseAddendum-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="detail-businesslines-template">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="content-box box-default">
+            <span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-round"><i class="fa fa-handshake-o"></i></span>
+            <h5 class="content-box-title">#=name#</h5>
+
+
+            <div class="panel-group" id="accordion-#=contractLineofBusinessId#">
+                <div class="panel panel-default" style="text-align: justify !important; box-shadow: none;">
+                    <div class="panel-heading panel-heading-link">
+                        <a data-toggle="collapse" data-parent="\\#accordion-#=contractLineofBusinessId#" href="\\#collapseOne-#=contractLineofBusinessId#" aria-expanded="false" class="collapsed">
+                            <i class="fa fa-hospital-o"></i> Locations
+                        </a>
+                    </div>
+                    <div id="collapseOne-#=contractLineofBusinessId#" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body" style="text-align: justify !important;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-template="clinic-row-template" data-bind="source: clinics"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-ar btn-primary" data-bind="enabled: enableBusinessLineButtons, events: { click: onEditContractBusinessLineItem }"><i class="fa fa-pencil"></i>  Edit</a>
+            <a class="btn btn-ar btn-default" data-bind="enabled: enableBusinessLineButtons, events: { click: onReleaseContractBusinessLineItem }"><i class="fa fa-trash"></i> Release</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="lineofbusiness-code-name-template">
+    <span class="k-state-default">
+        <strong>#:data.code#</strong> - #:data.name#
+    </span>
+</script>
+
+<script type="text/x-kendo-template" id="clinic-row-template">
+    <tr>
+        <td data-bind="text: name"></td>
+        <td>
+            <button class="button button-normal button-plain button-borderless" 
+                    data-bind="enabled: enableBusinessLineButtons, 
+                               click: deleteClinicContractBusinessLineItem">
+                <i class="fa fa-trash-o"></i>
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script type="text/x-kendo-template" id="release-businessLine-template">
+    <p>Are you sure you want to delete the Line of Business: <strong>#=name# </strong> from this contract?  </p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-releasebusinessline-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-releasebusinessline-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="release-cliniccontractbusinessLine-template">
+    <p>Are you sure you want to delete <strong>#=Name# </strong> from this contract?  </p>
+    <hr />
+    <div class="pull-left">
+        <button class="btn btn-ar btn-primary" id="js-cliniccontractbusinessLine-yesButton"><i class="fa fa-check-circle"></i> Yes</button>
+        <button class="btn btn-ar btn-default" id="js-cliniccontractbusinessLine-noButton"><i class="fa fa-ban"></i> No</button>
+    </div>
+</script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/contracts")
+}

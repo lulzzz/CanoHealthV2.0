@@ -1,0 +1,73 @@
+﻿@model CanoHealth.WebPortal.ViewModels.DoctorFormViewModel
+
+<div class="container-fluid">
+    <div class="form-group">
+        <label class="control-label text-uppercase">degree <sup class="text-danger">*</sup></label>
+        <input class="k-textbox" id="Degree" name="Degree"
+               data-val="true"
+               data-val-length="The field Degree must be a string with a maximum length of 100."
+               data-val-length-max="100"
+               data-val-required="The Degree field is required." style="width: 100%;">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">first name <sup class="text-danger">*</sup></label>
+        <input class="k-textbox" id="FirstName" name="FirstName"
+               data-val="true"
+               data-val-length="The field First Name must be a string with a maximum length of 50."
+               data-val-length-max="50"
+               data-val-required="The First Name field is required." style="width: 100%;">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">last name <sup class="text-danger">*</sup></label>
+        <input class="k-textbox" id="LastName" name="LastName"
+               data-val="true"
+               data-val-length="The field Last Name must be a string with a maximum length of 50."
+               data-val-length-max="50"
+               data-val-required="The Last Name field is required." style="width: 100%;">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">date of birth <sup class="text-danger">*</sup></label>
+        <input data-role="datepicker" id="DateOfBirth" name="DateOfBirth"
+               data-bind="value: DateOfBirth"
+               style="width: 100%">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">ssn <sup class="text-danger">*</sup></label>
+        <input id="SocialSecurityNumber" name="SocialSecurityNumber" data-role="maskedtextbox"
+               data-mask="000-00-0000"
+               data-bind="value: SocialSecurityNumber"              
+               data-val="true"
+               data-val-required="The SSN field is required."
+               style="width: 100%">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">npi <sup class="text-danger">*</sup></label>
+        <input id="NpiNumber" name="NpiNumber"
+               data-role="maskedtextbox"
+               data-mask="AAAAAAAAAA"
+               data-bind="value: NpiNumber"
+               data-val="true"
+               data-val-required="The NPI field is required."
+               style="width: 100%">
+        @*<input class="k-textbox" id="NpiNumber" name="NpiNumber"
+        data-val="true"
+        data-val-length="The field NPI must be a string with a maximum length of 10."
+        data-val-length-max="10"
+        data-val-required="The NPI field is required." style="width: 100%;">*@
+    </div>
+
+    <div class="form-group">
+        <label class="control-label text-uppercase">caqh <sup class="text-danger">*</sup></label>
+        <input class="k-textbox" id="CaqhNumber" name="CaqhNumber"
+               data-val="true"
+               data-val-length="The field CAQH must be a string with a maximum length of 50."
+               data-val-length-max="50"
+               data-val-required="The CAQH field is required." style="width: 100%;">
+    </div>
+</div>
+

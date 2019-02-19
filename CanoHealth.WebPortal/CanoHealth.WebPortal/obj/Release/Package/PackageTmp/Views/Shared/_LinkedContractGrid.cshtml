@@ -1,0 +1,180 @@
+﻿@using CanoHealth.WebPortal.Core.Dtos
+@(Html.Kendo().Grid<LinkedContractDto>()
+    .Name("DoctorContract_#=DoctorId#")
+    .ToolBar(tool =>
+    {
+        tool.Custom().Text("<i class='fa fa-plus-circle'></i> NEW")
+            .HtmlAttributes(new { @class = "btn btn-ar btn-primary js-addLinkedContractBtn_#=DoctorId#" })
+            .Url("javascript: onEnableLinkedContractFormWindow('#=DoctorId#')");
+    })
+    .Columns(col =>
+    {
+        col.Bound(c => c.DoctorId).Hidden();
+
+        col.Bound(c => c.ContractId).Hidden();
+
+        col.Bound(c => c.CorporationName).Title("CORPORATION");
+
+        col.Bound(c => c.InsuranceName).Title("INSURANCE");
+
+        col.Bound(c => c.GroupNumber).Title("CONTRACT"); //.ClientTemplate("<a>#=GroupNumber#</a>");
+})
+    .Filterable()
+    .Sortable()
+    .Groupable()
+    .Resizable(r => r.Columns(true))
+    .Pageable(pager => pager
+        .Numeric(true)
+        .Info(true)
+        .PreviousNext(true)
+        .Refresh(true)
+        .PageSizes(new object[] { 10, 20, "All" })
+    )
+    .ClientDetailTemplateId("linkedcontract-details-template")
+    .Events(ev => ev.DetailExpand("onExpandContractDataRow"))
+    .DataSource(ds => ds
+        .Ajax()
+        .ServerOperation(true)
+        .PageSize(5)
+        .Model(model =>
+        {
+            model.Id(c => c.GroupNumber);
+            model.Field(c => c.GroupNumber);
+        })
+        .Read(read => read.Action("ReadLinkedContracts", "LinkedContracts", new { doctorId = "#=DoctorId#" }))
+    )
+    .ToClientTemplate())
+
+<!--Form Section-->
+<div id="js-linked-contract-form-section_#=DoctorId#">
+    <div class="js-linked-contract-form-window_#=DoctorId# hidden-window">
+
+        <div class="form-group">
+            <label for="contracts_#=DoctorId#" class="control-label text-uppercase">Contracts <sup class="text-danger">*</sup></label>
+            <input id="contracts_#=DoctorId#"
+                   data-role="dropdownlist"
+                   data-auto-bind="false"
+                   data-value-primitive="false"
+                   data-text-field="groupNumber"
+                   data-value-field="contractId"
+                   data-header-template="contract-header-template"
+                   data-template="contract-autocomplete-template"
+                   @*data-value-template="contract-selectedvalue-template"*@
+                   data-bind="value: selectedContract,
+                              source: contractDataSource,
+                              events: { change: onChangeLinkedContracts }"
+                   style="width: 100%;" />
+        </div>
+
+        <div class="form-group">
+            <label for="businesslines_#=DoctorId#" class="control-label text-uppercase">business lines <sup class="text-danger">*</sup></label>
+            <input id="businesslines_#=DoctorId#"
+                   data-role="dropdownlist"
+                   data-auto-bind="false"
+                   data-value-primitive="false"
+                   data-cascade-from="contracts_#=DoctorId#"
+                   data-text-field="name"
+                   data-value-field="planTypeId"
+                   data-bind="value: selectedBusinessLine,
+                              source: businessLineDataSource,
+                              events: { change: onChangeBusinessLines }
+                             "
+                   style="width: 100%;" />
+            @**@
+        </div>
+
+        <div class="form-group">
+            <label for="effectiveDate_#=DoctorId#" class="control-label text-uppercase">Effective Date <sup class="text-danger">*</sup></label>
+            <input id="effectiveDate_#=DoctorId#"
+                   data-role="datepicker"
+                   data-bind="value: effectiveDate"
+                   style="width: 100%">
+        </div>
+
+        <div class="form-group">
+            <label for="note_#=DoctorId#" class="control-label text-uppercase">note</label>
+            <textarea id="note_#=DoctorId#"
+                      class="form-control"
+                      rows="5"
+                      cols="50"
+                      data-bind="value: note">
+                </textarea>
+        </div>
+
+        <div class="pull-left">
+            <a class="btn btn-ar btn-primary" data-bind="events: { click: onLinkDoctorToContract }"><i class="fa fa-check-circle"></i> Submit</a>
+            <a class="btn btn-ar btn-default" data-bind="events: { click: onCloseLinkedContractFormWindow }"><i class="fa fa-ban"></i> Cancel</a>
+        </div>
+
+    </div>    
+
+    <!--when doctor does not have an individual provider for the selected insurance the system launch this windows to create an individual provider
+        or out of network.
+    -->
+    <div class="js-individual-provider-notification_#=DoctorId# hidden-window">
+        <p>
+            This doctor does not have an individual provider with <strong data-bind="text: selectedContract.name"></strong> insurance in our system.
+        </p>
+        <p>Do you want to create an Out of Network contract?</p>
+
+        <label><input type="radio" id="ExtraOO_#=DoctorId#" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="true" />Out of Network</label>
+        <label><input type="radio" id="ExtraIP_#=DoctorId#" name="Extra" data-type="bool" data-bind="checked: outofnetwork" value="false" />Individual Provider</label>
+        <br/><br/>
+        <div class="js-oo-section" data-bind="visible: isOOVisible">
+            <div class="form-group">
+                <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
+                <input id="ooEffectiveDate_#=DoctorId#"
+                       data-role="datepicker"
+                       data-bind="value: ooEffectiveDate"
+                       style="width: 100%">
+            </div>
+            <div class="pull-left">
+                <a class="btn btn-ar btn-primary" data-bind="events:{ click: onSaveOutOfNetworkContract }">
+                    <i class="fa fa-check-circle"></i> Submit
+                </a>
+            </div>
+        </div>
+
+        <div class="js-ip-section" data-bind="visible: isIPVisible">
+            <div class="form-group">
+                <label class="control-label text-uppercase">Provider Number: <sup class="text-danger">*</sup></label>
+                <input id="individualProviderNumber_#=DoctorId#"
+                       type="text"
+                       class="k-textbox"
+                       name="providernumber"
+                       data-bind="value: individualProviderNumber"
+                       style="width: 100%"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label text-uppercase">effective date: <sup class="text-danger">*</sup></label>
+                <input id="individualproviderEffectiveDate_#=DoctorId#"
+                       data-role="datepicker"
+                       data-bind="value: individualproviderEffectiveDate"
+                       style="width: 100%">
+            </div>
+            <div class="pull-left">
+                <a class="btn btn-ar btn-primary" data-bind="events:{ click: onSaveIndividualProviderContract }">
+                    <i class="fa fa-check-circle"></i> Submit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="contract-header-template"></script>
+
+<script type="text/x-kendo-template" id="contract-autocomplete-template">
+
+    <span class="k-state-default">
+        <strong>Contract:</strong> #:data.groupNumber#,
+        <strong>Insurance:</strong> #:data.name#
+    </span>   
+</script>
+
+<script type="text/x-kendo-template" id="contract-selectedvalue-template">
+    @*#if(data.name){#
+                <span>Contract: #:data.groupNumber#</span>
+                <span>Insurance: #:data.name#</span>
+        #}#*@
+</script>
+

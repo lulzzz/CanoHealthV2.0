@@ -1,0 +1,145 @@
+﻿@using System.Collections
+@using CanoHealth.WebPortal.ViewModels
+@{
+    ViewBag.Title = "Locations";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+
+
+<header class="main-header main-header-inverse">
+    <div class="container">
+        <h1 class="page-title">Locations</h1>
+
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Home</a></li>
+            <li class="active">Locations</li>
+        </ol>
+    </div>
+</header>
+
+@Html.Partial("_CommonHeader")
+
+<br />
+
+<div class="container-fluid">
+    @(Html.Kendo().Grid<PlaceOfServiceFormViewModel>()
+                    .Name("PlaceOfService")
+                    .ToolBar(toolbar =>
+                    {
+                        toolbar.Excel().Text("EXCEL");
+                    })
+                    .Excel(ex =>
+                    {
+                        ex.AllPages(true);
+                        ex.FileName("Locations");
+                        ex.Filterable(true);
+                    })
+                    .Columns(col =>
+                    {
+                        col.Bound(p => p.CorporationId).Hidden(true);
+
+                        col.ForeignKey(p => p.CorporationId, (IEnumerable)ViewData["Corporations"], "CorporationId", "CorporationName")
+                            .Title("CORPORATION").Width(110);
+
+                        col.Bound(p => p.Name).Title("NAME").Width(110);
+
+                        col.Bound(p => p.Address).Title("ADDRESS").Width(200);
+
+                        col.Bound(p => p.PhoneNumber).Title("PHONE NUMBER").Width(110);
+
+                        col.Bound(p => p.FaxNumber).Title("FAX NUMBER").Width(110);
+
+                        col.Bound(p => p.Active).ClientTemplate("#=Active ? 'YES' : 'NO'#").Title("ACTIVE").Width(90);
+                    })
+                    .ClientDetailTemplateId("placeOfService-detail-template")
+                    .Events(ev => ev.DetailExpand("onExpandPlaceOfServiceRow"))
+
+
+                    .Pageable(ps => ps.Refresh(true)
+                        .PreviousNext(true).PageSizes(new object[] { 25, 50, 100, "All" }))
+                    .Sortable()
+                    .Groupable()
+                    .Filterable()
+                    .Resizable(r => r.Columns(true))
+                    .Scrollable(s => s.Height("auto"))
+
+                    .DataSource(ds => ds
+                        .Ajax()
+                        .PageSize(25)
+                        .ServerOperation(false)
+                        .Model(model =>
+                        {
+                            model.Id(pk => pk.PlaceOfServiceId);
+                            model.Field(p => p.PlaceOfServiceId).Editable(false);
+                        })
+                        .Read(r => r.Action("ReadLocations", "Billers"))
+                    ))
+</div>
+
+@Html.Partial("_PosLicenses")
+
+<script type="text/kendo-template" id="serverSideErrorHandlerTemp">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage" role="alert">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="placeOfService-detail-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-ar">
+        <li class="active"><a href="\\#license_#=PlaceOfServiceId#" data-toggle="tab"><i class="fa fa-file"></i>  LICENSES</a></li>
+        <li><a href="\\#doctor_#=PlaceOfServiceId#" data-toggle="tab"><i class="fa fa-user-md"></i>  DOCTORS</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="license_#=PlaceOfServiceId#">
+            <div class="js-license-#=PlaceOfServiceId#">
+                <div class="css-gray-listview js-#=PlaceOfServiceId#" data-role="listview"
+                     data-template="detail-license-template"
+                     data-bind="source: licensesDataSource, events: { edit: onEditLicenseItem, remove: onRemovePosLicense }">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="doctor_#=PlaceOfServiceId#">
+            @(Html.Kendo().Grid<DoctorFormViewModel>()
+                        .Name("Doctors_#=PlaceOfServiceId#")
+
+                        .Columns(col =>
+                        {
+                            col.Bound(d => d.FirstName).Title("FIRST NAME");
+                            col.Bound(d => d.LastName).Title("LAST NAME");
+                            col.Bound(d => d.DateOfBirth).Title("D.O.B").Format("{0: MM/dd/yyyy}");
+                            col.Bound(d => d.NpiNumber).Title("NPI");
+                        })
+
+                        .Pageable(ps => ps.Refresh(true)
+                            .PreviousNext(true).PageSizes(new object[] { 20, 50 }))
+                        .Sortable()
+                        .Groupable()
+                        .Filterable()
+                        .Resizable(r => r.Columns(true))
+                        .Scrollable(s => s.Height("auto"))
+
+                        .DataSource(ds => ds
+                            .Ajax()
+                            .ServerOperation(false)
+                            .PageSize(10)
+                            .Model(model =>
+                            {
+                                model.Id(d => d.DoctorId);
+                            })
+                            .Read(read => read.Action("GetDoctors", "ClinicDoctorTeams", new { placeOfServiceId = "#=PlaceOfServiceId#" }))
+
+                        ).ToClientTemplate())
+        </div>
+    </div>
+</script>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/placeofservices")
+}
+
